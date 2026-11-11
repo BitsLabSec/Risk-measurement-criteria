@@ -5,7 +5,7 @@
 | 模块 | 核心问题 | 标准 |
 | --- | --- | --- |
 | 代码安全 | 哪些代码逻辑已被审计和验证，最终报告仍保留什么风险 | [代码安全评分标准](./code-security-rating-standard-v0.1.md) |
-| 链上安全 | 当前控制、配置、依赖及实际资金头寸是什么状态 | [Lending 链上安全评估标准](./lending-onchain-security-rating-standard.md) |
+| 链上安全 | 按协议类型评价当前控制、配置、依赖及适用的资金状态 | [Lending 链上安全评估标准](./lending-onchain-security-rating-standard.md)、[DEX 链上安全评估标准](./dex-onchain-security-rating-standard.md)、[收益金库链上安全评估标准](./yield-vault-onchain-security-rating-standard.md)、[永续合约链上安全评估标准](./perpetuals-onchain-security-rating-standard.md)、[同质化代币链上安全评估标准](./fungible-token-onchain-security-rating-standard.md) |
 | 业务攻防 | 哪些实际业务及支撑系统已通过适用的渗透与业务验证 | [Web3 业务攻防评级标准](./web3-business-security-rating-standard.md) |
 | 安全运营与披露补充说明 | 整理前三部分未覆盖的联系、反馈、运营责任及补充保障信息，不设置独立评分 | [安全运营与披露补充说明](./security-operations-disclosure-supplement.md) |
 
@@ -20,7 +20,9 @@
 - 未知和关键遗漏按实际受影响范围展示，不清空无关结论；已有资料不足以支持全项目结论时先展示分项及缺口，不为补齐信息默认增加测试或穷尽采集。
 - 子项拆分沿用父项总权重，按业务影响保持合理粒度；不要求所有项目采用精确到代码行或接口数的统一拆分。
 - 保险、认证、团队、赏金和运营资源可补充披露，不因其存在直接给技术安全加分。
-- 链上其他协议类型后续补充，当前不把 Lending 的专属参数套给其他 DeFi 类型。
+- 链上当前覆盖 Lending、DEX、收益金库、永续合约与同质化代币，各自采用适用范围和检查项；其他协议类型后续补充，不把 Lending 的专属参数套给其他 DeFi 类型。DEX 不预设 Uniswap 架构，不默认全量扫描交易对。收益金库不限定链或架构，资金分布、退出状态及受影响敞口只展示，不独立评分。
+- 永续合约按公共控制、共享入口和必要依赖的实际作用范围分别计分，结算异常按链上已有记录披露。
+- 同质化代币分别评价发行与资产控制权限、当前转账与收费配置。前十大持仓和市值仅作后续展示补充。
 
 文档内版本为规则引用依据；代码安全文件沿用初版路径，具体版本见其正文。
 
