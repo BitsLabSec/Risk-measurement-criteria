@@ -219,4 +219,4 @@
 | 2026-11-10 | v0.1 | 确定 DEX 单快照链上评估边界、三模块评分、未知与不适用处理、模块去重及局部更新规则；不预设 Uniswap 架构，不纳入全量交易对与默认流动性评分 |
 | 2026-11-11 | v0.2 | 统一配置与依赖的 60 分表述，明确警戒条件及同一受影响范围内异常部分受限的判断 |
 
-配套标准：[代码安全评分标准](./code-security-rating-standard-v0.1.md)、[Web3 业务攻防评级标准](./web3-business-security-rating-standard.md)、[Lending 链上安全评估标准](./lending-onchain-security-rating-standard.md)。
+配套标准：[代码安全评分标准](../code-security-rating-standard.md)、[Web3 业务攻防评级标准](../web3-business-security-rating-standard.md)、[Lending 链上安全评估标准](./lending-onchain-security-rating-standard.md)。

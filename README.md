@@ -4,12 +4,12 @@
 
 | 模块 | 核心问题 | 标准 |
 | --- | --- | --- |
-| 代码安全 | 哪些代码逻辑已被审计和验证，最终报告仍保留什么风险 | [代码安全评分标准](./code-security-rating-standard-v0.1.md) |
-| 链上安全 | 按协议类型评价当前控制、配置、依赖及适用的资金状态 | [Lending 链上安全评估标准](./lending-onchain-security-rating-standard.md)、[DEX 链上安全评估标准](./dex-onchain-security-rating-standard.md)、[收益金库链上安全评估标准](./yield-vault-onchain-security-rating-standard.md)、[永续合约链上安全评估标准](./perpetuals-onchain-security-rating-standard.md)、[同质化代币链上安全评估标准](./fungible-token-onchain-security-rating-standard.md) |
+| 代码安全 | 哪些代码逻辑已被审计和验证，最终报告仍保留什么风险 | [代码安全评分标准](./code-security-rating-standard.md) |
+| 链上安全 | 按协议类型评价当前控制、配置、依赖及适用的资金状态 | [Lending 链上安全评估标准](./合约类型评估标准/lending-onchain-security-rating-standard.md)、[DEX 链上安全评估标准](./合约类型评估标准/dex-onchain-security-rating-standard.md)、[收益金库链上安全评估标准](./合约类型评估标准/yield-vault-onchain-security-rating-standard.md)、[永续合约链上安全评估标准](./合约类型评估标准/perpetuals-onchain-security-rating-standard.md)、[同质化代币链上安全评估标准](./合约类型评估标准/fungible-token-onchain-security-rating-standard.md) |
 | 业务攻防 | 哪些实际业务及支撑系统已通过适用的渗透与业务验证 | [Web3 业务攻防评级标准](./web3-business-security-rating-standard.md) |
 | 安全运营与披露补充说明 | 整理前三部分未覆盖的联系、反馈、运营责任及补充保障信息，不设置独立评分 | [安全运营与披露补充说明](./security-operations-disclosure-supplement.md) |
 
-链上通用检查项、五类专项映射和评分规则见[通用链上安全评估标准](../合约类型评估标准/通用链上安全评估标准.md)。
+链上通用检查项、五类专项映射和评分规则见[通用链上安全评估标准](./合约类型评估标准/通用链上安全评估标准.md)。
 
 ## 使用边界
 
@@ -26,7 +26,7 @@
 - 永续合约按公共控制、共享入口和必要依赖的实际作用范围分别计分，结算异常按链上已有记录披露。
 - 同质化代币分别评价发行与资产控制权限、当前转账与收费配置。前十大持仓和市值仅作后续展示补充。
 
-文档内版本为规则引用依据；代码安全文件沿用初版路径，具体版本见其正文。
+文档内版本为规则引用依据。
 
 ## 配套交付说明
 

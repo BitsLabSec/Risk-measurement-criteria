@@ -138,9 +138,9 @@
 
 配套标准：
 
-- [代码安全评分标准](./code-security-rating-standard-v0.1.md)
+- [代码安全评分标准](./code-security-rating-standard.md)
 - [Web3 业务攻防评级标准](./web3-business-security-rating-standard.md)
-- [Lending 链上安全评估标准](./lending-onchain-security-rating-standard.md)
+- [Lending 链上安全评估标准](./合约类型评估标准/lending-onchain-security-rating-standard.md)
 - [安全运营与披露补充说明](./security-operations-disclosure-supplement.md)
 
 ## 8. 版本记录

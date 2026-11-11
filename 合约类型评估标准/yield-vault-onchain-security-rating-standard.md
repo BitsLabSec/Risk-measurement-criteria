@@ -242,4 +242,4 @@
 | 2026-11-10 | v0.1 | 确定收益金库单快照范围，采用权限、配置、必要依赖三个计分模块；资金分布、退出状态与异常敞口只展示不独立评分；明确跨架构适用、去重、未知及更新规则 |
 | 2026-11-11 | v0.2 | 明确配置与必要依赖的 60 分条件，区分预设警戒与同一范围内异常部分受限 |
 
-配套标准：[代码安全评分标准](./code-security-rating-standard-v0.1.md)、[Web3 业务攻防评级标准](./web3-business-security-rating-standard.md)、[Lending 链上安全评估标准](./lending-onchain-security-rating-standard.md)、[DEX 链上安全评估标准](./dex-onchain-security-rating-standard.md)。
+配套标准：[代码安全评分标准](../code-security-rating-standard.md)、[Web3 业务攻防评级标准](../web3-business-security-rating-standard.md)、[Lending 链上安全评估标准](./lending-onchain-security-rating-standard.md)、[DEX 链上安全评估标准](./dex-onchain-security-rating-standard.md)。

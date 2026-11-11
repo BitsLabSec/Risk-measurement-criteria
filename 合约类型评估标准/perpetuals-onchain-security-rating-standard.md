@@ -117,4 +117,4 @@ v0.2 · 2026-11-11
 | 权限、参数、开关或绑定变化 | 用新快照重算受影响项及其实际范围。升级导致原机制解释失效时，相关项标 U 待复核。 |
 | 异常消除 | 当前证据满足适用条件即可恢复对应档位，不附加连续正常次数或历史处罚。 |
 
-配套标准见[代码安全评分标准](./code-security-rating-standard-v0.1.md)、[DEX 链上安全评估标准](./dex-onchain-security-rating-standard.md)与[Web3 业务攻防评级标准](./web3-business-security-rating-standard.md)。
+配套标准见[代码安全评分标准](../code-security-rating-standard.md)、[DEX 链上安全评估标准](./dex-onchain-security-rating-standard.md)与[Web3 业务攻防评级标准](../web3-business-security-rating-standard.md)。

@@ -122,4 +122,4 @@ v0.3 · 2026-11-11
 | 2026-11-11 | v0.2 | 增加权限配置造成必要转移永久失能的判定和去重规则。 |
 | 2026-11-11 | v0.3 | 明确配置的 60 分条件，区分预设警戒与同一范围内异常部分受限。 |
 
-配套规则见[代码安全评分标准](./code-security-rating-standard-v0.1.md)与[BitsScore 评级标准目录](./README.md)。
+配套规则见[代码安全评分标准](../code-security-rating-standard.md)与[BitsScore 评级标准目录](../README.md)。
