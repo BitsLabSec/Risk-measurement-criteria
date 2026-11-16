@@ -6,7 +6,7 @@
 | --- | --- | --- |
 | 代码安全 | 哪些代码逻辑已被审计和验证，最终报告仍保留什么风险 | [代码安全评分标准](./code-security-rating-standard.md) |
 | 链上安全 | 按协议类型评价当前控制、配置、依赖及适用的资金状态 | [Lending 链上安全评估标准](./合约类型评估标准/lending-onchain-security-rating-standard.md)、[DEX 链上安全评估标准](./合约类型评估标准/dex-onchain-security-rating-standard.md)、[收益金库链上安全评估标准](./合约类型评估标准/yield-vault-onchain-security-rating-standard.md)、[永续合约链上安全评估标准](./合约类型评估标准/perpetuals-onchain-security-rating-standard.md)、[同质化代币链上安全评估标准](./合约类型评估标准/fungible-token-onchain-security-rating-standard.md) |
-| 业务攻防 | 哪些实际业务及支撑系统已通过适用的渗透与业务验证 | [Web3 业务攻防评级标准](./web3-business-security-rating-standard.md) |
+| 业务攻防 | 评级侧从最终渗透报告识别实际业务覆盖与保留风险，独立完成映射、权重及评分 | [Web3 业务攻防评级标准](./web3-business-security-rating-standard.md) |
 | 安全运营与披露补充说明 | 整理前三部分未覆盖的联系、反馈、运营责任及补充保障信息，不设置独立评分 | [安全运营与披露补充说明](./security-operations-disclosure-supplement.md) |
 | 盘外情报 | 公开身份、披露、市场上下文、治理与攻击面枚举的完备度；小项四态计分映射到 100 | [盘外情报评级标准](./offchain-intelligence-rating-standard.md) |
 
@@ -32,6 +32,8 @@
 ## 配套交付说明
 
 - [合约审计与渗透测试报告交付需求](./security-assessment-report-delivery-requirements.md)：区分报告正文、覆盖附件及评级侧维护信息，供实际交付使用。
+- [Web3 业务渗透测试服务与交付规范草案](./web3-penetration-testing-service-spec.md)：明确业务范围、测试条件、服务项、内部测试准备、覆盖记录及报告交付，供团队讨论和试用。
+- [Web3 业务渗透测试客户服务范围信息收集表](./web3-penetration-testing-client-intake.md)：客户选择十项服务，并逐项确认测试对象、条件、允许操作及授权边界，供测试执行和报告披露使用。
 
 ## 展示时间口径
 
