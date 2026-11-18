@@ -1,0 +1,65 @@
+{
+  "status": "trial_rating",
+  "method": "lending-sustainable-operations-tail-v0.1",
+  "supersedes": "navi-sustainable-operations-rescore-2026-11-18.json",
+  "scope": {
+    "checkpoint": 345771824,
+    "checkpoint_timestamp": "2026-11-16T07:13:59.340Z",
+    "pool_count": 35,
+    "new_requests": 0,
+    "transaction_records_used": 0,
+    "account_records_used": 0
+  },
+  "inputs": {
+    "assessment_path": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/examples/navi-mainnet/assessment-v012/assessment.json",
+    "assessment_sha256": "e3ec5db191542fe2d51f8d380e215b961cdb52791dff5b6a58f93a166e7e2bfc",
+    "existing_income_aggregate": "navi-sustainable-operations-rescore-2026-11-18.json#inputs/income_series",
+    "valuation": "Native amounts are matched within each pool, then converted using November 16 stored snapshot quotes; some quotes are expired. Income is a previously collected protocol-level aggregate."
+  },
+  "funds_and_dependencies": {
+    "liquidity": {
+      "core_weight": 45,
+      "score": 88.7663912215
+    },
+    "critical_dependencies": {
+      "core_weight": 25,
+      "score": 71.7103788261
+    },
+    "core": {
+      "weight": 0.90,
+      "formula": "(45 * liquidity + 25 * critical_dependencies) / 70",
+      "score": 82.6749582232
+    },
+    "loss_absorption_and_recovery": {
+      "weight": 0.10,
+      "scenario": "One-time net loss after liquidation equal to 1% of outstanding debt in each pool. A sensitivity scenario, not a claim about present deficits, likelihood, or correlated failures.",
+      "score_formula": "100 * sum_i(price_i * min(Pool.treasury_balance_i, 0.01 * borrow_i)) / sum_i(price_i * 0.01 * borrow_i)",
+      "eligible_cash_definition": "Identified withdrawable protocol fee coins in the same pool and currency, treated as potential funds. No depositor assets, virtual treasury claims, future revenue, or unverified cross-pool allocation.",
+      "scenario_loss_usd": "508679.3279386707251721046",
+      "cash_matched_usd": "176634.9899584245045447250",
+      "score": 34.7242319978,
+      "recovery_disclosure": {
+        "affects_score": false,
+        "target": "Restore the cash used to absorb the modeled first loss, not cover its remaining unabsorbed portion.",
+        "reported_protocol_interest_at_recent_pace_over_90d_usd": "279425.0391329999928",
+        "required_share_if_realized_retained_and_matched_percent": 63.21373006,
+        "limitation": "Scenario cash is not a verified insurance commitment. Reported interest is not verified retained or allocatable cash. No second loss is required by the score."
+      }
+    },
+    "score_formula": "0.90 * core + 0.10 * loss_absorption_and_recovery",
+    "score": 77.8798856006
+  },
+  "sensitivity_disclosure": [
+    {"net_loss_percent_of_debt": 0.5, "loss_absorption_percent": 37.8637356926, "overall_recomputed": 78.1938359701},
+    {"net_loss_percent_of_debt": 1.0, "loss_absorption_percent": 34.7242319978, "overall_recomputed": 77.8798856006},
+    {"net_loss_percent_of_debt": 2.0, "loss_absorption_percent": 21.9612797925, "overall_recomputed": 76.6035903801}
+  ],
+  "rollup": {
+    "permissions_score_carried_forward": 79,
+    "configuration_trial_score_carried_forward": 82.25,
+    "formula": "min(permissions, configuration, funds_and_dependencies)",
+    "overall_score": 77.8798856006,
+    "rounded_overall_score": 78,
+    "formal_standard_and_frontend_changed": false
+  }
+}

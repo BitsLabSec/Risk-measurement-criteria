@@ -1,0 +1,70 @@
+{
+  "status": "superseded_trial_proxy_rating",
+  "superseded_by": "navi-sustainable-operations-tail-rating-2026-11-18.json",
+  "supersedes": "The 73/100 discussion rating that imputed 50 for two unverified items; does not supersede formal v0.12.",
+  "scope": {
+    "checkpoint": 345771824,
+    "checkpoint_timestamp": "2026-11-16T07:13:59.340Z",
+    "pool_count": 35,
+    "valuation": "Cash and stress losses are matched in native tokens per pool, then translated into USD at checkpoint stored quotes, some expired. Revenue uses the provider's USD figures for the pre-checkpoint windows.",
+    "new_requests": 0,
+    "transaction_records_used": 0,
+    "account_records_used": 0
+  },
+  "inputs": {
+    "assessment_path": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/examples/navi-mainnet/assessment-v012/assessment.json",
+    "assessment_sha256": "e3ec5db191542fe2d51f8d380e215b961cdb52791dff5b6a58f93a166e7e2bfc",
+    "income_series": {
+      "source": "NAVI's previously collected daily fee summary used by the DefiLlama adapter. borrowInterestRevenue only; mixed fees and treasury withdrawal records excluded.",
+      "adapter": "https://github.com/DefiLlama/dimension-adapters/blob/master/fees/navi/index.ts",
+      "archived_raw_sha256": "4d4d9de0814dcc7b1d38299d1cd967c593a6f04f78109d5310712c78bcdad393",
+      "recent": {"from_utc_inclusive": "2026-10-17", "to_utc_exclusive": "2026-11-16", "days": 30, "borrow_interest_revenue_usd": "93141.6797109999976"},
+      "prior": {"from_utc_inclusive": "2026-08-18", "to_utc_exclusive": "2026-10-17", "days": 60, "borrow_interest_revenue_usd": "227528.5319190000113"},
+      "scope_limit": "Protocol-level API summary without exact 35-pool attribution. Treat as a protocol-wide proxy; if it includes other markets or some interest cannot be kept, the income contribution may be overstated. Not evidence of realized cash, retained profit, or expense coverage."
+    }
+  },
+  "module": {
+    "liquidity": {
+      "weight": 0.45,
+      "scenario_withdrawal_percent": [5, 10, 15],
+      "scenario_coverage_percent": [94.75215312, 89.24777242, 82.29924813],
+      "formula": "Mean of three scenario coverage ratios. Coverage = 1 - sum of positive same-pool cash gaps in USD / total scenario demand in USD. Manager conversion excluded from direct cash.",
+      "score": 88.7663912215
+    },
+    "critical_dependencies": {
+      "weight": 0.25,
+      "formula": "40 for final non-positive and stale quote checks + 20 for normal repayment without a price read + 15 times the supply-weighted stale-primary failover share + 0 of 25 for adapter-abort failover.",
+      "supply_weighted_stale_primary_failover_fraction": 0.7806919217377834,
+      "score": 71.7103788261
+    },
+    "reserve_capacity_proxy": {
+      "weight": 0.15,
+      "stress_loss_as_fraction_of_each_pool_debt": "0.01",
+      "pool_fee_cash_usd": "223426.766323569076345191",
+      "scenario_loss_usd": "508679.3279386707251721046",
+      "matched_fee_cash_usd": "176634.9899584245045447250",
+      "uncovered_scenario_loss_usd": "332044.3379802462206273796",
+      "formula": "100 * sum_i(price_i * min(Pool.treasury_balance_i, 0.01 * borrow_i)) / sum_i(price_i * 0.01 * borrow_i)",
+      "score": 34.7242319978,
+      "limit": "Physical fee coins that can be withdrawn by the pool admin, treated as potential same-pool response funds, not committed insurance. Excludes supplier cash, virtual treasury claims, future income, and cross-pool subsidies. 1% is a fixed trial scenario, not a bad-debt finding or loss forecast."
+    },
+    "interest_replenishment_proxy": {
+      "weight": 0.15,
+      "target_days": 90,
+      "conservative_daily_reported_interest_usd": "3104.7226570333332533333333333333333333",
+      "recent_to_prior_average_daily_interest_percent": 81.8725273050,
+      "interest_at_stated_pace_over_target_days_usd": "279425.0391329999928",
+      "formula": "100 * min(1, max(0, 90 * min(recent interest / 30, prior interest / 60)) / full scenario loss budget). The full budget measures an independent quarterly replenishment target; currently held reserve is credited only in the reserve score.",
+      "score": 54.9314713191,
+      "limit": "One-quarter trial target and observed low-side interest pace; conditional income-generation proxy before cash realization, allocation and costs. Does not show that the reserve can actually be replenished within that time."
+    },
+    "score": 71.3208262537
+  },
+  "rollup": {
+    "permissions_score_carried_forward": 79,
+    "configuration_trial_score_carried_forward": 82.25,
+    "formula": "min(79, 82.25, 71.3208262537)",
+    "overall_score": 71.3208262537,
+    "rounded_overall_score": 71
+  }
+}
