@@ -4,7 +4,7 @@
 
 | 模块 | 核心问题 | 标准 |
 | --- | --- | --- |
-| 代码安全 | 哪些代码逻辑已被审计和验证，最终报告仍保留什么风险 | [代码安全评分标准](./code-security-rating-standard.md) |
+| 代码安全 | 哪些代码已由适用审计或形式化验证覆盖，报告记录了哪些风险 | [代码安全评分标准](./code-security-rating-standard.md) |
 | 链上安全 | 按协议类型评价当前控制、配置、依赖及适用的资金状态 | [Lending 链上安全评估标准](./合约类型评估标准/lending-onchain-security-rating-standard.md)、[DEX 链上安全评估标准](./合约类型评估标准/dex-onchain-security-rating-standard.md)、[收益金库链上安全评估标准](./合约类型评估标准/yield-vault-onchain-security-rating-standard.md)、[永续合约链上安全评估标准](./合约类型评估标准/perpetuals-onchain-security-rating-standard.md)、[同质化代币链上安全评估标准](./合约类型评估标准/fungible-token-onchain-security-rating-standard.md) |
 | 业务攻防 | 评级侧从最终渗透报告识别实际业务覆盖与保留风险，独立完成映射、权重及评分 | [Web3 业务攻防评级标准](./web3-business-security-rating-standard.md) |
 | 安全运营与披露补充说明 | 整理前三部分未覆盖的联系、反馈、运营责任及补充保障信息，不设置独立评分 | [安全运营与披露补充说明](./security-operations-disclosure-supplement.md) |
