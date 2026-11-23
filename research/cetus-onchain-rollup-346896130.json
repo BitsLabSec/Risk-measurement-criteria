@@ -1,0 +1,79 @@
+{
+  "id": "cetus-onchain-rollup-346896130-2026-11-23",
+  "project": "Cetus Protocol",
+  "checkpoint": {
+    "sequenceNumber": 346896130,
+    "digest": "CKzQHsSzzVDnjrPR6qBjRUmYvihnwdKrXNJh7YxrDW11",
+    "timestamp": "2026-11-19T10:43:55.124Z"
+  },
+  "ruleId": "project-onchain-rollup-v1",
+  "ruleVersion": "1.1",
+  "ruleSource": "合约类型评估标准/project-onchain-rollup-v1.json",
+  "calculatedOn": "2026-11-23",
+  "status": "rated_verified_lower_bound",
+  "score": 75.24,
+  "scoreExact": "10233/136",
+  "lower": 75.24264705882354,
+  "upper": 77.59558823529412,
+  "upperExact": "10553/136",
+  "upperDisplay": 77.6,
+  "pendingShare": 0.023529411764705882,
+  "pendingShareExact": "2/85",
+  "pendingSharePercent": 2.3529411764705883,
+  "completeScore": null,
+  "unknownScoresImputed": false,
+  "renormalizedUnknownWeights": false,
+  "moduleWeights": {
+    "permissions": 30,
+    "configuration": 30,
+    "fundsAndDependencies": 40
+  },
+  "scopeAdaptation": {
+    "thirdModule": "fundsAndDependencies",
+    "source": "cetus-funds-dependencies-method-research-2026-11-20.json",
+    "adoptionDate": "2026-11-20",
+    "basis": "本次已采纳的资金与关键依赖模块接替旧必要依赖模块；原30/30/40及父业务份额不变。所有声明业务的该第三模块均适用，不沿用旧外部依赖N/A分母。",
+    "newModuleWeights": false
+  },
+  "components": [
+    {
+      "id": "permissions",
+      "score": 47,
+      "calculatedScore": 46.560457516339866,
+      "scoreExact": "28495/612",
+      "weightPercent": 30,
+      "contribution": 13.96813725490196
+    },
+    {
+      "id": "configuration",
+      "score": null,
+      "status": "U",
+      "knownContribution": 89.01960784313725,
+      "knownContributionExact": "4540/51",
+      "pendingBusiness": "xcetus",
+      "configurationPendingShareExact": "4/51",
+      "weightPercent": 30,
+      "contribution": 26.705882352941174
+    },
+    {
+      "id": "fundsAndDependencies",
+      "score": 86.42,
+      "calculatedScore": 86.42156862745098,
+      "scoreExact": "8815/102",
+      "weightPercent": 40,
+      "contribution": 34.568627450980394
+    }
+  ],
+  "formula": "0.30*(28495/612)+0.30*(4540/51)+0.40*(8815/102)=10233/136",
+  "completeFormula": "10233/136+(2/85)*C_xcetus",
+  "publication": "75.24为已核证据下限；上界77.60，待核项目权重2.35%。配置完整分仍为U，未将xCETUS补成0或100。",
+  "businessWeightsSource": "/codeScoreBreakdown/projectScopedEstimate/businesses",
+  "sourceConfiguration": "/cetus/configuration-review-346896130.json",
+  "sourceAssessment": "/cetus/assessment.json",
+  "collection": {
+    "newOnchainRequests": 0,
+    "transactionQueries": 0,
+    "poolListQueries": 0
+  },
+  "layoutChanged": false
+}

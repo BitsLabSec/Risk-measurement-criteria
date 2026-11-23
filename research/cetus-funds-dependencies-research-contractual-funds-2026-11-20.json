@@ -1,0 +1,628 @@
+{
+  "schemaVersion": 2,
+  "project": "Cetus",
+  "researchDate": "2026-11-20",
+  "dimension": "资金状态与必要依赖：按明确用户权利和实际支付路径推导指标",
+  "checkpoint": {
+    "sequenceNumber": 346896130,
+    "digest": "CKzQHsSzzVDnjrPR6qBjRUmYvihnwdKrXNJh7YxrDW11",
+    "timestamp": "2026-11-19T10:43:55.124Z"
+  },
+  "scope": {
+    "businesses": [
+      "LP Burn",
+      "Vester补偿计划",
+      "xCETUS",
+      "两个具名结束Launchpad池"
+    ],
+    "changes": "仅生成本临时研究JSON；未修改主JSON、前端、配置、权限或权重。",
+    "collection": "真实浏览官方产品/技术资料；链上事实全部沿用固定检查点现有Rust scanner归档；无交易、用户列表、全量锁币/池采集。"
+  },
+  "method": {
+    "why": "只有先识别用户实际有权取得的币种、数量及时间，才能判断资金不足、结算受阻或外部依赖。没有本金赎回权的功能，不应被扣本金兑付分。",
+    "chain": [
+      "界定可强制执行的权利：本金、既得收益、固定补偿、购买份额或退款。",
+      "按同币、同责任范围找实际可用现金，区分共享库存、已隔离资金与发行人可提款项。",
+      "按当前阶段判到期与可领条件；未到期和自选折价按条款披露。",
+      "从正常结算路径找必要组件，区分当前需要与已经完成的一次性依赖。",
+      "使用精确义务或可信的负债上界；守恒已经足以证明覆盖时，不为求精确用户总和重开全量调查。",
+      "仅从观察到的缺口、失效条件和恢复路径作业务判断；不把NAVI借贷利用率、清算或补资安全垫公式移植到这些合同。"
+    ],
+    "naturalMetrics": [
+      {
+        "id": "same_coin_shortfall",
+        "formula": "max(到期或剩余承诺上界 - 可动用同币现金, 0)",
+        "reason": "0与正缺口直接对应合同可支付性；分界来自现金需求，不是经验分数线。"
+      },
+      {
+        "id": "funding_coverage",
+        "formula": "可动用同币现金 / 明确的同币义务",
+        "reason": "仅分母具有实际合同含义时使用；对没有本金权或无精确义务的范围不编造比例。"
+      },
+      {
+        "id": "cash_request_match",
+        "formula": "请求固定支付额 - 真实隔离锁币余额；并校验对象ID/币种/记录绑定",
+        "reason": "可以明确逐请求现金是已锁入还是仍依赖补资。"
+      },
+      {
+        "id": "claim_readiness",
+        "formula": "当前阶段、快照时间>=到期时间、必要结算是否完成、必要对象/开关是否匹配",
+        "reason": "必须区分正常待到期与已经到期却受阻。"
+      }
+    ],
+    "scoringBoundary": "这些一手来源支持用户权利、阶段和资金守恒方法，不提供统一100/80评分。本文不给虚构分数。可对实际承诺及必要依赖评价；不适用的子指标记N/A，不是项目0分或100分。",
+    "sourceUse": "官方条款与方法参照分开；所有具体资金覆盖结论以本地固定检查点部署代码和状态为依据。"
+  },
+  "businesses": [
+    {
+      "id": "lp-burn",
+      "label": "LP Burn",
+      "userRights": {
+        "principal": "永久放弃流动性本金取回权；没有任意赎回或到期退本金承诺。",
+        "retained": "原CLMM头寸产生的手续费、协议定义的挖矿奖励及对应凭证权。",
+        "sourceRefs": [
+          "cetus-lp-burn-sdk"
+        ]
+      },
+      "funds": {
+        "location": "被包装/封存的原CLMM Position及其底层AMM池；没有第二笔独立本金。",
+        "knownSharedRewardBalances": {
+          "CETUS": "6296937.771954171",
+          "SUI": "131128.240467341"
+        },
+        "registeredPools": "1113",
+        "countMeaning": "池登记数，不等于头寸数或金额。",
+        "dedup": "不能把Burn本金加在底层AMM本金之上；共享CLMM奖励库不属Burn独享储备；Vester补偿计划亦只计一次。"
+      },
+      "settlement": {
+        "principalExit": "none_by_product_design",
+        "retainedClaims": "由有效Burn凭证绑定底层CLMM头寸，走领费/领奖路径。正常路径依赖池及奖励支付对象，并不先出售本金。",
+        "snapshotScope": "现有具名池领费/领奖开关和需要币种的支付容器已核；不声称所有烧毁头寸的应领总额精确求和。"
+      },
+      "metrics": [
+        {
+          "id": "principal_redemption_ratio",
+          "value": null,
+          "status": "not_applicable",
+          "why": "用户没有这项权利，分母不能取封存本金。"
+        },
+        {
+          "id": "retained_claim_path",
+          "status": "verified_for_selected_pool",
+          "value": "池与支付对象匹配，领费/领奖路径存在；共享库余额按币种披露。"
+        }
+      ],
+      "externalFailureImpact": [
+        {
+          "failure": "CLMM领费/领奖功能暂停或升级不兼容",
+          "impact": "影响保留的手续费/奖励领取，应评价对应组件和恢复控制；不是本金到期违约。"
+        },
+        {
+          "failure": "奖励金库现金不足",
+          "impact": "可能阻断该奖励币的领取；不能仅因未来奖励非固定或无全量求和就称已经不足。"
+        },
+        {
+          "failure": "市场价格下跌",
+          "impact": "影响不可撤回头寸的经济价值，但不是一个从未承诺的本金赎回失败。"
+        }
+      ],
+      "judgment": "本金兑付子项N/A；保留收益领取路径及资金来源适用评价。产品不可逆需明确披露，但不能因设计不可赎回而按借贷兑付扣分。",
+      "ratingDisposition": {
+        "principalRedemption": "N/A",
+        "necessaryDependencies": "适用，限定在实际保留的费/奖权利",
+        "numericScore": null
+      },
+      "evidenceRefs": [
+        "baseReview.businesses[id=lp-burn]",
+        "vaultFarmBurn.outputs.mechanisms.burn",
+        "main.outputs.yield.burnManager"
+      ]
+    },
+    {
+      "id": "vester",
+      "label": "CLMM受损头寸CETUS补偿计划",
+      "classification": "跨受影响CLMM头寸的补偿责任，可被包装功能引用；不是LP Burn本金，项目只计一次。",
+      "userRights": {
+        "claim": "合资格受影响头寸按固定CETUS分期领取，已领金额扣除；不是按当前美元损失浮动支付。",
+        "sourceRefs": [
+          "cetus-compensation-announcement"
+        ]
+      },
+      "funds": {
+        "coin": "CETUS",
+        "sameCoin": true,
+        "totalCommitmentRaw": "150000000000000000",
+        "alreadyRedeemedRaw": "129724312574293266",
+        "remainingCommitmentRaw": "20275687425706734",
+        "balanceRaw": "20275688075706734",
+        "remainingCommitment": "20275687.425706734",
+        "balance": "20275688.075706734",
+        "surplus": "0.650000000",
+        "purpose": "全部剩余名义CETUS承诺的现金；不是可再分给其他业务的保险储备。"
+      },
+      "settlement": {
+        "periods": 13,
+        "allPeriodsMatureAtSnapshot": true,
+        "lastReleaseUnixSeconds": "1778414400",
+        "required": "有效Position和所属Pool绑定、受影响资格、该凭证未暂停、该期未重复领取、Versioned通过以及链上Clock到期。",
+        "cashPath": "从ClmmVester.balance直接拆出CETUS；无需keeper、实时外部价格、二级出售或新充值。",
+        "note": "固定计划余额覆盖整个剩余承诺，因此不需要单张凭证枚举才能证明计划层资金上界。"
+      },
+      "metrics": [
+        {
+          "id": "remaining_obligation_coverage",
+          "formula": "balance / (total_cetus_amount - redeemed_amount)",
+          "ratioNumeratorRaw": "20275688075706734",
+          "ratioDenominatorRaw": "20275687425706734",
+          "percent": "100.000003205809",
+          "status": "covered"
+        },
+        {
+          "id": "positive_cash_shortfall",
+          "formula": "max(remainingCommitment-balance,0)",
+          "valueRaw": "0",
+          "coin": "CETUS"
+        },
+        {
+          "id": "schedule_readiness",
+          "value": "13/13期均已到期",
+          "status": "matured_schedule"
+        }
+      ],
+      "externalFailureImpact": [
+        {
+          "failure": "外部市场CETUS价格下跌",
+          "impact": "不改变名义CETUS数量覆盖，影响补偿的市场价值；不能把同币余额重复按价格抵扣成现金缺口。"
+        },
+        {
+          "failure": "资格/凭证暂停或包版本受限",
+          "impact": "可能阻断某凭证正常领取，归实际授权与结算路径；不把资金已经足额与每人当下资格混同。"
+        }
+      ],
+      "judgment": "剩余固定同币义务全额有现金。余量0.65 CETUS虽小，但本计划没有借款扩张、浮动利息或不同币计价应付，未发现需要额外超额安全垫的现金来源；不能因余量薄自造扣分。",
+      "ratingDisposition": {
+        "fundingCoverage": "适用，已覆盖；自然缺口0",
+        "externalLiquidityDependence": "N/A，直接支付已存同币",
+        "numericScore": null
+      },
+      "sourceRefs": [
+        "cetus-compensation-announcement",
+        "openzeppelin-sui-vesting"
+      ],
+      "evidenceRefs": [
+        "baseReview.focusedReviews.vester",
+        "samples.outputs.vester.vester.asMoveObject.contents.json",
+        "samples.outputs.vester.package.vester.disassembly::redeem"
+      ]
+    },
+    {
+      "id": "xcetus",
+      "label": "xCETUS",
+      "userRights": {
+        "conversion": "已核正常路径按1:1存入CETUS并获得xCETUS。",
+        "redemption": "选择15至180天；最短50%、最长100%，到期领取所选固定数额；到期前可取消恢复xCETUS。",
+        "rewards": "分红来自协议收入，属于收益分配；不承诺固定年收益、固定未来每周金额或即时原价赎回。",
+        "sourceRefs": [
+          "cetus-xcetus-tokenomics",
+          "cetus-xcetus-guide"
+        ]
+      },
+      "funds": {
+        "mainCETUS": "25228351.214183861",
+        "totalSupplyXCETUS": "227293674.568440730",
+        "totalRequestedOriginalXCETUS": "202227320.782688558",
+        "notYetRequestedFaceValueXCETUS": "25066353.785752172",
+        "mainMinusNotYetRequestedFaceValueCETUS": "161997.428431689",
+        "extraCETUS": "5156969.833155688",
+        "extraInterpretation": "协议Eco Treasury余额，不能因文档提insurance用途就自动列为用户可调用的赎回现金。",
+        "requestCashSamples": [
+          {
+            "version": "V1",
+            "objectId": "0x89f6719a5797b73a5302f86e2b8f8324aec121183260fd3a58c9ba7fa2a487e6",
+            "actualCETUS": "22.555585500",
+            "recordCETUS": "22.555585500",
+            "originalXCETUS": "22.555585500",
+            "discountCETUS": "0",
+            "lockDays": 180,
+            "matureAtSnapshot": true,
+            "endUtc": "2023-11-06T11:20:44.000Z",
+            "recordAndCashMatch": true
+          },
+          {
+            "version": "V2",
+            "objectId": "0x984716c0db3938925abc938f1d6dc27b1b246dd81ede7bae832fd9895a933a0e",
+            "actualCETUS": "13335.531726138",
+            "recordCETUS": "13335.531726138",
+            "originalXCETUS": "13335.531726138",
+            "discountCETUS": "0",
+            "lockDays": 180,
+            "matureAtSnapshot": false,
+            "endUtc": "2027-05-18T09:53:14.000Z",
+            "recordAndCashMatch": true
+          }
+        ]
+      },
+      "settlement": {
+        "request": "申请时按所选期限计算p<=n，从主库转p到用户拥有的V2 LockedCoin；原始n计入total_locked，尚未烧毁。",
+        "cancel": "V2由friend helper拆回真实p；包装层校验未到期/对象绑定，现金回主库并恢复可用额度。",
+        "claim": "V2到期经包装层匹配VeNFT/LockInfo/真实余额，解锁p并销毁n；折扣n-p从主库转extra，全部原子执行。180天n=p时没有折扣结算现金需求。",
+        "legacy": "真实V1样本已到期且独立持有22.555585500 CETUS；V1公开helper可以直接领取其现金。",
+        "dividends": "已入账分红可由用户直接领取，不需SettleCap；新一期个人分配必须由持SettleCap者执行settle_v2。184已结算说明已执行过，不能证明今后无需该控制组。185已登记但0人结算、未到领取时间。"
+      },
+      "metrics": [
+        {
+          "id": "cash_vs_all_unrequested_face_value",
+          "formula": "B / (S-total_locked)",
+          "numeratorRaw": "25228351214183861",
+          "denominatorRaw": "25066353785752172",
+          "percent": "100.646274403594",
+          "meaning": "主库在本快照有足够现金把全部尚未请求额度按180天100%新建锁币；不是全存量偿付率。",
+          "status": "covered_at_snapshot"
+        },
+        {
+          "id": "real_request_cash_match",
+          "value": "V1和V2两个定点真实请求均现金=应兑额、n=p、D=0",
+          "status": "matched"
+        },
+        {
+          "id": "term_state",
+          "value": "V1已到期；V2处在约定180天等待期",
+          "status": "contractual_wait_is_not_failure"
+        },
+        {
+          "id": "complete_legacy_solvency_ratio",
+          "value": null,
+          "status": "not_used_for_current_dependency_rating",
+          "why": "完整D/P未求和；不伪称全部旧请求现金精确对账，也不为非必要统计触发全量扫描。"
+        },
+        {
+          "id": "unbooked_period_settlement_control",
+          "value": "SettleCap由单一2/3控制组拥有，无公开用户自结算入口",
+          "status": "verified_operational_dependency",
+          "meaning": "一个自动化进程停机可替换；控制组无法签名则该阶段停止，不影响已完成分配的直接领取。"
+        }
+      ],
+      "externalFailureImpact": [
+        {
+          "failure": "Keeper停机或外部报价缺失",
+          "impact": "本金正常请求/取消/到期领取均无需这些输入。"
+        },
+        {
+          "failure": "协议当周收入下降",
+          "impact": "影响后续分红水平；不改变已锁入固定p的现金，也不构成对固定未来收益的违约，因为未承诺该收益。"
+        },
+        {
+          "failure": "主库折扣差额结转现金不足",
+          "impact": "短期限V2包装层可能回滚，这是保留的内部现金条件；正常1:1入金与对称结转不需要独立收益融资。两个真实满额样本D=0。"
+        },
+        {
+          "failure": "暂停/升级控制",
+          "impact": "影响正常路径可用性，按实际特权控制评价，不能另把约定锁期再算一次风险。"
+        },
+        {
+          "failure": "结算Cap控制组丧失法定签名能力",
+          "impact": "会中断尚未完成的期次个人分配；184既有个人应收和本金正常领取不需此Cap。185尚未到期，不能称当前已违约。"
+        }
+      ],
+      "judgment": "本金的正常锁期/自选折价不是异常。主库覆盖未请求额度，两真实请求现金隔离；分红需区分既有个人应收可直接领取、已登记新期仍须单一2/3控制组结算。185尚未到期，结构性依赖已证实，但没有当前延误事实。本文不给无依据数值分。",
+      "ratingDisposition": {
+        "principalFundingAndClaimPath": "适用，按B/U与请求匹配分别披露",
+        "contractualLockDiscount": "条款披露，不按异常失败打分",
+        "externalPriceKeeper": "N/A",
+        "dividendSettlement": "适用：既有应收直接领取与下一期需要授权结算分列；不凭184已结算推未来permissionless，也不因未承诺未来奖励缺资金扣分。",
+        "numericScore": null
+      },
+      "sourceRefs": [
+        "cetus-xcetus-tokenomics",
+        "cetus-xcetus-guide",
+        "erc-7540"
+      ],
+      "evidenceRefs": [
+        "xcetusResult",
+        "baseReview.businesses[id=xcetus]",
+        "tokenLaunch.outputs.modules.lock",
+        "helpers.outputs.accountingHelpers.locking"
+      ],
+      "dividendContinuityReview": {
+        "checkpoint": 346896130,
+        "entry": {
+          "function": "dividend::settle_v2",
+          "signature": "public settle_v2(&SettleCap, &mut VeNFTDividends, &mut DividendManager, &XcetusManager, u64, vector<ID>, u64, &mut TxContext): Option<ID>",
+          "permissionless": false,
+          "basis": "public只表示函数可调用；调用必须提交已持有的owned SettleCap作为输入，任意用户不能借用别人地址拥有的Cap。"
+        },
+        "knownSettleCap": {
+          "id": "0xade40abe9f6dd10b83b11085be18f07b63b681cf1c169b041fa16854403388c5",
+          "owner": "0x2891c6b8dca29a075d263c1bb21c7b88adf3ff6baddae1b8743cc00b66bd2c47",
+          "ownerClass": "previously_verified_2_of_3_multisig",
+          "interpretation": "单一授权控制组，不是单钥EOA；一名成员失联仍可由剩余两名形成法定签名。"
+        },
+        "normalFallback": {
+          "publicUserSelfSettlement": false,
+          "oldSettleEntry": "旧settle直接Abort，不是备用自助路径。",
+          "automationOnlyOutage": "函数不绑定某台服务器或keeper地址；单个自动化进程停机时，只要持Cap组仍可签名，可手工或用替代客户端继续批量结算。",
+          "quorumOutage": "持Cap控制组无法形成法定签名时，普通用户没有替代入口新增个人分配；现有代码未提供公开重发SettleCap或按超时接管结算。",
+          "capTransfer": "Cap具有store/key，持有人能正常签名时可转移其控制；这不解决持有人已失去法定签名能力的情况。",
+          "administrativeUpgrade": "升级治理是另外的权限/恢复边界，不等于已存在permissionless结算回退。"
+        },
+        "rightClasses": [
+          {
+            "id": "principal",
+            "description": "本金锁仓与到期CETUS支付",
+            "needsDividendSettlementCap": false,
+            "why": "locking路径独立；停止分红运营不会使已隔离本金成为新增奖励融资。"
+          },
+          {
+            "id": "alreadyBookedDividends",
+            "description": "已写入个人VeNFT dividend表、且已到领取时间的分红",
+            "needsDividendSettlementCap": false,
+            "why": "redeem_v2/v3读取既有个人表并从余额支付；无需再次settle或运营者签名。保留常规版本/余额/凭证条件。"
+          },
+          {
+            "id": "registeredButNotBooked",
+            "description": "185期已登记总奖金、尚未完成个人分配",
+            "needsDividendSettlementCap": true,
+            "why": "个人领取函数不会自算并写入该期分配；若到期仍未分配，参与者不能靠redeem绕开Cap。未结算登记金额仍可被AdminCap更新，不能把其等同已经不可变的个人应收，也不能当完全未宣布的假设新增奖励。"
+          },
+          {
+            "id": "unannouncedFutureRewards",
+            "description": "186等尚未登记、未来业务收入和未来收益率",
+            "needsDividendSettlementCap": "若日后发放则需正常运营流程",
+            "fundingPenaltyApplicable": false,
+            "why": "没有承诺固定未来金额或固定APY；不因未来未赚到/未宣布的收入没有储备就扣偿付分。"
+          }
+        ],
+        "currentRegisteredPeriod": {
+          "period": 185,
+          "bonus": {
+            "SUI": "6196",
+            "CETUS": "12220",
+            "USDC": "488"
+          },
+          "isSettled": false,
+          "settledCount": "0",
+          "dueUnixSeconds": "1795600800",
+          "dueUtc": "2026-11-25T10:00:00.000Z",
+          "pastDueAtSnapshot": false,
+          "conclusion": "当前没有到期未结算事实；但下一期现存分红业务继续依赖这组的结算，184成功不消除结构性依赖。",
+          "cashEarmarkCaution": "register_bonus只记账不同时入金；update_bonus允许未settled期修改金额；redeem_extra的已声明余额保护只累计is_settled期。故登记金额与已分配应收/已隔离资金须分开。"
+        },
+        "assessmentConclusion": "应把本金、既有个人应收领取、已登记下一期结算及未承诺未来收益分开。当前185未逾期，不编造已发生支付失败；若评价运营者故障后的延续能力，Cap控制组不可用会使新增分红分配停止，应明示该依赖，不能仅凭184已结算给全部分红流程无单点结论。",
+        "numericScore": null,
+        "evidenceRefs": [
+          {
+            "file": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-business-ratings-346896130/tokenLaunch/snapshot.json",
+            "jsonPath": "outputs.modules.dividend.asMovePackage.module.disassembly",
+            "lines": {
+              "initCap": "140-195",
+              "registerBonus": "370-532",
+              "updateBeforeSettled": "534-620",
+              "settleCapGate": "664",
+              "settledCompletion": "951-997",
+              "disabledLegacySettle": "1000-1004",
+              "userClaimNoCap": "1012-1127",
+              "claimOnlyExistingTables": "1433-1608;1610-1794",
+              "extraProtectsSettledOnly": "1229-1338"
+            }
+          },
+          {
+            "file": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-project-346896130/snapshot.json",
+            "jsonPath": "outputs.other.{xDividendSettle,xDividendManager}"
+          },
+          {
+            "file": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-business-ratings-346896130/tokenLaunch/snapshot.json",
+            "jsonPath": "outputs.dividends.period.{p184,p185}"
+          }
+        ]
+      }
+    },
+    {
+      "id": "launchpad",
+      "label": "已结束的CETUS/SUI与NAVX/SUI销售池",
+      "userRights": {
+        "claim": "按已冻结的发行条款取得购买份额；未获配部分取得出资币退款。",
+        "notClaim": "成功买入代币不附带持续按首发价回售、美元保本、二级市场流动性承诺。",
+        "sourceRefs": [
+          "cetus-ido-2023",
+          "navi-navx-ido-2024"
+        ]
+      },
+      "funds": {
+        "early": {
+          "poolId": "0x8b3b1b25d0769ec4165c9d7cf6090375be6066c3b4b35cb472c7eb8f05b07a9c",
+          "currentUserSaleCETUS": "34518.760130341",
+          "currentUserRefundSUI": "41216.786889261",
+          "isSettle": true,
+          "isCancel": false
+        },
+        "navx": {
+          "poolId": "0x0493193e0c0c0b608c9351c943635f997eff8ae367b3b7d8e2f26e0a833d9146",
+          "currentUserSaleNAVX": "86067.982596208",
+          "currentUserRefundSUI": "37616.342808358",
+          "isLiquidityInjected": true,
+          "isWithdrawn": true,
+          "isCancelled": false
+        }
+      },
+      "settlement": {
+        "phase": "两具名成功发行均结束；用户存量领取和退款阶段。",
+        "path": "凭有效购买凭证、Pool绑定及未领取标记，从各池sale_coin/raise_coin直接支付。初始化白名单、配额、销售和流动性注入已完成；当前领取不再调用CLMM交换或报价。",
+        "conservation": "初始买方库存/超额退款与发行人可提款项分区；配售向下取整或使用向上取整压低退款，合计权利不超过预留；发行人只提其份额且成功池只提一次；用户领取同步扣库并防重复。",
+        "scope": "这是同检查点部署代码与状态的支付上界证明，不能从当前余额反推出精确未领总额，额外捐款可能存在。"
+      },
+      "metrics": [
+        {
+          "id": "current_positive_funding_shortfall_bound",
+          "early": {
+            "CETUSRaw": "0",
+            "SUIRaw": "0"
+          },
+          "navx": {
+            "NAVXRaw": "0",
+            "SUIRaw": "0"
+          },
+          "status": "proven_under_selected_pool_contract_invariants",
+          "meaning": "剩余义务<=对应用户预留现金，故资金正缺口上界为0；0不等于零负债，也不是分数。"
+        },
+        {
+          "id": "exact_unclaimed_debt_ratio",
+          "value": null,
+          "status": "unnecessary_for_coverage_judgment",
+          "why": "已证明现金覆盖义务上界；不应因没有逐用户应付求和而全部记待核。"
+        },
+        {
+          "id": "current_external_price_or_amm_requirement",
+          "value": false,
+          "status": "not_applicable_after_settlement"
+        }
+      ],
+      "externalFailureImpact": [
+        {
+          "failure": "Cetus AMM/Tide/Aggregator价格或交易服务失效",
+          "impact": "不会改变这两个结束池按原币领份额/退款的结算公式；用户随后卖出代币属于另一操作。"
+        },
+        {
+          "failure": "发行代币二级价格下跌",
+          "impact": "投资价格风险，不自动触发本池固定价退款。"
+        },
+        {
+          "failure": "Pool包/版本/凭证权限阻断",
+          "impact": "仍属必要链上执行边界；本快照已核正常终态，不因旧余额尚未领取就推断付款失败。"
+        }
+      ],
+      "judgment": "这两个结束池的同币预留覆盖剩余合同义务，可用守恒上界明确通过资金检查；当前外部价格/CLMM依赖N/A。无需为了精确全部未领总额再扫用户。",
+      "ratingDisposition": {
+        "saleAndRefundCoverage": "适用，已由代码守恒上界覆盖",
+        "currentExternalTradeDependence": "N/A",
+        "newOrActiveLaunches": "本快照范围外，不泛化已结束池结论",
+        "numericScore": null
+      },
+      "sourceRefs": [
+        "cetus-ido-2023",
+        "navi-navx-ido-2024",
+        "openzeppelin-sui-prefunded-sale"
+      ],
+      "evidenceRefs": [
+        "baseReview.focusedReviews.launchpad",
+        "main.outputs.other.{launchCetusSale,launchNavxSale}",
+        "tokenLaunch.outputs.modules.{early,over}",
+        "helpers.outputs.accountingHelpers.{early,over,math}"
+      ]
+    }
+  ],
+  "crossBusinessRules": {
+    "noDoubleCounting": [
+      "Burn/Vault/Farm包装的头寸仍是底层AMM同一笔资本。",
+      "Vester为协议补偿计划，同余额/义务只计一次，不作为Burn或其他业务额外本金。",
+      "xCETUS主库、extra、分红库分别对应不同责任；不得混成万能储备。",
+      "Launchpad每池sale/refund应付按原币分别比较，不能跨币抵补或并入AMM资金。"
+    ],
+    "avoidFalsePenalties": [
+      "产品条款中的永久放弃本金、锁期及自选折价不是异常兑付违约。",
+      "固定同币有限责任在余额覆盖时，不因超额很小创造安全垫扣分。",
+      "已有有效负债上界与守恒证明，无需精准全部用户求和才能判断覆盖。",
+      "实际执行依赖与已完成的一次性依赖分开；市场卖出不混成原币领取。"
+    ],
+    "noUnsupportedPass": "不把未测的全存量比例写100%；结论带对象/阶段范围，不泛化新业务。"
+  },
+  "sources": [
+    {
+      "id": "cetus-lp-burn-sdk",
+      "url": "https://github.com/CetusProtocol/cetus-lp-burn-sdk",
+      "publisher": "CetusProtocol",
+      "kind": "official_product_technical_documentation",
+      "usedFor": "LP Burn永久锁定本金、保留手续费与挖矿奖励领取权；包装原CLMM头寸。",
+      "webLines": "README rendered lines 214-217",
+      "notFor": "不提供评分阈值；不证明特定检查点的现金余额。"
+    },
+    {
+      "id": "cetus-xcetus-tokenomics",
+      "url": "https://cetus-1.gitbook.io/cetus-docs/tokenomics/xcetus",
+      "publisher": "Cetus",
+      "kind": "official_product_documentation",
+      "usedFor": "CETUS按1:1转为xCETUS；赎回期限与比例；短期限弃权余额在完成后转Eco Treasury；奖励由协议收入支持且非固定收益承诺。",
+      "webLines": "20-33; 35-47",
+      "notFor": "Eco Treasury的文字用途不等于本快照中的extra可被所有用户直接兑付；不提供安全评分。"
+    },
+    {
+      "id": "cetus-xcetus-guide",
+      "url": "https://cetus-1.gitbook.io/cetus-docs/guides/how-to-join-xcetus-staking",
+      "publisher": "Cetus",
+      "kind": "official_user_guide",
+      "usedFor": "15天50%、180天100%，到期后领取，到期前允许取消；分红每周结算后领取。",
+      "webLines": "14-16; 21-29",
+      "notFor": "不把正常锁期或自选折价视为兑付异常，也不证明全部旧存量精确勾稽。"
+    },
+    {
+      "id": "cetus-compensation-announcement",
+      "url": "https://medium.com/@CetusProtocol/cetus-relaunch-incoming-recovery-plan-and-the-road-ahead-9fc0f8bd5c41",
+      "publisher": "CetusProtocol",
+      "publishedDate": "2025-06-07",
+      "kind": "official_issuer_announcement",
+      "usedFor": "补偿为受影响CLMM LP的固定CETUS计划，配置总供应15%，5%可即时领取、10%随后分期；说明这是特定币种和期限的承诺。",
+      "webLines": "77-107",
+      "notFor": "不能将CETUS名义补偿解释成按原攻击损失美元价值保本，也不属于LP Burn独享本金。"
+    },
+    {
+      "id": "cetus-ido-2023",
+      "url": "https://medium.com/@CetusProtocol/the-cetus-ido-is-coming-f7dedf4031a3",
+      "publisher": "CetusProtocol",
+      "publishedDate": "2023-05-03",
+      "kind": "official_sale_terms",
+      "usedFor": "早期发行2千万CETUS，固定价0.04 SUI，硬顶800000 SUI，超额按配售规则分配，2023-05-10开始领取；发行期条款界定用户购买权。",
+      "notFor": "不把成功购买后的二级市场跌价当原币退款义务。"
+    },
+    {
+      "id": "navi-navx-ido-2024",
+      "url": "https://medium.com/@navi.protocol/official-announcement-navx-ido-with-cetus-strategic-dex-partner-41cce9f06e96",
+      "publisher": "NAVI Protocol",
+      "publishedDate": "2024-01-31",
+      "kind": "official_sale_issuer_terms",
+      "usedFor": "NAVX/SUI定价0.021，额度960万NAVX、硬顶201600 SUI，白名单保护后按比例分配，未使用出资在结束后退回；2024-02-07可领且无锁期。",
+      "webLines": "82-117; 126-135",
+      "notFor": "仅该具名发行条款，不泛化所有launchpad；非价格保本承诺。"
+    },
+    {
+      "id": "openzeppelin-sui-vesting",
+      "url": "https://docs.openzeppelin.com/contracts-sui/1.x/vesting-wallet",
+      "publisher": "OpenZeppelin",
+      "kind": "primary_reference_implementation_method",
+      "usedFor": "期限支付应区分释放曲线与资金守恒、已支付记账；自然关注到期可领和避免重复支付。",
+      "webLines": "48-49; schedule/release sections",
+      "analogyOnly": true,
+      "notFor": "不表示Cetus采用OpenZeppelin代码；示例文档称未审计；不提供Cetus评分。"
+    },
+    {
+      "id": "openzeppelin-sui-prefunded-sale",
+      "url": "https://docs.openzeppelin.com/contracts-sui/1.x/prefunded-sale",
+      "publisher": "OpenZeppelin",
+      "kind": "primary_reference_implementation_method",
+      "usedFor": "预存销售分离买方库存、退款托管和发行方收益；守恒与限制提款可以证明退款覆盖，无需扫描每个用户才能成立。",
+      "webLines": "48-51; 275-284; 309-314",
+      "analogyOnly": true,
+      "notFor": "不表示Cetus采用该库或其所有保证；Cetus保证仍以本地部署代码推导；不提供评分阈值。"
+    },
+    {
+      "id": "erc-7540",
+      "url": "https://eips.ethereum.org/EIPS/eip-7540",
+      "publisher": "Ethereum Improvement Proposals",
+      "kind": "primary_interface_standard_method",
+      "usedFor": "异步请求应分别识别Pending、Claimable、Claimed；不能把约定待到期直接称作流动性故障，取消与状态转换必须另核。",
+      "webLines": "82-100; 182-194; 498-502",
+      "analogyOnly": true,
+      "notFor": "Cetus是Sui Move协议，此处只借状态分类方法，未声称符合ERC-7540；没有外部给定的100/80映射。"
+    }
+  ],
+  "evidenceAliases": {
+    "baseReview": "/Users/secundanirn/Desktop/bitslab/docs/bitsscore/research/cetus-funds-dependencies-review-346896130.json",
+    "xcetusResult": "/private/tmp/cetus-funds-xcetus-result.json",
+    "main": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-project-346896130/snapshot.json",
+    "tokenLaunch": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-business-ratings-346896130/tokenLaunch/snapshot.json",
+    "vaultFarmBurn": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+    "samples": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-config-dependencies-346896130/samples/snapshot.json",
+    "helpers": "/private/tmp/cetus-funds-closure.Kurx4C/helpers-online/snapshot.json",
+    "head": "/private/tmp/cetus-funds-final.6XGd7s/round-1-online/snapshot.json",
+    "tail": "/private/tmp/cetus-funds-final.6XGd7s/latest-lock-online/snapshot.json"
+  },
+  "numericScoresProduced": false
+}

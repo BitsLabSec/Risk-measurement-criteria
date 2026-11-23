@@ -1,0 +1,3005 @@
+{
+  "schemaVersion": 1,
+  "project": "cetus",
+  "dimension": "onchain-funds-and-necessary-dependencies",
+  "assessmentDate": "2026-11-20",
+  "checkpoint": {
+    "sequenceNumber": 346896130,
+    "digest": "CKzQHsSzzVDnjrPR6qBjRUmYvihnwdKrXNJh7YxrDW11",
+    "timestamp": "2026-11-19T10:43:55.124Z"
+  },
+  "status": "required_snapshot_review_complete",
+  "sourceAssessment": {
+    "path": "/Users/secundanirn/Desktop/bitslab/docs/bitsscore/research/cetus-public-security-assessment-2026-11-19.json",
+    "sha256": "c01501a687910229a921b00d4a7cc5155f871eb6d43c263ebdf4a49da2f1c2d1"
+  },
+  "evidenceArchive": "cetus-funds-dependencies-evidence-346896130.json",
+  "method": {
+    "references": [
+      "合约类型评估标准/链上评估复用指南.md#资金状态与关键依赖",
+      "合约类型评估标准/dex-onchain-security-rating-standard.md#必要依赖的链上状态",
+      "合约类型评估标准/yield-vault-onchain-security-rating-standard.md#资金状态与受影响敞口展示不评分"
+    ],
+    "questions": [
+      "必要操作依赖哪个真实输入/组件，输入失效会影响什么，是否有独立替代或退出路径。",
+      "同一对象和币种的可用资金是否覆盖对应义务；账面份额、实际现金、协议费和共享资产分别保存。"
+    ],
+    "naviReuse": {
+      "cashPressureFractions": [
+        "5/100",
+        "10/100",
+        "15/100"
+      ],
+      "applicability": "只对真正使用借贷资产负债模型的两笔外部Suilend储备沿用情景，不套到AMM、订单、锁仓或Launchpad。",
+      "notAdopted": "不将Lending专用分配权重或1%债务损失情景默认套到整个Cetus。"
+    },
+    "scoring": {
+      "status": "research_trial",
+      "newScoresPublished": true,
+      "score": 86.42,
+      "projectOnchainScore": null,
+      "weightsChanged": false,
+      "reason": "资金责任及声明单来源停止情景取较弱结果；按冻结父业务份额汇总。",
+      "methodFile": "cetus-funds-dependencies-method-research-2026-11-20.json",
+      "adoptionStatus": "adopted_for_current_cetus_assessment"
+    }
+  },
+  "collection": {
+    "newHttpRequests": 20,
+    "requestsPerOnlineRun": 2,
+    "checkpointBound": true,
+    "aiCallsInCollector": 0,
+    "historyReads": 0,
+    "transactionReads": 0,
+    "positionOrUserEnumeration": 0,
+    "poolEnumeration": 0,
+    "offlineReplays": 9,
+    "offlineHttpRequests": 0,
+    "offlineOutputsMatch": true,
+    "thisContinuationHttpRequests": 16,
+    "successfulHttpRequests": 18,
+    "rejectedEndpointRequests": 2,
+    "rewardAccountingRows": 12,
+    "lockCoinObjects": 2
+  },
+  "businesses": [
+    {
+      "id": "spot",
+      "label": "现货做市与兑换",
+      "parentWeightExact": "5",
+      "weightEffect": "unchanged",
+      "fundsSnapshot": {
+        "id": "spot",
+        "nativeAmmPool": [
+          {
+            "symbol": "CETUS",
+            "amount": "19966115.980500936"
+          },
+          {
+            "symbol": "SUI",
+            "amount": "348079.938399996"
+          }
+        ],
+        "tideBook": {
+          "SUI": "36932.828223197",
+          "USDC": "42763.944839"
+        },
+        "deepBookFeeVault": {
+          "DEEP": "0.000622"
+        },
+        "scope": "单个 AMM 池、单个 Tide 簿、一个费用金库，分别披露。",
+        "interpretation": "原生样本池资产、Tide 簿内资产与 DEEP 协议费分别列在各组件。"
+      },
+      "review": {
+        "dependency": "原生AMM普通直接交易/撤资无外部报价服务；聚合结论限已核路线；Tide旧反向缓存失效不等于签名报价服务停摆，库存提款不需要报价。",
+        "funds": "AMM是双币份额，Aggregator为交易内资金交接，Tide为做市库存；DEEP协议费不是用户储备。"
+      },
+      "components": [
+        {
+          "id": "native-amm",
+          "weightExact": "25/8"
+        },
+        {
+          "id": "aggregator",
+          "weightExact": "15/16"
+        },
+        {
+          "id": "tide-rfq",
+          "weightExact": "15/16"
+        }
+      ],
+      "fundsAndDependenciesTrial": {
+        "id": "spot",
+        "label": "现货做市与兑换",
+        "weightExact": "5",
+        "scoreExact": "185/2",
+        "calculatedScore": 92.5,
+        "score": 92.5,
+        "contributionExact": "925/18",
+        "contribution": 51.388888888888886,
+        "components": [
+          {
+            "id": "native-amm",
+            "weightExact": "25/8",
+            "score": 100
+          },
+          {
+            "id": "aggregator",
+            "weightExact": "15/16",
+            "score": 100
+          },
+          {
+            "id": "tide-rfq",
+            "weightExact": "15/16",
+            "score": 60
+          }
+        ]
+      },
+      "currentStateReferenceRating": {
+        "id": "spot",
+        "label": "现货做市与兑换",
+        "result": "100",
+        "score": 100,
+        "scope": "现货的三个独立组件",
+        "basis": "原生AMM、已选聚合路线和Tide的链上依赖与资金取回路径已核。",
+        "components": [
+          {
+            "id": "native-amm",
+            "label": "原生 AMM（CLMM、DLMM）",
+            "result": "N/A",
+            "score": null,
+            "scope": "普通直接单池兑换、撤资"
+          },
+          {
+            "id": "aggregator",
+            "label": "Aggregator V3",
+            "result": "100",
+            "score": 100,
+            "scope": "指定 1 SUI→USDC 单跳资金交接"
+          },
+          {
+            "id": "tide-rfq",
+            "label": "Tide RFQ",
+            "result": "100",
+            "score": 100,
+            "scope": "报价消费、更新与库存取回"
+          }
+        ]
+      }
+    },
+    {
+      "id": "conditional-orders",
+      "label": "条件订单（Limit、DCA）",
+      "parentWeightExact": "12/17",
+      "weightEffect": "unchanged",
+      "fundsSnapshot": {
+        "id": "conditional-orders",
+        "scope": "用户余额按单托管，没有订单本金汇总。",
+        "protocolFeeVault": "0x8c8234abed769a89c8f88ee484dba14d0a3c009ba701541156f8853bc4b66ad8",
+        "feeVaultAssetEntries": "53",
+        "interpretation": "用户资产逐单托管。DCA 指定订单持有 50000000000000 个 BUT 最小单位，本期投入 5000000000000 个最小单位。两类订单均可按所有人身份撤回剩余余额。"
+      },
+      "review": {
+        "dependency": "Limit成交依赖授权keeper；DCA需达到门槛的临时签名。缺瞬态签名不证明服务离线。",
+        "funds": "逐单托管；符合撤单条件的所有人可退剩余资产，取消不依赖keeper。"
+      },
+      "fundsAndDependenciesTrial": {
+        "id": "conditional-orders",
+        "label": "条件订单（Limit、DCA）",
+        "weightExact": "12/17",
+        "scoreExact": "60",
+        "calculatedScore": 60,
+        "score": 60,
+        "contributionExact": "80/17",
+        "contribution": 4.705882352941177,
+        "components": []
+      },
+      "currentStateReferenceRating": {
+        "id": "conditional-orders",
+        "label": "条件订单（Limit、DCA）",
+        "result": "100",
+        "score": 100,
+        "scope": "keeper执行的链上前提与用户撤单取回",
+        "basis": "Limit授权keeper有效；DCA为3个授权地址、门槛2，链上执行条件已核；两类订单所有人撤单退款不需要keeper。",
+        "components": []
+      }
+    },
+    {
+      "id": "margin",
+      "label": "Cetus Margin",
+      "parentWeightExact": "12/17",
+      "weightEffect": "unchanged",
+      "fundsSnapshot": {
+        "id": "margin",
+        "scope": "Cetus ETH/USDC 市场登记仓位另列。Suilend 共享储备反映外部可用流动性，不计入 Cetus 自有资金。",
+        "positionCount": "10",
+        "assetTotal": null,
+        "liabilityTotal": null,
+        "amountGroups": [
+          {
+            "label": "Suilend 两笔外部储备的可用余额",
+            "amounts": {
+              "ETH": "1159.92022273",
+              "USDC": "6012995.45901"
+            }
+          }
+        ],
+        "interpretation": "外部ETH/USDC储备现金分别覆盖供应债权90.9670%、22.0126%，均覆盖5%/10%/15%提现情景；实际依赖Pyth，无独立备用报价。",
+        "externalReserveCashPressure": [
+          {
+            "symbol": "ETH",
+            "cash": "1159.92022273",
+            "supplierClaims": "1275.09947835239861632419623985",
+            "cashCoveragePercent": 90.96703766429066,
+            "scenarios": [
+              {
+                "withdrawalFractionPercent": 5,
+                "required": "63.75497391761993081620981200",
+                "covered": true
+              },
+              {
+                "withdrawalFractionPercent": 10,
+                "required": "127.50994783523986163241962399",
+                "covered": true
+              },
+              {
+                "withdrawalFractionPercent": 15,
+                "required": "191.26492175285979244862943598",
+                "covered": true
+              }
+            ]
+          },
+          {
+            "symbol": "USDC",
+            "cash": "6012995.459010",
+            "supplierClaims": "27316127.787046376977963297256023",
+            "cashCoveragePercent": 22.01262018499354,
+            "scenarios": [
+              {
+                "withdrawalFractionPercent": 5,
+                "required": "1365806.389352318848898164862802",
+                "covered": true
+              },
+              {
+                "withdrawalFractionPercent": 10,
+                "required": "2731612.778704637697796329725603",
+                "covered": true
+              },
+              {
+                "withdrawalFractionPercent": 15,
+                "required": "4097419.168056956546694494588404",
+                "covered": true
+              }
+            ]
+          }
+        ]
+      },
+      "review": {
+        "dependency": "最终无效/非正价格被拒绝，普通还款无报价依赖；已核Pyth路径没有独立备用。",
+        "funds": "真实外部储备宏观字段已足以计算现金压力，无需枚举Cetus仓位；不能将外部资产算Cetus自有资产。"
+      },
+      "fundsAndDependenciesTrial": {
+        "id": "margin",
+        "label": "Cetus Margin",
+        "weightExact": "12/17",
+        "scoreExact": "60",
+        "calculatedScore": 60,
+        "score": 60,
+        "contributionExact": "80/17",
+        "contribution": 4.705882352941177,
+        "components": []
+      },
+      "currentStateReferenceRating": {
+        "id": "margin",
+        "label": "Cetus Margin",
+        "result": "100",
+        "score": 100,
+        "scope": "ETH/USDC 市场普通小额还款和合资格提款",
+        "basis": "两币 Pyth 输入匹配，均在 60 秒时效内；相关两笔 Suilend 储备可刷新并有可用余额，流出限额有余量。",
+        "components": []
+      }
+    },
+    {
+      "id": "strategy-vault",
+      "label": "策略金库",
+      "parentWeightExact": "12/17",
+      "weightEffect": "unchanged",
+      "fundsSnapshot": {
+        "id": "strategy-vault",
+        "scope": "haSUI/SUI 样本金库的已匹配 CLMM 头寸；仅估算该仓位的双币本金，未并入费用、奖励或其他余额。",
+        "liquidityRaw": "1887168865623823277",
+        "tickLower": 788,
+        "tickUpper": 816,
+        "sqrtPriceX64": "19204801154185094268",
+        "approximatePrincipalAtSnapshotWholeCoins": {
+          "haSUI": "952374",
+          "SUI": "1717193"
+        },
+        "calculation": "当前价在区间内。设 S、A、B 为当前及价格区间两端的平方根（Q64），金额原始单位为 L·2^64·(B−S)/(S·B) 和 L·(S−A)/2^64。披露结果四舍五入至整币。",
+        "sources": [
+          "vaultFarmBurn.farmPosition",
+          "vaultFarmBurn.boundState",
+          "vaultFarmBurn.mechanisms.boundPool",
+          "assetUnits.units",
+          "https://github.com/CetusProtocol/cetus-clmm-sui-sdk/blob/main/src/math/clmm.ts#L449-L483"
+        ],
+        "interpretation": "按快照价格及头寸区间，样本头寸约含 952374 haSUI 和 1717193 SUI；仅为该头寸的双币本金估算。"
+      },
+      "review": {
+        "dependency": "已选金库绑定Farm和CLMM，当前底层组件及开关已核；奖励付款和本金取回分列。",
+        "funds": "金库份额对应已定位Farm包装CLMM头寸；其本期奖励现金也已可核，底层本金只能计一次。"
+      },
+      "fundsAndDependenciesTrial": {
+        "id": "strategy-vault",
+        "label": "策略金库",
+        "weightExact": "12/17",
+        "scoreExact": "100",
+        "calculatedScore": 100,
+        "score": 100,
+        "contributionExact": "400/51",
+        "contribution": 7.8431372549019605,
+        "components": []
+      },
+      "currentStateReferenceRating": {
+        "id": "strategy-vault",
+        "label": "策略金库",
+        "result": "100",
+        "score": 100,
+        "scope": "样本金库普通退出、复投与调仓",
+        "basis": "必要的 Farm 和 CLMM 组件可用；已选价格对象与池匹配，加撤开关开放。",
+        "components": []
+      }
+    },
+    {
+      "id": "stable-farming",
+      "label": "Stable Farming",
+      "parentWeightExact": "4/17",
+      "weightEffect": "unchanged",
+      "fundsSnapshot": {
+        "id": "stable-farming",
+        "scope": "共享奖励库四币全额余额与12条全部奖励会计记录，计算至同一检查点。",
+        "balances": {
+          "SUI": "28442.039222684",
+          "WAL": "173067.272715541",
+          "HAEDAL": "109289.485421398",
+          "haSUI": "9.944386583"
+        },
+        "interpretation": "四币全部12条奖励会计记录已核：SUI、WAL、HAEDAL、haSUI现金均足额覆盖当前已释放奖励付款预算。",
+        "releasedRewardPaymentBudget": {
+          "status": "verified_all_four_coin_released_budgets_covered",
+          "formula": "U_coin(t) = sum_p max(0, floor((R_p + Delta_p(t))/10^12) - H_p)",
+          "total_ledger_records": 12,
+          "checkpoint": 346896130,
+          "rows": [
+            {
+              "coin": "sui",
+              "ledger_entry_count": 6,
+              "linked_chain_complete": true,
+              "registered_pool_entry_count": "6",
+              "global_allocation_sum": "335",
+              "emission_per_second_scaled": "3877314814814814814",
+              "per_pool_upper_bounds": [
+                {
+                  "key": "0x871d8a227114f375170f149f7e9d45be822dd003eba225e83c05ac80828596bc",
+                  "allocation": "180",
+                  "elapsed_seconds": "485",
+                  "released_scaled": "4785637611235487864557646798",
+                  "released_increment_scaled_upper_bound": "1010416666666666666454",
+                  "released_at_checkpoint_scaled_upper_bound": "4785638621652154531224313252",
+                  "harvested_raw": "4778541739927777",
+                  "remaining_payout_upper_bound_raw": "7096881724377"
+                },
+                {
+                  "key": "0x6c545e78638c8c1db7a48b282bb8ca79da107993fcb185f75cedc1f5adb2f535",
+                  "allocation": "0",
+                  "elapsed_seconds": "29321",
+                  "released_scaled": "342352657417677696249242964",
+                  "released_increment_scaled_upper_bound": "0",
+                  "released_at_checkpoint_scaled_upper_bound": "342352657417677696249242964",
+                  "harvested_raw": "340405371272141",
+                  "remaining_payout_upper_bound_raw": "1947286145536"
+                },
+                {
+                  "key": "0xa528b26eae41bcfca488a9feaa3dca614b2a1d9b9b5c78c256918ced051d4c50",
+                  "allocation": "0",
+                  "elapsed_seconds": "5753",
+                  "released_scaled": "302030339870033716520159596",
+                  "released_increment_scaled_upper_bound": "0",
+                  "released_at_checkpoint_scaled_upper_bound": "302030339870033716520159596",
+                  "harvested_raw": "301569619857736",
+                  "remaining_payout_upper_bound_raw": "460720012297"
+                },
+                {
+                  "key": "0x313b7c579b95e8021bd2ab1d071ec18615c2f3e2f8da1f9f9e0f6d676b8bea66",
+                  "allocation": "0",
+                  "elapsed_seconds": "18034",
+                  "released_scaled": "15729039505008480702094740",
+                  "released_increment_scaled_upper_bound": "0",
+                  "released_at_checkpoint_scaled_upper_bound": "15729039505008480702094740",
+                  "harvested_raw": "15653072954108",
+                  "remaining_payout_upper_bound_raw": "75966550900"
+                },
+                {
+                  "key": "0x93372a4880cb4cbd4a9974a822c097aa36279a1dbeed7ebd7249d07b923238cf",
+                  "allocation": "0",
+                  "elapsed_seconds": "860845",
+                  "released_scaled": "11010119212962962962339885",
+                  "released_increment_scaled_upper_bound": "0",
+                  "released_at_checkpoint_scaled_upper_bound": "11010119212962962962339885",
+                  "harvested_raw": "11009830298549",
+                  "remaining_payout_upper_bound_raw": "288914413"
+                },
+                {
+                  "key": "0xa7417fb5f59e23b0a7826d78f025653823c49265be07bbf6dd9e553ba4249a56",
+                  "allocation": "155",
+                  "elapsed_seconds": "1612",
+                  "released_scaled": "49384973449066442577150998",
+                  "released_increment_scaled_upper_bound": "2891898148148148147540",
+                  "released_at_checkpoint_scaled_upper_bound": "49387865347214590725298538",
+                  "harvested_raw": "46764326467005",
+                  "remaining_payout_upper_bound_raw": "2623538880209"
+                }
+              ],
+              "sum_pool_harvested_raw": "5493943960777316",
+              "global_harvested_raw": "5493943960777316",
+              "harvest_sum_matches_global": true,
+              "total_remaining_payout_upper_bound_raw": "12204682227732",
+              "total_remaining_payout_upper_bound": "12204.682227732",
+              "actual_shared_vault_balance_raw": "28442039222684",
+              "actual_shared_vault_balance": "28442.039222684",
+              "cash_minus_entire_released_budget_upper_bound_raw": "16237356994952",
+              "cash_minus_entire_released_budget_upper_bound": "16237.356994952",
+              "all_current_released_budgets_fully_cash_covered": true,
+              "pool_allocation_sum": "335",
+              "allocation_sum_matches_global": true
+            },
+            {
+              "coin": "wal",
+              "ledger_entry_count": 2,
+              "linked_chain_complete": true,
+              "registered_pool_entry_count": "2",
+              "global_allocation_sum": "14063",
+              "emission_per_second_scaled": "162766203703703703703",
+              "per_pool_upper_bounds": [
+                {
+                  "key": "0x313b7c579b95e8021bd2ab1d071ec18615c2f3e2f8da1f9f9e0f6d676b8bea66",
+                  "allocation": "14063",
+                  "elapsed_seconds": "18034",
+                  "released_scaled": "4047942135284374999983823462",
+                  "released_increment_scaled_upper_bound": "2935325717592592592579902",
+                  "released_at_checkpoint_scaled_upper_bound": "4050877461001967592576403364",
+                  "harvested_raw": "3944134083075736",
+                  "remaining_payout_upper_bound_raw": "106743377926231"
+                },
+                {
+                  "key": "0xf26ad51dc0cf90a4c66ad82a24f66ecf9852547310d123147ed94d72f6c24865",
+                  "allocation": "0",
+                  "elapsed_seconds": "600444",
+                  "released_scaled": "105903703703703703703025920",
+                  "released_increment_scaled_upper_bound": "0",
+                  "released_at_checkpoint_scaled_upper_bound": "105903703703703703703025920",
+                  "harvested_raw": "105870644208723",
+                  "remaining_payout_upper_bound_raw": "33059494980"
+                }
+              ],
+              "sum_pool_harvested_raw": "4050004727284459",
+              "global_harvested_raw": "4050004727284459",
+              "harvest_sum_matches_global": true,
+              "total_remaining_payout_upper_bound_raw": "106776437421211",
+              "total_remaining_payout_upper_bound": "106776.437421211",
+              "actual_shared_vault_balance_raw": "173067272715541",
+              "actual_shared_vault_balance": "173067.272715541",
+              "cash_minus_entire_released_budget_upper_bound_raw": "66290835294330",
+              "cash_minus_entire_released_budget_upper_bound": "66290.835294330",
+              "all_current_released_budgets_fully_cash_covered": true,
+              "pool_allocation_sum": "14063",
+              "allocation_sum_matches_global": true
+            },
+            {
+              "coin": "haedal",
+              "ledger_entry_count": 3,
+              "linked_chain_complete": true,
+              "registered_pool_entry_count": "3",
+              "global_allocation_sum": "13000",
+              "emission_per_second_scaled": "150462962962962962962",
+              "per_pool_upper_bounds": [
+                {
+                  "key": "0x871d8a227114f375170f149f7e9d45be822dd003eba225e83c05ac80828596bc",
+                  "allocation": "12000",
+                  "elapsed_seconds": "485",
+                  "released_scaled": "8360414976851851851823884037",
+                  "released_increment_scaled_upper_bound": "67361111111111111110680",
+                  "released_at_checkpoint_scaled_upper_bound": "8360482337962962962934994717",
+                  "harvested_raw": "8340387054058965",
+                  "remaining_payout_upper_bound_raw": "20095283903997"
+                },
+                {
+                  "key": "0xf26ad51dc0cf90a4c66ad82a24f66ecf9852547310d123147ed94d72f6c24865",
+                  "allocation": "0",
+                  "elapsed_seconds": "812190",
+                  "released_scaled": "11962847222222222222186525",
+                  "released_increment_scaled_upper_bound": "0",
+                  "released_at_checkpoint_scaled_upper_bound": "11962847222222222222186525",
+                  "harvested_raw": "11933010545228",
+                  "remaining_payout_upper_bound_raw": "29836676994"
+                },
+                {
+                  "key": "0x313b7c579b95e8021bd2ab1d071ec18615c2f3e2f8da1f9f9e0f6d676b8bea66",
+                  "allocation": "1000",
+                  "elapsed_seconds": "18034",
+                  "released_scaled": "744539108796296296293772518",
+                  "released_increment_scaled_upper_bound": "208726851851851851850516",
+                  "released_at_checkpoint_scaled_upper_bound": "744747835648148148145623034",
+                  "harvested_raw": "723390449974409",
+                  "remaining_payout_upper_bound_raw": "21357385673739"
+                }
+              ],
+              "sum_pool_harvested_raw": "9075710514578602",
+              "global_harvested_raw": "9075710514578602",
+              "harvest_sum_matches_global": true,
+              "total_remaining_payout_upper_bound_raw": "41482506254730",
+              "total_remaining_payout_upper_bound": "41482.506254730",
+              "actual_shared_vault_balance_raw": "109289485421398",
+              "actual_shared_vault_balance": "109289.485421398",
+              "cash_minus_entire_released_budget_upper_bound_raw": "67806979166668",
+              "cash_minus_entire_released_budget_upper_bound": "67806.979166668",
+              "all_current_released_budgets_fully_cash_covered": true,
+              "pool_allocation_sum": "13000",
+              "allocation_sum_matches_global": true
+            },
+            {
+              "coin": "hasui",
+              "ledger_entry_count": 1,
+              "linked_chain_complete": true,
+              "registered_pool_entry_count": "1",
+              "global_allocation_sum": "50",
+              "emission_per_second_scaled": "0",
+              "per_pool_upper_bounds": [
+                {
+                  "key": "0x871d8a227114f375170f149f7e9d45be822dd003eba225e83c05ac80828596bc",
+                  "allocation": "50",
+                  "elapsed_seconds": "485",
+                  "released_scaled": "55613425925925925570",
+                  "released_increment_scaled_upper_bound": "0",
+                  "released_at_checkpoint_scaled_upper_bound": "55613425925925925570",
+                  "harvested_raw": "55613417",
+                  "remaining_payout_upper_bound_raw": "8"
+                }
+              ],
+              "sum_pool_harvested_raw": "55613417",
+              "global_harvested_raw": "55613417",
+              "harvest_sum_matches_global": true,
+              "total_remaining_payout_upper_bound_raw": "8",
+              "total_remaining_payout_upper_bound": "0.000000008",
+              "actual_shared_vault_balance_raw": "9944386583",
+              "actual_shared_vault_balance": "9.944386583",
+              "cash_minus_entire_released_budget_upper_bound_raw": "9944386575",
+              "cash_minus_entire_released_budget_upper_bound": "9.944386575",
+              "all_current_released_budgets_fully_cash_covered": true,
+              "pool_allocation_sum": "50",
+              "allocation_sum_matches_global": true
+            }
+          ],
+          "source": "/private/tmp/cetus-funds-final.6XGd7s/all-ledger-records.json",
+          "source_runs": [
+            {
+              "round": 1,
+              "prefix": "/private/tmp/cetus-funds-final.6XGd7s/round-1"
+            },
+            {
+              "round": 2,
+              "prefix": "/private/tmp/cetus-funds-final.6XGd7s/round-2"
+            },
+            {
+              "round": 3,
+              "prefix": "/private/tmp/cetus-funds-final.6XGd7s/round-3"
+            },
+            {
+              "round": 4,
+              "prefix": "/private/tmp/cetus-funds-final.6XGd7s/round-4"
+            },
+            {
+              "round": 5,
+              "prefix": "/private/tmp/cetus-funds-final.6XGd7s/round-5"
+            },
+            {
+              "round": 6,
+              "prefix": "/private/tmp/cetus-funds-final.6XGd7s/round-6"
+            }
+          ],
+          "conclusion": "All current released Farm reward payment budgets are cash-covered per coin at the snapshot. No all-user or underlying-pool enumeration was required."
+        }
+      },
+      "review": {
+        "dependency": "领取使用同币内部奖励现金；完整取回原LP需奖励清零，另有不先付款奖励的部分本金取回。",
+        "funds": "四币全部已释放可付款奖励预算已有足额现金覆盖。"
+      },
+      "fundsAndDependenciesTrial": {
+        "id": "stable-farming",
+        "label": "Stable Farming",
+        "weightExact": "4/17",
+        "scoreExact": "100",
+        "calculatedScore": 100,
+        "score": 100,
+        "contributionExact": "400/153",
+        "contribution": 2.6143790849673203,
+        "components": []
+      },
+      "currentStateReferenceRating": {
+        "id": "stable-farming",
+        "label": "Stable Farming",
+        "result": "N/A",
+        "score": null,
+        "scope": "领取奖励、取回原 LP 凭证",
+        "basis": "奖励使用内部同币现金，四币已释放付款预算均有足额余额；完整退出先清奖励，部分本金可直接移除流动性。",
+        "components": []
+      }
+    },
+    {
+      "id": "lp-burn",
+      "label": "LP Burn",
+      "parentWeightExact": "4/17",
+      "weightEffect": "unchanged",
+      "fundsSnapshot": {
+        "id": "lp-burn",
+        "registeredPools": "1113",
+        "lockedPrincipal": null,
+        "scope": "登记表按池计数。奖励及补偿余额为共享组件余额，不能汇总为 LP Burn 本金或单一凭证可领额。",
+        "amountGroups": [
+          {
+            "label": "CLMM 共享奖励金库 · 样本池所用币种",
+            "amounts": {
+              "CETUS": "6296937.771954171",
+              "SUI": "131128.240467341"
+            }
+          },
+          {
+            "label": "Vester 公共余额",
+            "amounts": {
+              "CETUS": "20275688.075706734"
+            }
+          },
+          {
+            "label": "Vester 剩余承诺",
+            "amounts": {
+              "CETUS": "20275687.425706734"
+            }
+          }
+        ],
+        "interpretation": "Vester 公共余额 20275688.075706734 CETUS，剩余承诺 20275687.425706734 CETUS，多 0.65 CETUS。单张凭证资格与金额另核。"
+      },
+      "review": {
+        "dependency": "已选池费用/奖励组件和Vester公开计划已核；封存本金按机制不赎回。",
+        "funds": "Vester公共余额覆盖整个剩余承诺，多0.65 CETUS；共享CLMM奖励库不能当LP Burn独享储备。"
+      },
+      "fundsAndDependenciesTrial": {
+        "id": "lp-burn",
+        "label": "LP Burn",
+        "weightExact": "4/17",
+        "scoreExact": "100",
+        "calculatedScore": 100,
+        "score": 100,
+        "contributionExact": "400/153",
+        "contribution": 2.6143790849673203,
+        "components": []
+      },
+      "currentStateReferenceRating": {
+        "id": "lp-burn",
+        "label": "LP Burn",
+        "result": "100",
+        "score": 100,
+        "scope": "指定池的费用、奖励支付组件和 Vester 补偿",
+        "basis": "池开放领费领奖，两种奖励资产的支付容器匹配；补偿计划 13 期已到，公共余额覆盖剩余承诺。",
+        "components": []
+      }
+    },
+    {
+      "id": "xcetus",
+      "label": "xCETUS",
+      "parentWeightExact": "12/17",
+      "weightEffect": "unchanged",
+      "fundsSnapshot": {
+        "id": "xcetus",
+        "lockingManager": {
+          "mainCETUS": "25228351.214183861",
+          "extraCETUS": "5156969.833155688"
+        },
+        "dividendFundRaw": [
+          {
+            "coinType": "0000000000000000000000000000000000000000000000000000000000000002::sui::SUI",
+            "balanceRaw": "143371754833049"
+          },
+          {
+            "coinType": "06864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b::cetus::CETUS",
+            "balanceRaw": "312871487737642"
+          },
+          {
+            "coinType": "5d4b302506645c37ff133b98c4b50a5ae14841659738d6d733d59d0d217a93bf::coin::COIN",
+            "balanceRaw": "55677085078"
+          },
+          {
+            "coinType": "dba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC",
+            "balanceRaw": "62952801377"
+          }
+        ],
+        "scope": "分别披露锁仓管理器的主、额外余额及独立分红金库，未核资产与应付义务的全量勾稽。",
+        "interpretation": "主库25,228,351.214183861 CETUS覆盖未请求额度25,066,353.785752172；已知V1/V2请求分别锁有22.555585500和13,335.531726138 CETUS，金额与请求一致。",
+        "currentFundingReview": {
+          "mainCetus": "25228351.214183861",
+          "unrequestedXCETUS": "25066353.785752172",
+          "mainMinusUnrequestedCetus": "161997.428431689",
+          "unrequestedFaceValueCovered": true,
+          "actualRequestCashMatches": true,
+          "statement": "主库现金覆盖全部尚未请求的额度；已知V1和V2请求的锁币实物与请求金额一致。"
+        },
+        "requestCashSamples": [
+          {
+            "version": "legacyV1",
+            "id": "0x89f6719a5797b73a5302f86e2b8f8324aec121183260fd3a58c9ba7fa2a487e6",
+            "type": "0x9e69acc50ca03bc943c4f7c5304c2a6002d507b51c11913b247159c60422c606::lock_coin::LockedCoin<0x06864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b::cetus::CETUS>",
+            "raw": {
+              "cash": "22555585500",
+              "originalXCETUS": "22555585500",
+              "requestedCETUS": "22555585500",
+              "discount": "0",
+              "start": "1683717644",
+              "end": "1699269644"
+            },
+            "cetus": "22.555585500",
+            "recordMatchesActualCash": true,
+            "maturedAtCheckpoint": true,
+            "lockDays": 180
+          },
+          {
+            "version": "currentV2",
+            "id": "0x984716c0db3938925abc938f1d6dc27b1b246dd81ede7bae832fd9895a933a0e",
+            "type": "0xa0e7ccad08e09657e294e7cbbd609d26dbd0020b9b894684702a115d5ae1a1cf::lock_coin_v2::LockedCoinV2<0x06864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b::cetus::CETUS>",
+            "raw": {
+              "cash": "13335531726138",
+              "originalXCETUS": "13335531726138",
+              "requestedCETUS": "13335531726138",
+              "discount": "0",
+              "start": "1795081994",
+              "end": "1810633994"
+            },
+            "cetus": "13335.531726138",
+            "recordMatchesActualCash": true,
+            "maturedAtCheckpoint": false,
+            "lockDays": 180
+          }
+        ]
+      },
+      "review": {
+        "dependency": "V2锁币持有真实CETUS，正常兑换/取消无需keeper或外部报价；完成包装层仍含折扣差额结算。",
+        "funds": "主库现金覆盖全部尚未请求的额度；已知V1和V2请求的锁币实物与请求金额一致。"
+      },
+      "fundsAndDependenciesTrial": {
+        "id": "xcetus",
+        "label": "xCETUS",
+        "weightExact": "12/17",
+        "scoreExact": "60",
+        "calculatedScore": 60,
+        "score": 60,
+        "contributionExact": "80/17",
+        "contribution": 4.705882352941177,
+        "components": []
+      },
+      "currentStateReferenceRating": {
+        "id": "xcetus",
+        "label": "xCETUS",
+        "result": "100",
+        "score": 100,
+        "scope": "快照时到期分红所需的结算",
+        "basis": "第 184 期已完成结算并有三种奖励的领取记账，第 185 期按快照时间尚未到应领日。",
+        "components": []
+      }
+    },
+    {
+      "id": "launchpad",
+      "label": "Launchpad",
+      "parentWeightExact": "12/17",
+      "weightEffect": "unchanged",
+      "fundsSnapshot": {
+        "id": "launchpad",
+        "early": {
+          "CETUS": "34518.760130341",
+          "SUI": "41216.786889261"
+        },
+        "oversubscribed": {
+          "NAVX": "86067.982596208",
+          "SUI": "37616.342808358"
+        },
+        "scope": "指定历史发行对象的存量余额；未核实对应领取份额与应退金额。",
+        "interpretation": "CETUS/SUI早期池与NAVX/SUI超募池的预留资金均覆盖剩余合约领取及退款义务。",
+        "coverageStatus": "covered_by_contract_accounting_invariants"
+      },
+      "review": {
+        "dependency": "两具名池已结束，存量领取/退款无需实时价格或再次注入AMM。",
+        "funds": "两个结束池的用户预留资金覆盖剩余合约领取及退款义务。"
+      },
+      "fundsAndDependenciesTrial": {
+        "id": "launchpad",
+        "label": "Launchpad",
+        "weightExact": "12/17",
+        "scoreExact": "100",
+        "calculatedScore": 100,
+        "score": 100,
+        "contributionExact": "400/51",
+        "contribution": 7.8431372549019605,
+        "components": []
+      },
+      "currentStateReferenceRating": {
+        "id": "launchpad",
+        "label": "Launchpad",
+        "result": "N/A",
+        "score": null,
+        "scope": "两个结束池的存量领取及退款",
+        "basis": "核对池、用户凭证和链上时钟后从池内余额支付；当前阶段无需调用 CLMM。",
+        "components": []
+      }
+    }
+  ],
+  "focusedReviews": {
+    "margin": {
+      "scope": {
+        "checkpoint": 346896130,
+        "timestamp": "2026-11-19T10:43:55.124Z",
+        "market": "0xc32409862a9e244a3d9248108797a9bac0045185d21140bd612bf79f83bf1246",
+        "upstream_market": "0x84030d26d85eaa7035084a057f2f11f701b7e2e4eda87551becbc7c97505ece1",
+        "transactions_read": 0,
+        "positions_enumerated": 0,
+        "new_requests_note": "父代理补采的4次HTTP请求与两次零网络Rust回放统一记录在顶层collection；此子任务只读归档。",
+        "subtaskNetworkRequests": 0
+      },
+      "market_macro_evidence": {
+        "object_pointer": "/outputs/trading/marginSampleMarket/asMoveObject/contents/json",
+        "position_holder": "0x703aa335859bb11ee120bdc6877e94efbff96fb371abdeae0cf734795c1b418b",
+        "position_count": "10",
+        "fields": [
+          "id",
+          "base_token",
+          "quote_token",
+          "position_holder",
+          "num_positions",
+          "fees",
+          "open_fee_rate",
+          "close_fee_rate",
+          "permissions"
+        ],
+        "reason": "Market structure has position ObjectBag and fees but no market-level deposit, borrow, total assets or NAV accumulator; aggregate Cetus positions not derivable from this object.",
+        "no_missing_macro_getter_in_market_module": true,
+        "position_data_needed_if_explicitly_authorized": "individual Position.obligation_owner_cap -> linked Suilend Obligation deposits/borrows; no such enumeration performed"
+      },
+      "reserves": [
+        {
+          "symbol": "ETH",
+          "reserve_uid": "0xdb864ae82293865b55c9a7826f363a59126193ef9c5192b5da793824deefce21",
+          "array_index": "9",
+          "mint_decimals": 8,
+          "source_pointer": "/outputs/reserves/market/asMoveObject/contents/eth/json",
+          "raw": {
+            "available_amount": "115992022273",
+            "borrowed_amount_decimal18": "11519217944226138657862502191",
+            "unclaimed_spread_fees_decimal18": "1295358751531124605008468",
+            "ctoken_supply": "125872735114",
+            "interest_last_update_timestamp_s": "1795084204",
+            "interest_rate_utils_base64": "AFBaZA==",
+            "interest_rate_aprs_bps": [
+              "100",
+              "300",
+              "1000",
+              "30000"
+            ]
+          },
+          "stored_book": {
+            "direct_cash_tokens": "1159.92022273",
+            "borrowed_tokens": "115.19217944226138657862502191",
+            "unclaimed_spread_fee_claim_tokens": "0.01295358751531124605008468",
+            "supplier_claims_tokens": "1275.09944858474607533257493723",
+            "cash_to_supplier_claims_pct": 90.96703978794868,
+            "label": "stored ledger; not silently represented as freshly compounded obligations"
+          },
+          "accrual_to_anchor": {
+            "delta_seconds": "831",
+            "model": "g=(1+APR(U)/31536000)^dt; interest=B*(g-1); B_new=B+interest; F_new=F+interest*spread_fee; supply_new=C+B_new-F_new",
+            "bit_exact_status": "complete helper retained; exact integer replay available",
+            "conservative_upper_bound": {
+              "maximum_curve_apr_bps": "30000",
+              "proof": "APR(U) <= APRmax for verified ordered interpolation curve; (1+APR/Y)^dt <= exp(APRmax*dt/Y) <= 1/(1-APRmax*dt/Y), with x<1; use integer ceil for B_upper and ignore newly accrued spread fees when bounding supplier claims upward.",
+              "borrowed_decimal18_upper_bound": "11520128639326907366007588979",
+              "supplier_claims_decimal18_upper_bound": "127510855553575376241402580511",
+              "supplier_claims_tokens_upper_bound": "1275.10855553575376241402580511",
+              "cash_coverage_pct_lower_bound": 90.966390013958,
+              "holdback_raw": "100",
+              "holdback_reason": "reserve::redeem_ctokens requires >=100 raw cash and >=100 ctoken supply remaining",
+              "pressure": [
+                {
+                  "withdrawal_fraction_pct": 5,
+                  "demand_tokens_upper_bound": "63.75542777678768812070129026",
+                  "cash_only_sufficient_even_after_100_raw_holdback": true,
+                  "rate_limiter_and_individual_position_limits_not_asserted": true
+                },
+                {
+                  "withdrawal_fraction_pct": 10,
+                  "demand_tokens_upper_bound": "127.51085555357537624140258052",
+                  "cash_only_sufficient_even_after_100_raw_holdback": true,
+                  "rate_limiter_and_individual_position_limits_not_asserted": true
+                },
+                {
+                  "withdrawal_fraction_pct": 15,
+                  "demand_tokens_upper_bound": "191.26628333036306436210387077",
+                  "cash_only_sufficient_even_after_100_raw_holdback": true,
+                  "rate_limiter_and_individual_position_limits_not_asserted": true
+                }
+              ]
+            },
+            "exact": {
+              "mode": "offline integer replay of same-deployment disassembly and same-checkpoint state",
+              "seconds_to_anchor": "831",
+              "fixed_point_scale": "1000000000000000000",
+              "utilization_decimal18": "90339761004614258",
+              "apr_decimal18": "12258494025115356",
+              "apr_percent": "1.225849402511535600",
+              "per_second_rate_decimal18": "388714295",
+              "growth_factor_decimal18": "1000000323021630951",
+              "interest_delta_decimal18": "3720956567623952662827",
+              "spread_delta_decimal18": "744191313524790532565",
+              "borrowed_decimal18": "11519221665182706281815165018",
+              "unclaimed_spread_fees_decimal18": "1296102942844649395541033",
+              "supplier_claims_decimal18": "127509947835239861632419623985",
+              "cumulative_borrow_rate_decimal18": "1050002576813468282",
+              "borrowed_tokens": "115.19221665182706281815165018",
+              "spread_fee_claim_tokens": "0.01296102942844649395541033",
+              "supplier_claims_tokens": "1275.09947835239861632419623985",
+              "cash_to_supplier_claims_pct": 90.96703766429066,
+              "cash_minus100_raw_to_supplier_claims_pct": 90.9670375858654,
+              "pressure": [
+                {
+                  "withdrawal_fraction_pct": 5,
+                  "demand_tokens": "63.75497391761993081620981200",
+                  "cash_only_sufficient_even_after_100_raw_holdback": true,
+                  "actual_individual_position_entitlement_and_rate_limiter_still_apply": true
+                },
+                {
+                  "withdrawal_fraction_pct": 10,
+                  "demand_tokens": "127.50994783523986163241962399",
+                  "cash_only_sufficient_even_after_100_raw_holdback": true,
+                  "actual_individual_position_entitlement_and_rate_limiter_still_apply": true
+                },
+                {
+                  "withdrawal_fraction_pct": 15,
+                  "demand_tokens": "191.26492175285979244862943598",
+                  "cash_only_sufficient_even_after_100_raw_holdback": true,
+                  "actual_individual_position_entitlement_and_rate_limiter_still_apply": true
+                }
+              ],
+              "rounding": "decimal::div/mul floor u256; calculate_apr first floors interpolation ratio then product; pow matches deployed exponentiation by squaring, flooring each multiplication; no JS floating point in raw arithmetic"
+            }
+          },
+          "interpretation": "External shared Suilend reserve, not Cetus-owned assets or Cetus-only debt; this is a cash-pressure fact, not a whole Margin or project score."
+        },
+        {
+          "symbol": "USDC",
+          "reserve_uid": "0xd388bc079ea1f647f519fce10bcf72f028fad967b440371ebe0a554eae1c2c15",
+          "array_index": "7",
+          "mint_decimals": 6,
+          "source_pointer": "/outputs/reserves/market/asMoveObject/contents/usdc/json",
+          "raw": {
+            "available_amount": "6012995459010",
+            "borrowed_amount_decimal18": "21316314647874299413309686290056",
+            "unclaimed_spread_fees_decimal18": "13191130366547574556784499773",
+            "ctoken_supply": "24280446054389",
+            "interest_last_update_timestamp_s": "1795084785",
+            "interest_rate_utils_base64": "AF1hZA==",
+            "interest_rate_aprs_bps": [
+              "400",
+              "700",
+              "1500",
+              "15000"
+            ]
+          },
+          "stored_book": {
+            "direct_cash_tokens": "6012995.459010",
+            "borrowed_tokens": "21316314.647874299413309686290056",
+            "unclaimed_spread_fee_claim_tokens": "13191.130366547574556784499773",
+            "supplier_claims_tokens": "27316118.976517751838752901790283",
+            "cash_to_supplier_claims_pct": 22.01262728493407,
+            "label": "stored ledger; not silently represented as freshly compounded obligations"
+          },
+          "accrual_to_anchor": {
+            "delta_seconds": "250",
+            "model": "g=(1+APR(U)/31536000)^dt; interest=B*(g-1); B_new=B+interest; F_new=F+interest*spread_fee; supply_new=C+B_new-F_new",
+            "bit_exact_status": "complete helper retained; exact integer replay available",
+            "conservative_upper_bound": {
+              "maximum_curve_apr_bps": "15000",
+              "proof": "APR(U) <= APRmax for verified ordered interpolation curve; (1+APR/Y)^dt <= exp(APRmax*dt/Y) <= 1/(1-APRmax*dt/Y), with x<1; use integer ceil for B_upper and ignore newly accrued spread fees when bounding supplier claims upward.",
+              "borrowed_decimal18_upper_bound": "21316568126852215749589052598235",
+              "supplier_claims_decimal18_upper_bound": "27316372455495668175032268098462",
+              "supplier_claims_tokens_upper_bound": "27316372.455495668175032268098462",
+              "cash_coverage_pct_lower_bound": 22.012423021052598,
+              "holdback_raw": "100",
+              "holdback_reason": "reserve::redeem_ctokens requires >=100 raw cash and >=100 ctoken supply remaining",
+              "pressure": [
+                {
+                  "withdrawal_fraction_pct": 5,
+                  "demand_tokens_upper_bound": "1365818.622774783408751613404924",
+                  "cash_only_sufficient_even_after_100_raw_holdback": true,
+                  "rate_limiter_and_individual_position_limits_not_asserted": true
+                },
+                {
+                  "withdrawal_fraction_pct": 10,
+                  "demand_tokens_upper_bound": "2731637.245549566817503226809847",
+                  "cash_only_sufficient_even_after_100_raw_holdback": true,
+                  "rate_limiter_and_individual_position_limits_not_asserted": true
+                },
+                {
+                  "withdrawal_fraction_pct": 15,
+                  "demand_tokens_upper_bound": "4097455.868324350226254840214770",
+                  "cash_only_sufficient_even_after_100_raw_holdback": true,
+                  "rate_limiter_and_individual_position_limits_not_asserted": true
+                }
+              ]
+            },
+            "exact": {
+              "mode": "offline integer replay of same-deployment disassembly and same-checkpoint state",
+              "seconds_to_anchor": "250",
+              "fixed_point_scale": "1000000000000000000",
+              "utilization_decimal18": "780356633612513825",
+              "apr_decimal18": "65172794632661736",
+              "apr_percent": "6.517279463266173600",
+              "per_second_rate_decimal18": "2066615760",
+              "growth_factor_decimal18": "1000000516654072871",
+              "interest_delta_decimal18": "11013160781424012994332175",
+              "spread_delta_decimal18": "2202632156284802598866435",
+              "borrowed_decimal18": "21316325661035080837322680622231",
+              "unclaimed_spread_fees_decimal18": "13193332998703859359383366208",
+              "supplier_claims_decimal18": "27316127787046376977963297256023",
+              "cumulative_borrow_rate_decimal18": "1214829029083233995",
+              "borrowed_tokens": "21316325.661035080837322680622231",
+              "spread_fee_claim_tokens": "13193.332998703859359383366208",
+              "supplier_claims_tokens": "27316127.787046376977963297256023",
+              "cash_to_supplier_claims_pct": 22.01262018499354,
+              "cash_minus100_raw_to_supplier_claims_pct": 22.012620184627455,
+              "pressure": [
+                {
+                  "withdrawal_fraction_pct": 5,
+                  "demand_tokens": "1365806.389352318848898164862802",
+                  "cash_only_sufficient_even_after_100_raw_holdback": true,
+                  "actual_individual_position_entitlement_and_rate_limiter_still_apply": true
+                },
+                {
+                  "withdrawal_fraction_pct": 10,
+                  "demand_tokens": "2731612.778704637697796329725603",
+                  "cash_only_sufficient_even_after_100_raw_holdback": true,
+                  "actual_individual_position_entitlement_and_rate_limiter_still_apply": true
+                },
+                {
+                  "withdrawal_fraction_pct": 15,
+                  "demand_tokens": "4097419.168056956546694494588404",
+                  "cash_only_sufficient_even_after_100_raw_holdback": true,
+                  "actual_individual_position_entitlement_and_rate_limiter_still_apply": true
+                }
+              ],
+              "rounding": "decimal::div/mul floor u256; calculate_apr first floors interpolation ratio then product; pow matches deployed exponentiation by squaring, flooring each multiplication; no JS floating point in raw arithmetic"
+            }
+          },
+          "interpretation": "External shared Suilend reserve, not Cetus-owned assets or Cetus-only debt; this is a cash-pressure fact, not a whole Margin or project score."
+        }
+      ],
+      "dependency_paths": [
+        {
+          "id": "oracle-consumption",
+          "current": "ETH and USDC Pyth objects fresh by 6.124s <=60s; coin and feed IDs match.",
+          "failure": "stale/confidence-invalid returns None; reserve validate_price_update -> unwrap_spot_price aborts. Both spot and EMA from same Pyth feed, not independent providers. Deprecated refresh_reserve_price always aborts; pro-compatible method uses Pyth only.",
+          "impact": "new borrowing and withdrawals with debt require fresh prices for obligation health. Independent alternate oracle not found in inspected current modules."
+        },
+        {
+          "id": "repay",
+          "path": "Cetus v4 router::repay -> Suilend v26 lending_market::repay -> reserve::compound_interest + obligation::repay + reserve::repay_liquidity",
+          "failure_scope": "no Pyth fetch or reserve fresh-price assertion on this path; stale quote does not itself prevent repayment. Still requires functioning Suilend code/object, Cetus version and repay permissions."
+        },
+        {
+          "id": "debt-free-withdraw",
+          "path": "Cetus v4 router::withdraw -> lending_market::withdraw_ctokens -> obligation::refresh -> obligation::withdraw",
+          "recovery": "If obligation.borrows is empty, obligation::withdraw destroys stale-oracle marker rather than rejecting it. Can be a repay-then-withdraw recovery path for users who already possess enough borrowed coin to repay; no claim that every position can self-close from collateral without exchange.",
+          "remaining_conditions": "Cetus and upstream version/pause/hold gates, ownership, cash, actual ctoken amount, limiter and health checks still apply; no individual max withdrawal proven."
+        },
+        {
+          "id": "upstream-failure",
+          "reason": "Cetus Position contains the upstream owner capability and router accesses it. Pyth-independent repayment does not bypass failed/paused/unavailable Suilend dependencies; no independent upstream replacement or direct cap withdrawal established."
+        }
+      ],
+      "fee_buffer": {
+        "unclaimed_spread_fees": "accounting claim, not an additional independent cash reserve",
+        "balances_struct": "reserve::Balances contains separate fees and ctoken_fees; no amount retained in reviewed scope",
+        "interpretation": "Do not count unclaimed spread fees both as user cash and as insurance/loss reserve; no insurance promise inferred."
+      },
+      "source_archives": {
+        "main": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-project-346896130/snapshot.json",
+        "reserves": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-config-dependencies-346896130/linked/snapshot.json",
+        "inputs": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-config-dependencies-346896130/selected/snapshot.json",
+        "gates": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-config-dependencies-346896130/gates/snapshot.json",
+        "marginV4": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-signer-check-346896130/marginV4/snapshot.json",
+        "marginProtocol": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-business-ratings-346896130/margin/snapshot.json",
+        "accountingHelpers": "cetus-funds-dependencies-evidence-346896130.json#/runs/helpers/snapshot"
+      },
+      "source_ranges": [
+        {
+          "archive": "marginV4",
+          "pointer": "/outputs/margin/asMovePackage/market/disassembly",
+          "lines": [
+            23,
+            33
+          ],
+          "use": "complete Market fields; no aggregate asset/debt accumulators"
+        },
+        {
+          "archive": "marginV4",
+          "pointer": "/outputs/margin/asMovePackage/router/disassembly",
+          "lines": [
+            426,
+            513
+          ],
+          "use": "repay path"
+        },
+        {
+          "archive": "marginV4",
+          "pointer": "/outputs/margin/asMovePackage/router/disassembly",
+          "lines": [
+            515,
+            664
+          ],
+          "use": "withdraw path"
+        },
+        {
+          "archive": "inputs",
+          "pointer": "/outputs/marginInputs/upstream/asMovePackage/reserve/disassembly",
+          "lines": [
+            1270,
+            1305
+          ],
+          "use": "stored and simulated supplier claims"
+        },
+        {
+          "archive": "inputs",
+          "pointer": "/outputs/marginInputs/upstream/asMovePackage/reserve/disassembly",
+          "lines": [
+            2067,
+            2277
+          ],
+          "use": "compound_interest and simulated_compound_interest"
+        },
+        {
+          "archive": "inputs",
+          "pointer": "/outputs/marginInputs/upstream/asMovePackage/reserve/disassembly",
+          "lines": [
+            2528,
+            2625
+          ],
+          "use": "100 raw cash and ctoken remainder required"
+        },
+        {
+          "archive": "inputs",
+          "pointer": "/outputs/marginInputs/upstream/asMovePackage/obligation/disassembly",
+          "lines": [
+            1024,
+            1074
+          ],
+          "use": "debt-free stale-oracle withdrawal exception"
+        },
+        {
+          "archive": "marginProtocol",
+          "pointer": "/outputs/marginProtocol/latestSuilend/nodes/0/lending/disassembly",
+          "lines": [
+            981,
+            1110
+          ],
+          "use": "withdraw refresh and obligation call"
+        },
+        {
+          "archive": "marginProtocol",
+          "pointer": "/outputs/marginProtocol/latestSuilend/nodes/0/lending/disassembly",
+          "lines": [
+            1413,
+            1514
+          ],
+          "use": "price-independent repay"
+        },
+        {
+          "archive": "accountingHelpers",
+          "pointer": "/outputs/accountingHelpers/suilend/decimal/disassembly",
+          "lines": [
+            136,
+            208
+          ],
+          "use": "floor multiplication/division and exponentiation by squaring"
+        },
+        {
+          "archive": "inputs",
+          "pointer": "/outputs/marginInputs/upstream/asMovePackage/reserve/disassembly",
+          "lines": [
+            308,
+            342
+          ],
+          "use": "reserve cache freshness is zero seconds, not source feed60s"
+        },
+        {
+          "archive": "gates",
+          "pointer": "/outputs/marginGates/source/oracles/disassembly",
+          "lines": [
+            148,
+            274
+          ],
+          "use": "Pyth staleness/confidence and zero handling"
+        },
+        {
+          "archive": "inputs",
+          "pointer": "/outputs/marginInputs/upstream/asMovePackage/reserve/disassembly",
+          "lines": [
+            1815,
+            1850
+          ],
+          "use": "None-spot rejection and feed binding"
+        },
+        {
+          "archive": "inputs",
+          "pointer": "/outputs/marginInputs/upstream/asMovePackage/reserve/disassembly",
+          "lines": [
+            2036,
+            2065
+          ],
+          "use": "direct Pyth update path with no fallback"
+        },
+        {
+          "archive": "gates",
+          "pointer": "/outputs/marginGates/source/cfg/disassembly",
+          "lines": [
+            779,
+            899
+          ],
+          "use": "actual piecewise APR integer interpolation"
+        }
+      ],
+      "score": null,
+      "weights_changed": false,
+      "evaluation_scope_note": "Missing all-position Cetus totals does not make the verified external-reserve dependency/cash facts U; Margin has separate user leveraged obligations rather than a pooled fixed principal redemption promise. Do not invent a mandatory Cetus-wide solvency ratio or enumerate all positions to fill it.",
+      "navi_fault_questions": [
+        {
+          "id": "final-price-validity",
+          "answer": "verified_rejection",
+          "path": "oracles::get_pyth_price_for_config -> get_pyth_price_with_thresholds; reserve::validate_price_update -> unwrap_spot_price; reserve::apply_price_update",
+          "basis": "Pyth price must satisfy effective 60s age/10x confidence bound and feed identity; zero spot yields None; None aborts; applied price must be >0. Negative inputs cannot pass strict positive application.",
+          "scope": "same two configured reserve feeds; no invented universal warning threshold"
+        },
+        {
+          "id": "ordinary-repay-without-price",
+          "answer": "verified",
+          "path": "Cetus v4 router::repay -> lending_market::repay -> compound_interest/obligation::repay/repay_liquidity",
+          "basis": "The complete public Cetus repay entrypoint contains no forced price refresh and no oracle input. Upstream repay likewise does not require a fresh price. Requires user already supplies the debt coin and all non-oracle gates still pass."
+        },
+        {
+          "id": "primary-stale-independent-fallback",
+          "answer": "no_independent_fallback_in_inspected_current_path",
+          "basis": "Only supplied Pyth PriceInfoObject accepted by current pro-compatible refresh; same-feed EMA does not replace a stale/invalid spot because spot None is unwrapped with abort before apply. Deprecated legacy refresh entrypoint always aborts and is not fallback.",
+          "impact": "Debt-sensitive new borrowing/withdrawal cannot use stale quote; repay remains possible; debt-free withdrawal has a verified stale exception."
+        },
+        {
+          "id": "adapter-abort-independent-fallback",
+          "answer": "no_independent_fallback_in_inspected_current_path",
+          "basis": "Current update_price_pro_compatible directly calls Pyth helper with no alternative provider branch; failed Move call aborts that transaction. Repeated same-provider wrappers are not provider redundancy.",
+          "impact": "Impacts price refresh and operations that require it; no implication that funds themselves disappeared or all repayment becomes unavailable."
+        }
+      ],
+      "price_cache_distinction": {
+        "pyth_source_max_age_seconds": 60,
+        "pyth_source_age_ms_at_anchor": 6124,
+        "reserve_cache_max_age_seconds": 0,
+        "reason": "reserve::is_price_fresh requires stored update timestamp to equal Clock timestamp in seconds; normal debt-sensitive operations refresh reserve from valid Pyth input within the transaction. Old stored reserve price by itself is not proof that no valid input can refresh it."
+      }
+    },
+    "stableFarming": {
+      "scope": {
+        "clmmPool": "0x871d8a227114f375170f149f7e9d45be822dd003eba225e83c05ac80828596bc",
+        "farmPool": "0x9f5fd63b2a2fd8f698ff6b7b9720dbb2aa14bedb9fc4fd6411f20e5b531a4b89",
+        "newObjectQueries": 0,
+        "newExactRewardFieldReads": 3,
+        "allUserOrPoolEnumeration": false,
+        "rewardLedgerRowsVerified": 12,
+        "poolObjectReads": 0
+      },
+      "timeSeconds": "1795085035",
+      "scale": "1000000000000",
+      "formulas": {
+        "increment": "delta = floor(emission_per_second * (t-last_reward_time) * allocate_point / total_allocate_point), with existing deployed early-return rules for zero inputs.",
+        "accumulator": "acc_new = acc_per_share + floor(delta / pool_share)",
+        "positionClaim": "floor((position.reward + position.share * acc_new - position.reward_debt) / scale)",
+        "poolRemainingPaymentCap": "floor((pool.reward_released + delta) / scale) - pool.reward_harvested"
+      },
+      "coins": [
+        {
+          "coin": "sui",
+          "global": {
+            "reward_coin": "0000000000000000000000000000000000000000000000000000000000000002::sui::SUI",
+            "total_allocate_point": "335",
+            "emission_per_second": "3877314814814814814",
+            "last_reward_time": "1795084550",
+            "total_reward_released": "5506154872136791564447817033",
+            "total_reward_harvested": "5493943960777316",
+            "pools": {
+              "id": "0x49f495f6a88d5c66777445676c0043e22c09965d7fb42364b2e6e88809159d3f",
+              "size": "6",
+              "head": "0x871d8a227114f375170f149f7e9d45be822dd003eba225e83c05ac80828596bc",
+              "tail": "0xa7417fb5f59e23b0a7826d78f025653823c49265be07bbf6dd9e553ba4249a56"
+            }
+          },
+          "pool": {
+            "allocate_point": "180",
+            "acc_per_share": "74202521283664",
+            "last_reward_time": "1795084550",
+            "reward_released": "4785637611235487864557646798",
+            "reward_harvested": "4778541739927777"
+          },
+          "deltaReleaseScaled": "1010416666666666666454",
+          "accPerShareAtCheckpoint": "74202521598509",
+          "poolShare": "3209249351138105",
+          "positionShare": "2745869337859873",
+          "positionReward": {
+            "reward": "32083711304843643984",
+            "reward_debt": "203750412822552562053179983907",
+            "reward_harvested": "3641672749511"
+          },
+          "positionClaimRaw": "16058761982",
+          "positionClaim": "16.058761982",
+          "poolMaxRemainingPayoutRaw": "7096881724377",
+          "poolMaxRemainingPayout": "7096.881724377",
+          "vaultRaw": "28442039222684",
+          "vault": "28442.039222684",
+          "sharedVaultCoversSelectedPoolEntireRewardBudget": true,
+          "sharedVaultCoversSelectedPosition": true
+        },
+        {
+          "coin": "hasui",
+          "global": {
+            "reward_coin": "bde4ba4c2e274a60ce15c1cfff9e5c42e41654ac8b6d906a57efa4bd3c29f47d::hasui::HASUI",
+            "total_allocate_point": "50",
+            "emission_per_second": "0",
+            "last_reward_time": "1795084550",
+            "total_reward_released": "40451388888888888630",
+            "total_reward_harvested": "55613417",
+            "pools": {
+              "id": "0x69246f0fb158eb3f1b2b69a360a4ec3316c4467c8738552b70f12c2426633478",
+              "size": "1",
+              "head": "0x871d8a227114f375170f149f7e9d45be822dd003eba225e83c05ac80828596bc",
+              "tail": "0x871d8a227114f375170f149f7e9d45be822dd003eba225e83c05ac80828596bc"
+            }
+          },
+          "pool": {
+            "allocate_point": "50",
+            "acc_per_share": "280688622",
+            "last_reward_time": "1795084550",
+            "reward_released": "55613425925925925570",
+            "reward_harvested": "55613417"
+          },
+          "deltaReleaseScaled": "0",
+          "accPerShareAtCheckpoint": "280688622",
+          "poolShare": "3209249351138105",
+          "positionShare": "2745869337859873",
+          "positionReward": {
+            "reward": "0",
+            "reward_debt": "770734280635940181465006",
+            "reward_harvested": "0"
+          },
+          "positionClaimRaw": "0",
+          "positionClaim": "0.000000000",
+          "poolMaxRemainingPayoutRaw": "8",
+          "poolMaxRemainingPayout": "0.000000008",
+          "vaultRaw": "9944386583",
+          "vault": "9.944386583",
+          "sharedVaultCoversSelectedPoolEntireRewardBudget": true,
+          "sharedVaultCoversSelectedPosition": true
+        },
+        {
+          "coin": "haedal",
+          "global": {
+            "reward_coin": "3a304c7feba2d819ea57c3542d68439ca2c386ba02159c740f7b406e592c62ea::haedal::HAEDAL",
+            "total_allocate_point": "13000",
+            "emission_per_second": "150462962962962962962",
+            "last_reward_time": "1795084550",
+            "total_reward_released": "9117069930555555555525149542",
+            "total_reward_harvested": "9075710514578602",
+            "pools": {
+              "id": "0x81e21b75a1285a29c487f002f1cf393ef212fa424b8b6d2b5fa3866ec8c37ab5",
+              "size": "3",
+              "head": "0x871d8a227114f375170f149f7e9d45be822dd003eba225e83c05ac80828596bc",
+              "tail": "0x313b7c579b95e8021bd2ab1d071ec18615c2f3e2f8da1f9f9e0f6d676b8bea66"
+            }
+          },
+          "pool": {
+            "allocate_point": "12000",
+            "acc_per_share": "1986552743747",
+            "last_reward_time": "1795084550",
+            "reward_released": "8360414976851851851823884037",
+            "reward_harvested": "8340387054058965"
+          },
+          "deltaReleaseScaled": "67361111111111111110680",
+          "accPerShareAtCheckpoint": "1986573733425",
+          "poolShare": "3209249351138105",
+          "positionShare": "2745869337859873",
+          "positionReward": {
+            "reward": "2139039485496045613404",
+            "reward_debt": "5453803456481182714745159376",
+            "reward_harvested": "276452074331605"
+          },
+          "positionClaimRaw": "1070584567823",
+          "positionClaim": "1070.584567823",
+          "poolMaxRemainingPayoutRaw": "20095283903997",
+          "poolMaxRemainingPayout": "20095.283903997",
+          "vaultRaw": "109289485421398",
+          "vault": "109289.485421398",
+          "sharedVaultCoversSelectedPoolEntireRewardBudget": true,
+          "sharedVaultCoversSelectedPosition": true
+        }
+      ],
+      "conclusions": [
+        "已核四种奖励币全部12条会计记录，当前现金覆盖截至检查点全部已释放奖励的可付款预算上限。",
+        "按逐池合约付款上限汇总，避免误用全局释放计数；四币均无资金缺口。"
+      ],
+      "globalCounterDiagnostic": {
+        "interpretation": "不得将累计释放与已领直接原数相减或无条件当作当前应付；haSUI全局差额为负，但实际付款校验采用池级计数。",
+        "haSuiGlobalDifferenceTokens": "-0.015162029",
+        "haSuiPoolRemainingCapRaw": "8",
+        "confirmedCashDeficit": false
+      },
+      "limits": [],
+      "evidence": {
+        "newAccounting": "cetus-funds-dependencies-evidence-346896130.json#/runs/farm/snapshot/outputs/poolRewardAccounting",
+        "existingAccounting": "vaultFarmBurn: outputs.mechanisms.registeredRewards, outputs.boundState.farmShare, outputs.farmPosition; main: outputs.farmBalances",
+        "code": "vaultFarmBurn: outputs.mechanisms.farm.reward.disassembly 493-572,585-719,1022-1129; pool.disassembly 1350-1570,2823-2911",
+        "independentIntegerRecalculation": "All three currencies and twelve intermediate/output fields independently matched source snapshots."
+      },
+      "globalFundingReview": {
+        "checkpoint": 346896130,
+        "scope": "Farm共享奖励库四币及其12条奖励会计记录(6 SUI+2 WAL+3 HAEDAL+1 haSUI)，同一检查点；未读取全量底层池对象、交易对目录或用户",
+        "global_counter_review": [
+          {
+            "symbol": "WAL",
+            "coin_type": "356a26eb9e012a68958082340d4c4116e7f55615cf27affcff209cf0ae544f59::wal::WAL",
+            "global_pool_entry_count": "2",
+            "vault_raw": "173067272715541",
+            "global_release_scaled_at_snapshot": "4153858373710300925909071524",
+            "emission_per_second_scaled": "162766203703703703703",
+            "elapsed_seconds": "18034",
+            "global_release_scaled_at_checkpoint": "4156793699427893518501651426",
+            "global_harvested_raw": "4050004727284459",
+            "reported_unpaid_raw": "106788972143434",
+            "cash_minus_reported_unpaid_raw": "66278300572107",
+            "cash_covers_reported_counter_difference": true,
+            "reported_difference_is_total_liability_upper_bound": false
+          },
+          {
+            "symbol": "SUI",
+            "coin_type": "0000000000000000000000000000000000000000000000000000000000000002::sui::SUI",
+            "global_pool_entry_count": "6",
+            "vault_raw": "28442039222684",
+            "global_release_scaled_at_snapshot": "5506154872136791564447817033",
+            "emission_per_second_scaled": "3877314814814814814",
+            "elapsed_seconds": "485",
+            "global_release_scaled_at_checkpoint": "5506156752634476749633001823",
+            "global_harvested_raw": "5493943960777316",
+            "reported_unpaid_raw": "12212791857160",
+            "cash_minus_reported_unpaid_raw": "16229247365524",
+            "cash_covers_reported_counter_difference": true,
+            "reported_difference_is_total_liability_upper_bound": false
+          },
+          {
+            "symbol": "HASUI",
+            "coin_type": "bde4ba4c2e274a60ce15c1cfff9e5c42e41654ac8b6d906a57efa4bd3c29f47d::hasui::HASUI",
+            "global_pool_entry_count": "1",
+            "vault_raw": "9944386583",
+            "global_release_scaled_at_snapshot": "40451388888888888630",
+            "emission_per_second_scaled": "0",
+            "elapsed_seconds": "485",
+            "global_release_scaled_at_checkpoint": "40451388888888888630",
+            "global_harvested_raw": "55613417",
+            "reported_unpaid_raw": "-15162029",
+            "cash_minus_reported_unpaid_raw": "9959548612",
+            "cash_covers_reported_counter_difference": true,
+            "reported_difference_is_total_liability_upper_bound": false
+          },
+          {
+            "symbol": "HAEDAL",
+            "coin_type": "3a304c7feba2d819ea57c3542d68439ca2c386ba02159c740f7b406e592c62ea::haedal::HAEDAL",
+            "global_pool_entry_count": "3",
+            "vault_raw": "109289485421398",
+            "global_release_scaled_at_snapshot": "9117069930555555555525149542",
+            "emission_per_second_scaled": "150462962962962962962",
+            "elapsed_seconds": "485",
+            "global_release_scaled_at_checkpoint": "9117142905092592592562186112",
+            "global_harvested_raw": "9075710514578602",
+            "reported_unpaid_raw": "41432390513990",
+            "cash_minus_reported_unpaid_raw": "67857094907408",
+            "cash_covers_reported_counter_difference": true,
+            "reported_difference_is_total_liability_upper_bound": false
+          }
+        ],
+        "global_bound_verdict": {
+          "status": "not_a_hard_payout_cap",
+          "reason": "withdraw_reward verifies pool.reward_harvested <= floor(pool.reward_released/1e12), while global.total_reward_released is not consulted. The global-harvested check only enforces total_harvested >= one pool harvested; it is not a total liability bound. Global R-H remains a useful explicit accounting diagnostic, not a strict promise that all pool liabilities are at most that amount.",
+          "empirical_counter_mismatch": {
+            "coin": "haSUI",
+            "registered_pool_count": "1",
+            "global_released_scaled": "40451388888888888630",
+            "unique_pool_released_scaled": "55613425925925925570",
+            "difference_scaled": "15162037037037036940",
+            "global_reported_remaining_raw": "-15162029",
+            "unique_pool_remaining_upper_bound_raw": "8",
+            "meaning": "global remaining is negative despite unique pool having eight raw payout units remaining; no historical transaction investigation performed or inferred"
+          }
+        },
+        "closed_scope": {
+          "hasui": {
+            "status": "all_registered_hasui_pool_budget_covered",
+            "pool_count": "1",
+            "pool_id": "0x871d8a227114f375170f149f7e9d45be822dd003eba225e83c05ac80828596bc",
+            "remaining_payout_upper_bound_raw": "8",
+            "vault_raw": "9944386583",
+            "explanation": "global list has one pool; direct read of its reward accounting is sufficient without any other pool enumeration. Emission is zero. This current ledger budget bound covers any claims that can pass pool reward payout checks."
+          },
+          "selected_pool": [
+            {
+              "coin": "sui",
+              "position_claim_raw": "16058761982",
+              "pool_remaining_budget_upper_bound_raw": "7096881724377",
+              "vault_raw": "28442039222684",
+              "shared_vault_covers_this_pool_budget": true,
+              "interpretation": "Sufficient current shared cash to fund this entire selected pool reward budget in isolation; not exclusive cash earmarking against competing claims from other pools."
+            },
+            {
+              "coin": "hasui",
+              "position_claim_raw": "0",
+              "pool_remaining_budget_upper_bound_raw": "8",
+              "vault_raw": "9944386583",
+              "shared_vault_covers_this_pool_budget": true,
+              "interpretation": "Sufficient current shared cash to fund this entire selected pool reward budget in isolation; not exclusive cash earmarking against competing claims from other pools."
+            },
+            {
+              "coin": "haedal",
+              "position_claim_raw": "1070584567823",
+              "pool_remaining_budget_upper_bound_raw": "20095283903997",
+              "vault_raw": "109289485421398",
+              "shared_vault_covers_this_pool_budget": true,
+              "interpretation": "Sufficient current shared cash to fund this entire selected pool reward budget in isolation; not exclusive cash earmarking against competing claims from other pools."
+            }
+          ]
+        },
+        "practical_conclusion": "Farm共享奖励库四币均已完成当前已释放可付款预算上限对账，余额全部足额；此前‘全部应付未知所以无法判断’可改为‘截至快照已释放奖励预算有足额现金覆盖’。",
+        "evidence": [
+          {
+            "archive": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+            "pointer": "/outputs/mechanisms/farm/reward/disassembly",
+            "lines": [
+              585,
+              721
+            ],
+            "use": "withdraw_reward pool payout bound and absence of global release cap"
+          },
+          {
+            "archive": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+            "pointer": "/outputs/mechanisms/farm/reward/disassembly",
+            "lines": [
+              493,
+              572
+            ],
+            "use": "pool settle followed by global emission accumulation"
+          },
+          {
+            "archive": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+            "pointer": "/outputs/mechanisms/farm/reward/disassembly",
+            "lines": [
+              902,
+              1130
+            ],
+            "use": "global elapsed emissions vs per-pool proportional emissions and separate counters"
+          },
+          {
+            "archive": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+            "pointer": "/outputs/mechanisms/registeredRewards/dynamicFields",
+            "use": "only four registered reward coins; hasui exactly one registered pool"
+          },
+          {
+            "archive": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-project-346896130/snapshot.json",
+            "pointer": "/outputs/farmBalances/dynamicFields",
+            "use": "actual reward-vault four balances, hasNextPage false"
+          },
+          {
+            "archive": "/private/tmp/cetus-funds-closure.Kurx4C/farm-online/snapshot.json",
+            "pointer": "/outputs/poolRewardAccounting",
+            "use": "selected three reward counters, same checkpoint"
+          }
+        ],
+        "score": null,
+        "weights_changed": false,
+        "pool_ledger_sum_proof": {
+          "formula": "U_coin(t) = sum_p max(0, floor((R_p + Delta_p(t))/10^12) - H_p)",
+          "delta_formula": "Delta_p=0 if dt<=0 or a_p=0 or E=0; otherwise floor(E*dt*a_p/A). For missing share assume share>0, which only overestimates actual release when actual share=0.",
+          "claim": "If actual shared-vault balance >= U_coin(t), cash suffices for every reward payment permitted by the released pool budgets at the snapshot, without reading user positions.",
+          "basis": [
+            "Each successful withdraw_reward(amount) increments H_p then requires H_p<=floor(R_p/10^12); no user payout can exceed its pool released budget.",
+            "All per-pool reward accounts are indexed by Rewarder.pools. add_pool pushes a new zero-initialized entry. Inspected current module has no remove_pool/pop/remove_rewarder/reset release/harvest function. Thus completed same-checkpoint lists contain every current registered pool reward budget.",
+            "update_rewarder and set_pool settle all pools using old emission/allocation before changing parameters; current E, a, A apply after each account last_reward_time.",
+            "Pool share zero suppresses incremental release; assuming positive share is conservative for a payment upper bound.",
+            "Only withdraw_reward performs ordinary user payment from the private manager vault. deposit_rewarder only adds; emergent_withdraw requires AdminCap and its current cash effect is reflected in the snapshot. Future administrative withdrawal belongs permission analysis.",
+            "Budget summation is per coin; no cross-coin offset. Floor each pool separately, clamp deficits separately, and only then sum."
+          ],
+          "scope_limit": "Current released payment budgets, not future infinite emissions or an exact sum of every user reward entitlement. An inconsistent historical allocation that exceeds a pool payment cap would be a code/allocation issue, not evidence of missing vault cash; no fresh code audit performed.",
+          "source_ranges": [
+            {
+              "module": "rewarder",
+              "lines": [
+                338,
+                412
+              ],
+              "use": "zero-initialized pool account; only push_back mutation"
+            },
+            {
+              "module": "rewarder",
+              "lines": [
+                259,
+                312
+              ],
+              "use": "settle all before emission changes"
+            },
+            {
+              "module": "rewarder",
+              "lines": [
+                414,
+                491
+              ],
+              "use": "settle all before allocation changes"
+            },
+            {
+              "module": "rewarder",
+              "lines": [
+                585,
+                721
+              ],
+              "use": "hard pool payment cap and ordinary vault payment"
+            },
+            {
+              "module": "rewarder",
+              "lines": [
+                902,
+                1130
+              ],
+              "use": "release clocks, allocation, share-zero case"
+            }
+          ]
+        },
+        "complete_pool_ledger_sum": {
+          "status": "verified_all_four_coin_released_budgets_covered",
+          "formula": "U_coin(t) = sum_p max(0, floor((R_p + Delta_p(t))/10^12) - H_p)",
+          "total_ledger_records": 12,
+          "checkpoint": 346896130,
+          "rows": [
+            {
+              "coin": "sui",
+              "ledger_entry_count": 6,
+              "linked_chain_complete": true,
+              "registered_pool_entry_count": "6",
+              "global_allocation_sum": "335",
+              "emission_per_second_scaled": "3877314814814814814",
+              "per_pool_upper_bounds": [
+                {
+                  "key": "0x871d8a227114f375170f149f7e9d45be822dd003eba225e83c05ac80828596bc",
+                  "allocation": "180",
+                  "elapsed_seconds": "485",
+                  "released_scaled": "4785637611235487864557646798",
+                  "released_increment_scaled_upper_bound": "1010416666666666666454",
+                  "released_at_checkpoint_scaled_upper_bound": "4785638621652154531224313252",
+                  "harvested_raw": "4778541739927777",
+                  "remaining_payout_upper_bound_raw": "7096881724377"
+                },
+                {
+                  "key": "0x6c545e78638c8c1db7a48b282bb8ca79da107993fcb185f75cedc1f5adb2f535",
+                  "allocation": "0",
+                  "elapsed_seconds": "29321",
+                  "released_scaled": "342352657417677696249242964",
+                  "released_increment_scaled_upper_bound": "0",
+                  "released_at_checkpoint_scaled_upper_bound": "342352657417677696249242964",
+                  "harvested_raw": "340405371272141",
+                  "remaining_payout_upper_bound_raw": "1947286145536"
+                },
+                {
+                  "key": "0xa528b26eae41bcfca488a9feaa3dca614b2a1d9b9b5c78c256918ced051d4c50",
+                  "allocation": "0",
+                  "elapsed_seconds": "5753",
+                  "released_scaled": "302030339870033716520159596",
+                  "released_increment_scaled_upper_bound": "0",
+                  "released_at_checkpoint_scaled_upper_bound": "302030339870033716520159596",
+                  "harvested_raw": "301569619857736",
+                  "remaining_payout_upper_bound_raw": "460720012297"
+                },
+                {
+                  "key": "0x313b7c579b95e8021bd2ab1d071ec18615c2f3e2f8da1f9f9e0f6d676b8bea66",
+                  "allocation": "0",
+                  "elapsed_seconds": "18034",
+                  "released_scaled": "15729039505008480702094740",
+                  "released_increment_scaled_upper_bound": "0",
+                  "released_at_checkpoint_scaled_upper_bound": "15729039505008480702094740",
+                  "harvested_raw": "15653072954108",
+                  "remaining_payout_upper_bound_raw": "75966550900"
+                },
+                {
+                  "key": "0x93372a4880cb4cbd4a9974a822c097aa36279a1dbeed7ebd7249d07b923238cf",
+                  "allocation": "0",
+                  "elapsed_seconds": "860845",
+                  "released_scaled": "11010119212962962962339885",
+                  "released_increment_scaled_upper_bound": "0",
+                  "released_at_checkpoint_scaled_upper_bound": "11010119212962962962339885",
+                  "harvested_raw": "11009830298549",
+                  "remaining_payout_upper_bound_raw": "288914413"
+                },
+                {
+                  "key": "0xa7417fb5f59e23b0a7826d78f025653823c49265be07bbf6dd9e553ba4249a56",
+                  "allocation": "155",
+                  "elapsed_seconds": "1612",
+                  "released_scaled": "49384973449066442577150998",
+                  "released_increment_scaled_upper_bound": "2891898148148148147540",
+                  "released_at_checkpoint_scaled_upper_bound": "49387865347214590725298538",
+                  "harvested_raw": "46764326467005",
+                  "remaining_payout_upper_bound_raw": "2623538880209"
+                }
+              ],
+              "sum_pool_harvested_raw": "5493943960777316",
+              "global_harvested_raw": "5493943960777316",
+              "harvest_sum_matches_global": true,
+              "total_remaining_payout_upper_bound_raw": "12204682227732",
+              "total_remaining_payout_upper_bound": "12204.682227732",
+              "actual_shared_vault_balance_raw": "28442039222684",
+              "actual_shared_vault_balance": "28442.039222684",
+              "cash_minus_entire_released_budget_upper_bound_raw": "16237356994952",
+              "cash_minus_entire_released_budget_upper_bound": "16237.356994952",
+              "all_current_released_budgets_fully_cash_covered": true,
+              "pool_allocation_sum": "335",
+              "allocation_sum_matches_global": true
+            },
+            {
+              "coin": "wal",
+              "ledger_entry_count": 2,
+              "linked_chain_complete": true,
+              "registered_pool_entry_count": "2",
+              "global_allocation_sum": "14063",
+              "emission_per_second_scaled": "162766203703703703703",
+              "per_pool_upper_bounds": [
+                {
+                  "key": "0x313b7c579b95e8021bd2ab1d071ec18615c2f3e2f8da1f9f9e0f6d676b8bea66",
+                  "allocation": "14063",
+                  "elapsed_seconds": "18034",
+                  "released_scaled": "4047942135284374999983823462",
+                  "released_increment_scaled_upper_bound": "2935325717592592592579902",
+                  "released_at_checkpoint_scaled_upper_bound": "4050877461001967592576403364",
+                  "harvested_raw": "3944134083075736",
+                  "remaining_payout_upper_bound_raw": "106743377926231"
+                },
+                {
+                  "key": "0xf26ad51dc0cf90a4c66ad82a24f66ecf9852547310d123147ed94d72f6c24865",
+                  "allocation": "0",
+                  "elapsed_seconds": "600444",
+                  "released_scaled": "105903703703703703703025920",
+                  "released_increment_scaled_upper_bound": "0",
+                  "released_at_checkpoint_scaled_upper_bound": "105903703703703703703025920",
+                  "harvested_raw": "105870644208723",
+                  "remaining_payout_upper_bound_raw": "33059494980"
+                }
+              ],
+              "sum_pool_harvested_raw": "4050004727284459",
+              "global_harvested_raw": "4050004727284459",
+              "harvest_sum_matches_global": true,
+              "total_remaining_payout_upper_bound_raw": "106776437421211",
+              "total_remaining_payout_upper_bound": "106776.437421211",
+              "actual_shared_vault_balance_raw": "173067272715541",
+              "actual_shared_vault_balance": "173067.272715541",
+              "cash_minus_entire_released_budget_upper_bound_raw": "66290835294330",
+              "cash_minus_entire_released_budget_upper_bound": "66290.835294330",
+              "all_current_released_budgets_fully_cash_covered": true,
+              "pool_allocation_sum": "14063",
+              "allocation_sum_matches_global": true
+            },
+            {
+              "coin": "haedal",
+              "ledger_entry_count": 3,
+              "linked_chain_complete": true,
+              "registered_pool_entry_count": "3",
+              "global_allocation_sum": "13000",
+              "emission_per_second_scaled": "150462962962962962962",
+              "per_pool_upper_bounds": [
+                {
+                  "key": "0x871d8a227114f375170f149f7e9d45be822dd003eba225e83c05ac80828596bc",
+                  "allocation": "12000",
+                  "elapsed_seconds": "485",
+                  "released_scaled": "8360414976851851851823884037",
+                  "released_increment_scaled_upper_bound": "67361111111111111110680",
+                  "released_at_checkpoint_scaled_upper_bound": "8360482337962962962934994717",
+                  "harvested_raw": "8340387054058965",
+                  "remaining_payout_upper_bound_raw": "20095283903997"
+                },
+                {
+                  "key": "0xf26ad51dc0cf90a4c66ad82a24f66ecf9852547310d123147ed94d72f6c24865",
+                  "allocation": "0",
+                  "elapsed_seconds": "812190",
+                  "released_scaled": "11962847222222222222186525",
+                  "released_increment_scaled_upper_bound": "0",
+                  "released_at_checkpoint_scaled_upper_bound": "11962847222222222222186525",
+                  "harvested_raw": "11933010545228",
+                  "remaining_payout_upper_bound_raw": "29836676994"
+                },
+                {
+                  "key": "0x313b7c579b95e8021bd2ab1d071ec18615c2f3e2f8da1f9f9e0f6d676b8bea66",
+                  "allocation": "1000",
+                  "elapsed_seconds": "18034",
+                  "released_scaled": "744539108796296296293772518",
+                  "released_increment_scaled_upper_bound": "208726851851851851850516",
+                  "released_at_checkpoint_scaled_upper_bound": "744747835648148148145623034",
+                  "harvested_raw": "723390449974409",
+                  "remaining_payout_upper_bound_raw": "21357385673739"
+                }
+              ],
+              "sum_pool_harvested_raw": "9075710514578602",
+              "global_harvested_raw": "9075710514578602",
+              "harvest_sum_matches_global": true,
+              "total_remaining_payout_upper_bound_raw": "41482506254730",
+              "total_remaining_payout_upper_bound": "41482.506254730",
+              "actual_shared_vault_balance_raw": "109289485421398",
+              "actual_shared_vault_balance": "109289.485421398",
+              "cash_minus_entire_released_budget_upper_bound_raw": "67806979166668",
+              "cash_minus_entire_released_budget_upper_bound": "67806.979166668",
+              "all_current_released_budgets_fully_cash_covered": true,
+              "pool_allocation_sum": "13000",
+              "allocation_sum_matches_global": true
+            },
+            {
+              "coin": "hasui",
+              "ledger_entry_count": 1,
+              "linked_chain_complete": true,
+              "registered_pool_entry_count": "1",
+              "global_allocation_sum": "50",
+              "emission_per_second_scaled": "0",
+              "per_pool_upper_bounds": [
+                {
+                  "key": "0x871d8a227114f375170f149f7e9d45be822dd003eba225e83c05ac80828596bc",
+                  "allocation": "50",
+                  "elapsed_seconds": "485",
+                  "released_scaled": "55613425925925925570",
+                  "released_increment_scaled_upper_bound": "0",
+                  "released_at_checkpoint_scaled_upper_bound": "55613425925925925570",
+                  "harvested_raw": "55613417",
+                  "remaining_payout_upper_bound_raw": "8"
+                }
+              ],
+              "sum_pool_harvested_raw": "55613417",
+              "global_harvested_raw": "55613417",
+              "harvest_sum_matches_global": true,
+              "total_remaining_payout_upper_bound_raw": "8",
+              "total_remaining_payout_upper_bound": "0.000000008",
+              "actual_shared_vault_balance_raw": "9944386583",
+              "actual_shared_vault_balance": "9.944386583",
+              "cash_minus_entire_released_budget_upper_bound_raw": "9944386575",
+              "cash_minus_entire_released_budget_upper_bound": "9.944386575",
+              "all_current_released_budgets_fully_cash_covered": true,
+              "pool_allocation_sum": "50",
+              "allocation_sum_matches_global": true
+            }
+          ],
+          "source": "/private/tmp/cetus-funds-final.6XGd7s/all-ledger-records.json",
+          "source_runs": [
+            {
+              "round": 1,
+              "prefix": "/private/tmp/cetus-funds-final.6XGd7s/round-1"
+            },
+            {
+              "round": 2,
+              "prefix": "/private/tmp/cetus-funds-final.6XGd7s/round-2"
+            },
+            {
+              "round": 3,
+              "prefix": "/private/tmp/cetus-funds-final.6XGd7s/round-3"
+            },
+            {
+              "round": 4,
+              "prefix": "/private/tmp/cetus-funds-final.6XGd7s/round-4"
+            },
+            {
+              "round": 5,
+              "prefix": "/private/tmp/cetus-funds-final.6XGd7s/round-5"
+            },
+            {
+              "round": 6,
+              "prefix": "/private/tmp/cetus-funds-final.6XGd7s/round-6"
+            }
+          ],
+          "conclusion": "All current released Farm reward payment budgets are cash-covered per coin at the snapshot. No all-user or underlying-pool enumeration was required."
+        },
+        "new_requests_by_this_subtask": 0
+      },
+      "zeroTopupRunway": [
+        {
+          "coin": "sui",
+          "pool_accounting_records": 6,
+          "decimals": 9,
+          "actual_cash_raw": "28442039222684",
+          "actual_cash": "28442.039222684",
+          "current_released_payment_budget_upper_raw": "12204682227732",
+          "current_released_payment_budget_upper": "12204.682227732",
+          "cash_minus_budget_raw": "16237356994952",
+          "cash_minus_budget": "16237.356994952",
+          "cash_to_current_budget_ratio": 2.330420300338241,
+          "current_budget_fully_covered": true,
+          "emission_per_second_scaled12": "3877314814814814814",
+          "emission_native_tokens_per_day_exact": "334.999999999999999929600",
+          "pending_fractional_payment_budget_scaled12_upper": "12204682227735978383448975",
+          "cash_after_fractional_budget_scaled12": "16237356994948021616551025",
+          "funded_seconds_conservative": "4187784",
+          "funded_days_conservative": 48.469722222222224,
+          "no_new_emissions": false,
+          "zero_emission_interpretation": null
+        },
+        {
+          "coin": "wal",
+          "pool_accounting_records": 2,
+          "decimals": 9,
+          "actual_cash_raw": "173067272715541",
+          "actual_cash": "173067.272715541",
+          "current_released_payment_budget_upper_raw": "106776437421211",
+          "current_released_payment_budget_upper": "106776.437421211",
+          "cash_minus_budget_raw": "66290835294330",
+          "cash_minus_budget": "66290.835294330",
+          "cash_to_current_budget_ratio": 1.6208376763201635,
+          "current_budget_fully_covered": true,
+          "emission_per_second_scaled12": "162766203703703703703",
+          "emission_native_tokens_per_day_exact": "14062.999999999999999939200",
+          "pending_fractional_payment_budget_scaled12_upper": "106776437421212296279429284",
+          "cash_after_fractional_budget_scaled12": "66290835294328703720570716",
+          "funded_seconds_conservative": "407276",
+          "funded_days_conservative": 4.713842592592592,
+          "no_new_emissions": false,
+          "zero_emission_interpretation": null
+        },
+        {
+          "coin": "haedal",
+          "pool_accounting_records": 3,
+          "decimals": 9,
+          "actual_cash_raw": "109289485421398",
+          "actual_cash": "109289.485421398",
+          "current_released_payment_budget_upper_raw": "41482506254730",
+          "current_released_payment_budget_upper": "41482.506254730",
+          "cash_minus_budget_raw": "67806979166668",
+          "cash_minus_budget": "67806.979166668",
+          "cash_to_current_budget_ratio": 2.6345921519372126,
+          "current_budget_fully_covered": true,
+          "emission_per_second_scaled12": "150462962962962962962",
+          "emission_native_tokens_per_day_exact": "12999.999999999999999916800",
+          "pending_fractional_payment_budget_scaled12_upper": "41482506254731333302804276",
+          "cash_after_fractional_budget_scaled12": "67806979166666666697195724",
+          "funded_seconds_conservative": "450655",
+          "funded_days_conservative": 5.215914351851852,
+          "no_new_emissions": false,
+          "zero_emission_interpretation": null
+        },
+        {
+          "coin": "hasui",
+          "pool_accounting_records": 1,
+          "decimals": 9,
+          "actual_cash_raw": "9944386583",
+          "actual_cash": "9.944386583",
+          "current_released_payment_budget_upper_raw": "8",
+          "current_released_payment_budget_upper": "0.000000008",
+          "cash_minus_budget_raw": "9944386575",
+          "cash_minus_budget": "9.944386575",
+          "cash_to_current_budget_ratio": null,
+          "current_budget_fully_covered": true,
+          "emission_per_second_scaled12": "0",
+          "emission_native_tokens_per_day_exact": "0.000000000000000000000",
+          "pending_fractional_payment_budget_scaled12_upper": "8925925925570",
+          "cash_after_fractional_budget_scaled12": "9944386574074074074430",
+          "funded_seconds_conservative": null,
+          "funded_days_conservative": null,
+          "no_new_emissions": true,
+          "zero_emission_interpretation": "当前排放为零，只需覆盖既有8个原始单位预算；不把巨大余额/微小预算比值或无限续航当安全得分。"
+        }
+      ]
+    },
+    "xcetus": {
+      "schemaVersion": 2,
+      "checkpoint": {
+        "sequenceNumber": 346896130,
+        "digest": "CKzQHsSzzVDnjrPR6qBjRUmYvihnwdKrXNJh7YxrDW11",
+        "timestamp": "2026-11-19T10:43:55.124Z"
+      },
+      "scope": "仅既有管理器对象及当前部署的locking/xcetus/lock_coin模块，辅助模块由父代理Rust采集；无交易或锁币列表查询。",
+      "status": "Current V2 deposit/request/cancel/redemption cash mechanism verified; aggregate legacy funding not asserted",
+      "package": {
+        "deployedPackageId": "0xa0e7ccad08e09657e294e7cbbd609d26dbd0020b9b894684702a115d5ae1a1cf",
+        "originalTypePackageId": "0x9e69acc50ca03bc943c4f7c5304c2a6002d507b51c11913b247159c60422c606",
+        "missingHelperModules": [],
+        "helperEvidenceStatus": "Collected and inspected both lock_coin and lock_coin_v2 in the same pinned checkpoint"
+      },
+      "rawValues": {
+        "decimals": 9,
+        "treasuryTotalSupply": "227293674568440730",
+        "totalLocked": "202227320782688558",
+        "managerMainBalance": "25228351214183861",
+        "managerExtraTreasury": "5156969833155688",
+        "availableUnrequestedSupply": "25066353785752172",
+        "mainMinusAvailableUnrequested": "161997428431689",
+        "activeLockInfoCount": "10773"
+      },
+      "humanValues": {
+        "totalSupply": "227293674.568440730",
+        "totalLocked": "202227320.782688558",
+        "managerMainBalance": "25228351.214183861",
+        "managerExtraTreasury": "5156969.833155688",
+        "availableUnrequestedSupply": "25066353.785752172",
+        "mainMinusAvailableUnrequested": "161997.428431689"
+      },
+      "definitions": {
+        "S": "All outstanding XCETUS supply from the TreasuryCap; includes tokens subject to outstanding redemption requests until burned",
+        "L": "Global accumulator of original XCETUS quantities reserved by redemption requests, not the amount of CETUS still in main custody",
+        "B": "LockUpManager.balance, CETUS held in main manager",
+        "U": "S-L; XCETUS units not already reserved by requests; can request future CETUS payout up to 1:1 under current maximum schedule",
+        "x_i": "Original XCETUS quantity of active redemption request i, LockInfo.xcetus_amount",
+        "p_i": "CETUS cash fixed at request creation and transferred out of main into corresponding lock coin, LockInfo.cetus_amount",
+        "P": "Sum of LockInfo.cetus_amount for applicable live redemption requests. Equality to physical lock-coin balances requires live-object correspondence, particularly for legacy V1 objects with public destruction.",
+        "D": "Sum of x_i-p_i for applicable live requests. Protocol discount transfer required by normal locking wrappers, not additional user cash entitlement. An orphaned legacy LockInfo after direct V1 helper consumption must not automatically count as an executable request.",
+        "E": "LockUpManager.extra_treasury; protocol treasury cash, excluded from user principal funding"
+      },
+      "equations": {
+        "counterConsistency": "Current normal wrappers increment/decrement L with original x_i and add/remove corresponding LockInfo records; current code alone does not certify the correspondence of every old record to a still-live lock coin.",
+        "discount": "D = L-P",
+        "managerRequirement": "B >= U+D = (S-L)+D = S-P, sufficient for simultaneous unrequested face-value principal and required pending-discount settlement under current wrapper paths",
+        "normalPathConservation": "Q = B+P-S = B-U-D",
+        "grossUserOnlyDiagnostic": "B-U > 0 is observed, but does not quantify D or prove all wrapper redemptions can complete",
+        "snapshotGap": "B-U = 161997.428431689 CETUS; complete manager requirement would require D <= this amount; D is unobserved, so no deficit or surplus is asserted"
+      },
+      "normalTransitions": [
+        {
+          "function": "locking::convert(n)",
+          "delta": {
+            "B": "+n",
+            "S": "+n",
+            "L": "0",
+            "P": "0",
+            "D": "0",
+            "Q": "0"
+          }
+        },
+        {
+          "function": "locking::redeem_lock_v2(x,p)",
+          "delta": {
+            "B": "-p",
+            "S": "0",
+            "L": "+x",
+            "P": "+p",
+            "D": "+(x-p)",
+            "Q": "0"
+          }
+        },
+        {
+          "function": "locking::cancel_redeem_lock_v2(x,p)",
+          "delta": {
+            "B": "+p",
+            "S": "0",
+            "L": "-x",
+            "P": "-p",
+            "D": "-(x-p)",
+            "Q": "0"
+          }
+        },
+        {
+          "function": "locking::redeem_v2(x,p)",
+          "delta": {
+            "B": "-(x-p)",
+            "S": "-x",
+            "L": "-x",
+            "P": "-p",
+            "D": "-(x-p)",
+            "E": "+(x-p)",
+            "Q": "0"
+          }
+        },
+        {
+          "function": "xcetus::burn_by_admin(n)",
+          "restriction": "Only available_value can burn; requires AdminCap plus mutable owner VeNFT",
+          "delta": {
+            "B": "0",
+            "S": "-n",
+            "L": "0",
+            "P": "0",
+            "D": "0",
+            "Q": "+n"
+          }
+        },
+        {
+          "function": "locking::redeem_treasury",
+          "delta": {
+            "B": "0",
+            "S": "0",
+            "L": "0",
+            "P": "0",
+            "D": "0",
+            "Q": "0"
+          },
+          "note": "Withdraws E only"
+        }
+      ],
+      "confirmed": [
+        "convert takes n CETUS into main before minting n XCETUS",
+        "request creation fixes p<=x, transfers p from main into a lock coin and records x,p and the lock id",
+        "current cancel/redeem wrappers bind lock id, VeNFT id and CETUS value to LockInfo; cancellation requires pre-maturity",
+        "main funds are not a yield reward pool; ordinary treasury withdrawal accesses extra only",
+        "all inspected current normal transitions preserve Q; available-only administrative token burning can increase Q",
+        "dividend corrections affect dividend entitlement; available_value for principal redemption uses raw xcetus_amount minus lock_amount",
+        "V2 helper actually stores Balance<CETUS> in LockedCoinV2; value() reads that balance, and lock_time() returns locked_until_time",
+        "V2 creation, unlock and cancellation-destruction helpers are public(friend); arbitrary external user calls cannot independently unlock or destroy V2",
+        "V2 unlock requires locked_until_time <= Clock, deletes the owned lock coin and transfers all its cash to tx_context::sender",
+        "Cancellation is a valid normal path before maturity: locking::cancel_redeem_lock_v2 requires lock_time > now, verifies VeNFT id, actual coin value and lock id, removes request, decreases L and returns its actual balance to main. It does not burn S or settle D.",
+        "Current normal V2 redemption does not need a keeper, oracle or reinvestment. It does require caller-owned lock coin plus VeNFT, package gate, maturity, matching record, token burn and main balance sufficient for that request discount transfer; any later abort reverts helper cash transfer atomically.",
+        "Legacy V1 helper unlock_coin and destory_lock are public. Mature V1 coins can be independently unlocked without wrapper; destory_lock has no time check and can return the contained balance to the object owner without wrapper bookkeeping. This does not prove any active old objects exist, unauthorized theft or repeat withdrawal.",
+        "Current locking::redeem_lock V1 creation entry aborts; newly requested redemption uses V2. Existing old V1 cancel/redeem wrappers are still present.",
+        "Positive B-U remains confirmed, but main free surplus and complete wrapper funding require live-request D; no blanket U classification is warranted for already verified accounting properties."
+      ],
+      "limitations": [
+        "The main manager and its fully archived top-level dynamic fields contain no global P or D totals; 10773 is only lockInfo count. No complete legacy cash/obligation reconciliation or shortage is asserted.",
+        "The Q conservation equation is verified for current normal wrapper transitions. Proving its nonnegative initial condition across historical versions/migrations is outside this snapshot-only evidence.",
+        "V1 publicly consumable lock coins can be used without removing LockInfo or reducing L/S; therefore a legacy record alone is not proof of a still-live funded lock coin or currently executable wrapper claim. Current snapshots do not identify the active V1/V2 breakdown, and no user/lock-coin list was queried.",
+        "Helper code proves custody and time/access behavior for normal V2 paths; it does not prove eligibility or live-object consistency for every old request. These are scoped aggregate/legacy limits, not a reason to mark verified V2 funding logic unverified.",
+        "extra_treasury is excluded from principal backing; no new score or threshold introduced"
+      ],
+      "targetedCollection": {
+        "packageId": "0xa0e7ccad08e09657e294e7cbbd609d26dbd0020b9b894684702a115d5ae1a1cf",
+        "modules": [
+          "lock_coin",
+          "lock_coin_v2"
+        ],
+        "checkpoint": 346896130,
+        "purpose": "Completed helper-only collection: V1/V2 custody, maturity, visibility and cancellation confirmed; no user list or transaction calls.",
+        "optionalSingleBinding": {
+          "managerLockInfoTable": "0x7c534bb7b8a2cc21538d0dbedd2437cc64f47106cb4c259b9ff921b5c3cb1a49",
+          "knownHeadKey": "0x89f6719a5797b73a5302f86e2b8f8324aec121183260fd3a58c9ba7fa2a487e6",
+          "purpose": "未执行的可选单对象绑定检查；不能证明全局P/D，非本轮覆盖结论的必需输入。"
+        },
+        "status": "Completed by parent Rust scanner; inspected read-only by this agent",
+        "resultFile": "cetus-funds-dependencies-evidence-346896130.json#/runs/helpers/snapshot",
+        "remainingAggregation": "There is no single exposed global P/D field in the current manager. Complete live legacy funding would require an independently evidenced aggregate or scoped additional evidence; no all-user enumeration is recommended or performed."
+      },
+      "sources": [
+        {
+          "file": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-project-346896130/snapshot.json",
+          "jsonPath": "outputs.other.xCetusManager.asMoveObject.contents.json; outputs.other.xLockManager.asMoveObject.contents.json"
+        },
+        {
+          "file": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-business-ratings-346896130/tokenLaunch/snapshot.json",
+          "jsonPath": "outputs.modules.lock.asMovePackage.module.disassembly",
+          "disassemblyLineReferences": {
+            "imports": "18-21",
+            "structs": "27-46",
+            "mainAndExtraMutators": "211-260",
+            "initialize": "607-711",
+            "convert": "714-790",
+            "disabledV1NewRequest": "792-796",
+            "requestV2": "798-971",
+            "cancelV2": "1104-1233",
+            "redeemV2": "1379-1521",
+            "treasuryWithdraw": "1558-1590"
+          }
+        },
+        {
+          "file": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-signer-check-346896130/roleBindings/snapshot.json",
+          "jsonPath": "outputs.state.x.asMovePackage.x.disassembly; outputs.state.lock.dynamicFields",
+          "disassemblyLineReferences": {
+            "lockedCounter": "388-443",
+            "mint": "661-696",
+            "burn": "699-736",
+            "adminBurn": "739-766",
+            "availableValue": "817-850",
+            "totalSupply": "853-858"
+          }
+        },
+        {
+          "file": "cetus-funds-dependencies-evidence-346896130.json#/runs/helpers/snapshot",
+          "jsonPath": "outputs.accountingHelpers.locking.{lock_coin,lock_coin_v2}.disassembly",
+          "disassemblyLineReferences": {
+            "both": {
+              "storage": "13-18",
+              "creation": "34-72",
+              "unlock": "74-135",
+              "value": "137-143",
+              "time": "145-151",
+              "newObjectOwnership": "153-172",
+              "destruction": "174-193"
+            }
+          }
+        }
+      ],
+      "helperReview": {
+        "checkpoint": {
+          "sequenceNumber": 346896130,
+          "digest": "CKzQHsSzzVDnjrPR6qBjRUmYvihnwdKrXNJh7YxrDW11",
+          "timestamp": "2026-11-19T10:43:55.124Z"
+        },
+        "v2": {
+          "storage": "LockedCoinV2<T> has key only, containing UID, Balance<T>, locked_start_time and locked_until_time",
+          "creation": "public(friend); end>start; converts supplied Coin into the same Balance and transfers newly created owned lock coin to supplied recipient. locking passes tx sender and current/end timestamps.",
+          "value": "public; reads balance::value from actual contained cash",
+          "time": "public; reads locked_until_time",
+          "unlock": "public(friend); requires end<=now; deletes object and transfers entire contained coin to tx sender; returns consumed object ID",
+          "cancel": "public(friend) destroy_for_cancel returns actual balance and consumed object ID without its own time check; the external locking wrapper supplies strict pre-maturity and binding checks",
+          "independentUserExit": false
+        },
+        "v1": {
+          "storage": "Same direct Balance custody shape under distinct LockedCoin<T> type",
+          "unlock": "public; end<=now, cash goes to tx sender without calling locking wrapper",
+          "destroy": "public destory_lock; no Clock or maturity check, returns contained Balance and consumed object ID",
+          "ownership": "Both consume the owned lock object; public visibility does not permit consuming another user-owned object without ownership authorization",
+          "currentCreation": "locking::redeem_lock now aborts; this old helper is relevant only to legacy or independently created V1 objects",
+          "caution": "A direct old-helper call is a code-reachable accounting bypass. Active old redemption-object existence and consequences are not inferred from static reachability."
+        },
+        "lineReferences": {
+          "both": {
+            "storage": "13-18",
+            "creation": "34-72",
+            "unlock": "74-135",
+            "value": "137-143",
+            "time": "145-151",
+            "newObjectOwnership": "153-172",
+            "destruction": "174-193"
+          }
+        }
+      },
+      "liveRequestSamples": [
+        {
+          "version": "legacyV1",
+          "id": "0x89f6719a5797b73a5302f86e2b8f8324aec121183260fd3a58c9ba7fa2a487e6",
+          "type": "0x9e69acc50ca03bc943c4f7c5304c2a6002d507b51c11913b247159c60422c606::lock_coin::LockedCoin<0x06864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b::cetus::CETUS>",
+          "raw": {
+            "cash": "22555585500",
+            "originalXCETUS": "22555585500",
+            "requestedCETUS": "22555585500",
+            "discount": "0",
+            "start": "1683717644",
+            "end": "1699269644"
+          },
+          "cetus": "22.555585500",
+          "recordMatchesActualCash": true,
+          "maturedAtCheckpoint": true,
+          "lockDays": 180
+        },
+        {
+          "version": "currentV2",
+          "id": "0x984716c0db3938925abc938f1d6dc27b1b246dd81ede7bae832fd9895a933a0e",
+          "type": "0xa0e7ccad08e09657e294e7cbbd609d26dbd0020b9b894684702a115d5ae1a1cf::lock_coin_v2::LockedCoinV2<0x06864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b::cetus::CETUS>",
+          "raw": {
+            "cash": "13335531726138",
+            "originalXCETUS": "13335531726138",
+            "requestedCETUS": "13335531726138",
+            "discount": "0",
+            "start": "1795081994",
+            "end": "1810633994"
+          },
+          "cetus": "13335.531726138",
+          "recordMatchesActualCash": true,
+          "maturedAtCheckpoint": false,
+          "lockDays": 180
+        }
+      ],
+      "requiredSnapshotEvidenceStatus": "verified",
+      "fundingConclusion": {
+        "mainCetus": "25228351.214183861",
+        "unrequestedXCETUS": "25066353.785752172",
+        "mainMinusUnrequestedCetus": "161997.428431689",
+        "unrequestedFaceValueCovered": true,
+        "actualRequestCashMatches": true,
+        "statement": "主库现金覆盖全部尚未请求的额度；已知V1和V2请求的锁币实物与请求金额一致。"
+      },
+      "liveBindingsVerified": true,
+      "fullLegacyAggregateRequiredForCurrentDependencyRating": false
+    },
+    "launchpad": {
+      "checkpoint": 346896130,
+      "scope": "仅两个具名结束池；复用既有池对象快照，父代理在相同检查点补采固定辅助模块。无历史交易、用户或池列表查询。",
+      "early": {
+        "id": "0x8b3b1b25d0769ec4165c9d7cf6090375be6066c3b4b35cb472c7eb8f05b07a9c",
+        "state": {
+          "is_settle": true,
+          "is_cancel": false
+        },
+        "raw": {
+          "sale_coin": "34518760130341",
+          "raise_coin": "41216786889261",
+          "sale_total": "20000000000000000",
+          "initialize_price": "40000000",
+          "hardcap": "800000000000000",
+          "reality_raise_total": "108247043828005115",
+          "unused_sale": "0",
+          "harvest_raise": "0"
+        },
+        "whitelistProtectedPurchaseRaw": "537356208825500",
+        "purchaseCount": "18577",
+        "currentUserReserve": {
+          "saleCETUSRaw": "34518760130341",
+          "saleCETUS": "34518.760130341",
+          "refundSUIRaw": "41216786889261",
+          "refundSUI": "41216.786889261"
+        },
+        "initialAllocationEnvelope": {
+          "saleCETUSRaw": "20000000000000000",
+          "refundSUIRaw": "107447043828005115"
+        },
+        "individualFormula": "D=1e9 (local SDK); P_i=purchase, w_i=protected purchase. Oversubscribed: refund_i=floor((R-H)*(P_i-w_i)/(R-W)); sale_i=floor(w_i*D/price)+floor((sale_total-floor(W*D/price))*(P_i-w_i)/(R-W)).",
+        "confirmed": "Closed for the selected already-settled successful pool under the archived deployed code: current user reserves cover all remaining contract-defined sale and refund obligations by conservation and downward rounding. Precise debt totals are not stored at pool level; no per-user sum was performed. This does not create a score or generalize to other pools.",
+        "missingForCompleteInvariantProof": [],
+        "knownTablesNoAggregate": {
+          "purchaseList": "0x88a5c9655c96a45d6b4bd04b632c100767e306705aa3d74261089e24677238f5",
+          "whitelistUsers": "0x7dccb24d47a130be07c48151f4ccd1eaea06a61e92e3aca715db2d4caa1ed89f"
+        },
+        "existingCodeEvidence": [
+          "outputs.modules.early.asMovePackage.module.disassembly::claim",
+          "::calculate_claim_sale_and_raise_amount",
+          "::settle_internal",
+          "::withdraw_sale_internal",
+          "::withdraw_raise",
+          "::withdraw_raise_internal",
+          "::create_mark_and_purchase",
+          "::purchase_internal"
+        ],
+        "coverageProof": {
+          "status": "covered_by_code_conservation_upper_bound",
+          "exactRemainingDebtKnown": false,
+          "units": "All formulas below use integer coin raw units.",
+          "denominator": 1000000000,
+          "protectedAggregate": "WhiteList.purchase_total starts at 0; increse_white_list_purchase_total subtracts the old per-user protected amount, updates it by capped purchase increment, then adds the new amount. Removing a user requires protected amount=0; administrative changes are gated to initialization. Thus W=sum w_i, 0<=w_i<=p_i, R=sum p_i.",
+          "rounding": "utils::math_u128_mul_div_to_u64 uses checked nonzero denominator, checked multiplication, integer Div and CastU64, hence floor for nonnegative values; overflow aborts rather than creating a payout.",
+          "saleAllocationProof": "Let A=floor(W*D/price), T=R-W>0. Sum floor(w_i*D/price)<=A; sum floor((sale_total-A)*(p_i-w_i)/T)<=sale_total-A. Therefore total sale liabilities<=sale_total. Current sale_total*D/price relation and all allocation inputs are frozen after purchase stage.",
+          "refundAllocationProof": "Sum floor((R-H)*(p_i-w_i)/(R-W))<=R-H. The p_i=w_i special branch has zero refund and its floor(w_i*D/price) sale allocation is consistent.",
+          "cashPartition": "Successful settlement reserves sale_total for purchasers and R-H for refunds; owner-only unused_sale and harvest_raise are separate. Owner withdrawals reduce the same owner amount and reset it to zero, so user reserve is invariant under owner withdrawals. Claims subtract exactly the paid amounts.",
+          "singlePayment": "Pool ID must match PurchaseMark. One mark is created per sender per pool. PurchaseMark has key but no store/copy, and the module only initially transfers it to that sender. Claim requires obtain_sale_amount=0 and used_raise_amount=purchase_total, then records the sale and purchased-minus-refund. Any positive payout makes that condition false; a possible repeated zero/zero payout cannot drain cash.",
+          "remainingDebtUpperBoundsRaw": {
+            "CETUS": "34518760130341",
+            "SUI": "41216786889261"
+          },
+          "provenPositiveFundingShortfallRaw": {
+            "CETUS": "0",
+            "SUI": "0"
+          },
+          "qualification": "Zero here is the proved positive funding shortfall under the stated code invariant, not zero liability and not an assessment score. Existing valid receipt and normal allowed claim path remain necessary."
+        },
+        "existingHelperEvidence": {
+          "utils": "outputs.accountingHelpers.early.utils.disassembly::CONST_DENOMINATOR; ::math_u128_mul_div; ::math_u128_mul_div_to_u64 (lines 23-68)",
+          "whitelist": "outputs.accountingHelpers.early.whitelist.disassembly::remove_user_from_whitelist (119-161); ::increse_white_list_purchase_total (163-260); ::get_whitelist_user_safe_purchased (303-328); ::get_purchase_total (330-336)"
+        },
+        "macroInvariant": "sum remaining sale claims <= sale_coin-unused_sale; sum remaining SUI refunds <= raise_coin-harvest_raise. Successful settlement partitions inventory; user claims debit exact payout, owner sale/raise withdrawals debit matching unused_sale/harvest_raise only."
+      },
+      "oversubscribed": {
+        "id": "0x0493193e0c0c0b608c9351c943635f997eff8ae367b3b7d8e2f26e0a833d9146",
+        "state": {
+          "is_cancelled": false,
+          "is_liquidity_injected": true,
+          "is_withdrawn": true
+        },
+        "raw": {
+          "sale_coin": "86067982596208",
+          "raise_coin": "37616342808358",
+          "total_supply": "9600000000000000",
+          "price": "21000000000000000",
+          "total_purchase_amount": "93118828816937612",
+          "liquidity_used_sale_amount": "6720000000000000",
+          "liquidity_used_raise_amount": "141119999777400"
+        },
+        "maxRaiseRaw": "201600000000000",
+        "protectedRaiseRaw": "133850198015706",
+        "unprotectedPurchaseRaw": "92984978618921906",
+        "unprotectedAllocationRaw": "67749801984294",
+        "initialSaleDepositRaw": "16320000000000000",
+        "initialUserSaleAllocationRaw": "9600000000000000",
+        "initialUserRefundAllocationRaw": "92917228816937612",
+        "ownerSuccessWithdrawFormula": {
+          "raiseRaw": "60480000222600",
+          "saleRaw": "0"
+        },
+        "currentUserReserve": {
+          "saleNAVXRaw": "86067982596208",
+          "saleNAVX_9DecimalsFromExistingAssessment": "86067.982596208",
+          "refundSUIRaw": "37616342808358",
+          "refundSUI": "37616.342808358"
+        },
+        "individualFormula": "D=1e18 (local SDK); u_i=w_i+(p_i-w_i)*(K-W)/(R-W); NAVX claim_i=floor(u_i*D/price); used_raise_i=ceil(u_i); refund_i=p_i-ceil(u_i).",
+        "confirmed": "Closed for the selected already-ended oversubscribed successful pool under archived deployed code: current NAVX and SUI cash cover remaining contract-defined redemption obligations by conservation. Emergency deposits can make cash exceed debt, so exact remaining debt cannot be reverse-inferred from cash. No per-user sum or score was produced.",
+        "missingForCompleteInvariantProof": [],
+        "knownTableNoAggregate": "0x672079c1556e2b3800dd700185a34fd0635c937e6b5fe24a45c1cb050f16ade2",
+        "existingCodeEvidence": [
+          "outputs.modules.over.asMovePackage.module.disassembly::create",
+          "::purchase",
+          "::redeem",
+          "::redeem_for_sale_success",
+          "::redeem_for_sale_oversubcribe",
+          "::withdraw",
+          "::withdraw_for_sale_success",
+          "::get_max_raise_amount",
+          "::get_sold_amount",
+          "::get_resever_sale_amount_for_liquidity",
+          "::emergency_deposit_raise",
+          "::emergency_deposit_sale"
+        ],
+        "coverageProof": {
+          "status": "covered_by_code_conservation_upper_bound",
+          "exactRemainingDebtKnown": false,
+          "denominator": "1000000000000000000",
+          "protectedAggregate": "update_for_purchase caps each protected increment by individual remaining limit, global remaining protection and purchase amount; caller adds this exact increment to white_list.protection_limit_used. Thus W=sum w_i and R=sum p_i. Changes to whitelist limits are restricted to initialization.",
+          "rounding": "full_math_u64/u128 use full-width multiplication; floor is integer division, ceil is (product+denominator-1)/denominator. Pool uses floor for sale allocation and ceil for used raise. The exact price denominator 1e18 and liquidity denominator 1e6 are in the deployed pool constants.",
+          "individualFormula": "u_i=w_i+(p_i-w_i)*(K-W)/(R-W); sale_i=floor(u_i*1e18/price), used_i=ceil(u_i), refund_i=p_i-used_i.",
+          "allocationProof": "sum u_i=K. Here K*1e18/price=total_supply exactly. Therefore sum sale_i<=total_supply and sum refund_i=R-sum ceil(u_i)<=R-K. The global protection total W<K and R> K in the selected state, so denominators and residual allocations are valid.",
+          "cashPartition": "create deposits total_supply plus reserved liquidity sale. Purchase adds full purchased raise. Actual CLMM draw is stored in liquidity_used_*; success owner withdrawal is K-liquidity_used_raise and zero sale in this oversubscribed pool. With sale liquidity reserve exactly consumed in selected state, cash after these steps is at least total_supply for sale entitlements and R-K for refunds, minus exactly already-paid user claims. Emergency deposits only add cash without increasing rights.",
+          "singlePaymentAndBinding": "Outer redeem checks certificate pool ID and !is_redeemed; update_for_redeem sets certificate and sender table record is_redeemed=true and records sale/used; refunded_raise_amount is purchased-used. create limits one certificate per sender, and transfer_purchase_certificate_to checks table certificate ID matches the exact certificate. Certificate has key without store/copy, so it cannot be externally forged, copied or freely transferred; the only provided transfer binds the same table owner.",
+          "ownerWithdrawalClosed": "is_withdrawn=true causes further owner withdrawal to abort. Current is_liquidity_injected=true and exact reserved NAVX liquidity already consumed.",
+          "remainingDebtUpperBoundsRaw": {
+            "NAVX": "86067982596208",
+            "SUI": "37616342808358"
+          },
+          "provenPositiveFundingShortfallRaw": {
+            "NAVX": "0",
+            "SUI": "0"
+          },
+          "qualification": "This proves cash coverage bounds, not exact unclaimed totals, user eligibility of a chosen receipt, or a score. It is limited to this pool and same-checkpoint code/state."
+        },
+        "existingHelperEvidence": {
+          "purchase_manager": "outputs.accountingHelpers.over.purchase_manager.disassembly::create_purchase_certificate (175-225); ::transfer_purchase_certificate_to (227-262); ::update_for_purchase (264-395); ::update_for_redeem (397-455); ::refunded_raise_amount (505-515); ::is_redeemed (517-523)",
+          "white_list": "outputs.accountingHelpers.over.white_list.disassembly::increase_protection_limit_used (215-244); ::remainer_protection_limit (273-285)",
+          "math": "outputs.accountingHelpers.math.full_math_u64.disassembly and .full_math_u128.disassembly::full_mul, ::mul_div_floor, ::mul_div_ceil"
+        },
+        "macroInvariant": "Sum NAVX allocations <= total_supply; sum refunds <= R-K. Liquidity draws only the reserved liquidity inventory. Owner success withdrawal takes K-liquidity_used_raise and zero sale in oversubscription, only once. Already-paid claims debit pool inventory. Emergency deposits only add assets."
+      },
+      "evidence": {
+        "stateSnapshot": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-project-346896130/snapshot.json",
+        "codeSnapshot": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-business-ratings-346896130/tokenLaunch/snapshot.json",
+        "localSDKArchive": "/private/tmp/cetus-project-YEvhp0Rv/launchsdk.tgz",
+        "note": "Exact deployed helper disassembly checked against pool disassembly; local SDK is corroboration only. No transaction or per-user queries.",
+        "accountingHelperSnapshot": "cetus-funds-dependencies-evidence-346896130.json#/runs/helpers/snapshot"
+      },
+      "nextPointReads": "None required to prove selected-pool cash coverage under these contract invariants. Exact outstanding liability totals require a per-user aggregate or separate authenticated accumulator, neither needed for the upper-bound coverage proof nor collected here.",
+      "coverageConclusion": "Both named ended pools have same-coin reserve coverage supported by immutable code allocation/conservation and archived state, not merely by a positive balance. Do not leave both as U only because no exact per-user debt sum was obtained; do not convert this into a score without the agreed module rule."
+    },
+    "vester": {
+      "balanceCetus": "20275688.075706734",
+      "remainingCommitmentCetus": "20275687.425706734",
+      "surplusCetus": "0.650000000",
+      "remainingCommitmentFormula": "150000000 - 129724312.574293266",
+      "coverageOfRemainingCommitment": true,
+      "scope": "公共计划同币余额，不代表每张凭证已满足领取条件；不把它再计作其他业务储备。"
+    },
+    "executionDependencies": {
+      "status": "verified_snapshot_prerequisites",
+      "tide": {
+        "quoteSignerRoles": 1,
+        "state": "版本、开关、簿与做市商绑定、报价角色有效；同笔交易可验签更新并消费报价。",
+        "cachedReverseAsk": "expired",
+        "cachedAskExpiredByMs": 206379,
+        "newReverseSignedQuoteObtained": false,
+        "cashExit": "treasury库存提款无需报价",
+        "risk": "单一报价角色，停供会影响该簿成交。"
+      },
+      "limit": {
+        "authorizedKeepers": 1,
+        "state": "授权keeper及最小偿付约束已核，成交无需额外报价签名。",
+        "cashExit": "所有人撤单退余额无需keeper",
+        "risk": "单keeper，停服会影响成交。"
+      },
+      "dca": {
+        "authorizedKeepers": 3,
+        "threshold": 2,
+        "state": "门槛可达，两个不同签名绑定订单、周期、币种、金额和时间。",
+        "cashExit": "所有人撤单退余额无需keeper",
+        "risk": "需取得两份有效执行签名。"
+      },
+      "classification": "逐笔成交封包是执行时入参，不再作为协议快照的预先采集要求；未宣称取得新的反向报价或完成成交。",
+      "evidence": "cetus-tide-orders-review-evidence-346896130.json#/facts",
+      "ratings": {
+        "tideQuoteRefreshAndVerification": 100,
+        "limitExecutionPrerequisites": 100,
+        "dcaExecutionPrerequisites": 100
+      }
+    }
+  },
+  "correctionsToEarlierInterpretation": [
+    {
+      "old": "Farm缺全部应付总额，所以无法作任何现金判断。",
+      "correct": "可用已选池奖励累计量和实际支付算法取得付款上限，并核对同币共享库现金；仍保留共享资金范围限制。"
+    },
+    {
+      "old": "Launchpad只知道余额，无法判断覆盖。",
+      "correct": "已补齐分配/退款/白名单辅助模块，可用会计守恒和舍入上界证明两个具名结束池覆盖，无须枚举用户。"
+    },
+    {
+      "old": "缺Cetus仓位总资产/总债务，使Margin资金和依赖整项都无法判断。",
+      "correct": "Cetus自身偿付率不强造，但可定量核外部实际储备现金，并闭合报价失效与还款退路。"
+    },
+    {
+      "old": "xCETUS未完整对账，所以兑付机制全待核；或用主库余额除supply-total_locked直接判足额。",
+      "correct": "V2真实锁币和正常兑付已核；主库完整要求为B >= (S-L)+D，旧存量P/D及V1记录仍需单列，不能把主库差额叫盈余。"
+    },
+    {
+      "old": "Tide反向缓存过期或缺DCA瞬态签名，等同服务停摆或资金无法取回。",
+      "correct": "分别记录该输入有效性、替代材料未证和独立资产取回路径，不能外推为全业务故障。"
+    }
+  ],
+  "remainingScopeLimits": [],
+  "sourceArchives": [
+    {
+      "path": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-project-346896130/snapshot.json",
+      "sha256": "43163ad9d146de23e1f9eb172e01b40c5270b759227b8d14ee63d7981a18e391",
+      "checkpoint": {
+        "sequenceNumber": 346896130,
+        "digest": "CKzQHsSzzVDnjrPR6qBjRUmYvihnwdKrXNJh7YxrDW11",
+        "timestamp": "2026-11-19T10:43:55.124Z"
+      }
+    },
+    {
+      "path": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+      "sha256": "d3ce98bdc287b6eeeaa966dc98881746a0b47215e9b7c2eace65d89c0a05328d",
+      "checkpoint": {
+        "sequenceNumber": 346896130,
+        "digest": "CKzQHsSzzVDnjrPR6qBjRUmYvihnwdKrXNJh7YxrDW11",
+        "timestamp": "2026-11-19T10:43:55.124Z"
+      }
+    },
+    {
+      "path": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-business-ratings-346896130/tokenLaunch/snapshot.json",
+      "sha256": "325814aa4478f97c19661af4b5cea72fd71681d3fce0678f7a29df9064a5ca70",
+      "checkpoint": {
+        "sequenceNumber": 346896130,
+        "digest": "CKzQHsSzzVDnjrPR6qBjRUmYvihnwdKrXNJh7YxrDW11",
+        "timestamp": "2026-11-19T10:43:55.124Z"
+      }
+    },
+    {
+      "path": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-config-dependencies-346896130/selected/snapshot.json",
+      "sha256": "03f0b3a5f693933deaec955ae3d43216e5506c3ee06aa4c78d18aa0718ed5e7f",
+      "checkpoint": {
+        "sequenceNumber": 346896130,
+        "digest": "CKzQHsSzzVDnjrPR6qBjRUmYvihnwdKrXNJh7YxrDW11",
+        "timestamp": "2026-11-19T10:43:55.124Z"
+      }
+    },
+    {
+      "path": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-config-dependencies-346896130/linked/snapshot.json",
+      "sha256": "8eadcccf1073029b4987e0a74e233f8acf45b9473628490d2d87e288d101d295",
+      "checkpoint": {
+        "sequenceNumber": 346896130,
+        "digest": "CKzQHsSzzVDnjrPR6qBjRUmYvihnwdKrXNJh7YxrDW11",
+        "timestamp": "2026-11-19T10:43:55.124Z"
+      }
+    },
+    {
+      "path": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-config-dependencies-346896130/samples/snapshot.json",
+      "sha256": "c482ee995b25c7ccdf5bb8f0defdc1cb3a122a86066c1f7d49acd281de359654",
+      "checkpoint": {
+        "sequenceNumber": 346896130,
+        "digest": "CKzQHsSzzVDnjrPR6qBjRUmYvihnwdKrXNJh7YxrDW11",
+        "timestamp": "2026-11-19T10:43:55.124Z"
+      }
+    },
+    {
+      "path": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-signer-check-346896130/roleBindings/snapshot.json",
+      "sha256": "2674376d848e946d8ea3a8c928006afe88b53800036db1436e7be54611c25d1e",
+      "checkpoint": {
+        "sequenceNumber": 346896130,
+        "digest": "CKzQHsSzzVDnjrPR6qBjRUmYvihnwdKrXNJh7YxrDW11",
+        "timestamp": "2026-11-19T10:43:55.124Z"
+      }
+    },
+    {
+      "path": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-signer-check-346896130/marginV4/snapshot.json",
+      "sha256": "3b388f21e08b70fb0153b79b43f2e7dea5f46ee62bc500267e3904cb764098e4",
+      "checkpoint": {
+        "sequenceNumber": 346896130,
+        "digest": "CKzQHsSzzVDnjrPR6qBjRUmYvihnwdKrXNJh7YxrDW11",
+        "timestamp": "2026-11-19T10:43:55.124Z"
+      }
+    },
+    {
+      "path": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-config-dependencies-346896130/gates/snapshot.json",
+      "sha256": "deb9e0770bc2b5792d513df51220a3ddfa67210698fe7bd7977d7d8129d40885",
+      "checkpoint": {
+        "sequenceNumber": 346896130,
+        "digest": "CKzQHsSzzVDnjrPR6qBjRUmYvihnwdKrXNJh7YxrDW11",
+        "timestamp": "2026-11-19T10:43:55.124Z"
+      }
+    },
+    {
+      "path": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-business-ratings-346896130/margin/snapshot.json",
+      "sha256": "bc4d054cf45dbb55830a91cbd92423f73b82c0053e5bf55b2c129413178eaeb5",
+      "checkpoint": {
+        "sequenceNumber": 346896130,
+        "digest": "CKzQHsSzzVDnjrPR6qBjRUmYvihnwdKrXNJh7YxrDW11",
+        "timestamp": "2026-11-19T10:43:55.124Z"
+      }
+    }
+  ],
+  "evidenceAliases": {
+    "main": "cetus-project-346896130/snapshot.json",
+    "vaultFarmBurn": "cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+    "inputs": "cetus-config-dependencies-346896130/selected/snapshot.json",
+    "gates": "cetus-config-dependencies-346896130/gates/snapshot.json",
+    "marginProtocol": "cetus-business-ratings-346896130/margin/snapshot.json",
+    "accountingHelpers": "cetus-funds-dependencies-evidence-346896130.json#/runs/helpers/snapshot",
+    "poolRewardAccounting": "cetus-funds-dependencies-evidence-346896130.json#/runs/farm/snapshot"
+  },
+  "verifiedRiskAndScopeSummary": {
+    "currentConfirmedFundingShortfall": false,
+    "confirmedDependencyLimitations": [
+      "已核Margin价格路径无独立Pyth替代源；失效影响需有效报价的操作，但不直接阻断普通还款。"
+    ],
+    "coverageEstablished": [
+      "Farm共享奖励库四币现金覆盖全部已释放可付奖励预算。",
+      "xCETUS主库覆盖全部未请求额度，已知V1/V2锁币实物与记录匹配。",
+      "两笔外部储备通过5/10/15%现金压力情景。",
+      "两个Launchpad结束池预留覆盖剩余合约领取退款义务。",
+      "Vester现金覆盖剩余承诺。"
+    ],
+    "aggregationNotEstablished": [],
+    "notEvidenceOfOutage": [
+      "Tide一条缓存反向报价过期。",
+      "缺DCA瞬态签名或Limit有效待成交样本。"
+    ]
+  },
+  "verification": {
+    "status": "passed",
+    "checks": [
+      "全部12条奖励会计链首尾、计数、prev/next与全局分配/已付合计匹配。",
+      "四币预算由原始整数独立复算，现金全部覆盖。",
+      "两已知锁币余额与各自LockInfo精确一致。",
+      "七组新增有效采集均已Rust零网络回放，输出一致。",
+      "主评估JSON已同步；四维分数、代码权重、权限和配置对象逐字段一致。",
+      "当前依赖核验项无未解决U；旧逐笔成交材料判断仅保留为历史记录。",
+      "Tide/Limit/DCA已核前提按既有规则落100；N/A不补分。",
+      "代码、权限、配置、父业务权重和链上总分逐字段保持一致。",
+      "研究试评8815/102精确复算；权限、配置、代码和父权重未变。",
+      "2026-11-20用户确认采用；主数据、方法及展示采用状态一致，数值与父权重不变。"
+    ],
+    "evidenceArchiveSha256": "3c940936ca268dc80099c32bde1f428c2c95137a2cde056b187efa34c1233ce8"
+  },
+  "uncomputedReferenceMetrics": [
+    {
+      "id": "xcetus-exact-legacy-P-D",
+      "value": null,
+      "resultUse": "not_required_for_current_snapshot_rating",
+      "description": "未计算全部旧请求P/D的精确总额；当前采用主库与未请求额度匹配、锁币现金及正常兑付机制核验。"
+    }
+  ],
+  "completionDecision": {
+    "status": "required_snapshot_evidence_verified",
+    "requiredEvidencePending": [],
+    "resolved": [
+      "Farm四币全部已释放奖励付款预算与现金对账。",
+      "xCETUS主库覆盖未请求本金，并完成旧V1/新V2真实锁币与请求绑定。",
+      "Tide报价刷新、验签和库存取回路径。",
+      "Limit/DCA执行依赖、签名门槛和用户撤单路径。",
+      "Margin外部储备现金压力和Pyth故障退路。",
+      "两个Launchpad结束池领取退款资金守恒。"
+    ],
+    "removedUnnecessaryRequirements": [
+      "逐笔成交的临时签名必须预先存在于快照。",
+      "为协议级评估逐一检查所有用户提款资格。",
+      "将未采用的全量精确存量指标视作所有已核性质的阻塞项。"
+    ],
+    "retainedRisks": [
+      "Margin已核Pyth路径无独立备用。",
+      "Tide单报价角色，Limit单keeper。",
+      "DCA需两个有效keeper签名。"
+    ]
+  },
+  "scopeDecision": "采用协议级快照和必要资金汇总，完成所列证据核验；不以逐笔成交证明或逐个用户检查作为前置条件。",
+  "verificationBeforeContinuation": {
+    "status": "passed",
+    "checks": [
+      "farm: capture hashes, anchored outputs, offline replay match",
+      "helpers: capture hashes, anchored outputs, offline replay match",
+      "ETH: independently reproduced APR, compound, net claims and all three cash scenarios",
+      "USDC: independently reproduced APR, compound, net claims and all three cash scenarios",
+      "Frozen eight-business weights total 9; spot components total 5",
+      "Source assessment unchanged; all retained input archive hashes verified",
+      "Launchpad allocation envelopes recalculated in raw integers"
+    ],
+    "evidenceArchiveSha256": "69bc08f2408ccb164af67f921ca2fcb1ef58e83ae80af505eda2d73909140858",
+    "note": "Capture/replay integrity and integer calculations verified; scoped mechanism conclusions are accompanied by source disassembly references. This is not a proof of omitted positions, pools or legacy requests."
+  },
+  "updatedAssessment": {
+    "path": "/Users/secundanirn/Desktop/bitslab/docs/bitsscore/research/cetus-public-security-assessment-2026-11-19.json",
+    "sha256": "7a864f5f6cfa00b195be90f9c7f80751b115e99c9f0e550ac71d0fb9231aab1d",
+    "changes": "用户确认采用86.42研究试评；同步采用状态，分数、方法目标、权重及其他维度保持不变。"
+  },
+  "supersededRatingUpdates": [
+    {
+      "policy": {
+        "id": "cetus-current-dependency-state-v1",
+        "standards": [
+          "DEX v0.2 section4",
+          "Yield Vault v0.2 section4",
+          "适用业务既有必要依赖快照口径"
+        ],
+        "tiers": [
+          {
+            "score": 100,
+            "condition": "当前必要输入和相关链上路径满足已确认有效性条件。"
+          },
+          {
+            "score": 60,
+            "condition": "触及预定适用警戒，或同一范围已证必要业务异常部分受限。"
+          },
+          {
+            "score": 0,
+            "condition": "已确认必要输入失效或关键路径不可用且没有有效替代。"
+          }
+        ],
+        "withinScopeAggregation": "min(applicable independent dependency checks)",
+        "notApplicable": "确实不存在该必要外部依赖时保留N/A，不补100。",
+        "singleProvider": "单报价源或单keeper没有现成自动扣分条款，披露结构性风险。",
+        "executionInputs": "逐笔临时签名不要求预存；本轮100对应已声明链上前提，不将过期缓存改写为有效。",
+        "funds": "资金状态按适用专项单列披露，不新增独立资金安全分。",
+        "weightsChanged": false
+      },
+      "ratings": [
+        {
+          "id": "spot",
+          "label": "现货做市与兑换",
+          "result": "100",
+          "score": 100,
+          "scope": "现货的三个独立组件",
+          "basis": "原生AMM、已选聚合路线和Tide的链上依赖与资金取回路径已核。",
+          "components": [
+            {
+              "id": "native-amm",
+              "label": "原生 AMM（CLMM、DLMM）",
+              "result": "N/A",
+              "score": null,
+              "scope": "普通直接单池兑换、撤资"
+            },
+            {
+              "id": "aggregator",
+              "label": "Aggregator V3",
+              "result": "100",
+              "score": 100,
+              "scope": "指定 1 SUI→USDC 单跳资金交接"
+            },
+            {
+              "id": "tide-rfq",
+              "label": "Tide RFQ",
+              "result": "100",
+              "score": 100,
+              "scope": "报价消费、更新与库存取回"
+            }
+          ]
+        },
+        {
+          "id": "conditional-orders",
+          "label": "条件订单（Limit、DCA）",
+          "result": "100",
+          "score": 100,
+          "scope": "keeper执行的链上前提与用户撤单取回",
+          "basis": "Limit授权keeper有效；DCA为3个授权地址、门槛2，链上执行条件已核；两类订单所有人撤单退款不需要keeper。",
+          "components": []
+        },
+        {
+          "id": "margin",
+          "label": "Cetus Margin",
+          "result": "100",
+          "score": 100,
+          "scope": "ETH/USDC 市场普通小额还款和合资格提款",
+          "basis": "两币 Pyth 输入匹配，均在 60 秒时效内；相关两笔 Suilend 储备可刷新并有可用余额，流出限额有余量。",
+          "components": []
+        },
+        {
+          "id": "strategy-vault",
+          "label": "策略金库",
+          "result": "100",
+          "score": 100,
+          "scope": "样本金库普通退出、复投与调仓",
+          "basis": "必要的 Farm 和 CLMM 组件可用；已选价格对象与池匹配，加撤开关开放。",
+          "components": []
+        },
+        {
+          "id": "stable-farming",
+          "label": "Stable Farming",
+          "result": "N/A",
+          "score": null,
+          "scope": "领取奖励、取回原 LP 凭证",
+          "basis": "奖励使用内部同币现金，四币已释放付款预算均有足额余额；完整退出先清奖励，部分本金可直接移除流动性。",
+          "components": []
+        },
+        {
+          "id": "lp-burn",
+          "label": "LP Burn",
+          "result": "100",
+          "score": 100,
+          "scope": "指定池的费用、奖励支付组件和 Vester 补偿",
+          "basis": "池开放领费领奖，两种奖励资产的支付容器匹配；补偿计划 13 期已到，公共余额覆盖剩余承诺。",
+          "components": []
+        },
+        {
+          "id": "xcetus",
+          "label": "xCETUS",
+          "result": "100",
+          "score": 100,
+          "scope": "快照时到期分红所需的结算",
+          "basis": "第 184 期已完成结算并有三种奖励的领取记账，第 185 期按快照时间尚未到应领日。",
+          "components": []
+        },
+        {
+          "id": "launchpad",
+          "label": "Launchpad",
+          "result": "N/A",
+          "score": null,
+          "scope": "两个结束池的存量领取及退款",
+          "basis": "核对池、用户凭证和链上时钟后从池内余额支付；当前阶段无需调用 CLMM。",
+          "components": []
+        }
+      ],
+      "ratedBusinesses": 6,
+      "notApplicableBusinesses": 2,
+      "pendingBusinesses": 0,
+      "status": "withdrawn_current_state_only"
+    }
+  ],
+  "fundsAndDependenciesTrial": {
+    "status": "research_trial",
+    "formula": "sum_b(w_b * min(normal_target_score_b, declared_single_source_scenario_scores_b)) / 9; spot uses its frozen component shares before parent aggregation",
+    "totalWeightExact": "9",
+    "rows": [
+      {
+        "id": "spot",
+        "label": "现货做市与兑换",
+        "weightExact": "5",
+        "scoreExact": "185/2",
+        "calculatedScore": 92.5,
+        "score": 92.5,
+        "contributionExact": "925/18",
+        "contribution": 51.388888888888886,
+        "components": [
+          {
+            "id": "native-amm",
+            "weightExact": "25/8",
+            "score": 100
+          },
+          {
+            "id": "aggregator",
+            "weightExact": "15/16",
+            "score": 100
+          },
+          {
+            "id": "tide-rfq",
+            "weightExact": "15/16",
+            "score": 60
+          }
+        ]
+      },
+      {
+        "id": "conditional-orders",
+        "label": "条件订单（Limit、DCA）",
+        "weightExact": "12/17",
+        "scoreExact": "60",
+        "calculatedScore": 60,
+        "score": 60,
+        "contributionExact": "80/17",
+        "contribution": 4.705882352941177,
+        "components": []
+      },
+      {
+        "id": "margin",
+        "label": "Cetus Margin",
+        "weightExact": "12/17",
+        "scoreExact": "60",
+        "calculatedScore": 60,
+        "score": 60,
+        "contributionExact": "80/17",
+        "contribution": 4.705882352941177,
+        "components": []
+      },
+      {
+        "id": "strategy-vault",
+        "label": "策略金库",
+        "weightExact": "12/17",
+        "scoreExact": "100",
+        "calculatedScore": 100,
+        "score": 100,
+        "contributionExact": "400/51",
+        "contribution": 7.8431372549019605,
+        "components": []
+      },
+      {
+        "id": "stable-farming",
+        "label": "Stable Farming",
+        "weightExact": "4/17",
+        "scoreExact": "100",
+        "calculatedScore": 100,
+        "score": 100,
+        "contributionExact": "400/153",
+        "contribution": 2.6143790849673203,
+        "components": []
+      },
+      {
+        "id": "lp-burn",
+        "label": "LP Burn",
+        "weightExact": "4/17",
+        "scoreExact": "100",
+        "calculatedScore": 100,
+        "score": 100,
+        "contributionExact": "400/153",
+        "contribution": 2.6143790849673203,
+        "components": []
+      },
+      {
+        "id": "xcetus",
+        "label": "xCETUS",
+        "weightExact": "12/17",
+        "scoreExact": "60",
+        "calculatedScore": 60,
+        "score": 60,
+        "contributionExact": "80/17",
+        "contribution": 4.705882352941177,
+        "components": []
+      },
+      {
+        "id": "launchpad",
+        "label": "Launchpad",
+        "weightExact": "12/17",
+        "scoreExact": "100",
+        "calculatedScore": 100,
+        "score": 100,
+        "contributionExact": "400/51",
+        "contribution": 7.8431372549019605,
+        "components": []
+      }
+    ],
+    "scoreExact": "8815/102",
+    "calculatedScore": 86.42156862745098,
+    "score": 86.42,
+    "rounding": "使用分数和未舍入贡献计算，最后保留两位小数。",
+    "deductions": [
+      {
+        "id": "spot",
+        "points": 4.166666666666667
+      },
+      {
+        "id": "conditional-orders",
+        "points": 3.1372549019607847
+      },
+      {
+        "id": "margin",
+        "points": 3.1372549019607847
+      },
+      {
+        "id": "xcetus",
+        "points": 3.1372549019607847
+      }
+    ],
+    "parentWeightsChanged": false,
+    "newInternalAxisWeights": false,
+    "naviFormulaTransferred": false,
+    "adoptionStatus": "adopted_for_current_cetus_assessment"
+  },
+  "researchReports": {
+    "execution": "cetus-funds-dependencies-research-execution-2026-11-20.json",
+    "managedFunds": "cetus-funds-dependencies-research-managed-funds-2026-11-20.json",
+    "contractualFunds": "cetus-funds-dependencies-research-contractual-funds-2026-11-20.json"
+  },
+  "researchMethod": "cetus-funds-dependencies-method-research-2026-11-20.json",
+  "sourceCount": 37,
+  "adoption": {
+    "status": "adopted_for_current_cetus_assessment",
+    "acceptedBy": "user",
+    "acceptedOn": "2026-11-20",
+    "userInstruction": "好，按照这个更新一下吧",
+    "methodId": "cetus-funds-dependency-continuity-research-v0.1",
+    "publicationLabel": "研究试评",
+    "scope": "Cetus本次声明范围的资金与关键依赖模块",
+    "generalStandardChanged": false
+  }
+}

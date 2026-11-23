@@ -1,0 +1,3707 @@
+{
+  "schemaVersion": "1.0-draft",
+  "id": "cetus-configuration-component-formula-discussion-v0.1",
+  "project": "Cetus",
+  "createdDate": "2026-11-20",
+  "status": "discussion_draft_not_adopted",
+  "checkpoint": {
+    "sequenceNumber": 346896130,
+    "digest": "CKzQHsSzzVDnjrPR6qBjRUmYvihnwdKrXNJh7YxrDW11",
+    "timestamp": "2026-11-19T10:43:55.124Z"
+  },
+  "objective": "逐父业务和实际组件补齐风险目标、参数语义、指标公式、评分映射候选及依据；把自然约束、评级政策和纯披露分开。",
+  "application": {
+    "newScoreCalculationApplied": false,
+    "publishedScoresChanged": false,
+    "frontendFilesChanged": false,
+    "existingWeightsChanged": false,
+    "oldDiscussionScores": "此前80/85及Farm75的数值映射仍属被质疑的研究裁量，本草案不将其视为公式已验证分数。",
+    "reasonNoRecalculation": "本轮先完成逐组件判据讨论；尚未采纳的阈值、映射和内部聚合不能偷偷进入当前分数。"
+  },
+  "evidenceBoundary": {
+    "chainState": "复用同一检查点已归档Rust scanner对象及部署代码映射。",
+    "onchainRequests": 0,
+    "transactionQueries": 0,
+    "poolListQueries": 0,
+    "orderListQueries": 0,
+    "accountQueries": 0,
+    "publicDocumentationConsulted": true,
+    "historyRequired": false,
+    "fullPairEnumerationRequired": false,
+    "subcomponentCountIsNotWeight": true
+  },
+  "common": {
+    "assessmentChain": [
+      "明确用户权益及必要业务操作",
+      "绑定当前对象、代码路径、字段和单位",
+      "按部署整数顺序计算指标",
+      "确定指标回答的风险及失效边界",
+      "为每个分档写明依据类别与适用范围",
+      "规则采纳后再汇总；先前权重不变"
+    ],
+    "evidenceClasses": {
+      "deployedMechanism": "当前部署/快照可核对的自然等式、不等式、分母、守恒和操作条件。",
+      "declaredEntitlement": "官网明确的机制承诺必须再映射代码，不因项目声明就证明安全。",
+      "existingRatingPolicy": "如NAVI历史5%/10%压力是已声明的自定政策；不是行业通用或市场校准结论，不能自动套其他类型。",
+      "newRatingProposal": "新增警戒、惩罚或映射必须显式标未采纳，说明风险意义；不允许先给80再自由±5。",
+      "disclosureOnly": "缺少适用安全阈值的商业费率、产品锁期、区间、规模占用、收益期望等保留公式和数值，不补满分。"
+    },
+    "interpretation": {
+      "metricPass": "单个算术/绑定条件通过，只说明这个性质成立；不能据此宣称组件经济风险充分。",
+      "currentVersusCounterfactual": "当前生效异常与参数允许边界下的情景、假设故障分别标注；奖励耗尽情景不能写成当前欠付。",
+      "perCallVersusPersistent": "逐笔签名滑点、最低到账及订单条件不伪造成项目全局静态配置；允许用符号公式讨论，但不能冒充已观测调用。",
+      "unknownVersusPolicyPending": "必要链上/机制输入未知才U；评分政策未定是method_pending，不等于项目有问题或没有审计。",
+      "normalConditions": "正常锁定、机制内折价、已结束阶段和用户资格不自动视为异常阻断。"
+    },
+    "scoreMappingCompatibility": {
+      "status": "candidate_not_applied",
+      "source": "合约类型评估标准/通用链上安全评估标准.md §3；DEX/收益金库对应配置章节",
+      "binaryRule": "具有明确通过/冲突边界的同一性质可提议100/0；不得硬凑60。",
+      "partialRule": "60需要已采纳且适用的警戒，或当前异常部分受限且同范围已核有效部分路径。新的M=0等映射也只是待讨论提案，不能假称已定规则。",
+      "zeroRule": "0必须限定具体配置、后果和范围；不能把局部性质失败自动扩为项目失能或已发生损失。",
+      "notApplicable": "N/A需代码/用途依据；不得因未调查或读取失败改N/A。",
+      "gradingConstants": "100/60/0与历史0/40/60/100均是评级政策的数值；公式推导解释状态，政策选择解释分值，二者分别记录。"
+    },
+    "aggregation": {
+      "parentBudgetTotalExact": "9",
+      "parentWeightsRef": "#/businessInventory",
+      "newSubcomponentWeights": null,
+      "rule": "不按子模块、函数、文件或指标数量新增权重，也不把每个绑定/开关100平均来抬高健康分。",
+      "sameScope": "同一已采纳检查目标内按既有规则处理独立计分条件；披露/引用/N/A不补100，必要U不删分母。",
+      "multiScope": "不同池、订单类型、版本或权益的子组件分别列示；父业务内部尚无已采用合并方法时，不默认平分或用局部最差代替所有范围。",
+      "project": "项目父预算及现货三个份额保持原样；仅在各范围规则/分母均已确认后重算，不重分P/C/D权重。"
+    },
+    "dimensionOwnership": {
+      "permission": "谁能改变参数/暂停/升级及密钥约束留权限；配置只引用，不重复扣。",
+      "configuration": "当前生效的参数关系、限制、账务映射和必要业务条件。",
+      "dependency": "当前报价是否失效、keeper/外部组件是否在线可用另列；不能仅因TTL参数存在就宣称服务在线。",
+      "funds": "余额、应付、库存覆盖、赔付能力单列，不能以余额薄给配置随机扣分。",
+      "codeSecurity": "审计范围覆盖另维度；代码在这里用于解释已有机制，不将无公开审计误写成当前配置失败。"
+    }
+  },
+  "businessInventory": [
+    {
+      "id": "spot",
+      "label": "现货做市与兑换",
+      "parentWeightExact": "5",
+      "parentWeightChanged": false,
+      "proposedNewScore": null,
+      "discussionRefs": [
+        "#/discussionPackages/execution/components/0",
+        "#/discussionPackages/execution/components/1",
+        "#/discussionPackages/execution/components/2",
+        "#/discussionPackages/execution/components/3"
+      ],
+      "subcomponentsDoNotCreateNewProjectWeight": true,
+      "components": [
+        {
+          "id": "native-amm",
+          "label": "原生AMM",
+          "frozenWeightExact": "25/8",
+          "discussionRefs": [
+            "#/discussionPackages/execution/components/0",
+            "#/discussionPackages/execution/components/1"
+          ]
+        },
+        {
+          "id": "aggregator",
+          "label": "Aggregator V3",
+          "frozenWeightExact": "15/16",
+          "discussionRefs": [
+            "#/discussionPackages/execution/components/2"
+          ]
+        },
+        {
+          "id": "tide-rfq",
+          "label": "Tide RFQ",
+          "frozenWeightExact": "15/16",
+          "discussionRefs": [
+            "#/discussionPackages/execution/components/3"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "conditional-orders",
+      "label": "条件订单（Limit、DCA）",
+      "parentWeightExact": "12/17",
+      "parentWeightChanged": false,
+      "proposedNewScore": null,
+      "discussionRefs": [
+        "#/discussionPackages/execution/components/4",
+        "#/discussionPackages/execution/components/5"
+      ],
+      "subcomponentsDoNotCreateNewProjectWeight": true
+    },
+    {
+      "id": "margin",
+      "label": "Cetus Margin",
+      "parentWeightExact": "12/17",
+      "parentWeightChanged": false,
+      "proposedNewScore": null,
+      "discussionRefs": [
+        "#/discussionPackages/margin"
+      ],
+      "subcomponentsDoNotCreateNewProjectWeight": true
+    },
+    {
+      "id": "strategy-vault",
+      "label": "策略金库",
+      "parentWeightExact": "12/17",
+      "parentWeightChanged": false,
+      "proposedNewScore": null,
+      "discussionRefs": [
+        "#/discussionPackages/otherBusinesses/businesses/0"
+      ],
+      "subcomponentsDoNotCreateNewProjectWeight": true,
+      "subcomponents": [
+        {
+          "id": "vault-share-accounting",
+          "label": "份额与本金核算",
+          "proposedNewScore": null,
+          "weight": null
+        },
+        {
+          "id": "vault-deposit-exit",
+          "label": "入退限制及实际到账",
+          "proposedNewScore": null,
+          "weight": null
+        },
+        {
+          "id": "vault-reinvest-rebalance",
+          "label": "复投和调仓联动",
+          "proposedNewScore": null,
+          "weight": null
+        }
+      ]
+    },
+    {
+      "id": "stable-farming",
+      "label": "Stable Farming",
+      "parentWeightExact": "4/17",
+      "parentWeightChanged": false,
+      "proposedNewScore": null,
+      "discussionRefs": [
+        "#/discussionPackages/otherBusinesses/businesses/1"
+      ],
+      "subcomponentsDoNotCreateNewProjectWeight": true,
+      "subcomponents": [
+        {
+          "id": "farm-share-reward",
+          "label": "奖励份额及累计公式",
+          "proposedNewScore": null,
+          "weight": null
+        },
+        {
+          "id": "farm-exit-fallback",
+          "label": "原LP完整退出与部分撤资",
+          "proposedNewScore": null,
+          "weight": null
+        }
+      ]
+    },
+    {
+      "id": "lp-burn",
+      "label": "LP Burn",
+      "parentWeightExact": "4/17",
+      "parentWeightChanged": false,
+      "proposedNewScore": null,
+      "discussionRefs": [
+        "#/discussionPackages/otherBusinesses/businesses/2"
+      ],
+      "subcomponentsDoNotCreateNewProjectWeight": true,
+      "subcomponents": [
+        {
+          "id": "burn-claim-rights",
+          "label": "封存及附带领取权",
+          "proposedNewScore": null,
+          "weight": null
+        },
+        {
+          "id": "vester-program",
+          "label": "补偿计划全局版本和期间",
+          "proposedNewScore": null,
+          "weight": null
+        }
+      ]
+    },
+    {
+      "id": "xcetus",
+      "label": "xCETUS",
+      "parentWeightExact": "12/17",
+      "parentWeightChanged": false,
+      "proposedNewScore": null,
+      "discussionRefs": [
+        "#/discussionPackages/otherBusinesses/businesses/3"
+      ],
+      "subcomponentsDoNotCreateNewProjectWeight": true,
+      "subcomponents": [
+        {
+          "id": "xcetus-locking",
+          "label": "转换、锁定、折价及同币配平",
+          "proposedNewScore": null,
+          "weight": null
+        },
+        {
+          "id": "xcetus-dividend",
+          "label": "分红登记、结算及领取期间",
+          "proposedNewScore": null,
+          "weight": null
+        }
+      ]
+    },
+    {
+      "id": "launchpad",
+      "label": "Launchpad",
+      "parentWeightExact": "12/17",
+      "parentWeightChanged": false,
+      "proposedNewScore": null,
+      "discussionRefs": [
+        "#/discussionPackages/otherBusinesses/businesses/4"
+      ],
+      "subcomponentsDoNotCreateNewProjectWeight": true,
+      "subcomponents": [
+        {
+          "id": "launch-early",
+          "label": "早期池领取退款",
+          "proposedNewScore": null,
+          "weight": null
+        },
+        {
+          "id": "launch-over",
+          "label": "超募池领取退款",
+          "proposedNewScore": null,
+          "weight": null
+        }
+      ]
+    }
+  ],
+  "discussionPackages": {
+    "execution": {
+      "schemaVersion": "1.0",
+      "status": "draft_rules_for_discussion_not_scored",
+      "project": "Cetus",
+      "checkpoint": {
+        "sequenceNumber": 346896130,
+        "timestamp": "2026-11-19T10:43:55.124Z"
+      },
+      "scope": "现货原生CLMM/DLMM、Aggregator V3、Tide RFQ及Limit/DCA六组件的配置指标与判档依据草案",
+      "score": null,
+      "collection": {
+        "new_http_requests": 0,
+        "transaction_history_queries": 0,
+        "pool_list_queries": 0,
+        "order_list_queries": 0,
+        "source": "existing Rust scanner archives and existing cached disassembly only"
+      },
+      "source_archives": {
+        "main": {
+          "directory": "cetus-project-346896130",
+          "snapshot_sha256": "43163ad9d146de23e1f9eb172e01b40c5270b759227b8d14ee63d7981a18e391",
+          "checkpoint": 346896130
+        },
+        "samples": {
+          "directory": "cetus-config-dependencies-346896130/samples",
+          "snapshot_sha256": "c482ee995b25c7ccdf5bb8f0defdc1cb3a122a86066c1f7d49acd281de359654",
+          "checkpoint": 346896130
+        },
+        "ordersTide": {
+          "directory": "cetus-business-ratings-346896130/ordersTide",
+          "snapshot_sha256": "bf223f14046a9540528f1c77473ae315eb122f1b2b5b06ded53c9e45a0fe48ac",
+          "checkpoint": 346896130
+        },
+        "coreAndToken": {
+          "directory": "cetus-permission-controls-346896130/coreAndToken",
+          "snapshot_sha256": "eedb66f25f0c79941c30d903b3f24a9dd6852c030b8fd0cee5a2acc49d0f0752",
+          "checkpoint": 346896130
+        },
+        "roleBindings": {
+          "directory": "cetus-signer-check-346896130/roleBindings",
+          "snapshot_sha256": "2674376d848e946d8ea3a8c928006afe88b53800036db1436e7be54611c25d1e",
+          "checkpoint": 346896130
+        }
+      },
+      "integer_semantics": {
+        "division": "仅标明floor/ceil及链上整数金额程序的除法使用对应整除。费率、占比、响应和展示比率使用精确有理数，不对2500/1000000做整数整除成0。",
+        "overflow": "按部署中u64/u128/u256宽度及cast检查验证，不使用JS Number处理大额最小单位。",
+        "economic_vs_code": "代码硬上限/类型范围只证明定义域及一致性，不证明经济充分。",
+        "demonstrations": "所有示例score=null；示范算术不是链上模拟或实时成交证明。",
+        "rational_display": "trade_rate/protocol_share/百分比等统计比率保存分子分母，以有理数计算及展示；只有回到金额扣费步骤才按部署floor/ceil。"
+      },
+      "proposed_mappings": [
+        {
+          "0": "有直接证据确认当前生效配置违反该已定义自然约束/必要消费不变量，明确影响该子范围；仅代码中存在assert不构成失败或通过。",
+          "60": null,
+          "100": "该已定义子项适用；当前必要值、单位、对象映射及消费路径已核，全部预先列明谓词满足。仅代表这个子项，不代表组件或项目配置整体100。",
+          "id": "binary_required_config_predicate",
+          "status": "proposal_not_active",
+          "U": "适用且必需的当前值、语义或消费路径缺证据；保留该缺口，不补分。",
+          "N/A": "有机制依据确认该子项不适用。",
+          "no_60_reason": "本子项只有谓词满足/不满足，不临时造中间阈值。"
+        },
+        {
+          "0": "已证该范围必要操作完全被自身配置阻断且无有效替代。",
+          "60": "已证必要操作异常部分受限，且同一受影响范围仍有已核部分完成/退出路径；必须逐操作说明，不凭另一币对或别的业务替代。",
+          "100": "本次声明的必要操作未被当前自身配置异常阻断。",
+          "id": "necessary_operation_state",
+          "status": "proposal_not_active",
+          "U": "必要开关/生效作用/替代路径证据缺失。",
+          "N/A": "该业务不存在该必要操作；正常机制锁定不自动当异常。"
+        }
+      ],
+      "aggregation_policy": {
+        "active": false,
+        "component_scores": null,
+        "project_score": null,
+        "existing_parent_weights_changed": false,
+        "new_child_weights": false,
+        "rule": "讨论前不激活；先冻结适用风险项、用途和必要输入，避免因公式/文件/子模块更多而增权。独立的状态缺失用U，机制不适用用N/A，规则尚未定义单列，不混成未审或链上异常。"
+      },
+      "components": [
+        {
+          "id": "clmm",
+          "label": "原生CLMM",
+          "scope": "既定CETUS/SUI池及CLMM全局配置；与DLMM分别列示，不按公式数增权",
+          "score": null,
+          "score_status": "draft_not_rated",
+          "risk_targets": [
+            "避免池、资产、费率档与步长错绑",
+            "避免协议分成与LP份额重复从本金扣取",
+            "核当前兑换/原LP撤资是否被自身配置异常限制"
+          ],
+          "metrics": [
+            {
+              "id": "clmm-binding",
+              "risk_target": "避免池、资产、费率档与步长错绑",
+              "parameters": {
+                "fee_rate": {
+                  "unit": "ppm/1e6",
+                  "value": "2500"
+                },
+                "tick_spacing": {
+                  "unit": "tick",
+                  "value": 60
+                },
+                "protocol_rate": {
+                  "unit": "手续费分成/1e4",
+                  "value": "2000"
+                }
+              },
+              "integer_program": [
+                "trade_rate = fee_rate / 1000000",
+                "tier_match = selected_pool.fee_rate == global_fee_tiers[selected_pool.tick_spacing]",
+                "binding_match = expected_coin_types == pool_coin_types && selected_pool_id == position.pool"
+              ],
+              "invariant": "tier_match && binding_match && 0 <= fee_rate && fee_rate < 1000000",
+              "judgment_basis": "绑定/单位和有效收费分母是可验证正确性条件；硬上限仅附加代码一致性条件，不能证明收费最优。",
+              "proposed_mapping_ref": "binary_required_config_predicate",
+              "assessment_use": "candidate_required_check_not_an_independent_weight",
+              "current_calculation": {
+                "trade_fee_pct": 0.25,
+                "protocol_share_of_trade_fee_pct": 20,
+                "tier_match": true
+              },
+              "score": null,
+              "evidence_refs": [
+                "main.outputs.clmm_config",
+                "main.outputs.objects.clmmSamplePool",
+                "main.outputs.pool_state"
+              ]
+            },
+            {
+              "id": "clmm-fee-split",
+              "risk_target": "避免协议分成与LP份额重复从本金扣取",
+              "parameters": {
+                "F": {
+                  "unit": "本次已计算交易手续费最小单位",
+                  "value": null
+                },
+                "R": {
+                  "unit": "分成分子/10000",
+                  "value": "2000"
+                },
+                "L": {
+                  "unit": "流动性",
+                  "value": null
+                }
+              },
+              "integer_program": [
+                "protocol_fee = ceil_div(F * R, 10000)",
+                "lp_fee = F - protocol_fee",
+                "growth_increment = L > 0 ? floor((lp_fee << 64) / L) : 0"
+              ],
+              "invariant": "0 <= R && R <= 10000 && 0 <= protocol_fee && protocol_fee <= F && lp_fee + protocol_fee == F",
+              "judgment_basis": "按已采clmm-v15源码update_fee_growth的实际ceil顺序；F来自swap逐步数学，不能在未给交易/跨tick输入时编一个统一floor(input*fee)公式。",
+              "proposed_mapping_ref": "binary_required_config_predicate",
+              "assessment_use": "candidate_required_check_not_an_independent_weight",
+              "current_calculation": {
+                "illustrative_raw_fee": "25",
+                "protocol_fee_raw": "5",
+                "lp_fee_raw": "20",
+                "dust_example": {
+                  "F": "1",
+                  "R": "2000",
+                  "protocol_fee": "1",
+                  "lp_fee": "0"
+                },
+                "note": "最小单位ceil导致微额fee可全归协议，不能用理想小数分配冒充整数支付。"
+              },
+              "score": null,
+              "evidence_refs": [
+                "cached:/private/tmp/cetus-state-0hMMfSZo/pool.move:update_fee_growth:3020-3041"
+              ]
+            },
+            {
+              "id": "clmm-operations",
+              "risk_target": "核当前兑换/原LP撤资是否被自身配置异常限制",
+              "parameters": {
+                "global_emergency_pause": {
+                  "unit": "bool",
+                  "value": false
+                },
+                "swap_enabled": {
+                  "unit": "bool",
+                  "value": true
+                },
+                "remove_liquidity_enabled": {
+                  "unit": "bool",
+                  "value": true
+                }
+              },
+              "integer_program": [
+                "swap_allowed = !global_emergency_pause && effective_pool_swap_switch",
+                "remove_allowed = !global_emergency_pause && effective_pool_remove_switch",
+                "effective_pool_switch按pool_status存在时覆盖、缺失时回退is_pause的实际代码解释"
+              ],
+              "invariant": "按每项必要操作执行operation mapping，暂停新增与阻断既有退出分开。",
+              "judgment_basis": "开关是当前状态；恢复控制者归权限，余额和深度归资金，不能互相替代。",
+              "proposed_mapping_ref": "necessary_operation_state",
+              "assessment_use": "candidate_required_check_not_an_independent_weight",
+              "current_calculation": {
+                "swap_allowed": true,
+                "remove_allowed": true
+              },
+              "score": null,
+              "evidence_refs": [
+                "main.outputs.pool_status",
+                "main.outputs.pool_state",
+                "cached:clmmPoolSwitches"
+              ]
+            }
+          ],
+          "disclosure_only": [
+            "0.25%交易费、20%手续费分成及全局16费率档原值",
+            "普通LP承受的价格/区间风险",
+            "具体成交耗费、跨tick数量及个人可提份额不在本配置草案推断"
+          ],
+          "requires_external_calibration_or_predeclared_policy": [
+            {
+              "question": "费率是否足以补偿LP逆向选择和价格风险？",
+              "status": "not_scored_pending_rule_definition",
+              "score": null,
+              "handling": "不把未定义的经济充分性阈值伪装成U或自动100；先确定该指标是否在本版评分范围内，再预先声明可验证判据/校准依据。当前仅披露、当前规则草案不出组件总分。",
+              "required_if_selected": [
+                "预先声明的成交/价格冲击模型、时间窗口及比较指标；不能只拿0.25%或代码20%上限定安全档"
+              ]
+            }
+          ],
+          "component_score_gate": {
+            "scope_complete": false,
+            "score": null,
+            "rule": "先冻结本组件实际适用的风险指标、检查用途和缺失处理。全部必要项可执行后才按既定类型规则汇总；当前不得把已有代码assert、费用未超硬上限或若干二值项通过直接变为组件100。",
+            "no_child_weight": "本草案不新增子模块/公式数量权重，也不改父业务或现货既定预算。"
+          }
+        },
+        {
+          "id": "dlmm",
+          "label": "原生DLMM",
+          "scope": "既定SUI/USDC样本及其当前BinStepConfig；不外推全部bin或池",
+          "score": null,
+          "score_status": "draft_not_rated",
+          "risk_targets": [
+            "避免动态费、衰减和步长关系使业务计算不可定义或错配",
+            "计算当前配置允许的动态收费边界",
+            "确认filter/decay/reduction实际产生已声明衰减",
+            "核兑换/撤资有效开关"
+          ],
+          "metrics": [
+            {
+              "id": "dlmm-config-domain",
+              "risk_target": "避免动态费、衰减和步长关系使业务计算不可定义或错配",
+              "parameters": {
+                "bin_step": {
+                  "unit": "basis-point-like bin step raw",
+                  "value": 25
+                },
+                "base_factor": {
+                  "unit": "raw",
+                  "value": 10000
+                },
+                "filter_seconds": {
+                  "unit": "s",
+                  "value": 30
+                },
+                "decay_seconds": {
+                  "unit": "s",
+                  "value": 600
+                },
+                "reduction": {
+                  "unit": "/10000",
+                  "value": 5000
+                },
+                "variable_control": {
+                  "unit": "raw",
+                  "value": 10000
+                },
+                "max_volatility": {
+                  "unit": "raw",
+                  "value": 250000
+                }
+              },
+              "integer_program": [
+                "base_fee = bin_step * base_factor * 10",
+                "config_domain = 0 < bin_step && bin_step <= 10000 && base_fee <= 100000000 && protocol_fee_rate <= 300000000 && filter_period < decay_period && reduction_factor <= 10000 && variable_fee_control <= 16777215 && max_volatility_accumulator <= 16777215",
+                "manager_match = pool_id == bin_manager.pool_id && bin_step == bin_manager.bin_step && bin_step == position_manager.bin_step"
+              ],
+              "invariant": "config_domain && manager_match",
+              "judgment_basis": "来自valid_bin_step_config的已核界限与实际管理器绑定；这些是格式/计算定义域，不能给经济充分性背书。",
+              "proposed_mapping_ref": "binary_required_config_predicate",
+              "assessment_use": "candidate_required_check_not_an_independent_weight",
+              "current_calculation": {
+                "base_fee_raw": "2500000",
+                "filter_lt_decay": true,
+                "reduction_fraction": 0.5,
+                "step_matches": true
+              },
+              "score": null,
+              "evidence_refs": [
+                "samples.outputs.dlmm.sample",
+                "/private/tmp/cetus_dlmm_followup_disassembly_v2/v10-config.txt:valid_bin_step_config"
+              ]
+            },
+            {
+              "id": "dlmm-fee-envelope",
+              "risk_target": "计算当前配置允许的动态收费边界",
+              "parameters": {
+                "FEE_DEN": {
+                  "unit": "raw denominator",
+                  "value": "1000000000"
+                },
+                "VAR_DEN": {
+                  "unit": "raw denominator",
+                  "value": "100000000000"
+                },
+                "FEE_CAP": {
+                  "unit": "raw fee rate",
+                  "value": "100000000"
+                },
+                "volatility_current": {
+                  "unit": "raw",
+                  "value": 0
+                }
+              },
+              "integer_program": [
+                "var_fee(v) = floor((variable_fee_control * (v * bin_step)^2 + 99999999999) / 100000000000)",
+                "total_fee(v) = min(base_fee + var_fee(v), 100000000)",
+                "variable_component_after_cap(v) = total_fee(v) - base_fee",
+                "for all v in [0,max_volatility_accumulator]: require 0 <= base_fee <= total_fee(v) && total_fee(v) < FEE_DEN",
+                "因var_fee对非负v单调，定义域/非负/上界核验可用v=0和v=max端点并核整数宽度，不枚举全bin。"
+              ],
+              "invariant": "整数乘方/加法不溢出，cap后减base不下溢，实际消费分母为正。",
+              "judgment_basis": "公式ceil后总费min再相减的顺序来自部署反汇编；不能把截顶10%等价经济安全，亦不能把储存active-bin费率外推本笔跨bin总成本。",
+              "proposed_mapping_ref": "binary_required_config_predicate",
+              "assessment_use": "candidate_required_check_not_an_independent_weight",
+              "current_calculation": {
+                "current_base_raw": "2500000",
+                "current_variable_raw": "0",
+                "current_total_stored_bin_raw": "2500000",
+                "maximum_variable_raw": "3906250",
+                "maximum_total_raw": "6406250",
+                "current_fee_pct": 0.25,
+                "maximum_fee_pct": 0.640625
+              },
+              "score": null,
+              "evidence_refs": [
+                "samples.outputs.dlmm.sample",
+                "/private/tmp/cetus_dlmm_followup_disassembly_v2/v10-parameters.txt:get_variable_fee_rate",
+                "/private/tmp/cetus_dlmm_followup_disassembly_v2/v10-pool.txt:calculate_total_fee_rate"
+              ]
+            },
+            {
+              "id": "dlmm-reference-decay",
+              "risk_target": "确认filter/decay/reduction实际产生已声明衰减",
+              "parameters": {
+                "filter_period": {
+                  "unit": "s",
+                  "value": 30
+                },
+                "decay_period": {
+                  "unit": "s",
+                  "value": 600
+                },
+                "reduction_factor": {
+                  "unit": "/10000",
+                  "value": 5000
+                }
+              },
+              "integer_program": [
+                "dt = now_s - last_update_s; require dt >= 0",
+                "if dt < filter_period: keep previous reference",
+                "else: index_reference = current_index; volatility_reference = dt < decay_period ? floor(previous_accumulator * reduction_factor / 10000) : 0",
+                "new_accumulator = min(volatility_reference + abs(current_index-index_reference)*10000,max_volatility_accumulator)"
+              ],
+              "invariant": "0 <= reduction_factor <= 10000 && filter_period < decay_period；按真实分支检查非增衰减及最大累计量截顶。",
+              "judgment_basis": "dt边界按<和>=精确执行；经济上30/600是否最优需要另有目标，不临时编窗口。",
+              "proposed_mapping_ref": "binary_required_config_predicate",
+              "assessment_use": "candidate_required_check_not_an_independent_weight",
+              "current_calculation": {
+                "illustrative_accumulator": 250000,
+                "dt29": "reference不重置",
+                "dt30_reduced_reference": 125000,
+                "dt600_reduced_reference": 0
+              },
+              "score": null,
+              "evidence_refs": [
+                "/private/tmp/cetus_dlmm_followup_disassembly_v2/v10-parameters.txt:update_references",
+                "/private/tmp/cetus_dlmm_followup_disassembly_v2/v10-parameters.txt:update_volatility_accumulator"
+              ]
+            },
+            {
+              "id": "dlmm-operations",
+              "risk_target": "核兑换/撤资有效开关",
+              "parameters": {
+                "disable_swap": {
+                  "unit": "bool",
+                  "value": false
+                },
+                "disable_remove": {
+                  "unit": "bool",
+                  "value": false
+                }
+              },
+              "integer_program": [
+                "swap_allowed = version_ok && !effective_disable_swap",
+                "remove_allowed = version_ok && !effective_disable_remove"
+              ],
+              "invariant": "按必要操作状态映射，不将不交易的bin流动性当开关故障。",
+              "judgment_basis": "全局/池级开关与版本都须参与真实入口，不能只看某个false字段。",
+              "proposed_mapping_ref": "necessary_operation_state",
+              "assessment_use": "candidate_required_check_not_an_independent_weight",
+              "current_calculation": {
+                "swap_allowed": true,
+                "remove_allowed": true
+              },
+              "score": null,
+              "evidence_refs": [
+                "samples.outputs.dlmm.sample",
+                "/onchainAssessment/nativeAmm/parameterConfiguration/dlmm"
+              ]
+            }
+          ],
+          "disclosure_only": [
+            "当前及最大费率、20%协议分成是明确成本边界",
+            "不称0.640625%足以补偿1%行情变化",
+            "奖励白名单/周期不自动成为普通撤资阻断"
+          ],
+          "requires_external_calibration_or_predeclared_policy": [
+            {
+              "question": "动态费是否足以支撑做市持续运营、衰减窗口是否过长/过短？",
+              "status": "not_scored_pending_rule_definition",
+              "score": null,
+              "handling": "不把未定义的经济充分性阈值伪装成U或自动100；先确定该指标是否在本版评分范围内，再预先声明可验证判据/校准依据。当前仅披露、当前规则草案不出组件总分。",
+              "required_if_selected": [
+                "先定义相对价格、波动情景及成交补偿口径；不能拿同一费用上限既作合法性通过又作额外安全加分"
+              ]
+            }
+          ],
+          "component_score_gate": {
+            "scope_complete": false,
+            "score": null,
+            "rule": "先冻结本组件实际适用的风险指标、检查用途和缺失处理。全部必要项可执行后才按既定类型规则汇总；当前不得把已有代码assert、费用未超硬上限或若干二值项通过直接变为组件100。",
+            "no_child_weight": "本草案不新增子模块/公式数量权重，也不改父业务或现货既定预算。"
+          }
+        },
+        {
+          "id": "aggregator-v3",
+          "label": "Aggregator V3",
+          "scope": "当前SDK成对V3上下文构造/确认及已声明CLMM、Tide、FLOWX路由；旧兼容独立流程另列",
+          "score": null,
+          "score_status": "draft_not_rated",
+          "risk_targets": [
+            "防止报价基数、滑点尺度、费率及输入上限被误解",
+            "检查净最低到账是否按初始投入且按部署整数顺序执行",
+            "防止V3流程静默降级成旧确认边界"
+          ],
+          "metrics": [
+            {
+              "id": "agg-input-definition",
+              "risk_target": "防止报价基数、滑点尺度、费率及输入上限被误解",
+              "parameters": {
+                "I": {
+                  "unit": "初始投入Coin最小单位",
+                  "value": null
+                },
+                "Qin": {
+                  "unit": "报价输入最小单位",
+                  "value": null
+                },
+                "Qout": {
+                  "unit": "报价输出最小单位",
+                  "value": null
+                },
+                "S": {
+                  "unit": "滑点ppm/1e6",
+                  "value": null
+                },
+                "F": {
+                  "unit": "集成费ppm/1e6",
+                  "value": null
+                },
+                "MAXI": {
+                  "unit": "用户签入输入上限",
+                  "value": null
+                },
+                "recipient": {
+                  "unit": "address",
+                  "value": null
+                }
+              },
+              "integer_program": [
+                "require 0 < I && I <= MAXI && Qin > 0 && Qout > 0",
+                "require 0 <= S && S < 1000000",
+                "require 0 <= F && F <= 100000（new_swap_context硬上限）",
+                "require F == 0 || recipient != 0x0（标准new_swap_context构造条件）",
+                "SwapContext.amount_in = initial Coin.value；take_balance不得被误当改变金额基数"
+              ],
+              "invariant": "逐笔用户输入按V3实际接收条件形成定义域；动态参数无单一项目全局当前值。",
+              "judgment_basis": "读取代码接受边界只说明配置含义；未采任意用户调用不产生一个假造的全局默认滑点/费率。",
+              "proposed_mapping_ref": "binary_required_config_predicate",
+              "assessment_use": "candidate_required_check_not_an_independent_weight",
+              "current_calculation": {
+                "per_call_parameters": "不是静态项目参数，示例见下项"
+              },
+              "score": null,
+              "evidence_refs": [
+                "coreAndToken.outputs.core.core.asMovePackage.module.disassembly:new_swap_context",
+                "coreAndToken.outputs.core.core.asMovePackage.module.disassembly:new_swap_context_v3"
+              ]
+            },
+            {
+              "id": "agg-minimum-net-output",
+              "risk_target": "检查净最低到账是否按初始投入且按部署整数顺序执行",
+              "parameters": {
+                "D": {
+                  "unit": "ppm denominator",
+                  "value": "1000000"
+                },
+                "G": {
+                  "unit": "场所返回gross output最小单位",
+                  "value": null
+                },
+                "recipient": {
+                  "unit": "address",
+                  "value": null
+                }
+              },
+              "integer_program": [
+                "quoted_for_initial_input = floor(I * Qout / Qin)",
+                "minimum_net_output = floor(quoted_for_initial_input * (1000000-S) / 1000000)",
+                "fee = (F == 0 || recipient == 0x0) ? 0 : floor(G * F / 1000000)",
+                "net_output = G - fee",
+                "accept = minimum_net_output > 0 && net_output >= minimum_net_output && residual_balances_bag_is_empty",
+                "两个mul_div各用u128相乘、各自floor并检查结果<=u64max；不能合并为一次floor。",
+                "collect_fee的recipient==0x0免手续费是helper分支；标准V3合法构造不能同时F>0且recipient==0x0，不把不可达组合当收费旁路。"
+              ],
+              "invariant": "保留V3 QuoteGuard、初始投入基数、扣费后比较及资产袋完整性；逐笔参数、类型/路由绑定正确时才讨论这个子项。",
+              "judgment_basis": "这是消费端结算不变量，不因代码assert存在就给组件100；与场所价格是否公允、其他路由可用性分开。",
+              "proposed_mapping_ref": "binary_required_config_predicate",
+              "assessment_use": "candidate_required_check_not_an_independent_weight",
+              "current_calculation": {
+                "illustrative": {
+                  "I": "50",
+                  "Qin": "100",
+                  "Qout": "200",
+                  "S": "10000",
+                  "minimum_net_output": "99",
+                  "G": "101",
+                  "F": "30000",
+                  "fee": "3",
+                  "net_output": "98",
+                  "would_reject": true
+                },
+                "rounding_counterexample": {
+                  "I": "1",
+                  "Qin": "100",
+                  "Qout": "199",
+                  "S": "10000",
+                  "two_step_floor_limit": "0",
+                  "incorrect_combined_floor_limit": "1",
+                  "correct_result": "minimum_out==0，拒绝"
+                },
+                "partial_execution": {
+                  "I": "100",
+                  "venue_consumed": "50",
+                  "remaining_input_returned": "50",
+                  "Qin": "100",
+                  "Qout": "200",
+                  "S": "10000",
+                  "minimum_net_output": "198",
+                  "note": "不会因只成交50把输出门槛降低到99。"
+                }
+              },
+              "score": null,
+              "evidence_refs": [
+                "coreAndToken.outputs.core.core.asMovePackage.module.disassembly:mul_div",
+                "coreAndToken.outputs.core.core.asMovePackage.module.disassembly:collect_fee",
+                "coreAndToken.outputs.core.core.asMovePackage.module.disassembly:confirm_swap_v3"
+              ]
+            },
+            {
+              "id": "agg-confirmation-binding",
+              "risk_target": "防止V3流程静默降级成旧确认边界",
+              "parameters": {
+                "guard": {
+                  "unit": "type/key",
+                  "value": "QuoteGuardKey -> QuoteGuardV3"
+                },
+                "constructor": {
+                  "unit": "function",
+                  "value": "new_swap_context_v3"
+                },
+                "confirmation": {
+                  "unit": "function",
+                  "value": "confirm_swap_v3"
+                }
+              },
+              "integer_program": [
+                "V3 confirmer requires guard and removes it",
+                "legacy confirmer does not remove QuoteGuard，最终bag::is_empty失败",
+                "legacy constructor lacks guard，V3 confirmer missing_guard失败"
+              ],
+              "invariant": "本声明SDK路径成对使用V3且该context的guard在最终结算中实际消费。",
+              "judgment_basis": "证明路径边界后不外推旧独立构造；此项是参考/前提，不额外加权。",
+              "proposed_mapping_ref": "binary_required_config_predicate",
+              "assessment_use": "candidate_required_check_not_an_independent_weight",
+              "current_calculation": {
+                "v3_pairing_observed_in_sdk": true
+              },
+              "score": null,
+              "evidence_refs": [
+                "coreAndToken.outputs.core.core.asMovePackage.module.disassembly",
+                "cached:/private/tmp/bitsscore-cetus-agg-v3.pzR0E0/sdk-src/src/client.ts:905-942"
+              ]
+            }
+          ],
+          "disclosure_only": [
+            "逐笔滑点、fee recipient、费率、venue fee及路由由用户签名选择",
+            "DEEP协议费金库余额/管理不是所有用户兑换存量托管资产",
+            "最低到账保证用户签入边界，不能证明最佳市场价"
+          ],
+          "requires_external_calibration_or_predeclared_policy": [
+            {
+              "question": "项目是否应对所有用户签入的最大滑点设经济安全阈值？",
+              "status": "not_scored_pending_rule_definition",
+              "score": null,
+              "handling": "不把未定义的经济充分性阈值伪装成U或自动100；先确定该指标是否在本版评分范围内，再预先声明可验证判据/校准依据。当前仅披露、当前规则草案不出组件总分。",
+              "required_if_selected": [
+                "先声明是否评价用户选择/SDK默认策略，以及币对/金额/报价基准；当前不能把允许S<100%直接称项目配置经济安全满分"
+              ]
+            }
+          ],
+          "component_score_gate": {
+            "scope_complete": false,
+            "score": null,
+            "rule": "先冻结本组件实际适用的风险指标、检查用途和缺失处理。全部必要项可执行后才按既定类型规则汇总；当前不得把已有代码assert、费用未超硬上限或若干二值项通过直接变为组件100。",
+            "no_child_weight": "本草案不新增子模块/公式数量权重，也不改父业务或现货既定预算。"
+          }
+        },
+        {
+          "id": "tide-rfq",
+          "label": "Tide RFQ",
+          "scope": "既定SUI/USDC共享簿的配置和消费约束；缓存输入当前是否有效只作依赖引用",
+          "score": null,
+          "score_status": "draft_not_rated",
+          "risk_targets": [
+            "确保签名期限区间、费率优先级可解释且有可执行定义域",
+            "将时间调价、层价与公允价偏离明确区分",
+            "核库存提款与报价成交的不同开关/条件"
+          ],
+          "metrics": [
+            {
+              "id": "tide-duration-and-fee",
+              "risk_target": "确保签名期限区间、费率优先级可解释且有可执行定义域",
+              "parameters": {
+                "min_expiry_s": {
+                  "unit": "s",
+                  "value": 15
+                },
+                "max_expiry_s": {
+                  "unit": "s",
+                  "value": 120
+                },
+                "default_fee_bps": {
+                  "unit": "/10000",
+                  "value": 10
+                },
+                "maker_fee_override_bps": {
+                  "unit": "/10000 or None",
+                  "value": 0
+                },
+                "book_fee_override": {
+                  "unit": "/10000 or None",
+                  "value": null
+                }
+              },
+              "integer_program": [
+                "require 5 <= min_expiry_s && min_expiry_s <= max_expiry_s && max_expiry_s <= 600（当前set_common_param硬约束）",
+                "effective_fee_bps = book_override if Some else maker_override if Some else pair_fee if exists else global_default",
+                "fee_raw(amount) = floor(amount * effective_fee_bps / 10000)",
+                "require 0 <= effective_fee_bps && effective_fee_bps <= 100（当前fee硬上限）"
+              ],
+              "invariant": "当前簿/mm/pair归属、层级优先级、单位以及配置定义域一致。",
+              "judgment_basis": "5/600和100bps来自代码域，不是外部经济校准的最优期限/费率；全局默认10不覆盖mm覆盖0。",
+              "proposed_mapping_ref": "binary_required_config_predicate",
+              "assessment_use": "candidate_required_check_not_an_independent_weight",
+              "current_calculation": {
+                "effective_fee_bps": 0,
+                "min_expiry_s": 15,
+                "max_expiry_s": 120
+              },
+              "score": null,
+              "evidence_refs": [
+                "main.outputs.spot",
+                "ordersTide.outputs.quoteConfig.config.disassembly:set_common_param",
+                "ordersTide.outputs.quoteConfig.fee.disassembly:resolve_fee_bps",
+                "ordersTide.outputs.quoteConfig.fee.disassembly:compute_fee"
+              ]
+            },
+            {
+              "id": "tide-time-price-adjustment",
+              "risk_target": "将时间调价、层价与公允价偏离明确区分",
+              "parameters": {
+                "max_total_slippage_bps": {
+                  "unit": "/10000",
+                  "value": 30
+                },
+                "max_slope_bps_per_s": {
+                  "unit": "bps/s",
+                  "value": 10
+                },
+                "max_layers": {
+                  "unit": "count",
+                  "value": 16
+                },
+                "signed_bps": {
+                  "unit": "bps per offset",
+                  "value": 10
+                },
+                "offset_ms": {
+                  "unit": "ms",
+                  "value": 1000
+                }
+              },
+              "integer_program": [
+                "if signed_bps == 0: effective_price = signed_layer_price（offset_ms可为0，不执行除法）",
+                "else require offset_ms > 0 && signed_bps <= max_total_slippage_bps && signed_bps*1000 <= offset_ms*max_slope_bps_per_s",
+                "elapsed_ms = max(now_ms - signed_at_ms,0)",
+                "age_bps = floor(elapsed_ms * signed_bps / offset_ms)",
+                "adjustment_bps = min(age_bps,max_total_slippage_bps)",
+                "factor = 10000-adjustment_bps if decreasing_direction else 10000+adjustment_bps",
+                "effective_price = floor(signed_layer_price * factor / 10000)",
+                "实际swap消费前还要求effective_price>0；符号分支须按对应swap方向绑定，不能互换"
+              ],
+              "invariant": "除数非零、时间曲线受当前配置约束、使用当前层价时结果为正；layer count<=max_layers且单调/深度检查按实际envelope消费。",
+              "judgment_basis": "30bps只限制相对签入层价的时间调整，不限制相对外部市场价的偏离，不能据30bps给经济充分性满分。",
+              "proposed_mapping_ref": "binary_required_config_predicate",
+              "assessment_use": "candidate_required_check_not_an_independent_weight",
+              "current_calculation": {
+                "checkpoint_age_ms": "14375",
+                "uncapped_age_adjustment_bps": "143",
+                "effective_adjustment_bps": "30",
+                "first_unfilled_bid_layer_price_raw": "728742790000000",
+                "decreasing_branch_effective_price_raw": "726556561630000",
+                "increasing_branch_effective_price_raw": "730929018370000",
+                "claim": "这里只计算两分支整数结果，方向绑定需随实际入口记录；不拿另一方向价格证明反向可用。"
+              },
+              "score": null,
+              "evidence_refs": [
+                "ordersTide.outputs.state.tideParams",
+                "ordersTide.outputs.quoteConfig.orderbook.disassembly:validate_slippage",
+                "ordersTide.outputs.quoteConfig.orderbook.disassembly:compute_effective_price"
+              ]
+            },
+            {
+              "id": "tide-operations",
+              "risk_target": "核库存提款与报价成交的不同开关/条件",
+              "parameters": {
+                "global_paused": {
+                  "unit": "bool",
+                  "value": false
+                },
+                "maker_paused": {
+                  "unit": "bool",
+                  "value": false
+                },
+                "book_paused": {
+                  "unit": "bool",
+                  "value": false
+                }
+              },
+              "integer_program": [
+                "not_paused = !global_paused && !maker_paused && !book_paused",
+                "inventory_withdraw不要求报价，但要求版本、资金管理角色、mm/book归属和余额",
+                "quote_consumption还要求该方向有效envelope、数量/深度条件；输入过期归依赖，不作为此配置项的重复失败"
+              ],
+              "invariant": "按库存提款和两个成交方向分别说明必要操作，不把一种方向正常外推另一方向。",
+              "judgment_basis": "当前pause false须结合消费路径；签名角色控制强弱归权限，当前新报价材料归依赖。",
+              "proposed_mapping_ref": "necessary_operation_state",
+              "assessment_use": "candidate_required_check_not_an_independent_weight",
+              "current_calculation": {
+                "not_paused": true,
+                "bid_remaining_ms": "15625",
+                "ask_remaining_ms": "-206379",
+                "timing_result_use": "dependency_reference_only"
+              },
+              "score": null,
+              "evidence_refs": [
+                "main.outputs.spot",
+                "ordersTide.outputs.quoteConfig.orderbook.disassembly:withdraw_base",
+                "ordersTide.outputs.quoteConfig.orderbook.disassembly:withdraw_quote"
+              ]
+            }
+          ],
+          "disclosure_only": [
+            "做市商对层价/有效期的承诺是商业报价，不是市场公允价证明",
+            "反向缓存过期及是否能取得替代封包归依赖",
+            "报价层深度/库存为资金与服务状态，不能当代码/配置assert通过的加分"
+          ],
+          "requires_external_calibration_or_predeclared_policy": [
+            {
+              "question": "15–120秒期限和30bps时间调整对这个币对/金额是否过宽？",
+              "status": "not_scored_pending_rule_definition",
+              "score": null,
+              "handling": "不把未定义的经济充分性阈值伪装成U或自动100；先确定该指标是否在本版评分范围内，再预先声明可验证判据/校准依据。当前仅披露、当前规则草案不出组件总分。",
+              "required_if_selected": [
+                "先选市场基准、币对、规模、时点和损失容忍目标；没有这些不能凭行情假设跳1%自动扣分"
+              ]
+            }
+          ],
+          "component_score_gate": {
+            "scope_complete": false,
+            "score": null,
+            "rule": "先冻结本组件实际适用的风险指标、检查用途和缺失处理。全部必要项可执行后才按既定类型规则汇总；当前不得把已有代码assert、费用未超硬上限或若干二值项通过直接变为组件100。",
+            "no_child_weight": "本草案不新增子模块/公式数量权重，也不改父业务或现货既定预算。"
+          }
+        },
+        {
+          "id": "limit",
+          "label": "Limit Orders",
+          "scope": "既定Limit v4协议配置、所有人取消及订单按自身rate承诺的同笔借出/归还",
+          "score": null,
+          "score_status": "draft_not_rated",
+          "risk_targets": [
+            "按订单rate精确形成每次最低偿还量，防止舍入或倒数方向错误",
+            "执行授权与owner退款路径是否混用"
+          ],
+          "metrics": [
+            {
+              "id": "limit-repay-target",
+              "risk_target": "按订单rate精确形成每次最低偿还量，防止舍入或倒数方向错误",
+              "parameters": {
+                "A": {
+                  "unit": "本次借出的输入币最小单位",
+                  "value": null
+                },
+                "R": {
+                  "unit": "输入币最小单位/输出币最小单位 × 1e18",
+                  "value": null
+                },
+                "T": {
+                  "unit": "整单total_pay_amount输入最小单位",
+                  "value": null
+                },
+                "O": {
+                  "unit": "此前obtained_amount输出最小单位",
+                  "value": null
+                },
+                "D": {
+                  "unit": "rate scale",
+                  "value": "1000000000000000000"
+                }
+              },
+              "integer_program": [
+                "require R > 0",
+                "per_fill = ceil_div(A * 1000000000000000000,R)",
+                "whole_order_target = ceil_div(T * 1000000000000000000,R)",
+                "require O <= whole_order_target",
+                "target_repay = min(per_fill,whole_order_target-O)",
+                "receipt stores(order_id,owner,target_repay)",
+                "repay requires same order_id and supplied_target_coin >= target_repay；消费不可drop receipt，按目标额入账/支付"
+              ],
+              "invariant": "两个ceil不能改floor，rate不能当输出/输入直接乘；整体截顶避免多次舍入超过整单目标。",
+              "judgment_basis": "这是订单承诺的结算正确性，不是判断该rate市场最优；真实订单金额缺失不编当前可成交结果。",
+              "proposed_mapping_ref": "binary_required_config_predicate",
+              "assessment_use": "candidate_required_check_not_an_independent_weight",
+              "current_calculation": {
+                "illustrative": {
+                  "A": "3",
+                  "R": "2000000000000000000",
+                  "T": "5",
+                  "O": "2",
+                  "per_fill": "2",
+                  "whole_order_target": "3",
+                  "target_repay": "1"
+                },
+                "sample_status": "示例不是新读取的活跃订单，不代表当前服务可成交。"
+              },
+              "score": null,
+              "evidence_refs": [
+                "roleBindings.outputs.orders.limit.asMovePackage.modules[name=limit_order].disassembly:flash_loan",
+                "roleBindings.outputs.orders.limit.asMovePackage.modules[name=limit_order].disassembly:repay_flash_loan"
+              ]
+            },
+            {
+              "id": "limit-cancel-auth",
+              "risk_target": "执行授权与owner退款路径是否混用",
+              "parameters": {
+                "require_flash_loan_auth": {
+                  "unit": "bool",
+                  "value": true
+                },
+                "keeper_members": {
+                  "unit": "count",
+                  "value": 1
+                },
+                "require_check_token_white_list": {
+                  "unit": "bool",
+                  "value": false
+                },
+                "deletion_grace_period": {
+                  "unit": "ms",
+                  "value": "2592000000"
+                }
+              },
+              "integer_program": [
+                "flash_loan与repay按当前config require_flash_loan_auth核执行者",
+                "cancel_order_by_owner检查订单owner和版本，不要求keeper；取回remaining pay_balance",
+                "delete_order的grace period与owner取消退款分开，不将30天删除宽限期误当用户必须等30天拿钱"
+              ],
+              "invariant": "执行门可达且owner取消没有被执行者在线状态额外锁住；版本/状态前提按实际函数。",
+              "judgment_basis": "keeper单点故障是执行可用性披露/依赖，不因拥有1名执行者直接扣配置75；角色控制分另评。",
+              "proposed_mapping_ref": "necessary_operation_state",
+              "assessment_use": "candidate_required_check_not_an_independent_weight",
+              "current_calculation": {
+                "execution_auth_enabled": true,
+                "owner_cancel_requires_keeper": false,
+                "deletion_grace_days": 30
+              },
+              "score": null,
+              "evidence_refs": [
+                "main.outputs.trading.limitConfig",
+                "roleBindings.outputs.orders.limit.asMovePackage.modules[name=limit_order].disassembly:cancel_order_by_owner",
+                "roleBindings.outputs.orders.limit.asMovePackage.modules[name=limit_order].disassembly:delete_limit_order"
+              ]
+            }
+          ],
+          "disclosure_only": [
+            "订单rate及成交价格属于用户商业选择",
+            "30天删除宽限期不等于退出等待",
+            "token whitelist未启用仅说明机制，未建立风险目标前不能自动扣或满分"
+          ],
+          "requires_external_calibration_or_predeclared_policy": [
+            {
+              "question": "用户rate距市场价格或keeper数量是否存在统一安全阈值？",
+              "status": "not_scored_pending_rule_definition",
+              "score": null,
+              "handling": "不把未定义的经济充分性阈值伪装成U或自动100；先确定该指标是否在本版评分范围内，再预先声明可验证判据/校准依据。当前仅披露、当前规则草案不出组件总分。",
+              "required_if_selected": [
+                "需要预先声明价格基准/执行服务故障模型；不按地址数、历史成交率或任意价格偏离给分"
+              ]
+            }
+          ],
+          "component_score_gate": {
+            "scope_complete": false,
+            "score": null,
+            "rule": "先冻结本组件实际适用的风险指标、检查用途和缺失处理。全部必要项可执行后才按既定类型规则汇总；当前不得把已有代码assert、费用未超硬上限或若干二值项通过直接变为组件100。",
+            "no_child_weight": "本草案不新增子模块/公式数量权重，也不改父业务或现货既定预算。"
+          }
+        },
+        {
+          "id": "dca",
+          "label": "DCA Orders",
+          "scope": "既定DCA v4协议级配置、BUT→USDC样本订单参数与owner取消；不要求临时签名作为静态参数判断前置",
+          "score": null,
+          "score_status": "draft_not_rated",
+          "risk_targets": [
+            "防止门槛不可达到或空门槛伪装成有效多签",
+            "防止过期、未来签名或同一封包跨期重复执行",
+            "按整数扣费并守住用户每期输出与执行承诺",
+            "成交服务受限时owner能否取回剩余托管余额"
+          ],
+          "metrics": [
+            {
+              "id": "dca-quorum-reachability",
+              "risk_target": "防止门槛不可达到或空门槛伪装成有效多签",
+              "parameters": {
+                "t": {
+                  "unit": "required unique keeper count",
+                  "value": 2
+                },
+                "N": {
+                  "unit": "distinct eligible keepers",
+                  "value": 3
+                }
+              },
+              "integer_program": [
+                "0 < t && t <= N",
+                "distinct_qualified_valid_signers = cardinality(VecSet(address) after role=keeper and Ed25519 verify)",
+                "signature_count_sufficient = distinct_qualified_valid_signers >= t",
+                "unavailable_keeper_tolerance = N-t"
+              ],
+              "invariant": "t的当前配置可达到；验签实际按不同地址去重、角色和签名有效性计数。",
+              "judgment_basis": "可达到/去重正确性是二值；N-t只是故障承受能力指标，不存在已定线性安全分。v2执行角色是keeper，不要求独立oracle签名。",
+              "proposed_mapping_ref": "binary_required_config_predicate",
+              "assessment_use": "candidate_required_check_not_an_independent_weight",
+              "current_calculation": {
+                "configured_t": 2,
+                "eligible_N": 3,
+                "unavailable_tolerance": 1,
+                "single_signature_reaches_threshold": false
+              },
+              "score": null,
+              "evidence_refs": [
+                "main.outputs.trading.dcaConfig",
+                "roleBindings.outputs.orders.dca.asMovePackage.modules[name=order].disassembly:validate_keepers_v2",
+                "roleBindings.outputs.orders.dca.asMovePackage.modules[name=order].disassembly:verify_internal"
+              ]
+            },
+            {
+              "id": "dca-time-period-binding",
+              "risk_target": "防止过期、未来签名或同一封包跨期重复执行",
+              "parameters": {
+                "signature_ttl": {
+                  "unit": "s",
+                  "value": 300
+                },
+                "min_cycle_frequency": {
+                  "unit": "s",
+                  "value": 60
+                },
+                "sample_cycle_frequency": {
+                  "unit": "s",
+                  "value": 1800
+                }
+              },
+              "integer_program": [
+                "now_s = floor(clock_ms/1000)",
+                "signature_fresh = signature_ts <= now_s && now_s-signature_ts <= oracle_valid_duration",
+                "payload = order_id || BCS(input_type) || BCS(output_type) || BCS(order.next_cycle_at) || BCS(order.amount_left_next_cycle) || BCS(promised_out) || BCS(signature_ts)",
+                "if nonterminal_after_execution: next_cycle_at = now_s + order.cycle_frequency；else按部署终态分支处理",
+                "订单周期须满足部署实际检查的configured_min_cycle_frequency；不额外假定代码必然要求该配置>0。"
+              ],
+              "invariant": "消息绑定期次及当前量；是否改变时间或其他状态按非终态实际更新判断，不按TTL/min周期比值猜可重放次数。",
+              "judgment_basis": "300/60=5只作两个参数的量纲比较，不代表一个签名能完成五期；300秒是否经济上最优另需规则。",
+              "proposed_mapping_ref": "binary_required_config_predicate",
+              "assessment_use": "candidate_required_check_not_an_independent_weight",
+              "current_calculation": {
+                "signature_ttl_s": 300,
+                "min_cycle_s": 60,
+                "sample_cycle_s": 1800,
+                "signed_fields_change_per_period": true,
+                "current_signature_material": "未取得；属于执行依赖，不导致静态配置虚构满分或全项U。"
+              },
+              "score": null,
+              "evidence_refs": [
+                "roleBindings.outputs.orders.dca.asMovePackage.modules[name=order].disassembly:validate_keepers_v2",
+                "roleBindings.outputs.orders.dca.asMovePackage.modules[name=order].disassembly:flash_loan_for_make_deal_v2"
+              ],
+              "additional_policy_proposal": {
+                "id": "positive-cycle-time-spacing",
+                "status": "new_rating_proposal_not_adopted",
+                "predicate": "configured_min_cycle_frequency > 0",
+                "riskGoal": "若选定DCA必须有正时间间隔的运营目标，明确其时间推进要求。",
+                "notCodeNaturalDomain": true,
+                "warning": "不声称部署已强制此关系；0间隔不等于整个订单无推进，余额/期次也可能推进。映射和适用性需先讨论。",
+                "score": null
+              }
+            },
+            {
+              "id": "dca-fee-output-closure",
+              "risk_target": "按整数扣费并守住用户每期输出与执行承诺",
+              "parameters": {
+                "A": {
+                  "unit": "每期输入最小单位",
+                  "value": "5000000000000"
+                },
+                "fee_rate": {
+                  "unit": "/1e6",
+                  "value": "5000"
+                },
+                "min_out": {
+                  "unit": "USDC最小单位",
+                  "value": "37500000"
+                },
+                "max_out": {
+                  "unit": "USDC最小单位",
+                  "value": "50000000"
+                }
+              },
+              "integer_program": [
+                "fee = floor(A * fee_rate / 1000000)",
+                "external_swap_input = A - fee",
+                "对声明的普通正向成交输入要求fee<=A且external_swap_input>0；不以宽松fee代码域证明经济适配",
+                "borrow entry requires min_out <= promised_out && promised_out <= max_out",
+                "repay entry requires actual_output >= promised_out && actual_output >= min_out && actual_output <= max_out",
+                "receipt binds order_id，承诺和期次数量来自同一已验消息"
+              ],
+              "invariant": "不满足承诺或用户区间则原子失败；实际输出高于max同样会拒绝，不能只检查min。",
+              "judgment_basis": "0.5%是已签订单费率，不能仅因小于代码上限给经济安全满分；上界也限制执行，需要按用户机制解释。",
+              "proposed_mapping_ref": "binary_required_config_predicate",
+              "assessment_use": "candidate_required_check_not_an_independent_weight",
+              "current_calculation": {
+                "current_cycle_input_raw": "5000000000000",
+                "cycle_fee_raw": "25000000000",
+                "external_swap_input_raw": "4975000000000",
+                "minimum_usdc": 37.5,
+                "maximum_usdc": 50,
+                "try_37_usdc": "不满足min，拒绝",
+                "try_51_usdc": "超过max，同样拒绝"
+              },
+              "score": null,
+              "evidence_refs": [
+                "/onchainAssessment/tideAndOrderReview/dca/sample",
+                "roleBindings.outputs.orders.dca.asMovePackage.modules[name=order].disassembly:flash_loan_for_make_deal_v2",
+                "roleBindings.outputs.orders.dca.asMovePackage.modules[name=order].disassembly:repay_for_make_deal"
+              ]
+            },
+            {
+              "id": "dca-owner-cancel",
+              "risk_target": "成交服务受限时owner能否取回剩余托管余额",
+              "parameters": {
+                "owner_cancel": {
+                  "unit": "function",
+                  "value": "cancel_order"
+                },
+                "keeper_required_for_cancel": {
+                  "unit": "bool",
+                  "value": false
+                }
+              },
+              "integer_program": [
+                "owner_cancel requires sender==order.owner and valid version/state",
+                "remaining_input和已获output按合约路径返还owner，不要求keeper签名或oracle报价"
+              ],
+              "invariant": "按owner取消这一必要操作判断，不拿keeper实际在线率替代配置。",
+              "judgment_basis": "执行和用户退出不同责任范围；暂未取得当期签名不说明owner取消待核。",
+              "proposed_mapping_ref": "necessary_operation_state",
+              "assessment_use": "candidate_required_check_not_an_independent_weight",
+              "current_calculation": {
+                "keeper_signature_required_for_cancel": false
+              },
+              "score": null,
+              "evidence_refs": [
+                "roleBindings.outputs.orders.dca.asMovePackage.modules[name=order].disassembly:cancel_order",
+                "/onchainAssessment/tideAndOrderReview/ownerCancellation"
+              ]
+            }
+          ],
+          "disclosure_only": [
+            "最短60秒、最少2期、300秒报价期限和样本1800秒周期不自动对应80/85",
+            "借贷式利率/清算公式对DCA不适用",
+            "样本承诺37.5–50USDC不等于同期市场最佳价格"
+          ],
+          "requires_external_calibration_or_predeclared_policy": [
+            {
+              "question": "300秒报价窗口对该订单/币对是否过宽、2/3签名是否达到预定服务容错？",
+              "status": "not_scored_pending_rule_definition",
+              "score": null,
+              "handling": "不把未定义的经济充分性阈值伪装成U或自动100；先确定该指标是否在本版评分范围内，再预先声明可验证判据/校准依据。当前仅披露、当前规则草案不出组件总分。",
+              "required_if_selected": [
+                "先声明允许的价格偏离/用户经济目标及成员故障模型；阈值需独立于当前值设定，不能为了扣5临时创造"
+              ]
+            }
+          ],
+          "component_score_gate": {
+            "scope_complete": false,
+            "score": null,
+            "rule": "先冻结本组件实际适用的风险指标、检查用途和缺失处理。全部必要项可执行后才按既定类型规则汇总；当前不得把已有代码assert、费用未超硬上限或若干二值项通过直接变为组件100。",
+            "no_child_weight": "本草案不新增子模块/公式数量权重，也不改父业务或现货既定预算。"
+          }
+        }
+      ],
+      "review_notes": [
+        "本草案不复用80基础加减5的人工映射。",
+        "100/60/0只是预先定义子项的判档语义；组件整体分必须覆盖其声明的适用风险范围，不能把assert存在或全部读取成功直接称项目配置满分。",
+        "商业费率、报价期限、区间深度和用户价格选择不能在缺独立判据时编造及格线。",
+        "已采输入与代码结论可复算，经济分档是否纳入需另行讨论；不因缺高级模型阻断已定义的轻量正确性核验。",
+        "交叉复核修正：Aggregator fee>0必须recipient非零；比率有理数与金额整除分开；DCA正最短时间间隔属于新增候选政策而非未经核实的代码自然域。"
+      ]
+    },
+    "margin": {
+      "schemaVersion": "1.0",
+      "id": "cetus-margin-configuration-criteria-draft",
+      "status": "proposal_not_applied",
+      "createdDate": "2026-11-20",
+      "scope": {
+        "chain": "sui-mainnet",
+        "checkpoint": {
+          "sequenceNumber": 346896130,
+          "digest": "CKzQHsSzzVDnjrPR6qBjRUmYvihnwdKrXNJh7YxrDW11",
+          "timestamp": "2026-11-19T10:43:55.124Z"
+        },
+        "market": "0xc32409862a9e244a3d9248108797a9bac0045185d21140bd612bf79f83bf1246",
+        "assets": [
+          "ETH",
+          "USDC"
+        ],
+        "sourceReuseOnly": true,
+        "newNetworkRequests": 0,
+        "transactionHistoryQueries": 0,
+        "accountQueries": 0,
+        "poolListQueries": 0,
+        "noNewScores": true
+      },
+      "purpose": "给当前已采Margin范围补齐可复用判据；分开自然/代码边界、评分政策和仍需讨论的适配，不把80/85案例改成伪公式。",
+      "sourceDocuments": [
+        {
+          "path": "合约类型评估标准/lending-onchain-security-rating-standard.md",
+          "section": "第二部分v0.5；当前文件整体Lending v0.12",
+          "role": "现成归一公式、C1/C3/C4/C5/C6/C7及历史C2压力政策来源，不代表本轮自动采纳所有评分"
+        },
+        {
+          "path": "合约类型评估标准/lending-configuration-evaluation-method.md",
+          "section": "v0.1",
+          "role": "后讨论运营判断、Dopen/M分开解释、不得单凭统一跌幅判全配置失败；80/85是研究裁量而非自动阈值"
+        },
+        {
+          "path": "合约类型评估标准/通用链上安全评估标准.md",
+          "section": "当前配置",
+          "role": "0/60/100/U/N/A及同范围影响/不重复计分边界"
+        }
+      ],
+      "evidenceSources": [
+        {
+          "path": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-config-dependencies-346896130/linked/snapshot.json",
+          "sha256": "8eadcccf1073029b4987e0a74e233f8acf45b9473628490d2d87e288d101d295",
+          "anchor": {
+            "sequenceNumber": 346896130,
+            "digest": "CKzQHsSzzVDnjrPR6qBjRUmYvihnwdKrXNJh7YxrDW11",
+            "timestamp": "2026-11-19T10:43:55.124Z"
+          }
+        },
+        {
+          "path": "/Users/secundanirn/Documents/GitHub/bitsscore-scanner/runs/cetus-project-346896130/snapshot.json",
+          "sha256": "43163ad9d146de23e1f9eb172e01b40c5270b759227b8d14ee63d7981a18e391",
+          "anchor": {
+            "sequenceNumber": 346896130,
+            "digest": "CKzQHsSzzVDnjrPR6qBjRUmYvihnwdKrXNJh7YxrDW11",
+            "timestamp": "2026-11-19T10:43:55.124Z"
+          }
+        },
+        {
+          "path": "/private/tmp/cetus-config-deps.5xWaoE/reserve.dis",
+          "sha256": "de234c5a24a0c4b3689ce307700cf7178af2b630ed27b7d965eb7c1e1d88f2aa",
+          "functions": [
+            "calculate_capped_liquidation_bonus",
+            "calculate_utilization_rate",
+            "total_supply",
+            "max_borrow_amount",
+            "deposit_liquidity_and_mint_ctokens"
+          ]
+        },
+        {
+          "path": "/private/tmp/cetus-config-deps.5xWaoE/obligation.dis",
+          "sha256": "490c506a36cfdf25ab44e527045b02f00ebf53db4eda14921ea983fa676fa659",
+          "functions": [
+            "liquidate"
+          ]
+        },
+        {
+          "path": "/private/tmp/cetus-config-deps.5xWaoE/cfg.dis",
+          "sha256": "68b4df64a1e34e35552f779a98488f252593563e98e2b1858b89f02c01bde953",
+          "functions": [
+            "calculate_apr",
+            "liquidation_bonus",
+            "protocol_liquidation_fee"
+          ]
+        }
+      ],
+      "formulas": {
+        "effectiveAdmission": {
+          "b": "代码允许的最大初始实际债务价值/抵押价值；从open_ltv及真实债务权重/模式覆盖归一",
+          "lambda": "代码允许的实际清算债务价值/抵押价值；从close_ltv及真实债务权重/模式覆盖归一",
+          "currentAdapter": "两笔已采reserve的borrow_weight_bps均10000，即w=1，b=open_ltv_pct/100，lambda=close_ltv_pct/100",
+          "guards": [
+            "不把仅供应/禁新增抵押的b=0判作参数失效",
+            "不把b=lambda误称非法",
+            "没有独立b的模型不虚构b=lambda",
+            "不把borrow_weight重复折算"
+          ]
+        },
+        "opening": {
+          "H0": "lambda/b",
+          "D_open": "1-b/lambda",
+          "H_relative_shock": "(1-d)*lambda/b",
+          "domain": "独立b存在且b>0；d为抵押/借款相对价格变化，不新增债务/利息",
+          "meaning": "达到清算线的参数缓冲及情景健康度，不等于坏账概率或当前账户健康度"
+        },
+        "seizure": {
+          "configuredBonus": "(liquidation_bonus_bps+protocol_liquidation_fee_bps)/10000",
+          "currentConfiguredBonus": "(300+299)/10000=0.0599",
+          "bonusCap": "D>0时min(configuredBonus,max(C-D,0)/D)；D=0的辅助函数分支返回configuredBonus，但无债务不能构造实际清算评级情景",
+          "betaActual": "1+bonusCap",
+          "betaConservativeAtCurrentConfig": "1+configuredBonus=1.0599",
+          "fieldWarning": "当前liquidation_bonus_bps与max_liquidation_bonus_bps均300；保守上界基于实际路径相加及实际可达最大值，不能对其他版本机械把max字段再加一遍",
+          "meaning": "总扣押倍率包含执行奖励及协议费用；协议分配是总额的一部分，不能重复计入",
+          "capInputs": "C、D取calculate_capped_liquidation_bonus的实际调用参数；obligation::liquidate分别传入collateral_value_usd和deposited_value_usd，债务为unweighted_borrowed_value_usd。保留实际路径，不能凭字段名把两个不同调用合并或虚构账户C/D。"
+        },
+        "liquidation": {
+          "M": "1-lambda*beta",
+          "H_after": "(H_before-lambda*beta*f)/(1-f)",
+          "atTrigger": "H_before=1时H_after=1+f*(1-lambda*beta)/(1-f)",
+          "domain": [
+            "单抵押/单债务及明确的抵押/债务方向",
+            "操作内价格固定",
+            "0<f<1，且f在目标协议当前代码允许的清算量范围内",
+            "剩余抵押为正，beta取此情景实际总扣押或已说明的保守上界"
+          ],
+          "meaning": "M的正/零/负说明该局部部分清算的健康恢复方向；不证明清算成交速度或极端跳价下无损失",
+          "exampleFraction": {
+            "value": 0.1,
+            "use": "仅示例计算，不作为安全阈值/扣分标准/默认实际清算量"
+          }
+        },
+        "nativeUtilization": {
+          "decimalScale": "10^18，每一最小代币单位以Decimal记账；原币还要按mint_decimals换算",
+          "u": "borrowed/(max(available-unclaimed_spread_fees,0)+borrowed)",
+          "zeroDenominator": "按reserve::calculate_utilization_rate当前代码返回0，不将正常空池的0/0故障化",
+          "warning": "这里的max只作用available-fees，不能与total_supply的max(available+borrowed-fees,0)混为一个表达式"
+        },
+        "rate": {
+          "interpolation": "r(u)=r_j+(r_(j+1)-r_j)*(u-u_j)/(u_(j+1)-u_j)，u_j<=u<=u_(j+1)",
+          "units": "u与APR都用小数；原始utils百分数/100，原始aprs基点/10000",
+          "segmentSlope": "k_j=(r_(j+1)-r_j)/(u_(j+1)-u_j)",
+          "singleKinkNavi": "k_low=(r(u*)-r(0))/u*；k_high=(r(1)-r(u*))/(1-u*)",
+          "multiKinkProposal": "对每一相邻节点算k_j，分别列首段/末段及全部中间段；不偷偷把第一/最后节点区间或80%选择当既有批准阈值",
+          "nativeSnapshots": "以当前配置与已存储borrowed/available/fees计算，不重放计息，不把它称实际交易时执行利率",
+          "warning": "高/低响应形状不是偿付保证；更陡或更高APR不额外加分"
+        },
+        "capacity": {
+          "total_supply": "max(available+borrowed-unclaimed_spread_fees,0)",
+          "depositNativeOccupancy": "total_supply/(deposit_limit*10^18)",
+          "borrowNativeOccupancy": "borrowed/(borrow_limit*10^18)",
+          "remainingNative": "max(native_cap-current_code_comparison_quantity,0)",
+          "borrowCurrentExecutionBudget": "floor(min(max(available-100_min_units,0),max(native_borrow_limit-borrowed,0),USD剩余借款额度按代码upper/lower price bound折回原币))，仍受账户健康、市场/资产开关及同笔刷新约束",
+          "depositExecutionRule": "存入后total_supply<=native_deposit_limit AND market_value_upper_bound(total_supply)<=deposit_limit_usd",
+          "borrowExecutionRule": "借款后的本币债务和代码upper-bound美元债务均不得超过各自上限；不能只比较本币上限",
+          "distinction": "允许配置/参数上限是规则预算；当前有效可借额度同时受双上限、现有债务、现金、价格边界和协议状态限制。账户可借额不在本次范围",
+          "cashDust": "available-100仅留100个代币最小单位；不是100个代币，也不是固定现金比例。不能称宏观现金缓冲或按其加分",
+          "zeroAndInfinity": "各字段的0/最大值按目标代码分别解释；本次四本币cap均有限正数。不对未解析的0做除法",
+          "snapshotTiming": "占用按同一快照已存储的borrowed/available/spread fees派生；交易中刷新计息后的比较值可能不同，不能把此占用直接当同笔可执行额度"
+        },
+        "comparisonPrecision": {
+          "normalizedFractions": "b=open_ltv_pct/100；lambda=close_ltv_pct/100；beta按bps/10000构造成有理数",
+          "rateSlopeComparison": "局部斜率按原始APR基点差/利用率百分点差作有理数，用交叉乘法比较；不以JS浮点误差把相等斜率判成弱化",
+          "thresholdComparison": "Dopen/M/0与政策阈值用精确有理数比较，展示舍入不参与分档",
+          "disclosureNumbers": "本草案指标中的浮点值用于阅读；raw值和表达式保留以便确定性实现"
+        }
+      },
+      "criteria": [
+        {
+          "id": "M-C1",
+          "name": "范围、资产、单位与生效绑定",
+          "appliesTo": "两reserve及当前ETH/USDC Margin路径",
+          "input": [
+            "coin_type",
+            "mint_decimals",
+            "lending_market_id",
+            "array_index",
+            "当前margin市场币种与代码绑定",
+            "价格入口的资产/单位映射"
+          ],
+          "predicate": "所有输入对应当前同一市场、同一币种/单位及被实际调用的版本/路径",
+          "proposalMapping": {
+            "conditions": [
+              {
+                "when": "适用关键值/单位/代码关系缺失",
+                "result": "U",
+                "score": null
+              },
+              {
+                "when": "证明该机制或用途不适用",
+                "result": "N/A",
+                "score": null
+              },
+              {
+                "when": "与已确认用途、单位、映射或自然参数关系明确冲突",
+                "result": "fail",
+                "score": 0
+              },
+              {
+                "when": "同一声明检查的全部必要条件已证满足",
+                "result": "pass",
+                "score": 100
+              }
+            ],
+            "warning": "这只是正确性或明确保护性质的二值分，不据此宣称经济最优，不把每个字段变成单独100分再平均。"
+          },
+          "sourceKind": "reused_navi_correctness_rule",
+          "score": null
+        },
+        {
+          "id": "M-C2A",
+          "name": "准入定义及自然约束",
+          "input": [
+            "b",
+            "lambda",
+            "债务权重的实际消费公式",
+            "用途启用状态"
+          ],
+          "predicate": "普通超额抵押适用域内0<lambda<=1，新增抵押借款时0<b<=lambda；两资产本轮w=1",
+          "derived": [
+            "D_open",
+            "H0",
+            "H(d)"
+          ],
+          "proposalMapping": {
+            "conditions": [
+              {
+                "when": "适用关键值/单位/代码关系缺失",
+                "result": "U",
+                "score": null
+              },
+              {
+                "when": "证明该机制或用途不适用",
+                "result": "N/A",
+                "score": null
+              },
+              {
+                "when": "与已确认用途、单位、映射或自然参数关系明确冲突",
+                "result": "fail",
+                "score": 0
+              },
+              {
+                "when": "同一声明检查的全部必要条件已证满足",
+                "result": "pass",
+                "score": 100
+              }
+            ],
+            "warning": "这只是正确性或明确保护性质的二值分，不据此宣称经济最优，不把每个字段变成单独100分再平均。"
+          },
+          "exceptions": [
+            "b=lambda允许但D_open=0必须显著披露，不能误记非法",
+            "b=0且确定禁新增抵押借款：该新增用途N/A，不能推断存量债务为0",
+            "没有独立初始b时，开仓距离N/A而非虚构b=lambda"
+          ],
+          "sourceKind": "reused_navi_normalization_and_natural_constraints",
+          "limitations": "仅自然约束不会对正开仓缓冲的大小分级；若要区分3.75%与6.67%的充分性，必须明确采用何种经讨论政策，不隐性补80/85或随机压力线。",
+          "score": null
+        },
+        {
+          "id": "M-C2B",
+          "name": "清算总扣押及恢复方向",
+          "input": [
+            "配置执行奖励",
+            "配置协议清算费",
+            "代码截顶关系",
+            "lambda",
+            "当前允许的部分清算范围"
+          ],
+          "predicate": "先按真实路径算beta，再在声明的0<f<1和剩余抵押正情景验证H_after相对H_before的方向",
+          "naturalBoundary": "清算线附近M=1-lambda*beta的正/零/负",
+          "proposalMapping": {
+            "status": "proposal_requires_selection",
+            "conditions": [
+              {
+                "when": "必要参数/实际总扣押或清算量适用域未解析",
+                "result": "U",
+                "score": null
+              },
+              {
+                "when": "机制明确不适用部分清算恢复目标",
+                "result": "N/A",
+                "score": null
+              },
+              {
+                "when": "适用自然关系冲突、计算无定义，或已确认M<0使所评部分清算情景健康恶化",
+                "result": "failed_recovery_property",
+                "score": 0
+              },
+              {
+                "when": "参数有效且M=0，清算线附近只保持原健康度、没有改善",
+                "result": "neutral_recovery_property",
+                "score": 60
+              },
+              {
+                "when": "参数有效且M>0，允许的该部分清算情景改善剩余健康度",
+                "result": "positive_recovery_property",
+                "score": 100
+              }
+            ],
+            "warning": "0/60/100是本项局部恢复性质的映射提案，不代表已确定清算一定失败/全业务归零；M>0也不证明恢复余量足以覆盖特定波动，程度分级需另选政策。"
+          },
+          "sourceKind": "navi_formulas_plus_explicit_new_mapping_proposal",
+          "antiDoubleCount": "D_open与M各解释不同情景；若选择下面B_buf旧政策，不再把两个100/60作为额外评分组重复计。",
+          "score": null
+        },
+        {
+          "id": "M-C3",
+          "name": "执行奖励和协议清算费",
+          "use": "disclosure",
+          "predicate": "按同一总扣押分配展示执行者/协议份额及截顶条件；不得把协议分配再加到已经含它的beta",
+          "independentScore": null,
+          "sourceKind": "reused_navi_C3_disclosure_only"
+        },
+        {
+          "id": "M-C4",
+          "name": "绝对与美元双上限及当前占用",
+          "use": "disclosure",
+          "formulas": [
+            "capacity.total_supply",
+            "capacity.depositNativeOccupancy",
+            "capacity.borrowNativeOccupancy",
+            "capacity.borrowCurrentExecutionBudget",
+            "capacity.depositExecutionRule",
+            "capacity.borrowExecutionRule"
+          ],
+          "states": [
+            {
+              "when": "0<=rho<1",
+              "state": "本币配置预算尚有余量"
+            },
+            {
+              "when": "rho=1",
+              "state": "达到该配置上限"
+            },
+            {
+              "when": "rho>1",
+              "state": "快照总量高于当前配置上限；不据此认定绕过执行检查"
+            }
+          ],
+          "legacyWarningThreshold": {
+            "value": 0.9,
+            "status": "existing_policy_for_optional_disclosure_not_natural_failure_boundary",
+            "source": "NAVI C4的90%提示线；不自动变成安全分"
+          },
+          "score": null,
+          "antiMisinterpretation": [
+            "低占用不证明绝对额度合理",
+            "绝对cap比当前现金+债务高不自动扣分，只说明不能保证留存固定现金比例",
+            "USD与本币限制同时生效，实际额度取更紧者，price upper/lower bound按真实代码",
+            "available−100是最小单位尘埃，不是资金缓冲"
+          ],
+          "sourceKind": "reused_navi_C4_disclosure_with_suilend_adapter"
+        },
+        {
+          "id": "M-C5",
+          "name": "利用率响应的实际曲线与多节点适配",
+          "input": [
+            "原生u",
+            "utils全部节点",
+            "aprs全部节点",
+            "目标代码分段插值/年化"
+          ],
+          "predicate": "在全部当前配置节点及区间中验证定义域、连续性、非负/单调和有效局部斜率，不只看斜率字段正数",
+          "proposalMapping": {
+            "status": "multi_kink_adaptation_proposal_not_adopted",
+            "source": "NAVI C5单拐点0/60/100；多节点的中间段检查是本次明确列出的适配提案",
+            "conditions": [
+              {
+                "when": "必要曲线/单位/消费公式确实未知",
+                "result": "U",
+                "score": null
+              },
+              {
+                "when": "明确是固定利率/到期定价且不依赖利用率反馈",
+                "result": "N/A",
+                "score": null
+              },
+              {
+                "when": "当前配置使曲线不能计算，或出现负率、负有效斜率/向下跳变，或违反目标代码约定连续性",
+                "result": "invalid_curve",
+                "score": 0
+              },
+              {
+                "when": "全区间有限、非负、连续、单调，但全曲线平坦或存在任一后续局部斜率弱于前段",
+                "result": "weaker_marginal_response",
+                "score": 60
+              },
+              {
+                "when": "全区间有限、非负、连续、单调；k_last>0，且全部相邻局部斜率不递减",
+                "result": "nonweakening_marginal_response",
+                "score": 100
+              }
+            ],
+            "warning": "这将NAVI两段khigh>=klow明确扩成多段形状检查；采纳前不能把当前Cetus套成新分。分值评价响应形状，不评价APR最优、不预测资金必回流；更高更陡不再额外加分。"
+          },
+          "score": null,
+          "sourceKind": "reused_navi_C5_with_explicit_multi_node_proposal"
+        },
+        {
+          "id": "M-C6",
+          "name": "当前覆盖模式与允许组合",
+          "predicate": "先确定所声明ETH/USDC路径是否实际启用额外覆盖参数/成员约束；不能仅凭没看到字段判不存在",
+          "currentEvidence": {
+            "isolated": [
+              false,
+              false
+            ],
+            "additionalFieldCounts": [
+              0,
+              0
+            ],
+            "codePath": "已核refresh/borrow路径使用普通reserve参数，当前声明范围没有额外生效覆盖；不外推整个Suilend"
+          },
+          "proposalMapping": {
+            "source": "NAVI C6用途与未知处理",
+            "conditions": [
+              {
+                "when": "所声明路径确证无生效特殊模式",
+                "result": "N/A",
+                "score": null
+              },
+              {
+                "when": "有生效覆盖且其成员/允许方向与配置一致，约束实际执行",
+                "result": "binding_pass",
+                "score": 100
+              },
+              {
+                "when": "有生效覆盖但成员/方向或实际约束明确冲突",
+                "result": "binding_conflict",
+                "score": 0
+              },
+              {
+                "when": "有模式但关键覆盖或生效状态未知",
+                "result": "U",
+                "score": null
+              }
+            ],
+            "highLeverage": "如未来所声明路径启用高杠杆覆盖，重新归一b/lambda/beta，采用已选的C2判据替代默认C2，不重复计分"
+          },
+          "score": null
+        },
+        {
+          "id": "M-C7",
+          "name": "当前协议必要操作开关",
+          "input": [
+            "Margin全局/市场权限位图",
+            "还款、提款、平仓、必要清算的实际开关路径",
+            "Suilend市场/储备暂停状态及代码回退"
+          ],
+          "predicate": "确定当前自身配置是否异常阻断所声明必要操作；普通抵押条件、正常排队、仅停止新增不算异常",
+          "proposalMapping": {
+            "source": "既有NAVI C7和通用配置0/60/100",
+            "conditions": [
+              {
+                "when": "必要开关/实际影响关键证据缺失",
+                "result": "U",
+                "score": null
+              },
+              {
+                "when": "确无对应必要机制",
+                "result": "N/A",
+                "score": null
+              },
+              {
+                "when": "该范围必要操作未被异常限制",
+                "result": "normal",
+                "score": 100
+              },
+              {
+                "when": "必要操作异常部分受限，且同一受影响范围有已核部分完成/退出替代",
+                "result": "partial",
+                "score": 60
+              },
+              {
+                "when": "必要操作完全阻断且无有效替代",
+                "result": "blocked",
+                "score": 0
+              }
+            ]
+          },
+          "antiDoubleCount": [
+            "单签或可修改参数归权限，不在此重复扣",
+            "池中现金多少归资金披露，不用暂停分代替现金短缺",
+            "预言机来源/过期回退归对应依赖规则，配置只核用途映射",
+            "已因同一权限配置永久失能计0时本项引用，不再对同根因重复计分"
+          ],
+          "score": null
+        }
+      ],
+      "currentInputsAndIndicators": [
+        {
+          "asset": "ETH",
+          "scopeId": "cetus-margin-eth-usdc",
+          "reserve": "0xdb864ae82293865b55c9a7826f363a59126193ef9c5192b5da793824deefce21",
+          "decimals": 8,
+          "evidenceJsonPath": "outputs.reserves.market.asMoveObject.contents.eth.json",
+          "raw": {
+            "open_ltv_pct": 70,
+            "close_ltv_pct": 75,
+            "max_close_ltv_pct": 75,
+            "borrow_weight_bps": "10000",
+            "liquidation_bonus_bps": "300",
+            "max_liquidation_bonus_bps": "300",
+            "protocol_liquidation_fee_bps": "299",
+            "borrowed_amount": "11519217944226138657862502191",
+            "available_amount": "115992022273",
+            "unclaimed_spread_fees": "1295358751531124605008468",
+            "deposit_limit": "1500000000000",
+            "borrow_limit": "600000000000",
+            "deposit_limit_usd": "55000000",
+            "borrow_limit_usd": "20000000",
+            "isolated": false,
+            "additionalFields": {
+              "id": "0x5181ca6b93d1398189a10aa05ba1effcd98ec4463d18995be29caa1b8bd82e24",
+              "size": "0"
+            }
+          },
+          "normalized": {
+            "b": 0.7,
+            "lambda": 0.75,
+            "debtWeight": 1,
+            "betaConfiguredConservative": 1.0599
+          },
+          "derivedIndicators": {
+            "D_open": 0.06666666666666676,
+            "H0": 1.0714285714285714,
+            "M": 0.2050749999999999,
+            "H_after_f_0_1": 1.0227861111111112,
+            "nativeUtilization": 0.09033976100461427,
+            "rateCurve": [
+              {
+                "utilizationPct": 0,
+                "borrowAprBps": "100",
+                "borrowAprDecimal": 0.01
+              },
+              {
+                "utilizationPct": 80,
+                "borrowAprBps": "300",
+                "borrowAprDecimal": 0.03
+              },
+              {
+                "utilizationPct": 90,
+                "borrowAprBps": "1000",
+                "borrowAprDecimal": 0.1
+              },
+              {
+                "utilizationPct": 100,
+                "borrowAprBps": "30000",
+                "borrowAprDecimal": 3
+              }
+            ],
+            "localSlopes": [
+              0.024999999999999994,
+              0.7000000000000001,
+              28.999999999999996
+            ],
+            "kLowFirstSegment": 0.024999999999999994,
+            "kHighLastSegment": 28.999999999999996,
+            "allIntermediateSlopesRetained": true,
+            "borrowAprDecimalAtCurrentU": 0.012258494025115356,
+            "borrowAprDecimalAt": [
+              {
+                "u": 0,
+                "r": 0.01
+              },
+              {
+                "u": 0.9,
+                "r": 0.1
+              },
+              {
+                "u": 0.95,
+                "r": 1.5499999999999983
+              },
+              {
+                "u": 1,
+                "r": 3
+              }
+            ],
+            "depositNativeOccupancy": {
+              "numeratorDecimalRaw": "127509944858474607533257493723",
+              "denominatorDecimalRaw": "1500000000000000000000000000000",
+              "ratio": 0.08500662990564974
+            },
+            "borrowNativeOccupancy": {
+              "numeratorDecimalRaw": "11519217944226138657862502191",
+              "denominatorDecimalRaw": "600000000000000000000000000000",
+              "ratio": 0.019198696573710233
+            },
+            "usdOccupancy": null,
+            "usdOccupancyNote": "本草案保留USD上限和代码比较公式，未把已有缓存price直接冒充market_value_upper_bound；不新增价格查询、不算账户可借额"
+          },
+          "score": null,
+          "scoreStatus": "not_evaluated_against_any_new_proposal"
+        },
+        {
+          "asset": "USDC",
+          "scopeId": "cetus-margin-eth-usdc",
+          "reserve": "0xd388bc079ea1f647f519fce10bcf72f028fad967b440371ebe0a554eae1c2c15",
+          "decimals": 6,
+          "evidenceJsonPath": "outputs.reserves.market.asMoveObject.contents.usdc.json",
+          "raw": {
+            "open_ltv_pct": 77,
+            "close_ltv_pct": 80,
+            "max_close_ltv_pct": 80,
+            "borrow_weight_bps": "10000",
+            "liquidation_bonus_bps": "300",
+            "max_liquidation_bonus_bps": "300",
+            "protocol_liquidation_fee_bps": "299",
+            "borrowed_amount": "21316314647874299413309686290056",
+            "available_amount": "6012995459010",
+            "unclaimed_spread_fees": "13191130366547574556784499773",
+            "deposit_limit": "110000000000000",
+            "borrow_limit": "85000000000000",
+            "deposit_limit_usd": "111000000",
+            "borrow_limit_usd": "86000000",
+            "isolated": false,
+            "additionalFields": {
+              "id": "0x4f9ae73ea6bad4326784e6032d6acf498899dd2539b930deee3ce553993ecf59",
+              "size": "0"
+            }
+          },
+          "normalized": {
+            "b": 0.77,
+            "lambda": 0.8,
+            "debtWeight": 1,
+            "betaConfiguredConservative": 1.0599
+          },
+          "derivedIndicators": {
+            "D_open": 0.03749999999999998,
+            "H0": 1.038961038961039,
+            "M": 0.15207999999999988,
+            "H_after_f_0_1": 1.0168977777777777,
+            "nativeUtilization": 0.7803566336125138,
+            "rateCurve": [
+              {
+                "utilizationPct": 0,
+                "borrowAprBps": "400",
+                "borrowAprDecimal": 0.04
+              },
+              {
+                "utilizationPct": 93,
+                "borrowAprBps": "700",
+                "borrowAprDecimal": 0.07
+              },
+              {
+                "utilizationPct": 97,
+                "borrowAprBps": "1500",
+                "borrowAprDecimal": 0.15
+              },
+              {
+                "utilizationPct": 100,
+                "borrowAprBps": "15000",
+                "borrowAprDecimal": 1.5
+              }
+            ],
+            "localSlopes": [
+              0.03225806451612904,
+              1.9999999999999996,
+              45.00000000000001
+            ],
+            "kLowFirstSegment": 0.03225806451612904,
+            "kHighLastSegment": 45.00000000000001,
+            "allIntermediateSlopesRetained": true,
+            "borrowAprDecimalAtCurrentU": 0.06517279463266173,
+            "borrowAprDecimalAt": [
+              {
+                "u": 0,
+                "r": 0.04
+              },
+              {
+                "u": 0.9,
+                "r": 0.06903225806451613
+              },
+              {
+                "u": 0.95,
+                "r": 0.10999999999999989
+              },
+              {
+                "u": 1,
+                "r": 1.5
+              }
+            ],
+            "depositNativeOccupancy": {
+              "numeratorDecimalRaw": "27316118976517751838752901790283",
+              "denominatorDecimalRaw": "110000000000000000000000000000000",
+              "ratio": 0.24832835433197958
+            },
+            "borrowNativeOccupancy": {
+              "numeratorDecimalRaw": "21316314647874299413309686290056",
+              "denominatorDecimalRaw": "85000000000000000000000000000000",
+              "ratio": 0.250780172327933
+            },
+            "usdOccupancy": null,
+            "usdOccupancyNote": "本草案保留USD上限和代码比较公式，未把已有缓存price直接冒充market_value_upper_bound；不新增价格查询、不算账户可借额"
+          },
+          "score": null,
+          "scoreStatus": "not_evaluated_against_any_new_proposal"
+        }
+      ],
+      "currentFlags": {
+        "marginGlobalPermissions": 4294967295,
+        "marginMarketPermissions": 4294967295,
+        "openFeeRaw": "0",
+        "closeFeeRaw": "0",
+        "operationNames": [
+          "open",
+          "close",
+          "deposit",
+          "withdraw",
+          "borrow",
+          "repay"
+        ],
+        "decoded": "当前已核六项均开放；必要操作评分还须按代码读取外部实际储备/市场开关，不只把4294967295看成所有链路无条件可达"
+      },
+      "policyOptions": [
+        {
+          "id": "navi-lending-light-v2-buffer-policy",
+          "status": "existing_policy_option_requires_explicit_discussion_not_automatically_restored",
+          "source": "合约类型评估标准/lending-onchain-security-rating-standard.md 第二部分§2.2–§2.4",
+          "formula": "B_buf=min(D_open,M)；无独立b时仅M",
+          "scenarios": [
+            {
+              "class": "一般组合",
+              "d1": 0.05,
+              "d2": 0.1
+            },
+            {
+              "class": "有机制证明的同锚/同底层受限组合",
+              "d1": 0.01,
+              "d2": 0.03
+            }
+          ],
+          "mapping": [
+            {
+              "condition": "适用自然关系冲突或B_buf<0",
+              "score": 0
+            },
+            {
+              "condition": "参数合法且0<=B_buf<d1",
+              "score": 40
+            },
+            {
+              "condition": "d1<=B_buf<d2",
+              "score": 60
+            },
+            {
+              "condition": "B_buf>=d2",
+              "score": 100
+            }
+          ],
+          "provenance": "压力幅度与0/40/60/100分值是旧版初步评级政策，不是自然定律、行业统一线或统计波动校准结果",
+          "approvalStatus": "本草案没有把它恢复成用户最终同意的Cetus判据",
+          "separation": "NAVI后来讨论方法把D_open/M分别解释、反对统一跌幅直接代表全部配置健康；本选项展示其历史可复算形式供讨论，不覆盖该异议",
+          "notApplied": true,
+          "currentAssetScores": null
+        }
+      ],
+      "aggregationBoundary": {
+        "existingProjectParentAndSpotWeightsChanged": false,
+        "newWeightTableIntroduced": false,
+        "doNotComputeMarginOrProjectScore": true,
+        "sourceDistinction": "公式化NAVI正文按资产内适用项最低及供应账面权重；后讨论五风险组20/25/20/20/15是另一种研究汇总，不能两者混拼。当前任务仅给项目既定Margin预算内部的判据草案，不隐性改已有汇总。",
+        "sourceOptions": [
+          "若明确采用公式化NAVI正文，必须同时明确当前声明两资产的适用项、范围权重及U/N/A处理，不能默默等权或取两资产最小覆盖全业务",
+          "若沿用已有五组研究预算，则每组判据及C1/C7前提作用要另外明确，不把字段数当新权重"
+        ],
+        "unknowns": "关键U不删权重也不填80；范围外/选配/披露缺口不扩成全业务U；N/A须有机制依据"
+      },
+      "methodChallenges": [
+        {
+          "id": "no-score-by-restoring-old-policy",
+          "issue": "当前可计算不代表某套历史分档已被用户选定",
+          "resolution": "自然指标、映射proposal、旧policy选项分开存；所有新score均null"
+        },
+        {
+          "id": "natural-boundary-versus-degree",
+          "issue": "自然边界能证明方向/一致性，不能独自校准任何正缓冲大小是否足够",
+          "resolution": "如要对正缓冲大小分等级，应先讨论明确政策；不为了区分数字临时恢复5/10或设置新线"
+        },
+        {
+          "id": "multi-kink-adapter",
+          "issue": "两段NAVI公式不能不说明地套到Suilend多段；单纯最后段更陡也会漏中间弱化",
+          "resolution": "完整节点、逐段斜率和候选0/60/100适配显式列出；当前未应用"
+        },
+        {
+          "id": "cash-cap-and-utilization",
+          "issue": "本币绝对cap不是比例cap，100最小单位尘埃不是固定宏观现金储备",
+          "resolution": "native/USD双上限、现金执行预算与利用率响应分开披露；不以现金多少或极高APR凑安全分"
+        },
+        {
+          "id": "scope-of-zero",
+          "issue": "局部清算性质失败不等于全业务/全项目资金损失",
+          "resolution": "每项0绑定具体资产、操作、情景与失败性质；不得未经采用的汇总自动扩散"
+        },
+        {
+          "id": "no-duplicate-buffer-grade",
+          "issue": "同时用Dopen/M单项评分、Bmin旧政策和五组85会重复计算相同保护",
+          "resolution": "选择一套主要评分映射，其他指标仅披露/引用；本草案不作评分选择"
+        }
+      ],
+      "application": {
+        "projectFilesChanged": false,
+        "frontendChanged": false,
+        "existingScoresOverwritten": false,
+        "proposedScores": null
+      }
+    },
+    "otherBusinesses": {
+      "schemaVersion": "1.0-draft",
+      "project": "Cetus",
+      "checkpoint": 346896130,
+      "purpose": "逐组件讨论指标公式、自然约束和固定判档候选；不产生新分数",
+      "status": "draft_not_adopted",
+      "noPublishedScoreChanges": true,
+      "noFrontendChanges": true,
+      "noNewWeights": true,
+      "collection": {
+        "newHttpRequests": 0,
+        "transactionQueries": 0,
+        "poolListQueries": 0,
+        "orderListQueries": 0
+      },
+      "common": {
+        "unitNotes": {
+          "integerMath": "所有金额与份额按链上整数计算，逐步保留目标函数的floor/ceil顺序；展示值不参与分档。",
+          "signedTicks": "tick字段按i32补码解释，不能将负tick的u32 bits作为正数。",
+          "time": "Clock.timestamp_ms先整除1000得到秒；区间端点按实际代码的<、<=、>=，不统一改为近似。"
+        },
+        "fixedMapping": {
+          "0": "已确认当前配置违反本指标已验证的机制约束，或已使同范围必要操作完全不可达且无有效替代；必须有当前状态及后果证据。",
+          "60": "仅在已采配置已使同范围必要操作异常部分受限、且已核有效部分完成/退出路径时适用；或有此前已冻结且适用的警戒条件。未满足这些条件不使用60。",
+          "100": "本指标全部已选自然约束满足且实际进入必要代码路径；只表示该指标通过，不外推业务经济风险充分。",
+          "status": "draft_not_adopted",
+          "U": "本指标所需原值、单位、作用路径或自然约束语义确实缺失；仅作用于依赖它的指标。",
+          "N/A": "有代码及用途依据证明本指标或用途不适用；读取失败、未做个人查询不等于N/A。"
+        },
+        "classificationPolicy": {
+          "natural_constraint_score_candidate": "可以在用户确认检查目标/作用范围后冻结为确定性规则；不得将一般机制通过外推经济风险充分。",
+          "disclosure_and_policy_pending": "保留公式与事实，未冻结经济警戒/严重度时不产生分数，不用80±5。",
+          "funding": "余额、应付、覆盖、兑现能力与跑道单列；不因薄余量直接扣配置。",
+          "permissions": "能否单钥修改、升级、暂停属于权限，不重复。",
+          "dependencies": "即时外部价格有效性及外部服务可用性另列；配置这里只核用途/绑定/单位与消费路径。"
+        },
+        "aggregation": {
+          "subcomponentWeights": null,
+          "newWeights": false,
+          "withinDeclaredGoal": "同范围已采纳且独立计分指标按既有min规则；N/A排除，披露/引用不补100，必要U不删除。",
+          "businessAggregation": "尚待逐组件确认，不按文件/函数/参数数量平均；不修改已有业务份额。",
+          "healthScoreBoundary": "只采自然等式/开关而尚无该经济风险目标的固定指标时，不发布“经济配置健康满分”；不得通过附加自动100稀释风险。"
+        }
+      },
+      "businesses": [
+        {
+          "id": "strategy-vault",
+          "label": "策略金库",
+          "scope": "既定haSUI/SUI金库：存入、普通份额退出、在仓复投及调仓全流程；不扩其他金库",
+          "subcomponents": [
+            {
+              "id": "vault-share-accounting",
+              "label": "份额与本金核算",
+              "scope": "相同金库、WrappedPosition与底层CLMM Position",
+              "status": "draft_for_discussion",
+              "observed": {
+                "pool": "0x871d8a227114f375170f149f7e9d45be822dd003eba225e83c05ac80828596bc",
+                "liquidity": "1887168865623823277",
+                "bottomPositionLiquidity": "1887168865623823277",
+                "totalSupplyRaw": "301576314346492832"
+              },
+              "metrics": [
+                {
+                  "id": "vault-share-mint",
+                  "riskTarget": "防止入金份额与实际增加的底层流动性不一致",
+                  "formula": "s=0 ? minted=deltaL : minted=floor(s*deltaL/L_before)",
+                  "unit": "LP最小单位；L为CLMM流动性单位",
+                  "naturalConstraints": [
+                    "s>0的路径要求L_before>0；首次发行分支不做0分母除法",
+                    "s>0时严格使用既有底层L作分母，不拿入金后L稀释新增/存量持有人",
+                    "按目标函数舍入；不设经济上任意误差容忍阈值"
+                  ],
+                  "source": [
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                      "jsonPath": "outputs.mechanisms.vault.module.disassembly",
+                      "function": "get_lp_amount_by_liquidity"
+                    }
+                  ],
+                  "classification": "natural_constraint_score_candidate",
+                  "fixedMappingRef": "#/discussionPackages/otherBusinesses/common/fixedMapping",
+                  "weight": null,
+                  "score": null
+                },
+                {
+                  "id": "vault-share-exit",
+                  "riskTarget": "防止退出份额超出持有权益或账实错位",
+                  "formula": "deltaL=floor(burnedShares*L_position/supply_before); L_recorded==L_position",
+                  "unit": "LP最小单位及L",
+                  "naturalConstraints": [
+                    "supply_before>0；0<burnedShares<=用户本次提供份额且<=supply_before",
+                    "0<=deltaL<=L_position；当前recorded L与position L一致",
+                    "退出调用须绑定Vault.pool、Farm.clmm_pool_id和Position.pool"
+                  ],
+                  "source": [
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                      "jsonPath": "outputs.mechanisms.vault.module.disassembly",
+                      "function": "get_share_liquidity_by_amount"
+                    },
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                      "jsonPath": "outputs.mechanisms.vault.module.disassembly",
+                      "function": "remove"
+                    }
+                  ],
+                  "classification": "natural_constraint_score_candidate",
+                  "fixedMappingRef": "#/discussionPackages/otherBusinesses/common/fixedMapping",
+                  "weight": null,
+                  "score": null
+                }
+              ],
+              "codeRefs": [
+                {
+                  "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                  "jsonPath": "outputs.mechanisms.vault.module.disassembly"
+                }
+              ],
+              "calibrationNeeded": [
+                "金库/底层非原子价格变动情景、份额稀释和舍入经济损失的警戒阈值未冻结；不能因上述等式成立判全部经济配置充分。"
+              ],
+              "boundaryNotes": [],
+              "score": null,
+              "weight": null,
+              "aggregation": {
+                "status": "not_adopted",
+                "rule": "本组件不得把披露项、引用项、N/A或未冻结经济判据当作100。将来只有已采纳且独立的自然约束项可按同范围最低值汇总；关键U不得删除后发布满分。该汇总仅对应已声明检查目标。",
+                "parentHealthScore": null
+              }
+            },
+            {
+              "id": "vault-deposit-exit",
+              "label": "入退限制及实际到账",
+              "scope": "既定金库存入和普通退出",
+              "status": "draft_for_discussion",
+              "observed": {
+                "protocolFeeRateRaw": "0",
+                "feeDenominator": 10000,
+                "isPause": false,
+                "status": 1,
+                "managerVersion": "16",
+                "maxQuotaRaw": "0",
+                "quotaBasedType": "0000000000000000000000000000000000000000000000000000000000000002::sui::SUI"
+              },
+              "metrics": [
+                {
+                  "id": "vault-net-output",
+                  "riskTarget": "防止扣费后低于用户签名最低到账",
+                  "formula": "fee_i = feeRate==0 ? 0 : ceil(gross_i*feeRate/10000); net_i=gross_i-fee_i; net_i>=min_i",
+                  "unit": "各币种最小单位",
+                  "naturalConstraints": [
+                    "0<=feeRate<=10000为支付算术域；代码允许上限2000另披露，不证明经济最优",
+                    "两币分别校验，未用跨币价格强加统一NAV最低值",
+                    "用户min_i是逐笔签名输入，不能编一个全局min-out"
+                  ],
+                  "source": [
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                      "jsonPath": "outputs.mechanisms.vault.module.disassembly",
+                      "function": "remove"
+                    }
+                  ],
+                  "classification": "natural_constraint_score_candidate",
+                  "fixedMappingRef": "#/discussionPackages/otherBusinesses/common/fixedMapping",
+                  "weight": null,
+                  "score": null
+                },
+                {
+                  "id": "vault-effective-exit-state",
+                  "riskTarget": "识别协议自身是否阻断必要退出",
+                  "formula": "remove_enabled = version_pass && !is_pause && status==1 && effective_exit_state.allow_remove",
+                  "unit": "布尔",
+                  "naturalConstraints": [
+                    "可选exit_state不存在时按代码默认分支解释，不把null当暂停或通过",
+                    "status=2/其他状态须结合exit_vault/finalize_exit替代路径判实际影响，不凭单字段直接0/60",
+                    "正常存入额度限制不等于已有份额退出异常"
+                  ],
+                  "source": [
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                      "jsonPath": "outputs.mechanisms.vault.module.disassembly",
+                      "function": "remove"
+                    },
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                      "jsonPath": "outputs.mechanisms.vault.module.disassembly",
+                      "function": "exit_vault"
+                    },
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                      "jsonPath": "outputs.mechanisms.vault.module.disassembly",
+                      "function": "finalize_exit"
+                    }
+                  ],
+                  "classification": "natural_constraint_score_candidate",
+                  "fixedMappingRef": "#/discussionPackages/otherBusinesses/common/fixedMapping",
+                  "weight": null,
+                  "score": null
+                },
+                {
+                  "id": "vault-quota",
+                  "riskTarget": "限制新增部署规模但不把低占用当安全",
+                  "formula": "quota_zero_semantics=目标deposit分支解释；若有限quota则rho=current_quota_usage/quota",
+                  "unit": "额度币种原单位；rho无量纲",
+                  "naturalConstraints": [],
+                  "source": [
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                      "jsonPath": "outputs.mechanisms.vault.module.disassembly",
+                      "function": "deposit_v2"
+                    },
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                      "jsonPath": "outputs.mechanisms.vault.module.disassembly",
+                      "function": "update_max_quota"
+                    }
+                  ],
+                  "classification": "disclosure_and_policy_pending",
+                  "fixedMappingRef": null,
+                  "weight": null,
+                  "score": null,
+                  "fixedMapping": null,
+                  "calibrationGap": "max_quota=0须按代码解释是否无限额；绝对额度是否合适需业务风险判据，未冻结不得评分"
+                }
+              ],
+              "codeRefs": [
+                {
+                  "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                  "jsonPath": "outputs.mechanisms.vault.module.disassembly"
+                }
+              ],
+              "calibrationNeeded": [
+                "费率经济负担、绝对quota规模适配无统一阈值，仅披露；不能以fee<=2000或无限额本身给100/0。"
+              ],
+              "boundaryNotes": [],
+              "score": null,
+              "weight": null,
+              "aggregation": {
+                "status": "not_adopted",
+                "rule": "本组件不得把披露项、引用项、N/A或未冻结经济判据当作100。将来只有已采纳且独立的自然约束项可按同范围最低值汇总；关键U不得删除后发布满分。该汇总仅对应已声明检查目标。",
+                "parentHealthScore": null
+              }
+            },
+            {
+              "id": "vault-reinvest-rebalance",
+              "label": "复投和调仓联动",
+              "scope": "同一在仓金库及其合法进入迁移/调仓的路径",
+              "status": "draft_for_discussion",
+              "observed": {
+                "oracle": {
+                  "clmm_pool": "0x871d8a227114f375170f149f7e9d45be822dd003eba225e83c05ac80828596bc",
+                  "slippage": 50
+                },
+                "toleranceRaw": 50,
+                "toleranceDenominator": 2000,
+                "toleranceRatio": 0.025,
+                "finishRebalanceThresholdRaw": "200000000000",
+                "thresholdCoin": "0000000000000000000000000000000000000000000000000000000000000002::sui::SUI",
+                "positionTickLower": 788,
+                "positionTickUpper": 816,
+                "poolCurrentTick": 805
+              },
+              "metrics": [
+                {
+                  "id": "vault-reinvest-budget",
+                  "riskTarget": "防止加仓计算分母错误及资产无归属消失",
+                  "formula": "tolerance=s/2000; opposite_leg_budget=expected_opposite+floor(expected_opposite*s/2000); post_assets=LP_position_assets+remaining_harvest_assets",
+                  "unit": "数量容差无量纲；金额为两币最小单位",
+                  "naturalConstraints": [
+                    "s字段为u8，当前50意味着2.5%相关腿数量余量；不是2.5%NAV损失上限",
+                    "add-liquidity回执要求的支付额由所提供资产支付；未用余额重新并回harvest_assets",
+                    "deltaL_after_reinvest>0；recorded_L按实际deltaL更新",
+                    "绑定OracleInfo与实际池一致；不把同池即时价格当独立外部公允价值"
+                  ],
+                  "source": [
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                      "jsonPath": "outputs.mechanisms.vault.module.disassembly",
+                      "function": "reinvest_harvest_assets"
+                    },
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                      "jsonPath": "outputs.mechanisms.vault.module.disassembly",
+                      "function": "migrate_liquidity"
+                    }
+                  ],
+                  "classification": "natural_constraint_score_candidate",
+                  "fixedMappingRef": "#/discussionPackages/otherBusinesses/common/fixedMapping",
+                  "weight": null,
+                  "score": null
+                },
+                {
+                  "id": "vault-rebalance-completion",
+                  "riskTarget": "识别调仓状态与剩余资产限制是否互相冲突",
+                  "formula": "rebalance_exit_to_status1 iff leftover_value_in_quota_coin<=finish_rebalance_threshold && required checks pass",
+                  "unit": "quota_based_type最小单位",
+                  "naturalConstraints": [
+                    "按代码将双币余额折为指定计价币，不把两币raw直接相加",
+                    "迁移先进入status2，必须结合可完成的调仓/退出路径判断是否异常；当前status1不等于根本不存在迁移路径",
+                    "threshold=200000000000对应200 SUI，属于完成门槛，不是可损失额度"
+                  ],
+                  "source": [
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                      "jsonPath": "outputs.mechanisms.vault.module.disassembly",
+                      "function": "rebalance"
+                    },
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                      "jsonPath": "outputs.mechanisms.vault.module.disassembly",
+                      "function": "migrate_liquidity"
+                    },
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                      "jsonPath": "outputs.mechanisms.vault.module.disassembly",
+                      "function": "get_tvl_of_based_coin"
+                    }
+                  ],
+                  "classification": "natural_constraint_score_candidate",
+                  "fixedMappingRef": "#/discussionPackages/otherBusinesses/common/fixedMapping",
+                  "weight": null,
+                  "score": null
+                },
+                {
+                  "id": "vault-concentration-sensitivity",
+                  "riskTarget": "说明在仓区间对价格变化的敏感性",
+                  "formula": "P=(current_sqrt_price/2^64)^2（同币原始B/A比例）；P_lower=1.0001^tickLower；P_upper=1.0001^tickUpper；width=P_upper/P_lower-1；upToUpper=P_upper/P-1；downToLower=1-P_lower/P",
+                  "unit": "价格相对变化；只在当前tick处于区间时计算",
+                  "naturalConstraints": [],
+                  "source": [
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                      "jsonPath": "outputs.mechanisms.vault.module.disassembly",
+                      "function": "migrate_liquidity"
+                    }
+                  ],
+                  "classification": "disclosure_and_policy_pending",
+                  "fixedMappingRef": null,
+                  "weight": null,
+                  "score": null,
+                  "fixedMapping": null,
+                  "calibrationGap": "无资产适配/操作周期校准时不以统一宽度扣分；出区间先影响做市收入和币种构成，不自动等于本金损失",
+                  "precisionNote": "主计算用当前sqrt_price，不用floor后的currentTick当精确现价；若仅用tick差算距离，必须另标网格近似。不同币decimals的人类价格展示另换算，距离比率中尺度相消。",
+                  "currentExample": {
+                    "currentSqrtPrice": "19204801154185094268",
+                    "currentPoolTick": 805,
+                    "lowerTick": 788,
+                    "upperTick": 816,
+                    "downToLower": 0.0017472633803701232,
+                    "upToUpper": 0.0010516209498299123,
+                    "score": null,
+                    "classification": "sensitivity_disclosure_only"
+                  }
+                }
+              ],
+              "codeRefs": [
+                {
+                  "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                  "jsonPath": "outputs.mechanisms.vault.module.disassembly"
+                }
+              ],
+              "calibrationNeeded": [
+                "2.5%数量容差、区间宽度与200 SUI完成门槛的经济/运营警戒尚未冻结，不能仅因存在参数而判充分或不安全。"
+              ],
+              "boundaryNotes": [],
+              "score": null,
+              "weight": null,
+              "aggregation": {
+                "status": "not_adopted",
+                "rule": "本组件不得把披露项、引用项、N/A或未冻结经济判据当作100。将来只有已采纳且独立的自然约束项可按同范围最低值汇总；关键U不得删除后发布满分。该汇总仅对应已声明检查目标。",
+                "parentHealthScore": null
+              }
+            }
+          ],
+          "score": null,
+          "weight": null
+        },
+        {
+          "id": "stable-farming",
+          "label": "Stable Farming",
+          "subcomponents": [
+            {
+              "id": "farm-share-reward",
+              "label": "奖励份额及累计公式",
+              "scope": "既定Farm池及所核头寸",
+              "status": "draft_for_discussion",
+              "observed": {
+                "clmmPool": "0x871d8a227114f375170f149f7e9d45be822dd003eba225e83c05ac80828596bc",
+                "effectiveLower": 762,
+                "effectiveUpper": 826,
+                "poolTotalShare": "3209249351138105",
+                "managerTotalShare": "3209249351138105",
+                "positionLower": 788,
+                "positionUpper": 816,
+                "positionLiquidity": "1887168865623823277",
+                "rewardPrecision": "1000000000000"
+              },
+              "metrics": [
+                {
+                  "id": "farm-share-valuation",
+                  "riskTarget": "防止区间、价格或份额单位错误扭曲奖励",
+                  "formula": "a=max(positionLower,effectiveLower); b=min(positionUpper,effectiveUpper); share=(a>=b)?0:floor(amountA(a,b,L,sqrtPrice)*sqrtPrice^2/2^128)+amountB(a,b,L,sqrtPrice)",
+                  "unit": "share为按固定sqrtPrice折算的计价数量",
+                  "naturalConstraints": [
+                    "positionLower<positionUpper且effectiveLower<effectiveUpper；无交集为正常share0，不自动0分",
+                    "sqrtPrice满足tick_math实际域；份额计算用池配置sqrt_price，不把current price误替",
+                    "pool.total_share==RewarderManager.pool_shares[clmmPool]；仅核已采对应记录，不声称已遍历全体份额"
+                  ],
+                  "source": [
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                      "jsonPath": "outputs.mechanisms.farm.pool.disassembly",
+                      "function": "calculate_position_share"
+                    }
+                  ],
+                  "classification": "natural_constraint_score_candidate",
+                  "fixedMappingRef": "#/discussionPackages/otherBusinesses/common/fixedMapping",
+                  "weight": null,
+                  "score": null
+                },
+                {
+                  "id": "farm-reward-accumulation",
+                  "riskTarget": "避免计奖分母冲突及时间倒置",
+                  "formula": "active=(now>last_time && alloc_point>0 && total_share>0 && emission_scaled>0); if active: deltaR_scaled=floor(emission_scaled*(now-last_time)*alloc_point/total_alloc); deltaAcc=floor(deltaR_scaled/total_share); else: deltaAcc=0",
+                  "unit": "emission_scaled为奖励最小单位/秒乘10^12",
+                  "naturalConstraints": [
+                    "只有active分支要求total_alloc>0；不将零排放/零份额的正常停止计奖判失败",
+                    "total_share与manager记录一致；整数乘除顺序复现目标函数",
+                    "金额归一到10^12精度后再解释，不把累计scaled数量当币数量"
+                  ],
+                  "source": [
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                      "jsonPath": "outputs.mechanisms.farm.reward.disassembly",
+                      "function": "accumulate_pool_reward"
+                    },
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                      "jsonPath": "outputs.mechanisms.farm.reward.disassembly",
+                      "function": "pool_rewards_settle"
+                    }
+                  ],
+                  "classification": "natural_constraint_score_candidate",
+                  "fixedMappingRef": "#/discussionPackages/otherBusinesses/common/fixedMapping",
+                  "weight": null,
+                  "score": null
+                }
+              ],
+              "codeRefs": [
+                {
+                  "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                  "jsonPath": "outputs.mechanisms.farm.pool.disassembly"
+                },
+                {
+                  "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                  "jsonPath": "outputs.mechanisms.farm.reward.disassembly"
+                }
+              ],
+              "calibrationNeeded": [
+                "分配点/排放规模/有效计奖区间的经济警戒不由合法性自动得出。"
+              ],
+              "boundaryNotes": [],
+              "score": null,
+              "weight": null,
+              "aggregation": {
+                "status": "not_adopted",
+                "rule": "本组件不得把披露项、引用项、N/A或未冻结经济判据当作100。将来只有已采纳且独立的自然约束项可按同范围最低值汇总；关键U不得删除后发布满分。该汇总仅对应已声明检查目标。",
+                "parentHealthScore": null
+              }
+            },
+            {
+              "id": "farm-exit-fallback",
+              "label": "原LP完整退出与部分撤资",
+              "scope": "同一WrappedPosition的withdraw、close_position_v2和remove_liquidity",
+              "status": "draft_for_discussion",
+              "observed": {
+                "fullNftExitRequiresRewardZero": true,
+                "partialRemoveRequiresRewardPayment": false,
+                "partialRemoveRequiresNonzeroResidual": true
+              },
+              "metrics": [
+                {
+                  "id": "farm-operation-state",
+                  "riskTarget": "确定当前必要入口的代码门及绑定是否异常",
+                  "formula": "full_unwrap_allowed=version_pass && belongs_to_pool && all_position_rewards_scaled==0; partial_remove_allowed=version_pass && pool_position_match && remaining_amountA+remaining_amountB>0",
+                  "unit": "布尔及各币raw；不得把异币金额直接相加作经济量",
+                  "naturalConstraints": [
+                    "检查all_rewards==0用的是scaled原值，不能先取整为0",
+                    "close_position_v2先调用withdraw，不能声称它绕过奖励前置；旧close_position直接abort",
+                    "remove_liquidity不调用harvest/withdraw_reward，可返还双币本金并更新奖励账；但两币剩余均0时abort，不能说完整退出无奖励依赖",
+                    "未查个体应领不扩散为全部协议U；确认当前异常必须有同范围当前值证据"
+                  ],
+                  "source": [
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                      "jsonPath": "outputs.mechanisms.farm.pool.disassembly",
+                      "function": "withdraw"
+                    },
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                      "jsonPath": "outputs.mechanisms.farm.pool.disassembly",
+                      "function": "close_position_v2"
+                    },
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                      "jsonPath": "outputs.mechanisms.farm.pool.disassembly",
+                      "function": "remove_liquidity"
+                    },
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                      "jsonPath": "outputs.mechanisms.farm.pool.disassembly",
+                      "function": "assert_position_liquidity_valid"
+                    }
+                  ],
+                  "classification": "natural_constraint_score_candidate",
+                  "fixedMappingRef": "#/discussionPackages/otherBusinesses/common/fixedMapping",
+                  "weight": null,
+                  "score": null
+                },
+                {
+                  "id": "farm-exit-coupling",
+                  "riskTarget": "评价独立奖励融资对完整本金退出的影响",
+                  "formula": "full_exit_depends_on_reward_payment=true; partial_principal_path=true; affected_tail=minimum_nonzero_residual_required_by_target_math",
+                  "unit": "机制布尔及残留原币数量",
+                  "naturalConstraints": [],
+                  "source": [
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                      "jsonPath": "outputs.mechanisms.farm.pool.disassembly",
+                      "function": "withdraw"
+                    },
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                      "jsonPath": "outputs.mechanisms.farm.pool.disassembly",
+                      "function": "remove_liquidity"
+                    },
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                      "jsonPath": "outputs.mechanisms.farm.reward.disassembly",
+                      "function": "withdraw_reward"
+                    }
+                  ],
+                  "classification": "disclosure_and_policy_pending",
+                  "fixedMappingRef": null,
+                  "weight": null,
+                  "score": null,
+                  "fixedMapping": null,
+                  "calibrationGap": "已确认机制耦合，但不能仅据条件性未来奖励不足固定扣5或给60。若当前已确认异常且仍可部分撤资，才按既有60分条件；预防性扣分需要先冻结可复用政策"
+                },
+                {
+                  "id": "farm-principal-recovery-under-unpaid-rewards",
+                  "riskTarget": "把奖励不可付时可回收本金与完整解包分开，避免把剩余NFT或尘额等同全部本金受阻",
+                  "classification": "disclosure_only_structural_diagnostic",
+                  "counterfactual": {
+                    "rewardOutstanding": true,
+                    "rewardPaymentUnavailable": true,
+                    "otherNecessaryConfigurationUnchanged": true,
+                    "note": "明确反事实诊断，未声称快照已发生奖励不足或退出异常"
+                  },
+                  "inputs": {
+                    "L": "1887168865623823277",
+                    "positionTickLower": 788,
+                    "positionTickUpper": 816,
+                    "poolCurrentSqrtPrice": "19204801154185094268",
+                    "precision": "部署整数币种最小单位及实际CLMM amount rounding"
+                  },
+                  "formula": {
+                    "minimumResidual": "L_min = min{ l>0 | deployed_amountA(l,current_sqrt,lower,upper)>0 OR deployed_amountB(l,current_sqrt,lower,upper)>0 }",
+                    "principalLiquidityRecoveryRatio": "R_principal = max(0,L-L_min)/L when L>0; L==0 => N/A for liquidity ratio",
+                    "fullUnwrapAvailability": "full_unwrap=false while any outstanding scaled reward remains and required harvest cannot pay; this Boolean is not 1-R_principal",
+                    "amountRecovery": "recoverableA/B=deployed_remove_amountA/B(L-L_min,current_sqrt,lower,upper) with actual rounding, max-input/min-output and pool gates"
+                  },
+                  "numericResult": null,
+                  "numericGap": "本次已读pool模块通过clmm_math helper计算残留；尚未在本草案中绑定该helper的精确逐步舍入实现，故仅保留符号公式，不估算L_min或固称所有头寸能取99%。",
+                  "unit": "L为流动性整数，R为无量纲；A/B各自最小单位分别展示",
+                  "naturalConstraints": [
+                    "L_min必须用同一部署sqrt/tick及实际整数舍入得到",
+                    "仅当min-out和底层有效开关允许时诊断直接remove_liquidity路径",
+                    "R描述结构性本金回收能力，不能当当前资金可用性、完整NFT可取性或直接配置分"
+                  ],
+                  "source": [
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                      "jsonPath": "outputs.mechanisms.farm.pool.disassembly",
+                      "function": "remove_liquidity/assert_position_liquidity_valid/withdraw/close_position_v2"
+                    },
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                      "jsonPath": "outputs.farmPosition.farmPosition.dynamicField.value.json.value"
+                    }
+                  ],
+                  "fixedMapping": null,
+                  "fixedMappingRef": null,
+                  "score": null,
+                  "weight": null,
+                  "calibrationGap": "R到安全分的警戒/分档尚未冻结，不新增60阈值，不与奖励资金覆盖重复计分。"
+                }
+              ],
+              "codeRefs": [
+                {
+                  "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                  "jsonPath": "outputs.mechanisms.farm.pool.disassembly"
+                },
+                {
+                  "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                  "jsonPath": "outputs.mechanisms.farm.reward.disassembly"
+                }
+              ],
+              "calibrationNeeded": [
+                "未冻结完整退出耦合的预防性警戒；不能沿用80-5的研究建议冒充固定判档。"
+              ],
+              "boundaryNotes": [
+                "奖励余额及应付对账列资金；实际支付组件失效列依赖；权限能改排放另评。"
+              ],
+              "score": null,
+              "weight": null,
+              "aggregation": {
+                "status": "not_adopted",
+                "rule": "本组件不得把披露项、引用项、N/A或未冻结经济判据当作100。将来只有已采纳且独立的自然约束项可按同范围最低值汇总；关键U不得删除后发布满分。该汇总仅对应已声明检查目标。",
+                "parentHealthScore": null
+              }
+            }
+          ],
+          "score": null,
+          "weight": null
+        },
+        {
+          "id": "lp-burn",
+          "label": "LP Burn",
+          "subcomponents": [
+            {
+              "id": "burn-claim-rights",
+              "label": "封存及附带领取权",
+              "scope": "既定BurnManager与凭证领费领奖",
+              "status": "draft_for_discussion",
+              "observed": {
+                "mustFullRange": true,
+                "minimumVersion": "1",
+                "v2LowerRequirement": -443000,
+                "v2UpperRequirement": 443000
+              },
+              "metrics": [
+                {
+                  "id": "burn-admission-consistency",
+                  "riskTarget": "防止准入/凭证/底层池解释错配",
+                  "formula": "legacy_admissible=target_legacy_full_range_check(position); v2_admissible=(lower<=-443000 && upper>=443000); claim_path=version_pass && proof_position_pool_match",
+                  "unit": "tick为i32；布尔",
+                  "naturalConstraints": [
+                    "旧入口按其实际full-range helper解释，不把v2边界强塞旧入口",
+                    "新准入限制不能无依据外推为老凭证不能领取",
+                    "领费领奖使用凭证封存的原Position；本金永久封存为声明权益边界，不评为异常退出"
+                  ],
+                  "source": [
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/vaultFarmBurn/snapshot.json",
+                      "jsonPath": "outputs.mechanisms.burn.module.disassembly",
+                      "function": "collect_fee/collect_rewarder及准入入口"
+                    }
+                  ],
+                  "classification": "natural_constraint_score_candidate",
+                  "fixedMappingRef": "#/discussionPackages/otherBusinesses/common/fixedMapping",
+                  "weight": null,
+                  "score": null
+                }
+              ],
+              "codeRefs": [],
+              "calibrationNeeded": [
+                "本组件只是已声明权益可达性，不证明LP无价格/区间风险。"
+              ],
+              "boundaryNotes": [],
+              "score": null,
+              "weight": null,
+              "aggregation": {
+                "status": "not_adopted",
+                "rule": "本组件不得把披露项、引用项、N/A或未冻结经济判据当作100。将来只有已采纳且独立的自然约束项可按同范围最低值汇总；关键U不得删除后发布满分。该汇总仅对应已声明检查目标。",
+                "parentHealthScore": null
+              }
+            },
+            {
+              "id": "vester-program",
+              "label": "补偿计划全局版本和期间",
+              "scope": "既定Vester公共计划，不扩查单凭证",
+              "status": "draft_for_discussion",
+              "observed": {
+                "version": "1",
+                "periodCount": 13,
+                "percentagesBps": [
+                  "3328",
+                  "556",
+                  "556",
+                  "556",
+                  "556",
+                  "556",
+                  "556",
+                  "556",
+                  "556",
+                  "556",
+                  "556",
+                  "556",
+                  "556"
+                ],
+                "releaseTimes": [
+                  "1749351600",
+                  "1749556800",
+                  "1752148800",
+                  "1754827200",
+                  "1757505600",
+                  "1760097600",
+                  "1762776000",
+                  "1765368000",
+                  "1768046400",
+                  "1770724800",
+                  "1773144000",
+                  "1775822400",
+                  "1778414400"
+                ]
+              },
+              "metrics": [
+                {
+                  "id": "vester-schedule",
+                  "riskTarget": "防止总份额或到期表互相冲突",
+                  "formula": "share_sum=sum(period.percentage); due_i=(floor(clock_ms/1000)>=release_time_i); not_duplicate_period_ids=cardinality(unique(period))==period_count",
+                  "unit": "百分比单位1/10000；时间秒",
+                  "naturalConstraints": [
+                    "share_sum==10000是该完整既定计划的分配约束；每项0<=percentage<=10000",
+                    "期间索引与redeem实际vector索引匹配；release_time按声明计划检查，正常未到期不扣分",
+                    "按当前实际版本检查，不把包版本2与Versioned.version1当冲突"
+                  ],
+                  "source": [
+                    {
+                      "archive": "runs/cetus-config-dependencies-346896130/samples/snapshot.json",
+                      "jsonPath": "outputs.vester.package.vester.disassembly",
+                      "function": "redeem"
+                    }
+                  ],
+                  "classification": "natural_constraint_score_candidate",
+                  "fixedMappingRef": "#/discussionPackages/otherBusinesses/common/fixedMapping",
+                  "weight": null,
+                  "score": null
+                },
+                {
+                  "id": "vester-per-receipt-pause",
+                  "riskTarget": "界定个体暂停与公共计划状态",
+                  "formula": "receipt_eligible=pool_match && attacked_position && !PositionVesting.is_paused && !period.is_redeemed && due_i",
+                  "unit": "布尔",
+                  "naturalConstraints": [],
+                  "source": [
+                    {
+                      "archive": "runs/cetus-config-dependencies-346896130/samples/snapshot.json",
+                      "jsonPath": "outputs.vester.package.vester.disassembly",
+                      "function": "redeem/pause"
+                    }
+                  ],
+                  "classification": "disclosure_and_policy_pending",
+                  "fixedMappingRef": null,
+                  "weight": null,
+                  "score": null,
+                  "fixedMapping": null,
+                  "calibrationGap": "is_paused属于单凭证状态；宏观规则仅披露机制及范围，未读个体不能宣称全部未暂停，也不能把公共计划配置整项改U"
+                }
+              ],
+              "codeRefs": [],
+              "calibrationNeeded": [
+                "公共计划字段不能替代个体资格；单钥/多签暂停能力归权限。"
+              ],
+              "boundaryNotes": [
+                "balance、remaining_commitment、surplus同币对账只入资金，不参与配置得分。"
+              ],
+              "score": null,
+              "weight": null,
+              "aggregation": {
+                "status": "not_adopted",
+                "rule": "本组件不得把披露项、引用项、N/A或未冻结经济判据当作100。将来只有已采纳且独立的自然约束项可按同范围最低值汇总；关键U不得删除后发布满分。该汇总仅对应已声明检查目标。",
+                "parentHealthScore": null
+              }
+            }
+          ],
+          "score": null,
+          "weight": null
+        },
+        {
+          "id": "xcetus",
+          "label": "xCETUS",
+          "subcomponents": [
+            {
+              "id": "xcetus-locking",
+              "label": "转换、锁定、折价及同币配平",
+              "scope": "既定locking正常转换及两版赎回状态机",
+              "status": "draft_for_discussion",
+              "observed": {
+                "coin": "06864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b::cetus::CETUS",
+                "minDays": "15",
+                "maxDays": "180",
+                "minNumerator": "500",
+                "maxNumerator": "1000",
+                "ratioDenominator": 1000,
+                "lockVersion": "3"
+              },
+              "metrics": [
+                {
+                  "id": "xcetus-redemption-function",
+                  "riskTarget": "防止赎回金额定义域或比例错误",
+                  "formula": "若minD==maxD：payout=floor(n*minR/1000)；否则r(d)=minR+(maxR-minR)*(d-minD)/(maxD-minD)，payout必须复现redeem_num的10^11中间精度与整数除法顺序",
+                  "unit": "天、比例分子/1000、CETUS最小单位",
+                  "naturalConstraints": [
+                    "minD<=maxD，用户d在[minD,maxD]；minD==maxD为代码已有固定锁期分支，不错误制造零分母；只在线性分支要求maxD-minD>0",
+                    "0<=minR<=maxR<=1000；复现整数缩放/舍入，不用浮点替代redeem_num",
+                    "0<=payout<=n且当前公式随d非递减；15/180天与50/100%只表示机制端点，不证明锁期/折价经济最优"
+                  ],
+                  "source": [
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/tokenLaunch/snapshot.json",
+                      "jsonPath": "outputs.modules.lock.asMovePackage.module.disassembly",
+                      "function": "redeem_num"
+                    },
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/tokenLaunch/snapshot.json",
+                      "jsonPath": "outputs.modules.lock.asMovePackage.module.disassembly",
+                      "function": "redeem_lock_v2"
+                    }
+                  ],
+                  "classification": "natural_constraint_score_candidate",
+                  "fixedMappingRef": "#/discussionPackages/otherBusinesses/common/fixedMapping",
+                  "weight": null,
+                  "score": null
+                },
+                {
+                  "id": "xcetus-cash-book-symmetry",
+                  "riskTarget": "防止正常转换/赎回路径无对应入金或重复花费",
+                  "formula": "convert(n): deltaB=n,deltaX=n; request(n,p): deltaB=-p,deltaEscrow=p,lockedX+=n; cancel: deltaB=p,deltaEscrow=-p,lockedX-=n; redeem: escrow_paid=p,deltaB=-(n-p),deltaExtra=n-p,deltaX=-n",
+                  "unit": "同币CETUS raw；xCETUS记权raw",
+                  "naturalConstraints": [
+                    "convert精确split同一个n入manager.balance后mint n；不将未核迁移/其他铸币入口视作已覆盖",
+                    "request只转出p，折价差额n-p自然留主余额；cancel归回p",
+                    "日常redeem_treasury只提extra_treasury，不能直接提主balance",
+                    "赎回wrapper仍要差额结转；正常同币配平无需新的奖励融资，但不能据此声称存量全部负债已对账",
+                    "LockInfo已核字段venft_id/lock_id/xcetus_amount/cetus_amount；未归档lock_coin_v2 helper的内部字段/可见性不编造"
+                  ],
+                  "source": [
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/tokenLaunch/snapshot.json",
+                      "jsonPath": "outputs.modules.lock.asMovePackage.module.disassembly",
+                      "function": "convert"
+                    },
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/tokenLaunch/snapshot.json",
+                      "jsonPath": "outputs.modules.lock.asMovePackage.module.disassembly",
+                      "function": "redeem_lock_v2"
+                    },
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/tokenLaunch/snapshot.json",
+                      "jsonPath": "outputs.modules.lock.asMovePackage.module.disassembly",
+                      "function": "cancel_redeem_lock_v2"
+                    },
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/tokenLaunch/snapshot.json",
+                      "jsonPath": "outputs.modules.lock.asMovePackage.module.disassembly",
+                      "function": "redeem_v2"
+                    },
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/tokenLaunch/snapshot.json",
+                      "jsonPath": "outputs.modules.lock.asMovePackage.module.disassembly",
+                      "function": "receive_treasury/take_treasury"
+                    }
+                  ],
+                  "classification": "natural_constraint_score_candidate",
+                  "fixedMappingRef": "#/discussionPackages/otherBusinesses/common/fixedMapping",
+                  "weight": null,
+                  "score": null
+                },
+                {
+                  "id": "xcetus-effective-state",
+                  "riskTarget": "识别必要赎回是否被当前配置阻断",
+                  "formula": "redeem_enabled=checked_package_version_pass && target_redeem_conditions; convert_enabled=!convert_paused",
+                  "unit": "布尔",
+                  "naturalConstraints": [
+                    "convert暂停主要作用于新增转换，不能直接认定到期redeem被暂停",
+                    "emergency旧版本状态须按checked_package_version实际作用解释",
+                    "正常锁期/持有凭证/到期条件不是异常退出限制"
+                  ],
+                  "source": [
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/tokenLaunch/snapshot.json",
+                      "jsonPath": "outputs.modules.lock.asMovePackage.module.disassembly",
+                      "function": "checked_package_version/convert/redeem_v2"
+                    }
+                  ],
+                  "classification": "natural_constraint_score_candidate",
+                  "fixedMappingRef": "#/discussionPackages/otherBusinesses/common/fixedMapping",
+                  "weight": null,
+                  "score": null
+                }
+              ],
+              "codeRefs": [
+                {
+                  "archive": "runs/cetus-business-ratings-346896130/tokenLaunch/snapshot.json",
+                  "jsonPath": "outputs.modules.lock.asMovePackage.module.disassembly"
+                }
+              ],
+              "calibrationNeeded": [
+                "锁期长度、折价斜率的统一安全警戒未冻结，作为用户机制披露；不因数学合法或余额为正直接给健康满分。"
+              ],
+              "boundaryNotes": [],
+              "score": null,
+              "weight": null,
+              "aggregation": {
+                "status": "not_adopted",
+                "rule": "本组件不得把披露项、引用项、N/A或未冻结经济判据当作100。将来只有已采纳且独立的自然约束项可按同范围最低值汇总；关键U不得删除后发布满分。该汇总仅对应已声明检查目标。",
+                "parentHealthScore": null
+              }
+            },
+            {
+              "id": "xcetus-dividend",
+              "label": "分红登记、结算及领取期间",
+              "scope": "既定DividendManager和184/185两期",
+              "status": "draft_for_discussion",
+              "observed": {
+                "startTime": "1683712800",
+                "intervalDays": 7,
+                "isOpen": true,
+                "version": "1",
+                "p184Settled": true,
+                "p185Settled": false
+              },
+              "metrics": [
+                {
+                  "id": "dividend-time-grid",
+                  "riskTarget": "防止期间计时/单位错误导致提前或永久不可领",
+                  "formula": "period_due(p)=floor(clock_ms/1000)>=start_time+p*interval_day*86400",
+                  "unit": "秒及正整数天",
+                  "naturalConstraints": [
+                    "interval_day>0且乘加不溢出目标类型；期号p按合约原义",
+                    "用start_time+p*interval，不用register_time+7天替代；未到期185未结算不自动失败",
+                    "is_open影响新增登记的入口须与旧期领取区分，不能仅false就说既有分红被阻断"
+                  ],
+                  "source": [
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/tokenLaunch/snapshot.json",
+                      "jsonPath": "outputs.modules.dividend.asMovePackage.module.disassembly",
+                      "function": "redeem_token_v2"
+                    },
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/tokenLaunch/snapshot.json",
+                      "jsonPath": "outputs.modules.dividend.asMovePackage.module.disassembly",
+                      "function": "register_bonus"
+                    }
+                  ],
+                  "classification": "natural_constraint_score_candidate",
+                  "fixedMappingRef": "#/discussionPackages/otherBusinesses/common/fixedMapping",
+                  "weight": null,
+                  "score": null
+                },
+                {
+                  "id": "dividend-registration",
+                  "riskTarget": "防止奖励类型/已领账与已登记权益错配",
+                  "formula": "reward_type in bonus_types; per_period_redeemed(coin)<=registered_bonus(coin)；individual claim removes the recorded period/coin entry once",
+                  "unit": "每币种raw，分别比较",
+                  "naturalConstraints": [
+                    "按相同期间/相同币种对比，不把不同币或不同期raw混加",
+                    "领取会删除或减少对应记账并更新已领汇总；先核实际调用的v1/v2/v3路径",
+                    "个体不查不自动U；宏观已登记/已结算与周期字段的验证不能冒充全量个人负债勾稽"
+                  ],
+                  "source": [
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/tokenLaunch/snapshot.json",
+                      "jsonPath": "outputs.modules.dividend.asMovePackage.module.disassembly",
+                      "function": "register_bonus"
+                    },
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/tokenLaunch/snapshot.json",
+                      "jsonPath": "outputs.modules.dividend.asMovePackage.module.disassembly",
+                      "function": "redeem_token_v2/increase_redeem"
+                    }
+                  ],
+                  "classification": "natural_constraint_score_candidate",
+                  "fixedMappingRef": "#/discussionPackages/otherBusinesses/common/fixedMapping",
+                  "weight": null,
+                  "score": null
+                },
+                {
+                  "id": "dividend-settlement-lag",
+                  "riskTarget": "评价到期后尚未结算的运营影响",
+                  "formula": "settlement_lag=max(0,now-(start_time+p*interval_day*86400)); due_unsettled=period_due(p)&&!is_settled",
+                  "unit": "秒及布尔",
+                  "naturalConstraints": [],
+                  "source": [
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/tokenLaunch/snapshot.json",
+                      "jsonPath": "outputs.modules.dividend.asMovePackage.module.disassembly",
+                      "function": "settle/settle_v2/redeem_token_v2"
+                    }
+                  ],
+                  "classification": "disclosure_and_policy_pending",
+                  "fixedMappingRef": null,
+                  "weight": null,
+                  "score": null,
+                  "fixedMapping": null,
+                  "calibrationGap": "允许批处理的正常等待需按机制解释；尚未冻结宽限/警戒时不得自己定1天、7天后60或0。明确异常阻断已有应领权益才进入既有分档"
+                }
+              ],
+              "codeRefs": [
+                {
+                  "archive": "runs/cetus-business-ratings-346896130/tokenLaunch/snapshot.json",
+                  "jsonPath": "outputs.modules.dividend.asMovePackage.module.disassembly"
+                }
+              ],
+              "calibrationNeeded": [
+                "到期结算延迟/批处理完成度的警戒线未冻结，不能用统一天数造扣分。"
+              ],
+              "boundaryNotes": [
+                "分红余额和应付总额为资金；未来分红收益率及分红修改控制另属披露/权限。"
+              ],
+              "score": null,
+              "weight": null,
+              "aggregation": {
+                "status": "not_adopted",
+                "rule": "本组件不得把披露项、引用项、N/A或未冻结经济判据当作100。将来只有已采纳且独立的自然约束项可按同范围最低值汇总；关键U不得删除后发布满分。该汇总仅对应已声明检查目标。",
+                "parentHealthScore": null
+              }
+            }
+          ],
+          "score": null,
+          "weight": null
+        },
+        {
+          "id": "launchpad",
+          "label": "Launchpad",
+          "subcomponents": [
+            {
+              "id": "launch-early",
+              "label": "早期池领取退款",
+              "scope": "既定CETUS/SUI已结束早期池",
+              "status": "draft_for_discussion",
+              "observed": {
+                "pool": "0x8b3b1b25d0769ec4165c9d7cf6090375be6066c3b4b35cb472c7eb8f05b07a9c",
+                "priceRaw": "40000000",
+                "realityRaiseTotal": "108247043828005115",
+                "hardcap": "800000000000000",
+                "whitePurchaseTotal": "537356208825500",
+                "saleTotal": "20000000000000000",
+                "start": "1683540000",
+                "purchaseDuration": "172800",
+                "settleDuration": "86400",
+                "isSettle": true,
+                "isCancel": false,
+                "priceDenominatorSdkCorroborated": "1000000000",
+                "sdkUnitEvidence": {
+                  "archive": "/private/tmp/cetus-project-YEvhp0Rv/launchsdk.tgz",
+                  "existingSDKHash": "099f0d1387be001ac9c472d5ae19a7dc534cf04e2bb588fbd9d203c0e7ad7f5c",
+                  "entry": "package/dist/index.js",
+                  "entrySha256": "e24fee08d61b2faa67465568e13c6c6a405956bdcf59f341250a07de6581fd97",
+                  "definitions": {
+                    "CONST_DENOMINATOR": {
+                      "symbol": "Me",
+                      "definition": "var Dt=\"router\",Me=1e9",
+                      "value": "1000000000",
+                      "definitionOffset": 48686,
+                      "export": "Me as CONST_DENOMINATOR"
+                    },
+                    "PRICE_MULTIPLICATION": {
+                      "symbol": "re",
+                      "definition": "Le=1e6,re=1e18",
+                      "value": "1000000000000000000",
+                      "definitionOffset": 68595,
+                      "export": "re as PRICE_MULTIPLICATION"
+                    },
+                    "earlyUiPrice": "buildLaunchPadPool: current_price=$(i.initialize_price).div($(1e9)).toString()"
+                  },
+                  "evidenceLevel": "existing_official_sdk_unit_corroboration",
+                  "boundary": "早期SDK明确D=1e9，且其UI价格解释一致；尚未独立展开链上同部署utils::CONST_DENOMINATOR实现，不声称链上helper已直接匹配。"
+                }
+              },
+              "metrics": [
+                {
+                  "id": "early-denominator-domain",
+                  "riskTarget": "防止超募分配或价格换算分母无效",
+                  "formula": "R=reality_raise_total; H=hardcap; W=white_list.purchase_total; nonwhiteDen=R-W; if R>H and nonwhiteUser>0 then nonwhiteDen>0; P=initialize_price>0",
+                  "unit": "金额为本池对应币raw；价格用该部署CONST_DENOMINATOR",
+                  "naturalConstraints": [
+                    "白名单保护额w<=用户投入u；0<=W<=R",
+                    "只对实际进入的超募分支要求R-W>0；非超募/全保护路径不虚造分母缺口",
+                    "已有SDK的Me=1e9并导出CONST_DENOMINATOR，buildLaunchPadPool以initialize_price/1e9解价，支持本版D=1e9单位；链上utils常量实现尚未独立展开，保留证据层级，不套新版1e18。"
+                  ],
+                  "source": [
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/tokenLaunch/snapshot.json",
+                      "jsonPath": "outputs.modules.early.asMovePackage.module.disassembly",
+                      "function": "calculate_claim_sale_and_raise_amount"
+                    },
+                    {
+                      "archive": "/private/tmp/cetus-project-YEvhp0Rv/launchsdk.tgz",
+                      "entry": "package/dist/index.js",
+                      "function": "CONST_DENOMINATOR export / LaunchpadUtil.buildLaunchPadPool",
+                      "sha256": "099f0d1387be001ac9c472d5ae19a7dc534cf04e2bb588fbd9d203c0e7ad7f5c"
+                    }
+                  ],
+                  "classification": "natural_constraint_score_candidate",
+                  "fixedMappingRef": "#/discussionPackages/otherBusinesses/common/fixedMapping",
+                  "weight": null,
+                  "score": null,
+                  "inputCompleteness": "价格分母已有SDK定义与解价路径交叉佐证为1e9；缺口限于同部署链上utils常量的独立实现绑定。不得说完全没有分母信息，也不冒称链上helper已直接核实。"
+                },
+                {
+                  "id": "early-allocation",
+                  "riskTarget": "核对保护份额、公开份额与退款计算一致",
+                  "formula": "if u==w or R<=H: sale=floor(u*D/P),refund=0; else: public=u-w; refund=floor((R-H)*public/(R-W)); sale=floor(w*D/P)+floor((sale_total-floor(W*D/P))*public/(R-W))",
+                  "unit": "sale币raw及raise币raw，D按本部署实际常量",
+                  "naturalConstraints": [
+                    "分支条件和舍入顺序与目标函数一致；0<=refund<=u",
+                    "需真实部署的价格单位，不能拿另一发行版本价格分母代入",
+                    "不读取个体凭证可用符号输入验证算术域；不得捏造每个用户具体额度"
+                  ],
+                  "source": [
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/tokenLaunch/snapshot.json",
+                      "jsonPath": "outputs.modules.early.asMovePackage.module.disassembly",
+                      "function": "calculate_claim_sale_and_raise_amount"
+                    },
+                    {
+                      "archive": "/private/tmp/cetus-project-YEvhp0Rv/launchsdk.tgz",
+                      "entry": "package/dist/index.js",
+                      "function": "Me=1e9 / buildLaunchPadPool initialize_price/1e9"
+                    }
+                  ],
+                  "classification": "natural_constraint_score_candidate",
+                  "fixedMappingRef": "#/discussionPackages/otherBusinesses/common/fixedMapping",
+                  "weight": null,
+                  "score": null
+                },
+                {
+                  "id": "early-stage",
+                  "riskTarget": "识别当前存量领取是否受阶段/版本异常阻断",
+                  "formula": "phase=target_duration_manager(now); claim_enabled=version_pass && target_claim_stage_conditions && is_settle when required",
+                  "unit": "秒及布尔",
+                  "naturalConstraints": [
+                    "按早期部署实际阶段解释，is_cancel时可能存在退款路径，不一律0",
+                    "当前样本已settle且未cancel；本期领取不要求重新做外部AMM注入",
+                    "发行结束不代表所有用户都领完"
+                  ],
+                  "source": [
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/tokenLaunch/snapshot.json",
+                      "jsonPath": "outputs.modules.early.asMovePackage.module.disassembly",
+                      "function": "claim/claim_internal"
+                    },
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/redemption/snapshot.json",
+                      "jsonPath": "outputs.modules.earlyConfig/earlyRouter",
+                      "function": "checked_package_version/claim"
+                    }
+                  ],
+                  "classification": "natural_constraint_score_candidate",
+                  "fixedMappingRef": "#/discussionPackages/otherBusinesses/common/fixedMapping",
+                  "weight": null,
+                  "score": null
+                }
+              ],
+              "codeRefs": [
+                {
+                  "archive": "runs/cetus-business-ratings-346896130/tokenLaunch/snapshot.json",
+                  "jsonPath": "outputs.modules.early.asMovePackage.module.disassembly"
+                }
+              ],
+              "calibrationNeeded": [
+                "售价、募资规模、分配公平性及经济警戒未冻结；自然分配公式只能证明机械一致性。"
+              ],
+              "boundaryNotes": [],
+              "score": null,
+              "weight": null,
+              "aggregation": {
+                "status": "not_adopted",
+                "rule": "本组件不得把披露项、引用项、N/A或未冻结经济判据当作100。将来只有已采纳且独立的自然约束项可按同范围最低值汇总；关键U不得删除后发布满分。该汇总仅对应已声明检查目标。",
+                "parentHealthScore": null
+              }
+            },
+            {
+              "id": "launch-over",
+              "label": "超募池领取退款",
+              "scope": "既定NAVX/SUI已结束超募池",
+              "status": "draft_for_discussion",
+              "observed": {
+                "pool": "0x0493193e0c0c0b608c9351c943635f997eff8ae367b3b7d8e2f26e0a833d9146",
+                "priceRaw": "21000000000000000",
+                "priceDenominator": "1000000000000000000",
+                "totalPurchase": "93118828816937612",
+                "protectionUsed": "133850198015706",
+                "completeRaiseLimit": "201600000000000",
+                "isWithdrawn": true,
+                "isLiquidityInjected": true,
+                "isCancelled": false,
+                "start": "1707048000",
+                "purchaseDuration": "259200",
+                "lockupDuration": "0"
+              },
+              "metrics": [
+                {
+                  "id": "over-allocation",
+                  "riskTarget": "防止超募分配的剩余容量、分母和向上取整扣款错位",
+                  "formula": "T=total_purchase_amount; W=protection_limit_used; C=ceil(total_supply*price/10^18); c=certificate.protected_raise; u=certificate.purchased_raise; public=u-c; q=T-W; capacity=C-W; sale=floor((c*q+public*capacity)*10^18/(q*price)); consumed=c+ceil(public*capacity/q); refund=target_purchase_manager.refunded_raise_amount(certificate_after_update_for_redeem)",
+                  "unit": "sale/raise币各自raw；price分母1e18",
+                  "naturalConstraints": [
+                    "只在oversubscribe分支要求q>0、price>0、0<=W<=C<=T、0<=c<=u；其他分支采用对应公式",
+                    "get_max_raise_amount已核为ceil(total_supply*price/10^18)，不是complete_raise_limit；refund在调用update_for_redeem后读取，其helper内部赋值/舍入未在本次已读模块中展开，不伪装已完成其独立重建",
+                    "记录sale向下、raise consumed向上的非对称舍入；不得把consumed误写refund",
+                    "未超募路径sale=floor(u*10^18/price),consumed=u"
+                  ],
+                  "source": [
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/tokenLaunch/snapshot.json",
+                      "jsonPath": "outputs.modules.over.asMovePackage.module.disassembly",
+                      "function": "redeem_for_sale_oversubcribe/redeem_for_sale_unoversubcribe/get_max_raise_amount"
+                    },
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/tokenLaunch/snapshot.json",
+                      "jsonPath": "outputs.modules.over.asMovePackage.module.disassembly",
+                      "function": "redeem_for_sale_success"
+                    }
+                  ],
+                  "classification": "natural_constraint_score_candidate",
+                  "fixedMappingRef": "#/discussionPackages/otherBusinesses/common/fixedMapping",
+                  "weight": null,
+                  "score": null,
+                  "inputCompleteness": "配售/实耗公式与价格分母已核；精确退款记账由purchase_manager helper实现，需定位已有helper来源后才能称端到端确定性公式完整。"
+                },
+                {
+                  "id": "over-stage",
+                  "riskTarget": "核对成功/失败、领取窗口和凭证一次性约束",
+                  "formula": "claim_enabled=version_pass && certificate.pool_id==pool.id && !is_redeemed && (sale_failed_refund_branch || success_claim_period)",
+                  "unit": "布尔与秒",
+                  "naturalConstraints": [
+                    "成功/失败及is_claim_period必须用本版本duration helper，不能借用早期阶段公式",
+                    "当前样本已withdrawn/liquidity_injected；存量领取不要求重新执行注入",
+                    "相同凭证不能重复领取，发送对象为tx sender；个体额度不在宏观快照编造"
+                  ],
+                  "source": [
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/tokenLaunch/snapshot.json",
+                      "jsonPath": "outputs.modules.over.asMovePackage.module.disassembly",
+                      "function": "redeem/is_sale_failed"
+                    },
+                    {
+                      "archive": "runs/cetus-business-ratings-346896130/redemption/snapshot.json",
+                      "jsonPath": "outputs.modules.overTime/overConfig",
+                      "function": "is_claim_period/checked_package_version"
+                    }
+                  ],
+                  "classification": "natural_constraint_score_candidate",
+                  "fixedMappingRef": "#/discussionPackages/otherBusinesses/common/fixedMapping",
+                  "weight": null,
+                  "score": null
+                }
+              ],
+              "codeRefs": [
+                {
+                  "archive": "runs/cetus-business-ratings-346896130/tokenLaunch/snapshot.json",
+                  "jsonPath": "outputs.modules.over.asMovePackage.module.disassembly"
+                }
+              ],
+              "calibrationNeeded": [
+                "售价、超募规模和保护比例的经济适配没有统一评分阈值；当前既有结束阶段只评分声明领取/退款机械一致性。"
+              ],
+              "boundaryNotes": [
+                "池余额与应领应退资金覆盖另披露；管理员/升级控制不在配置重复扣。"
+              ],
+              "score": null,
+              "weight": null,
+              "aggregation": {
+                "status": "not_adopted",
+                "rule": "本组件不得把披露项、引用项、N/A或未冻结经济判据当作100。将来只有已采纳且独立的自然约束项可按同范围最低值汇总；关键U不得删除后发布满分。该汇总仅对应已声明检查目标。",
+                "parentHealthScore": null
+              }
+            }
+          ],
+          "score": null,
+          "weight": null
+        }
+      ],
+      "openQuestions": [
+        "早期Launchpad分母已有既存SDK明确CONST_DENOMINATOR=1e9和initialize_price/1e9解价佐证；仍未独立绑定链上utils常量实现，缺口是部署代码绑定层，不能表述为完全没信息。",
+        "lock_coin_v2 helper内部结构/可见性未包含在当前已读归档；不伪造字段，不额外查链。",
+        "Farm退出耦合的预防性扣分、Vault区间/容差与调仓门槛的经济警戒、分红结算迟延警戒均未冻结，保留为讨论项。",
+        "超募池精确退款记账需补purchase_manager::update_for_redeem/refunded_raise_amount的已有helper定位；配售、实耗、最大募资公式已核，不拿complete_raise_limit代C。"
+      ]
+    }
+  },
+  "externalMechanismCrossChecks": [
+    {
+      "id": "cetus-dynamic-fee-doc",
+      "url": "https://cetus-1.gitbook.io/cetus-docs/dlmm/dynamic-fee",
+      "title": "Cetus Dynamic Fee",
+      "consultedDate": "2026-11-20",
+      "sourceType": "official_mechanism_description",
+      "supports": "区分基础费与随波动/跨bin行为变化的变费；只作机制意图交叉核验。",
+      "doesNotSupport": "不提供本次评分阈值，不证明当前变费足以补偿LP价格风险，也不替代部署参数和源码。"
+    },
+    {
+      "id": "cetus-xcetus-guide",
+      "url": "https://cetus-1.gitbook.io/cetus-docs/guides/how-to-join-xcetus-staking",
+      "title": "Cetus xCETUS Staking Guide",
+      "consultedDate": "2026-11-20",
+      "sourceType": "official_declared_entitlement",
+      "supports": "公开锁期/兑付端点及周期性奖励的承诺，用于与部署公式对应。",
+      "doesNotSupport": "不证明所有存量应付已足额，不证明lock_coin_v2内部或当前全部个体可兑现。"
+    },
+    {
+      "id": "uniswap-v3-whitepaper",
+      "url": "https://app.uniswap.org/whitepaper-v3.pdf",
+      "title": "Uniswap v3 Core, March 2021",
+      "consultedDate": "2026-11-20",
+      "sourceType": "primary_mathematical_reference",
+      "supports": "集中流动性的区间、资产数量与平方根价格关系，以及越界变单边和不再活跃的解释。",
+      "doesNotSupport": "不是Cetus部署等价证据，不提供对所有币对适用的区间宽度/费率安全阈值。"
+    }
+  ],
+  "sourceEvidence": {
+    "assessment": "cetus-public-security-assessment-2026-11-19.json",
+    "assessmentSha256": "c01501a687910229a921b00d4a7cc5155f871eb6d43c263ebdf4a49da2f1c2d1",
+    "archivedInputCatalog": {
+      "main": {
+        "directory": "runs/cetus-project-346896130",
+        "snapshotSha256": "43163ad9d146de23e1f9eb172e01b40c5270b759227b8d14ee63d7981a18e391",
+        "evidenceIndexSha256": "782278d151b28c39b4e51369dcd508d3a452857a48a69a8c42223abb9303705c",
+        "checkpoint": 346896130
+      },
+      "samples": {
+        "directory": "runs/cetus-config-dependencies-346896130/samples",
+        "snapshotSha256": "c482ee995b25c7ccdf5bb8f0defdc1cb3a122a86066c1f7d49acd281de359654",
+        "evidenceIndexSha256": "1f5039710cbb5611745df327092bbc9c5d5b349614420c74b514be2294103b24",
+        "checkpoint": 346896130
+      },
+      "selected": {
+        "directory": "runs/cetus-config-dependencies-346896130/selected",
+        "snapshotSha256": "03f0b3a5f693933deaec955ae3d43216e5506c3ee06aa4c78d18aa0718ed5e7f",
+        "evidenceIndexSha256": "3896b6f9139c61e5977dd2be5bf6b7af0ed11862edc0c496d4942cf9b0da80ad",
+        "checkpoint": 346896130
+      },
+      "linked": {
+        "directory": "runs/cetus-config-dependencies-346896130/linked",
+        "snapshotSha256": "8eadcccf1073029b4987e0a74e233f8acf45b9473628490d2d87e288d101d295",
+        "evidenceIndexSha256": "6a329b31cdc0f5f11189909ac3936cb0845274e937e4dc0c457fa5561520949d",
+        "checkpoint": 346896130
+      },
+      "vaultFarmBurn": {
+        "directory": "runs/cetus-business-ratings-346896130/vaultFarmBurn",
+        "snapshotSha256": "d3ce98bdc287b6eeeaa966dc98881746a0b47215e9b7c2eace65d89c0a05328d",
+        "evidenceIndexSha256": "df8d350189cdd19ab1f09404d40607e0a92b2c3b6218def5f624d01f8fc17a7f",
+        "checkpoint": 346896130
+      },
+      "ordersTide": {
+        "directory": "runs/cetus-business-ratings-346896130/ordersTide",
+        "snapshotSha256": "bf223f14046a9540528f1c77473ae315eb122f1b2b5b06ded53c9e45a0fe48ac",
+        "evidenceIndexSha256": "3cc57b17e905d5d7436e4e05568c4327b2bdff69ef032e2d3edc4aae58a77305",
+        "checkpoint": 346896130
+      },
+      "tokenLaunch": {
+        "directory": "runs/cetus-business-ratings-346896130/tokenLaunch",
+        "snapshotSha256": "325814aa4478f97c19661af4b5cea72fd71681d3fce0678f7a29df9064a5ca70",
+        "evidenceIndexSha256": "2b53830965b5e56ef5f21ee89bbc30238869d25ba66254e5fc49de90c7e5b4c7",
+        "checkpoint": 346896130
+      },
+      "redemption": {
+        "directory": "runs/cetus-business-ratings-346896130/redemption",
+        "snapshotSha256": "0d4b4a9a2c5ffa080506648a4ba69e9f4446325ba3e225f7378a9c7a723e214b",
+        "evidenceIndexSha256": "5396f120d22cbb146df38a8acc24a5d6b2b49881bbdaeb9cac1a8c6e6ec64da8",
+        "checkpoint": 346896130
+      },
+      "roleBindings": {
+        "directory": "runs/cetus-signer-check-346896130/roleBindings",
+        "snapshotSha256": "2674376d848e946d8ea3a8c928006afe88b53800036db1436e7be54611c25d1e",
+        "evidenceIndexSha256": "9fae28b99f372d212804e79485da9f679fe21d987300bbb0d9190e986765a50b",
+        "checkpoint": 346896130
+      },
+      "marginV4": {
+        "directory": "runs/cetus-signer-check-346896130/marginV4",
+        "snapshotSha256": "3b388f21e08b70fb0153b79b43f2e7dea5f46ee62bc500267e3904cb764098e4",
+        "evidenceIndexSha256": "84831004693b3e8bdacbacff57d8d3f0d90df7bef335fcce9897212c0fb1456c",
+        "checkpoint": 346896130
+      },
+      "margin": {
+        "directory": "runs/cetus-business-ratings-346896130/margin",
+        "snapshotSha256": "bc4d054cf45dbb55830a91cbd92423f73b82c0053e5bf55b2c129413178eaeb5",
+        "evidenceIndexSha256": "4da28caf03441e690c100a4f4f28f7345a5a00d55e945fcd535c782f072af895",
+        "checkpoint": 346896130
+      },
+      "coreAndToken": {
+        "directory": "runs/cetus-permission-controls-346896130/coreAndToken",
+        "snapshotSha256": "eedb66f25f0c79941c30d903b3f24a9dd6852c030b8fd0cee5a2acc49d0f0752",
+        "evidenceIndexSha256": "704f41adbc015613290a030e401140d5d9893d08cfc61cf4e7009a5187fef2ec",
+        "checkpoint": 346896130
+      },
+      "gates": {
+        "directory": "runs/cetus-config-dependencies-346896130/gates",
+        "snapshotSha256": "deb9e0770bc2b5792d513df51220a3ddfa67210698fe7bd7977d7d8129d40885",
+        "evidenceIndexSha256": "8b8f48254dc1e41e7ef1f91107e1c903399e457bdb4e66be7a0574368d9b4a28",
+        "checkpoint": 346896130
+      }
+    },
+    "packetProvenance": [
+      {
+        "packet": "execution",
+        "temporaryInputPath": "/private/tmp/cetus-configuration-method-execution.json",
+        "sha256": "068dc5b55e8e0deed40ed83fa2efd1fb982034f8d48e39090207cad2e4b1f175"
+      },
+      {
+        "packet": "margin",
+        "temporaryInputPath": "/private/tmp/cetus-configuration-method-margin.json",
+        "sha256": "93c8e879164d9d2cab48b52883d0a1789cffac8810a97da6988aee358d7f7ef4"
+      },
+      {
+        "packet": "otherBusinesses",
+        "temporaryInputPath": "/private/tmp/cetus-configuration-method-components.json",
+        "sha256": "8574c54fbc3dacb0a6be6d58a34ee719876722f2bddbd1481b1e95378eceb931"
+      }
+    ]
+  },
+  "discussionOrder": [
+    "spot.native-amm.CLMM",
+    "spot.native-amm.DLMM",
+    "spot.aggregator",
+    "spot.tide-rfq",
+    "conditional-orders.Limit",
+    "conditional-orders.DCA",
+    "margin",
+    "strategy-vault",
+    "stable-farming",
+    "lp-burn.burn-and-vester",
+    "xcetus.locking-and-dividend",
+    "launchpad.early-and-over"
+  ],
+  "publicationGate": {
+    "allNewScores": null,
+    "requiredBeforeScoring": [
+      "确定每组件实际要评的风险目标，区分自然正确性与经济充分性",
+      "选择或明确排除每项评分政策；不得为现有数值倒推阈值",
+      "解决会改变单位/分配公式的必要源码缺口，其余未知仅影响对应指标",
+      "冻结独立计分职责和内部聚合，保留现有父业务预算",
+      "以原值/整数舍入/明确条件复算，并输出分数理由与未覆盖范围"
+    ],
+    "notRequired": [
+      "扫描交易历史",
+      "拉全量pair/订单/用户账户",
+      "为非必需披露强制新增市场数据",
+      "证明经济上唯一最优参数或所有未来行情均安全"
+    ]
+  },
+  "verification": {
+    "parentBusinesses": 8,
+    "parentBudgetsChanged": false,
+    "publishedScoresChanged": false,
+    "frontendChanged": false,
+    "allSnapshotExamplesUseCheckpoint": 346896130,
+    "policyStatus": "all_proposals_not_applied"
+  },
+  "reviewNotes": [
+    "原生CLMM/DLMM、Aggregator和Tide并非同一机制，分别讨论。",
+    "条件订单分Limit与DCA；xCETUS分锁仓与分红；LP Burn分凭证权益与Vester；Launchpad分早期与超募实现。",
+    "自然约束与经济风险阈值不同，公式存在不自动代表判分依据已充分。"
+  ]
+}
