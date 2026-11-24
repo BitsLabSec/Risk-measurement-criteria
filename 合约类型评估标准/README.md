@@ -1,23 +1,27 @@
-# BitsScore 合约类型评估标准
+# BitsScore 链上评估标准与类型索引
 
-本目录归集截至 2026-11-17 已成文的五份链上专项标准。[通用链上安全评估标准 v0.1](./通用链上安全评估标准.md)列出通用检查项、评分公式及五类专项映射。[五类标准的共同规则与适用边界](./共同规则.md)保留前期对既有文档的归纳。
+链上评估用**权限管理、参数配置、资金与外部依赖**判断协议当前能否长期正常运行。固定范围、快照和权限关系后，按通用和业务专项判据定档，再按已核实的独立问题计算档内分。 [执行流程](./链上评估复用指南.md) · [定档及扣分](./通用链上安全评估标准.md#13-先定档再计算档内分) · [共同适用边界](./共同规则.md)
 
-| 分类标准 | 结论覆盖谁 | 独立计分 | 资金、头寸或市场信息 |
-| --- | --- | --- | --- |
-| [Lending v0.12](./lending-onchain-security-rating-standard.md) | 指定链、借贷市场、资产／模式及相应用户权益 | 链上权限、配置压力情景与响应、预言机来源与配置韧性 | 必采披露资金位置、供应、借款、现金、奖励和上限占用；账户类汇总暂不开展，选配不阻断基础评分。 |
-| [DEX v0.2](./dex-onchain-security-rating-standard.md) | 约定的核心组件与操作，具体池按约定纳入 | 权限、配置、必要依赖 | 当前标准未把全量交易对、池深度或 LP 集中度列为默认评分项。 |
-| [收益金库 v0.2](./yield-vault-onchain-security-rating-standard.md) | 选定金库、底层资金组件及其承接的用户权益 | 权限、配置、必要依赖 | 展示资金分布、领取／退出状态及受影响敞口。 |
-| [永续合约 v0.2](./perpetuals-onchain-security-rating-standard.md) | 证据能覆盖的公共入口、市场组、资产或局部市场 | 权限、配置、必要依赖，各分数可覆盖不同范围 | 披露链上可直接核验的结算异常。整体缺口需要逐仓重建时标为未核验。 |
-| [同质化代币 v0.3](./fungible-token-onchain-security-rating-standard.md) | 本链代币部署，以及适用的账户类别或转账方向 | 发行与资产控制权限、当前转账与收费配置 | 外部转账校验并入配置。前十大持仓和市值预留作展示。 |
+## 类型专项
 
-五类专项标准以本目录为唯一正文。代码安全、业务攻防、交付要求和运营披露属于跨项目的配套文档，见 [BitsScore 评级标准目录](../README.md)。
+| 专项 | 先确定的业务和必要操作 | 参数、资金及依赖的专项输入 |
+| --- | --- | --- |
+| [Lending v0.15](./lending-onchain-security-rating-standard.md) | 指定借贷市场及模式的借款、还款、清算、提款 | 资产及价格绑定、准入及清算联动、限额、利率、模式；池级债权、同币现金、实际可达资金和报价替代。 |
+| [DEX v0.5](./dex-onchain-security-rating-standard.md) | 原生 AMM 交易、结算、撤资；聚合签入交易与资产返还；RFQ 报价与库存取回 | CLMM／DLMM 生效收费及退出，聚合实际净到账和退款，RFQ 有效报价、库存、结算与提款分开核实。 |
+| [收益金库 v0.5](./yield-vault-onchain-security-rating-standard.md) | 份额兑付、领取、赎回和从策略取回资产 | 份额及策略绑定、复投和兑付规则，现金、待付及按期可调回额度。 |
+| [杠杆仓位 v0.3](./margin-onchain-security-rating-standard.md) | 开仓、减仓、还款、清算及合资格提款 | 借贷及交易的实际联动、报价接受规则、项目仓位与外部储备资金边界、还款退出路径。 |
+| [条件订单 v0.3](./order-execution-onchain-security-rating-standard.md) | 限价单与 DCA 开单、存量执行、取消退款 | 订单对象和签入条件、每期资产与净输出、托管余额、报价、签名或执行者及独立退出。 |
+| [Farming 与奖励池 v0.3](./farm-incentives-onchain-security-rating-standard.md) | 已产生奖励的领取、存入资产的取回 | 计奖、释放、支付规则和同币奖励库，已释放与未来排放分开。 |
+| [锁仓赎回与分红 v0.3](./staking-redemption-onchain-security-rating-standard.md) | 锁仓、到期赎回、分红领取和已承诺分配履约 | 锁仓实际转移、发行与兑付口径、已登记分红资金、净利润归属及独立领取路径。 |
+| [Launchpad 发行与退款 v0.3](./launchpad-onchain-security-rating-standard.md) | 配售、代币领取、退款及已结束发行的存量权利 | 发行阶段、清算及分配、未领预算和退款预留、已提取资金与必要依赖。 |
+| [LP 永久封存与历史补偿 v0.3](./lp-burn-onchain-security-rating-standard.md) | 封存后保留的收费领取权、已声明补偿的领取 | 封存与领取权益的实质、可领取余额、到期补偿、底层结算及必要授权。 |
+| [永续合约 v0.5](./perpetuals-onchain-security-rating-standard.md) | 已声明市场的减仓、权益结算和可用保证金提款 | 保证金与结算绑定、风险约束、当前可核应付和现金、实际采用的价格及资金释放路径。 |
+| [同质化代币 v0.6](./fungible-token-onchain-security-rating-standard.md) | 发行与控制、持有人的必要转移、适用兑现权 | 转账方向、暂停、费率与豁免、外部校验状态；实际兑现义务由承担它的业务专项判断。 |
 
-[链上评估复用指南](./链上评估复用指南.md)记录共用采集和证据清单、加权公式、Lending 完整示例，以及迁移到其他类型时应替换的具体检查项。
+同一个项目可按功能采用多个专项。先确认用户权益及评估范围，再按这些权利选择机制、参数和适用扣分条件。共享对象沿用同一证据。业务封顶后，每个项目大项对适用业务等权平均，再按三大项权重加权和执行项目级封顶。 [汇总规则](./链上评估复用指南.md#3-项目汇总与正式交付) · [现行 JSON](./project-onchain-rollup-v2.json)
 
-## Lending 当前讨论与执行状态
+## 已有案例与规则追溯
 
-- [配置风险评估方法与执行流程 v0.1](./lending-configuration-evaluation-method.md)：总结持续运营目标、证据门槛、五组控制、九步执行流程及NAVI约82的讨论性初评。正式执行规则尚未迁移，不能与v0.12当作同版本分差。
-- [下一模块：预言机事实与讨论起点](./lending-oracle-review-notes.md)：区分报价安全、冗余、停更和权限覆盖，暂不修改分数。
-- [资金状态与关键依赖试评](../research/lending-sustainable-operations-research-2026-11-18.md#低权重净损失情景与-navi-复算)：一次净损失情景占第三模块 10%，收入用于披露补库能力；NAVI 第三模块为 77.88。
-- [NAVI 加权复算](../research/navi-onchain-weighted-rating-2026-11-18.json)：试评按权限 30%、配置 30%、资金与关键依赖 40% 汇总，链上总分 **79.53（整数 80）**。
-- 当前冻结的 Lending v0.12、采集规则和前端结果保持原样；其中资金部分继续作宏观披露。
+- NAVI 的借贷配置和持续运营试评保留其快照、公式及权重。该快照的参数和情景使用见 Lending 专项的历史规则区。 [NAVI 配置研究](../research/lending-configuration-research-2026-11-17.md) · [NAVI 资金研究](../research/lending-sustainable-operations-research-2026-11-18.md) · [试评结果](../research/navi-onchain-weighted-rating-2026-11-18.json)
+- Cetus 的现货、杠杆、金库、订单、奖励、锁仓分红、LP 封存及发行按各自业务路径拆分。专项案例引用具名对象和当轮已采用的规则。 [配置判定底稿](../research/cetus-configuration-assessment-346896130.json) · [资金与依赖底稿](../research/cetus-funds-dependencies-review-346896130.json) · [当轮停供试评](../research/cetus-funds-dependencies-method-research-2026-11-20.json)
+- 永续和同质化代币按自身机制识别实际资金义务与必要操作，规则包含相关配置和依赖的档内扣分。

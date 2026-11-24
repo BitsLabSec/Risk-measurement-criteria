@@ -1,0 +1,237 @@
+{
+  "id": "project-onchain-rollup-v2",
+  "version": "2.2",
+  "effectiveDate": "2026-11-24",
+  "title": "项目链上评分汇总",
+  "status": "current",
+  "supersedes": "project-onchain-rollup-v1.json",
+  "scoreRange": [
+    0,
+    100
+  ],
+  "dimensionWeights": {
+    "permissions": 30,
+    "configuration": 30,
+    "fundsAndExternalDependencies": 40
+  },
+  "dimensionLabels": {
+    "permissions": "权限管理",
+    "configuration": "参数配置",
+    "fundsAndExternalDependencies": "资金与外部依赖"
+  },
+  "scope": {
+    "rollupUnit": "一级业务模块",
+    "moduleSelection": "沿用已确认的业务范围及一级业务模块 ID。按独立的业务功能、用户权益及必要操作划分。合约、版本、池、市场、适配器及类型专项是模块内的评分依据。",
+    "scopeBoundary": "每个业务模块、每个大项提供一条归并结果。局部证据只用于实际覆盖的范围。有明确专项公式时先按专项归并，正式范围内适用的必要检查缺证时按结项规则计分。",
+    "excludedScope": "范围外业务或对象注明排除理由。范围内适用的必要检查缺证按 0 计分并注明原因。跨链按各链快照记录，同链同轮使用同一锚点。"
+  },
+  "input": {
+    "assessmentFields": [
+      "assessment_id",
+      "scope_id",
+      "scope_manifest_id",
+      "snapshots",
+      "business_module_ids",
+      "rollup_rule_id",
+      "rollup_rule_version",
+      "module_results",
+      "risk_and_cap_records"
+    ],
+    "moduleResultFields": [
+      "item_id",
+      "business_module_id",
+      "dimension",
+      "scope_id",
+      "status",
+      "score_or_null",
+      "reason",
+      "evidence_refs",
+      "formula_or_rule_id"
+    ],
+    "referenceFields": [
+      "reference_item_ids"
+    ],
+    "uniqueModuleResultKey": [
+      "business_module_id",
+      "dimension"
+    ],
+    "missingResult": "正式范围内应交付结果的业务和大项仍缺必要证据时，补入数值 0 及证据未取得的说明。不能用范围无法对应的材料作计分证据。",
+    "specializedScores": "模块结果引用适用的通用及专项规则、证据和评分细项。采用专项组内公式时使用组内最终分，允许小数。",
+    "moduleResultScore": "score_or_null 是封顶前的业务分项原分。状态 rated 时为数值，只有 N/A 和纯引用为 null。",
+    "capInputFields": [
+      "scope_level",
+      "scope_id",
+      "rule_id",
+      "ceiling",
+      "reason",
+      "evidence_refs"
+    ]
+  },
+  "statusPolicy": {
+    "rated": {
+      "includedInDenominator": true,
+      "scored": true,
+      "score": "分数在 0–100。已证实失败或适用必要检查缺证的 0 分均保留在分母，用 reason 区分。查不到的保护或替代按无相应保护计算。"
+    },
+    "N/A": {
+      "includedInDenominator": false,
+      "scored": false,
+      "score": null,
+      "description": "有依据证实该大项对该模块确实不适用。记录依据。权限检查适用且完整核验后确认无危险能力，按权限分表计 100。"
+    },
+    "reference": {
+      "includedInDenominator": false,
+      "scored": false,
+      "score": null,
+      "description": "模块在该大项只有其他责任项已经评分的重复事实。关联责任项及根因、范围和后果。模块自身适用的独立事实另计分，缺证也适用结项规则。"
+    }
+  },
+  "calculation": {
+    "order": [
+      "business_weighted_mean",
+      "business_cap",
+      "dimension_equal_mean",
+      "project_weighted_sum",
+      "project_cap"
+    ],
+    "includedStatuses": [
+      "rated"
+    ],
+    "excludedStatuses": [
+      "N/A",
+      "reference"
+    ],
+    "dimensionDenominator": "同一大项内所有适用业务模块数，包含因缺证记 0 的模块。",
+    "dimensionScore": "同一大项内应计入分母的业务汇总分之和 ÷ 该大项分母。",
+    "businessWeightedScore": "业务独立适用的大项原分乘对应 30/30/40 权重后相加，再除以这些适用权重的和。",
+    "projectWeightedScore": "业务封顶处理后，权限管理大项分 × 30% + 参数配置大项分 × 30% + 资金与外部依赖大项分 × 40%。",
+    "finalScore": "项目最终分 = min(项目原始加权分, 适用项目上限)。有确证触发项目级 0 分封顶时直接交付 0。相同事实按实际风险范围应用一次封顶。",
+    "renormalizeDimensionWeights": false,
+    "rounding": {
+      "intermediate": "unrounded",
+      "displayDecimalPlaces": 2,
+      "displayMode": "half_up"
+    },
+    "businessFinalScore": "业务最终分 = min(业务原分, 适用业务上限)。有确证触发业务级 0 分封顶时该业务直接交付 0。",
+    "businessRollupFactor": "业务原分大于 0 时，业务汇总系数 = 业务最终分 ÷ 业务原分。业务原分为 0 时，系数为 1。",
+    "moduleScoreForRollup": "同一业务各独立适用大项的原分均乘以其业务汇总系数。结果仅用于项目汇总，保留分项原分。",
+    "businessNormalizeApplicableDimensionWeights": true,
+    "renormalizeDimensionWeightsScope": "项目总分固定使用三项权重；适用权重归一只用于业务原分。"
+  },
+  "publication": {
+    "rated": "发布各大项、各业务与项目得分，列原始分、范围、上限及最终分。发布分 60 及以下为不及格。",
+    "missingEvidence": "适用必要检查以证据未取得为原因出分。仅选配或披露项缺证时保留说明。完成后交付确定得分或已证实不适用的结果。",
+    "zeroDenominator": "某大项全部为 N/A 时记 N/A，全部仅为引用或由引用和 N/A 组成时记 reference_only。业务的独立适用权重之和为 0 时，该业务总分不适用。项目整项确无独立适用模块时交付分项，项目总分不适用。已确认相应范围触发 0 分封顶时仍交付 0。",
+    "reportFields": [
+      "scope_id",
+      "snapshots",
+      "dimension_results",
+      "business_results",
+      "module_rollup_results",
+      "project_status",
+      "raw_weighted_score_or_null",
+      "final_score_or_null",
+      "risk_and_cap_records"
+    ],
+    "dimensionResultFields": [
+      "dimension",
+      "dimension_weight",
+      "module_result_ids",
+      "denominator",
+      "status",
+      "score_or_null",
+      "weighted_contribution_or_null"
+    ],
+    "capRecordFields": [
+      "scope_id",
+      "scope_level",
+      "rule_id",
+      "evidence_refs",
+      "reason",
+      "ceiling",
+      "raw_weighted_score_or_null",
+      "final_score_or_null"
+    ],
+    "businessResultFields": [
+      "business_module_id",
+      "rated_module_result_ids",
+      "applicable_weight_sum",
+      "status",
+      "raw_weighted_score_or_null",
+      "ceiling",
+      "final_score_or_null",
+      "rollup_factor_or_null"
+    ],
+    "moduleRollupFields": [
+      "item_id",
+      "business_module_id",
+      "dimension",
+      "raw_score_or_null",
+      "score_for_rollup_or_null"
+    ]
+  },
+  "capPolicy": {
+    "source": "链上评估复用指南.md#项目和业务风险封顶",
+    "application": {
+      "business": "局部重大风险只对受影响业务的原始加权分封顶，按该业务封顶后的比例带入项目汇总。",
+      "project": "按覆盖全项目的控制、配置或故障后果，对项目原始加权分封顶。已用于项目级封顶的同一事实不重复用于业务级封顶。",
+      "priority": "先判已证实的 0 风险，再判 60 风险。剩余情形取已证实满足的最高保护档，需有保护的范围缺证时以 60 封顶并另记原因。"
+    },
+    "rules": [
+      {
+        "id": "scope_wide_critical_risk",
+        "ceiling": 0,
+        "condition": "有确证可在短时间内极低成本影响该评分范围全部资产，或明显部署错误使该范围核心业务无法正常运行。"
+      },
+      {
+        "id": "limited_risk",
+        "ceiling": 60,
+        "condition": "有确证可在短时间内以低成本影响部分资产或功能，核心业务仍能正常运行。"
+      },
+      {
+        "id": "unproven_baseline_protection",
+        "ceiling": 60,
+        "condition": "该范围需有相应关键保护或合理配置，但无法验证满足 80 档的条件。"
+      },
+      {
+        "id": "protected_governance",
+        "ceiling": 80,
+        "condition": "关键授权要求有效多签，无法单签绕过，必要参数合理或由代码作合理固定约束。"
+      },
+      {
+        "id": "timelock_24h",
+        "ceiling": 85,
+        "minimumDelayHours": 24,
+        "condition": "达到 80 档且按复用指南第 1.3 节核验的最短有效延时达到 24 但不足 48 小时。"
+      },
+      {
+        "id": "timelock_48h",
+        "ceiling": 95,
+        "minimumDelayHours": 48,
+        "condition": "达到 80 档且按复用指南第 1.3 节核验的最短有效延时至少 48 小时。"
+      },
+      {
+        "id": "additional_independent_protection",
+        "ceiling": 100,
+        "condition": "达到 95 档且关键路径有额外独立强制批准或无法由控制者移除的实质硬约束。"
+      },
+      {
+        "id": "no_privileged_configuration",
+        "ceiling": 100,
+        "condition": "已核实该业务既无特权角色也无可调参数；或已核实多业务项目在项目层无覆盖全局的权限、可调参数或封顶风险。"
+      }
+    ],
+    "maximumFailingScore": 60
+  },
+  "migration": {
+    "legacyResults": "历史试评保留原规则 ID、快照和已发布分数，按原版本追溯。",
+    "legacyEvidence": "旧明细可以作为证据引用。提交现行结果前核对部署、快照、范围、业务模块和现行大项定义，必要判据按现行规则核验。",
+    "legacyDependencyField": "旧 necessaryDependencies 与现行 fundsAndExternalDependencies 定义不同，需逐项对应资金、必要依赖和范围。不能作为同口径证据的部分按现行缺证规则计分。"
+  },
+  "references": [
+    "链上评估复用指南.md",
+    "通用链上安全评估标准.md",
+    "共同规则.md",
+    "../assessment-preparation.md"
+  ]
+}
