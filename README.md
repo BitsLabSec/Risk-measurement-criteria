@@ -1,6 +1,7 @@
 # BitsScore 评估指南
 
 > 评分规则的上位依据是[评分骨架 v1.0](./评分骨架.md)。各标准与骨架冲突时，以骨架为准。
+> **执行评估的 agent 请直接按[工作流](./工作流/README.md)的步骤卡操作。**目前覆盖前期准备和代码安全；agent 只填写事实，计分由脚本完成。
 
 ## 做什么
 
@@ -28,7 +29,7 @@ JSON 记录本轮范围、生产版本和适用的链上快照，以及代码安
 
 | 本轮评估项 | 从哪里开始、接着怎么做 |
 | --- | --- |
-| 代码安全 | 打开[代码安全评分标准 v1.0](./code-security/code-security-rating-standard.md)，按第 3 节七个步骤执行：建分母、收集报告、逐行判定覆盖、算覆盖分、给总体评价、风险封顶、得出最终分。交付内容见[第 4 节](./code-security/code-security-rating-standard.md#4-交付)。 |
+| 代码安全 | 打开[代码安全评分标准 v1.1](./code-security/code-security-rating-standard.md)，按第 3 节七个步骤执行：建分母、收集报告、逐行判定覆盖、算覆盖分、给总体评价、风险封顶、得出最终分。交付内容见[第 4 节](./code-security/code-security-rating-standard.md#4-交付)。 |
 | 链上安全 | 打开[链上安全评估标准 v1.0](./onchain/链上安全评估标准.md)，按第 2 节的流程执行；每个业务按[专项索引](./onchain/README.md#类型专项)选一个专项。结果字段见[第 10 节](./onchain/链上安全评估标准.md#10-每个结果必须带的字段)。 |
 | 业务攻防 | 打开[业务攻防评级标准](./业务攻防/web3-business-security-rating-standard.md)。把终审渗透报告的覆盖和保留风险映射到实际业务流程，按标准评分。 |
 | 盘外情报 | 打开[盘外情报评级标准](./盘外情报/offchain-intelligence-rating-standard.md)，逐项查公开材料并判断符合程度。按需整理[安全运营与披露](./盘外情报/security-operations-disclosure-supplement.md)，作为不计分的补充信息。 |

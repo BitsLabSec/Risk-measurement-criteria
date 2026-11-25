@@ -4,3 +4,5 @@
 /元数据采集与评分证据清单.md
 web3-penetration-testing-service-spec.md
 web3-penetration-testing-client-intake.md
+__pycache__/
+.DS_Store
