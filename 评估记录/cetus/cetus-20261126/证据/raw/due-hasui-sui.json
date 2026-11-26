@@ -1,0 +1,21 @@
+{
+ "command": "cmd:python3 工作流/scripts/sui_read.py <目录> clmm-due 0x871d8a227114f375170f149f7e9d45be822dd003eba225e83c05ac80828596bc --at 349316550 --name due-hasui-sui",
+ "inputs": {
+  "pool": "file:证据/raw/due-hasui-sui-pool.json",
+  "ticks": "file:证据/raw/due-hasui-sui-ticks.json"
+ },
+ "result": {
+  "ticks": 376,
+  "due_a": "1948504082236850",
+  "due_b": "1255706250138105",
+  "balance_a": "1948696398462374",
+  "balance_b": "1255727634905725",
+  "reserved_a": "1240723969",
+  "reserved_b": "7061422685",
+  "liquidity_rebuilt": "2259169922640932678",
+  "liquidity_recorded": "2259169922640932678",
+  "rebuild_ok": true,
+  "problem": null
+ },
+ "formula": "onchain/dex-onchain-security-rating-standard.md DX-F1.1"
+}

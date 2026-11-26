@@ -1,0 +1,26 @@
+{
+  "sources": [
+    {
+      "id": "S01",
+      "deployment_ids": [
+        "I01"
+      ],
+      "language": "move",
+      "repo_url": "https://github.com/CetusProtocol/cetus-contracts",
+      "commit": "4e6147ed5584def9eb6b8e36ef7e62ccb7551fd3",
+      "local_path": "cache:packages/cetus_clmm",
+      "in_scope_globs": [
+        "sources/*.move",
+        "sources/math/*.move"
+      ],
+      "excluded_globs": [
+        "tests/**"
+      ],
+      "verify_method": "not_verified",
+      "verify_result": "not_verified",
+      "verify_evidence": [
+        "https://github.com/CetusProtocol/cetus-contracts/blob/4e6147ed5584def9eb6b8e36ef7e62ccb7551fd3/packages/cetus_clmm/Published.toml"
+      ]
+    }
+  ]
+}

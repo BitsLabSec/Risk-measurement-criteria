@@ -1,0 +1,511 @@
+{
+  "targets": [
+    {
+      "id": "OT01",
+      "chain_id": "sui:mainnet",
+      "address": "0x4462a572640227717cb8c60b6dd337f022743de6bc13f1fe0b7adb182d1fa274",
+      "kind": "capability",
+      "fields": [
+        {
+          "name": "owner",
+          "meaning": "持有人地址"
+        },
+        {
+          "name": "package",
+          "meaning": "当前包"
+        },
+        {
+          "name": "version",
+          "meaning": "版本"
+        },
+        {
+          "name": "policy",
+          "meaning": "升级策略，0=兼容"
+        }
+      ],
+      "serves": [
+        "H1@BZ01"
+      ],
+      "priority": "required",
+      "reason": "cetus_clmm 的升级凭证"
+    },
+    {
+      "id": "OT02",
+      "chain_id": "sui:mainnet",
+      "address": "0x89c1a321291d15ddae5a086c9abc533dff697fde3d89e0ca836c41af73e36a75",
+      "kind": "capability",
+      "fields": [
+        {
+          "name": "owner",
+          "meaning": "持有人地址"
+        }
+      ],
+      "serves": [
+        "H1@BZ01",
+        "H2@BZ01",
+        "H3@BZ01"
+      ],
+      "priority": "required",
+      "reason": "config::AdminCap 的全部实例（按类型在快照上查询，只有 1 个）"
+    },
+    {
+      "id": "OT03",
+      "chain_id": "sui:mainnet",
+      "address": "0xdaa46292632c3c4d8f31f23ea0f9b36a28ff3677e9684980e4438403a67a3d8f",
+      "kind": "config",
+      "fields": [
+        {
+          "name": "package_version",
+          "meaning": "当前允许的包版本；等于 2^63 表示紧急暂停中"
+        },
+        {
+          "name": "protocol_fee_rate",
+          "meaning": "协议分成，分母 10000"
+        },
+        {
+          "name": "acl.permissions",
+          "meaning": "角色表（LinkedTable）的 ID 和条目数"
+        }
+      ],
+      "serves": [
+        "H3@BZ01",
+        "DX-C3.1@MK01",
+        "DX-C3.1@MK02",
+        "DX-C3.1@MK03",
+        "DX-C2.1@MK01",
+        "DX-C2.1@MK02",
+        "DX-C2.1@MK03"
+      ],
+      "priority": "required",
+      "reason": "CLMM 全局配置"
+    },
+    {
+      "id": "OT04",
+      "chain_id": "sui:mainnet",
+      "address": "0xdaa46292632c3c4d8f31f23ea0f9b36a28ff3677e9684980e4438403a67a3d8f",
+      "kind": "config",
+      "fields": [
+        {
+          "name": "dynamic_fields",
+          "meaning": "GlobalConfig 下的动态字段；有 emergency_pause_before_version 表示处于紧急暂停"
+        }
+      ],
+      "serves": [
+        "DX-C3.1@MK01",
+        "DX-C3.1@MK02",
+        "DX-C3.1@MK03"
+      ],
+      "priority": "required",
+      "reason": "确认是否处于紧急暂停"
+    },
+    {
+      "id": "OT05",
+      "chain_id": "sui:mainnet",
+      "address": "0xcf1897ae0793665f0e3f676d86450675bbf31842fde1aa02613b7b53f34b764c",
+      "kind": "config",
+      "fields": [
+        {
+          "name": "member[0xdbfd0b17fa804c98f51d552b050fb7f850b85db96fa2a0d79e50119525814a47]",
+          "meaning": "该地址的角色位（u128 位图）"
+        },
+        {
+          "name": "member[0x94718229b8b79c06e81ea7d32a9c226cd20c905ab493fabab28998ab4cd0ab9c]",
+          "meaning": "该地址的角色位（u128 位图）"
+        },
+        {
+          "name": "member[0xf5c5735651726d57dab28f32d2e62c0821e5448ac4a597db94cc1adc92025f9f]",
+          "meaning": "该地址的角色位（u128 位图）"
+        },
+        {
+          "name": "member[0xaabf2fedcb36146db164bec930b74a47969c4df98216e049342a3c49b6d11580]",
+          "meaning": "该地址的角色位（u128 位图）"
+        },
+        {
+          "name": "member[0x2891c6b8dca29a075d263c1bb21c7b88adf3ff6baddae1b8743cc00b66bd2c47]",
+          "meaning": "该地址的角色位（u128 位图）"
+        },
+        {
+          "name": "member[0x69d3948e0324e8c2f05faa0fccaaaca92ce5875025bea4611a7e1399801b18ee]",
+          "meaning": "该地址的角色位（u128 位图）"
+        },
+        {
+          "name": "member[0x2713eff5875e0c59ce5ee5b561df3d8c8cbe5d086033e0a59be14efeb5e39c81]",
+          "meaning": "该地址的角色位（u128 位图）"
+        }
+      ],
+      "serves": [
+        "H1@BZ01",
+        "H2@BZ01",
+        "H3@BZ01"
+      ],
+      "priority": "required",
+      "reason": "CLMM 角色表，一次查询读出 7 个成员"
+    },
+    {
+      "id": "OT06",
+      "chain_id": "sui:mainnet",
+      "address": "0xdbfd0b17fa804c98f51d552b050fb7f850b85db96fa2a0d79e50119525814a47",
+      "kind": "multisig",
+      "fields": [
+        {
+          "name": "members_threshold",
+          "meaning": "从一笔交易签名解出的成员、权重和门限"
+        }
+      ],
+      "serves": [
+        "H1@BZ01",
+        "H2@BZ01",
+        "H3@BZ01"
+      ],
+      "priority": "required",
+      "reason": "Sui 原生多签成员"
+    },
+    {
+      "id": "OT07",
+      "chain_id": "sui:mainnet",
+      "address": "0x2891c6b8dca29a075d263c1bb21c7b88adf3ff6baddae1b8743cc00b66bd2c47",
+      "kind": "multisig",
+      "fields": [
+        {
+          "name": "members_threshold",
+          "meaning": "从一笔交易签名解出的成员、权重和门限"
+        }
+      ],
+      "serves": [
+        "H1@BZ01",
+        "H2@BZ01",
+        "H3@BZ01"
+      ],
+      "priority": "required",
+      "reason": "Sui 原生多签成员"
+    },
+    {
+      "id": "OT08",
+      "chain_id": "sui:mainnet",
+      "address": "0x871d8a227114f375170f149f7e9d45be822dd003eba225e83c05ac80828596bc",
+      "kind": "market_or_pool",
+      "fields": [
+        {
+          "name": "type",
+          "meaning": "池的币种类型（A, B）"
+        },
+        {
+          "name": "tick_spacing",
+          "meaning": "tick 间距"
+        },
+        {
+          "name": "fee_rate",
+          "meaning": "手续费率，分母 1000000"
+        },
+        {
+          "name": "coin_a",
+          "meaning": "A 币真实余额（最小单位）"
+        },
+        {
+          "name": "coin_b",
+          "meaning": "B 币真实余额（最小单位）"
+        },
+        {
+          "name": "fee_protocol_coin_a",
+          "meaning": "A 币协议费（最小单位）"
+        },
+        {
+          "name": "fee_protocol_coin_b",
+          "meaning": "B 币协议费（最小单位）"
+        },
+        {
+          "name": "liquidity",
+          "meaning": "当前价格处的流动性"
+        },
+        {
+          "name": "current_sqrt_price",
+          "meaning": "当前价格的平方根，Q64.64"
+        },
+        {
+          "name": "is_pause",
+          "meaning": "池级暂停标志"
+        },
+        {
+          "name": "position_manager.positions.size",
+          "meaning": "头寸数量（只披露）"
+        }
+      ],
+      "serves": [
+        "DX-C1.1@MK01",
+        "DX-C2.1@MK01",
+        "DX-C3.1@MK01",
+        "DX-F1.1@MK01"
+      ],
+      "priority": "required",
+      "reason": "选定的池（haSUI-SUI（费率 0.01%））"
+    },
+    {
+      "id": "OT09",
+      "chain_id": "sui:mainnet",
+      "address": "0x871d8a227114f375170f149f7e9d45be822dd003eba225e83c05ac80828596bc",
+      "kind": "market_or_pool",
+      "fields": [
+        {
+          "name": "dynamic_fields",
+          "meaning": "池下的动态字段：有 pool_status 表示设置过逐项开关"
+        }
+      ],
+      "serves": [
+        "DX-C3.1@MK01"
+      ],
+      "priority": "required",
+      "reason": "确认池级开关状态（haSUI-SUI（费率 0.01%））"
+    },
+    {
+      "id": "OT10",
+      "chain_id": "sui:mainnet",
+      "address": "0x826f09b95ea134f30364d58c807fef95d9bc9d9ba13c4ca0acd7b57d8a80fe09",
+      "kind": "market_or_pool",
+      "fields": [
+        {
+          "name": "due_a",
+          "meaning": "全部头寸的 A 币本金应得（最小单位），由整张 tick 表（376 个）重建"
+        },
+        {
+          "name": "due_b",
+          "meaning": "全部头寸的 B 币本金应得（最小单位），由整张 tick 表重建"
+        }
+      ],
+      "serves": [
+        "DX-F1.1@MK01"
+      ],
+      "priority": "required",
+      "reason": "DEX 专项 DX-F1.1：一次读出 tick 表，重建全部头寸的本金应得（haSUI-SUI（费率 0.01%））"
+    },
+    {
+      "id": "OT11",
+      "chain_id": "sui:mainnet",
+      "address": "0xdcd762ad374686fa890fc4f3b9bbfe2a244e713d7bffbfbd1b9221cb290da2ed",
+      "kind": "market_or_pool",
+      "fields": [
+        {
+          "name": "type",
+          "meaning": "池的币种类型（A, B）"
+        },
+        {
+          "name": "tick_spacing",
+          "meaning": "tick 间距"
+        },
+        {
+          "name": "fee_rate",
+          "meaning": "手续费率，分母 1000000"
+        },
+        {
+          "name": "coin_a",
+          "meaning": "A 币真实余额（最小单位）"
+        },
+        {
+          "name": "coin_b",
+          "meaning": "B 币真实余额（最小单位）"
+        },
+        {
+          "name": "fee_protocol_coin_a",
+          "meaning": "A 币协议费（最小单位）"
+        },
+        {
+          "name": "fee_protocol_coin_b",
+          "meaning": "B 币协议费（最小单位）"
+        },
+        {
+          "name": "liquidity",
+          "meaning": "当前价格处的流动性"
+        },
+        {
+          "name": "current_sqrt_price",
+          "meaning": "当前价格的平方根，Q64.64"
+        },
+        {
+          "name": "is_pause",
+          "meaning": "池级暂停标志"
+        },
+        {
+          "name": "position_manager.positions.size",
+          "meaning": "头寸数量（只披露）"
+        }
+      ],
+      "serves": [
+        "DX-C1.1@MK02",
+        "DX-C2.1@MK02",
+        "DX-C3.1@MK02",
+        "DX-F1.1@MK02"
+      ],
+      "priority": "required",
+      "reason": "选定的池（USDC-USDY（费率 0.01%））"
+    },
+    {
+      "id": "OT12",
+      "chain_id": "sui:mainnet",
+      "address": "0xdcd762ad374686fa890fc4f3b9bbfe2a244e713d7bffbfbd1b9221cb290da2ed",
+      "kind": "market_or_pool",
+      "fields": [
+        {
+          "name": "dynamic_fields",
+          "meaning": "池下的动态字段：有 pool_status 表示设置过逐项开关"
+        }
+      ],
+      "serves": [
+        "DX-C3.1@MK02"
+      ],
+      "priority": "required",
+      "reason": "确认池级开关状态（USDC-USDY（费率 0.01%））"
+    },
+    {
+      "id": "OT13",
+      "chain_id": "sui:mainnet",
+      "address": "0x84cd5d3e0239992ee7c859cc82f852feb4871960e37db4b1535fc1a08127a853",
+      "kind": "market_or_pool",
+      "fields": [
+        {
+          "name": "due_a",
+          "meaning": "全部头寸的 A 币本金应得（最小单位），由整张 tick 表（32 个）重建"
+        },
+        {
+          "name": "due_b",
+          "meaning": "全部头寸的 B 币本金应得（最小单位），由整张 tick 表重建"
+        }
+      ],
+      "serves": [
+        "DX-F1.1@MK02"
+      ],
+      "priority": "required",
+      "reason": "DEX 专项 DX-F1.1：一次读出 tick 表，重建全部头寸的本金应得（USDC-USDY（费率 0.01%））"
+    },
+    {
+      "id": "OT14",
+      "chain_id": "sui:mainnet",
+      "address": "0xb8d7d9e66a60c239e7a60110efcf8de6c705580ed924d0dde141f4a0e2c90105",
+      "kind": "market_or_pool",
+      "fields": [
+        {
+          "name": "type",
+          "meaning": "池的币种类型（A, B）"
+        },
+        {
+          "name": "tick_spacing",
+          "meaning": "tick 间距"
+        },
+        {
+          "name": "fee_rate",
+          "meaning": "手续费率，分母 1000000"
+        },
+        {
+          "name": "coin_a",
+          "meaning": "A 币真实余额（最小单位）"
+        },
+        {
+          "name": "coin_b",
+          "meaning": "B 币真实余额（最小单位）"
+        },
+        {
+          "name": "fee_protocol_coin_a",
+          "meaning": "A 币协议费（最小单位）"
+        },
+        {
+          "name": "fee_protocol_coin_b",
+          "meaning": "B 币协议费（最小单位）"
+        },
+        {
+          "name": "liquidity",
+          "meaning": "当前价格处的流动性"
+        },
+        {
+          "name": "current_sqrt_price",
+          "meaning": "当前价格的平方根，Q64.64"
+        },
+        {
+          "name": "is_pause",
+          "meaning": "池级暂停标志"
+        },
+        {
+          "name": "position_manager.positions.size",
+          "meaning": "头寸数量（只披露）"
+        }
+      ],
+      "serves": [
+        "DX-C1.1@MK03",
+        "DX-C2.1@MK03",
+        "DX-C3.1@MK03",
+        "DX-F1.1@MK03"
+      ],
+      "priority": "required",
+      "reason": "选定的池（USDC-SUI（费率 0.25%））"
+    },
+    {
+      "id": "OT15",
+      "chain_id": "sui:mainnet",
+      "address": "0xb8d7d9e66a60c239e7a60110efcf8de6c705580ed924d0dde141f4a0e2c90105",
+      "kind": "market_or_pool",
+      "fields": [
+        {
+          "name": "dynamic_fields",
+          "meaning": "池下的动态字段：有 pool_status 表示设置过逐项开关"
+        }
+      ],
+      "serves": [
+        "DX-C3.1@MK03"
+      ],
+      "priority": "required",
+      "reason": "确认池级开关状态（USDC-SUI（费率 0.25%））"
+    },
+    {
+      "id": "OT16",
+      "chain_id": "sui:mainnet",
+      "address": "0xfdc565e10a59ac7beae3d5c6f22fbdbea89bfcaf91c5b254cbd3d1f72bb10b14",
+      "kind": "market_or_pool",
+      "fields": [
+        {
+          "name": "due_a",
+          "meaning": "全部头寸的 A 币本金应得（最小单位），由整张 tick 表（599 个）重建"
+        },
+        {
+          "name": "due_b",
+          "meaning": "全部头寸的 B 币本金应得（最小单位），由整张 tick 表重建"
+        }
+      ],
+      "serves": [
+        "DX-F1.1@MK03"
+      ],
+      "priority": "required",
+      "reason": "DEX 专项 DX-F1.1：一次读出 tick 表，重建全部头寸的本金应得（USDC-SUI（费率 0.25%））"
+    },
+    {
+      "id": "OT17",
+      "chain_id": "sui:mainnet",
+      "address": "0xce7bceef26d3ad1f6d9b6f13a953f053e6ed3ca77907516481ce99ae8e588f2b",
+      "kind": "vault_or_reserve",
+      "fields": [
+        {
+          "name": "balances.size",
+          "meaning": "奖励金库中的币种数"
+        }
+      ],
+      "serves": [
+        "H1@BZ01"
+      ],
+      "priority": "optional",
+      "reason": "emergent_withdraw 能取走的奖励金库（只确认对象存在和币种数）"
+    },
+    {
+      "id": "OT18",
+      "chain_id": "sui:mainnet",
+      "address": "0xf699e7f2276f5c9a75944b37a0c5b5d9ddfd2471bf6242483b03ab2887d198d0",
+      "kind": "other",
+      "fields": [
+        {
+          "name": "list.size",
+          "meaning": "已创建的池数量"
+        }
+      ],
+      "serves": [
+        "TVL"
+      ],
+      "priority": "disclosure",
+      "reason": "池注册表，只读池数量（不枚举）"
+    }
+  ]
+}

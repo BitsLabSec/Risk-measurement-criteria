@@ -6,3 +6,6 @@ web3-penetration-testing-service-spec.md
 web3-penetration-testing-client-intake.md
 __pycache__/
 .DS_Store
+
+# fetch-sources 检出的源码缓存
+/工作流/.src-cache/

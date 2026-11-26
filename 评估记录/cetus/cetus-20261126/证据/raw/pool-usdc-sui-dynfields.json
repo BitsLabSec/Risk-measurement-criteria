@@ -1,0 +1,47 @@
+{
+ "endpoint": "https://graphql.mainnet.sui.io/graphql",
+ "query": "query($a:SuiAddress!,$c:UInt53,$after:String){ address(address:$a, atCheckpoint:$c){\n  dynamicFields(first:50, after:$after){ pageInfo{ hasNextPage endCursor }\n  nodes{ name{ json type{ repr } } value{ __typename ... on MoveValue{ json type{ repr } } ... on MoveObject{ address contents{ json type{ repr } } } } } } } }",
+ "variables": {
+  "a": "0xb8d7d9e66a60c239e7a60110efcf8de6c705580ed924d0dde141f4a0e2c90105",
+  "c": 349316550
+ },
+ "response": {
+  "data": {
+   "address": {
+    "dynamicFields": {
+     "nodes": [
+      {
+       "name": {
+        "json": "position_liquidity_snapshot",
+        "type": {
+         "repr": "0x0000000000000000000000000000000000000000000000000000000000000001::string::String"
+        }
+       },
+       "value": {
+        "__typename": "MoveObject",
+        "address": "0x4a637235aa08cfa07f75f48670c59f4b45ad3e4871541fe1e14d3c48adc7807a",
+        "contents": {
+         "json": {
+          "id": "0x4a637235aa08cfa07f75f48670c59f4b45ad3e4871541fe1e14d3c48adc7807a",
+          "current_sqrt_price": "328459529077012688164",
+          "remove_percent": "142414",
+          "total_value_cut": "3713158714316",
+          "snapshots": {
+           "id": "0x00fb0f72ec85bd014c7f57151e49190cc517ace6e1cdff2b00f870cb74a1f729",
+           "head": "0xbf99bb47791216d652b954ad0b94306f319b3a1ec7d72ec3b4ac2e4834bbc1f5",
+           "tail": "0x9d716f5881cd7cdee4f6e0369a740741682533d4f2c9a1df7c16ffc00f386102",
+           "size": "6812"
+          }
+         },
+         "type": {
+          "repr": "0x75b2e9ecad34944b8d0c874e568c90db0cf9437f0d7392abfd4cb902972f3e40::position_snapshot::PositionLiquiditySnapshot"
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  }
+ }
+}

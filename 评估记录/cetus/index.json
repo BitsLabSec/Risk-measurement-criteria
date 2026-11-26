@@ -1,0 +1,51 @@
+{
+  "generatedAt": "2026-11-26T06:16:09Z",
+  "assessments": [
+    {
+      "assessmentId": "cetus-20261126",
+      "directory": "cetus-20261126",
+      "date": "2026-11-26",
+      "previousAssessmentId": "无",
+      "reason": "first",
+      "dimensions": {
+        "code_security": {
+          "status": "not_assessed",
+          "score": null
+        },
+        "onchain": {
+          "status": "rated",
+          "score": 92.0
+        },
+        "business_security": {
+          "status": "not_assessed",
+          "score": null
+        },
+        "intelligence": {
+          "status": "not_assessed",
+          "score": null
+        }
+      },
+      "snapshots": [
+        {
+          "dimension": "onchain",
+          "purpose": "链上快照：权限、参数、资金都按这个时点读取",
+          "chainId": "sui:mainnet",
+          "blockOrCheckpoint": "349316550",
+          "hash": "GHyg51XmgbRCYzz2ty4o2TN3Gspa65ad4LCFVfPFktub",
+          "timeUtc": "2026-11-26T05:59:34.620Z"
+        }
+      ],
+      "ruleVersions": {
+        "skeleton": "1.1",
+        "codeSecurity": null,
+        "onchain": "1.1",
+        "workflow": "1.0",
+        "specialties": {
+          "dex_amm": "1.1"
+        }
+      },
+      "deliverable": "cetus-20261126/deliverable.json"
+    }
+  ],
+  "problems": []
+}

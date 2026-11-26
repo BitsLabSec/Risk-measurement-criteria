@@ -1,0 +1,546 @@
+{
+  "role_holders": [
+    {
+      "role_id": "R01",
+      "chain_id": "sui:mainnet",
+      "credential": "0x89c1a321291d15ddae5a086c9abc533dff697fde3d89e0ca836c41af73e36a75",
+      "holder_status": "held",
+      "holder_principal_ids": [
+        "PR07"
+      ],
+      "reading_ids": [
+        "RD005"
+      ],
+      "evidence": [
+        "file:证据/raw/caps-AdminCap.json"
+      ]
+    },
+    {
+      "role_id": "R02",
+      "chain_id": "sui:mainnet",
+      "credential": "0x4462a572640227717cb8c60b6dd337f022743de6bc13f1fe0b7adb182d1fa274",
+      "holder_status": "held",
+      "holder_principal_ids": [
+        "PR07"
+      ],
+      "reading_ids": [
+        "RD001"
+      ],
+      "evidence": [
+        "file:证据/raw/upgradecap-clmm.json"
+      ]
+    },
+    {
+      "role_id": "R03",
+      "chain_id": "sui:mainnet",
+      "credential": "0xdaa46292632c3c4d8f31f23ea0f9b36a28ff3677e9684980e4438403a67a3d8f#acl:0",
+      "holder_status": "held",
+      "holder_principal_ids": [
+        "PR08"
+      ],
+      "reading_ids": [
+        "RD014"
+      ],
+      "evidence": [
+        "file:证据/raw/acl-members.json"
+      ]
+    },
+    {
+      "role_id": "R04",
+      "chain_id": "sui:mainnet",
+      "credential": "0xdaa46292632c3c4d8f31f23ea0f9b36a28ff3677e9684980e4438403a67a3d8f#acl:1",
+      "holder_status": "held",
+      "holder_principal_ids": [
+        "PR08"
+      ],
+      "reading_ids": [
+        "RD014"
+      ],
+      "evidence": [
+        "file:证据/raw/acl-members.json"
+      ]
+    },
+    {
+      "role_id": "R05",
+      "chain_id": "sui:mainnet",
+      "credential": "0xdaa46292632c3c4d8f31f23ea0f9b36a28ff3677e9684980e4438403a67a3d8f#acl:2",
+      "holder_status": "held",
+      "holder_principal_ids": [
+        "PR09",
+        "PR05"
+      ],
+      "reading_ids": [
+        "RD016",
+        "RD013"
+      ],
+      "evidence": [
+        "file:证据/raw/acl-members.json"
+      ]
+    },
+    {
+      "role_id": "R06",
+      "chain_id": "sui:mainnet",
+      "credential": "0xdaa46292632c3c4d8f31f23ea0f9b36a28ff3677e9684980e4438403a67a3d8f#acl:3",
+      "holder_status": "held",
+      "holder_principal_ids": [
+        "PR08"
+      ],
+      "reading_ids": [
+        "RD014"
+      ],
+      "evidence": [
+        "file:证据/raw/acl-members.json"
+      ]
+    },
+    {
+      "role_id": "R07",
+      "chain_id": "sui:mainnet",
+      "credential": "0xdaa46292632c3c4d8f31f23ea0f9b36a28ff3677e9684980e4438403a67a3d8f#acl:4",
+      "holder_status": "held",
+      "holder_principal_ids": [
+        "PR08",
+        "PR04"
+      ],
+      "reading_ids": [
+        "RD014",
+        "RD012"
+      ],
+      "evidence": [
+        "file:证据/raw/acl-members.json"
+      ]
+    },
+    {
+      "role_id": "R08",
+      "chain_id": "sui:mainnet",
+      "credential": "0xdaa46292632c3c4d8f31f23ea0f9b36a28ff3677e9684980e4438403a67a3d8f#acl:5",
+      "holder_status": "held",
+      "holder_principal_ids": [
+        "PR07"
+      ],
+      "reading_ids": [
+        "RD010"
+      ],
+      "evidence": [
+        "file:证据/raw/acl-members.json"
+      ]
+    },
+    {
+      "role_id": "R09",
+      "chain_id": "sui:mainnet",
+      "credential": "0xdaa46292632c3c4d8f31f23ea0f9b36a28ff3677e9684980e4438403a67a3d8f#acl:6",
+      "holder_status": "held",
+      "holder_principal_ids": [
+        "PR06",
+        "PR02",
+        "PR05",
+        "PR04"
+      ],
+      "reading_ids": [
+        "RD015",
+        "RD011",
+        "RD013",
+        "RD012"
+      ],
+      "evidence": [
+        "file:证据/raw/acl-members.json"
+      ]
+    }
+  ],
+  "principals": [
+    {
+      "id": "PR01",
+      "chain_id": "sui:mainnet",
+      "address": "0xda7e6003d390c35eb54aa3f67ec4dfe98a0f958e2cfec05e861cb15e80e6d113",
+      "kind": "eoa",
+      "threshold": 0,
+      "members": [],
+      "reading_ids": [],
+      "delay_seconds": 0
+    },
+    {
+      "id": "PR02",
+      "chain_id": "sui:mainnet",
+      "address": "0x94718229b8b79c06e81ea7d32a9c226cd20c905ab493fabab28998ab4cd0ab9c",
+      "kind": "eoa",
+      "threshold": 0,
+      "members": [],
+      "reading_ids": [],
+      "delay_seconds": 0
+    },
+    {
+      "id": "PR03",
+      "chain_id": "sui:mainnet",
+      "address": "0xd2029d6ded1bc3cf4b16b7bbc5b1f496966a0073e8b5275ecee42868a297f9b8",
+      "kind": "eoa",
+      "threshold": 0,
+      "members": [],
+      "reading_ids": [],
+      "delay_seconds": 0
+    },
+    {
+      "id": "PR04",
+      "chain_id": "sui:mainnet",
+      "address": "0xf5c5735651726d57dab28f32d2e62c0821e5448ac4a597db94cc1adc92025f9f",
+      "kind": "eoa",
+      "threshold": 0,
+      "members": [],
+      "reading_ids": [],
+      "delay_seconds": 0
+    },
+    {
+      "id": "PR05",
+      "chain_id": "sui:mainnet",
+      "address": "0xaabf2fedcb36146db164bec930b74a47969c4df98216e049342a3c49b6d11580",
+      "kind": "eoa",
+      "threshold": 0,
+      "members": [],
+      "reading_ids": [],
+      "delay_seconds": 0
+    },
+    {
+      "id": "PR06",
+      "chain_id": "sui:mainnet",
+      "address": "0x69d3948e0324e8c2f05faa0fccaaaca92ce5875025bea4611a7e1399801b18ee",
+      "kind": "eoa",
+      "threshold": 0,
+      "members": [],
+      "reading_ids": [],
+      "delay_seconds": 0
+    },
+    {
+      "id": "PR07",
+      "chain_id": "sui:mainnet",
+      "address": "0xdbfd0b17fa804c98f51d552b050fb7f850b85db96fa2a0d79e50119525814a47",
+      "kind": "multisig",
+      "threshold": 5,
+      "members": [
+        {
+          "principal_id": "PR01",
+          "weight": 3
+        },
+        {
+          "principal_id": "PR02",
+          "weight": 3
+        },
+        {
+          "principal_id": "PR03",
+          "weight": 1
+        },
+        {
+          "principal_id": "PR04",
+          "weight": 1
+        },
+        {
+          "principal_id": "PR05",
+          "weight": 1
+        },
+        {
+          "principal_id": "PR06",
+          "weight": 1
+        }
+      ],
+      "reading_ids": [
+        "RD017"
+      ],
+      "delay_seconds": 0
+    },
+    {
+      "id": "PR08",
+      "chain_id": "sui:mainnet",
+      "address": "0x2891c6b8dca29a075d263c1bb21c7b88adf3ff6baddae1b8743cc00b66bd2c47",
+      "kind": "multisig",
+      "threshold": 2,
+      "members": [
+        {
+          "principal_id": "PR05",
+          "weight": 1
+        },
+        {
+          "principal_id": "PR06",
+          "weight": 1
+        },
+        {
+          "principal_id": "PR04",
+          "weight": 1
+        }
+      ],
+      "reading_ids": [
+        "RD018"
+      ],
+      "delay_seconds": 0
+    },
+    {
+      "id": "PR09",
+      "chain_id": "sui:mainnet",
+      "address": "0x2713eff5875e0c59ce5ee5b561df3d8c8cbe5d086033e0a59be14efeb5e39c81",
+      "kind": "eoa",
+      "threshold": 0,
+      "members": [],
+      "reading_ids": [],
+      "delay_seconds": 0
+    }
+  ],
+  "paths": [
+    {
+      "id": "PA01",
+      "business_ids": [
+        "BZ01"
+      ],
+      "consequence": "H1",
+      "control_ids": [
+        "K01"
+      ],
+      "description": "UpgradeCap 由多签 B（5/10 加权）持有，无时间锁，兼容升级可替换全部池和头寸的处理逻辑",
+      "approver_ids": [
+        "PR07"
+      ],
+      "initiator_ids": [],
+      "delay_seconds": 0,
+      "delay_public": "na",
+      "delay_bypass": "na",
+      "exit_closable_in_delay": "na",
+      "h1_rate_limited": "no",
+      "h1_covers_all_assets": "yes",
+      "h3_auto_expire": "na",
+      "reading_ids": [
+        "RD001",
+        "RD004",
+        "RD017"
+      ],
+      "evidence": [
+        "file:证据/raw/upgradecap-clmm.json",
+        "file:证据/raw/msig-dbfd.json"
+      ]
+    },
+    {
+      "id": "PA02",
+      "business_ids": [
+        "BZ01"
+      ],
+      "consequence": "H1",
+      "control_ids": [
+        "K02"
+      ],
+      "description": "AdminCap（多签 B）调用 emergent_withdraw 取走奖励金库中 LP 已累计的奖励；不涉及池中本金",
+      "approver_ids": [
+        "PR07"
+      ],
+      "initiator_ids": [],
+      "delay_seconds": 0,
+      "delay_public": "na",
+      "delay_bypass": "na",
+      "exit_closable_in_delay": "na",
+      "h1_rate_limited": "no",
+      "h1_covers_all_assets": "no",
+      "h3_auto_expire": "na",
+      "reading_ids": [
+        "RD005",
+        "RD061",
+        "RD017"
+      ],
+      "evidence": [
+        "file:证据/raw/caps-AdminCap.json",
+        "sources/rewarder.move:374-389"
+      ]
+    },
+    {
+      "id": "PA03",
+      "business_ids": [
+        "BZ01"
+      ],
+      "consequence": "H2",
+      "control_ids": [
+        "K06"
+      ],
+      "description": "池管理员（多签 A，2/3）调整已有池的手续费率，上限 20%",
+      "approver_ids": [
+        "PR08"
+      ],
+      "initiator_ids": [],
+      "delay_seconds": 0,
+      "delay_public": "na",
+      "delay_bypass": "na",
+      "exit_closable_in_delay": "na",
+      "h1_rate_limited": "na",
+      "h1_covers_all_assets": "na",
+      "h3_auto_expire": "na",
+      "reading_ids": [
+        "RD014",
+        "RD018"
+      ],
+      "evidence": [
+        "file:证据/raw/acl-members.json",
+        "sources/pool.move:1444-1463"
+      ]
+    },
+    {
+      "id": "PA04",
+      "business_ids": [
+        "BZ01"
+      ],
+      "consequence": "H2",
+      "control_ids": [
+        "K09"
+      ],
+      "description": "池管理员（多签 A）调整全部池的协议分成，上限 30%",
+      "approver_ids": [
+        "PR08"
+      ],
+      "initiator_ids": [],
+      "delay_seconds": 0,
+      "delay_public": "na",
+      "delay_bypass": "na",
+      "exit_closable_in_delay": "na",
+      "h1_rate_limited": "na",
+      "h1_covers_all_assets": "na",
+      "h3_auto_expire": "na",
+      "reading_ids": [
+        "RD014",
+        "RD018"
+      ],
+      "evidence": [
+        "file:证据/raw/acl-members.json",
+        "sources/config.move:242-257"
+      ]
+    },
+    {
+      "id": "PA05",
+      "business_ids": [
+        "BZ01"
+      ],
+      "consequence": "H2",
+      "control_ids": [
+        "K03",
+        "K06",
+        "K09"
+      ],
+      "description": "间接路径：AdminCap（多签 B）先给自己授予池管理员角色，再调整费率或协议分成",
+      "approver_ids": [
+        "PR07"
+      ],
+      "initiator_ids": [],
+      "delay_seconds": 0,
+      "delay_public": "na",
+      "delay_bypass": "na",
+      "exit_closable_in_delay": "na",
+      "h1_rate_limited": "na",
+      "h1_covers_all_assets": "na",
+      "h3_auto_expire": "na",
+      "reading_ids": [
+        "RD005",
+        "RD017"
+      ],
+      "evidence": [
+        "file:证据/raw/caps-AdminCap.json",
+        "sources/config.move:339-360"
+      ]
+    },
+    {
+      "id": "PA06",
+      "business_ids": [
+        "BZ01"
+      ],
+      "consequence": "H3",
+      "control_ids": [
+        "K03",
+        "K05"
+      ],
+      "description": "池管理员（多签 A）可关闭撤资和领费开关，没有到期时间；多签 B 能用 AdminCap 撤掉 A 的角色并给自己授权恢复，所以阻断能否持续取决于 B",
+      "approver_ids": [
+        "PR07"
+      ],
+      "initiator_ids": [
+        "PR08"
+      ],
+      "delay_seconds": 0,
+      "delay_public": "na",
+      "delay_bypass": "na",
+      "exit_closable_in_delay": "na",
+      "h1_rate_limited": "na",
+      "h1_covers_all_assets": "na",
+      "h3_auto_expire": "no",
+      "reading_ids": [
+        "RD014",
+        "RD005",
+        "RD017"
+      ],
+      "evidence": [
+        "sources/pool.move:2514-2570",
+        "sources/config.move:339-374"
+      ]
+    },
+    {
+      "id": "PA07",
+      "business_ids": [
+        "BZ01"
+      ],
+      "consequence": "H3",
+      "control_ids": [
+        "K03",
+        "K07"
+      ],
+      "description": "4 个单签地址都能紧急暂停全部池；只有多签 B 能解除（角色位 5），并能用 AdminCap 撤掉暂停者的角色，所以阻断能否持续取决于 B",
+      "approver_ids": [
+        "PR07"
+      ],
+      "initiator_ids": [
+        "PR06",
+        "PR02",
+        "PR05",
+        "PR04"
+      ],
+      "delay_seconds": 0,
+      "delay_public": "na",
+      "delay_bypass": "na",
+      "exit_closable_in_delay": "na",
+      "h1_rate_limited": "na",
+      "h1_covers_all_assets": "na",
+      "h3_auto_expire": "no",
+      "reading_ids": [
+        "RD010",
+        "RD011",
+        "RD012",
+        "RD013",
+        "RD014",
+        "RD015",
+        "RD016",
+        "RD017"
+      ],
+      "evidence": [
+        "file:证据/raw/acl-members.json",
+        "sources/config.move:540-569"
+      ]
+    },
+    {
+      "id": "PA08",
+      "business_ids": [
+        "BZ01"
+      ],
+      "consequence": "H3",
+      "control_ids": [
+        "K04"
+      ],
+      "description": "AdminCap（多签 B）把 package_version 调到代码版本之上，全部入口失效，只能靠升级恢复",
+      "approver_ids": [
+        "PR07"
+      ],
+      "initiator_ids": [],
+      "delay_seconds": 0,
+      "delay_public": "na",
+      "delay_bypass": "na",
+      "exit_closable_in_delay": "na",
+      "h1_rate_limited": "na",
+      "h1_covers_all_assets": "na",
+      "h3_auto_expire": "no",
+      "reading_ids": [
+        "RD005",
+        "RD006",
+        "RD017"
+      ],
+      "evidence": [
+        "sources/config.move:575-583"
+      ]
+    }
+  ],
+  "absent": []
+}

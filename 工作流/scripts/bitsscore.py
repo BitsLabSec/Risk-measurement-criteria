@@ -4,6 +4,8 @@
 
 用法（<目录> 是这一轮评估的工作目录）：
   python3 bitsscore.py init <目录>        生成空白模板
+  python3 bitsscore.py fetch-sources <目录>
+                                          按 P2 的仓库和 commit 检出源码到 工作流/.src-cache/（local_path 写 cache 时用）
   python3 bitsscore.py validate <目录> [--step P3]
                                           检查漏填、格式和引用；--step 表示要求做到这一步
   python3 bitsscore.py graph <目录>       由 P3–P5 生成关系图 P6-graph.md
@@ -69,6 +71,22 @@ def jsave(path, data):
         f.write("\n")
 
 
+SRC_CACHE = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".src-cache"))
+
+
+def src_root(s):
+    """P2 源码记录的本地目录。local_path 写 cache 或 cache:<子目录> 时，指向 fetch-sources 检出的缓存。"""
+    lp = str(s.get("local_path", ""))
+    if lp == "cache" or lp.startswith("cache:"):
+        name = str(s.get("repo_url", "")).rstrip("/").split("/")[-1]
+        if name.endswith(".git"):
+            name = name[:-4]
+        base = os.path.join(SRC_CACHE, "%s@%s" % (name, str(s.get("commit", ""))[:12]))
+        sub = lp[len("cache:"):] if lp.startswith("cache:") else ""
+        return os.path.join(base, sub) if sub else base
+    return lp
+
+
 def is_blank(v):
     return isinstance(v, str) and v.startswith(BLANK)
 
@@ -114,6 +132,29 @@ def cmd_init(d):
         made.append(name)
     print("已生成模板：" + (", ".join(made) if made else "（全部已存在，未覆盖）"))
     print("下一步：按 工作流/README.md 从 T0 开始逐步填写。")
+
+
+def cmd_fetch_sources(d):
+    """按 P2 的 repo_url 和 commit，把 local_path 写成 cache 的源码检出到 工作流/.src-cache/。"""
+    p2 = jload(fp(d, "P2-sources.json"))
+    for s in p2.get("sources", []):
+        lp = str(s.get("local_path", ""))
+        if not (lp == "cache" or lp.startswith("cache:")):
+            print("%s：local_path 是 %s，不用检出" % (s.get("id"), lp))
+            continue
+        base = src_root(dict(s, local_path="cache"))
+        if not os.path.isdir(os.path.join(base, ".git")):
+            os.makedirs(SRC_CACHE, exist_ok=True)
+            r = subprocess.run(["git", "clone", "--quiet", s["repo_url"], base])
+            if r.returncode != 0:
+                die("%s：克隆 %s 失败" % (s.get("id"), s["repo_url"]))
+        r = subprocess.run(["git", "-C", base, "checkout", "--quiet", "--detach", s["commit"]], capture_output=True, text=True)
+        if r.returncode != 0:
+            subprocess.run(["git", "-C", base, "fetch", "--quiet", "origin", s["commit"]])
+            r = subprocess.run(["git", "-C", base, "checkout", "--quiet", "--detach", s["commit"]], capture_output=True, text=True)
+            if r.returncode != 0:
+                die("%s：检出 commit %s 失败：%s" % (s.get("id"), s["commit"], r.stderr.strip()))
+        print("%s：已检出 %s@%s → %s" % (s.get("id"), s["repo_url"], s["commit"][:12], src_root(s)))
 
 
 # ---------------------------------------------------------------- validate
@@ -207,6 +248,28 @@ def file_lines(path):
         return f.read().split("\n")
 
 
+LOC_RE = re.compile(r"^(.+):(\d+)-(\d+)$")
+
+
+def loc_problem(loc, srcs):
+    """源码位置 路径:起-止 要能在某个 P2 源码目录里找到，且行号不越界。"""
+    m = LOC_RE.match(str(loc))
+    if not m:
+        return "源码位置格式应为 路径:起始行-结束行"
+    f, a, b = m.group(1), int(m.group(2)), int(m.group(3))
+    roots = [src_root(s) for s in srcs.values() if not is_blank(str(s.get("local_path", "")))]
+    if not roots:
+        return None
+    for root in roots:
+        pth = os.path.join(root, f)
+        if os.path.isfile(pth):
+            n = len(file_lines(pth))
+            if not (1 <= a <= b <= n):
+                return "行号超出范围：%s 共 %d 行，且起始不能大于结束" % (f, n)
+            return None
+    return "在 P2 的源码目录里找不到文件 %s（路径相对于 local_path）" % f
+
+
 def validate(d, upto=None, quiet=False, skip=()):
     ctx = Ctx()
     data = {}
@@ -218,8 +281,21 @@ def validate(d, upto=None, quiet=False, skip=()):
             required = STEP_ORDER[: STEP_ORDER.index("P5") + 1] + ONCHAIN_ORDER[: ONCHAIN_ORDER.index(upto) + 1]
         else:
             die("--step 只能是 %s" % (STEP_ORDER + ONCHAIN_ORDER))
+    # 全量检查时，只检查 T0 里选了的维度（init 会生成全部模板，没选的维度不用填）
+    off_steps = set()
+    t0p = fp(d, "T0-task.json")
+    if not upto and os.path.exists(t0p):
+        try:
+            dims = jload(t0p).get("dimensions") or []
+        except Exception:  # noqa: BLE001
+            dims = []
+        if isinstance(dims, list) and dims and not any(is_blank(x) for x in dims if isinstance(x, str)):
+            if "code_security" not in dims:
+                off_steps |= {"C1", "C2", "C3", "C4", "C5", "C6"}
+            if "onchain" not in dims:
+                off_steps |= set(ONCHAIN_ORDER)
     for name, f in FILES.items():
-        if name in skip:
+        if name in skip or f["step"] in off_steps:
             continue
         if upto and f["step"] != "*" and f["step"] not in required:
             continue
@@ -279,8 +355,9 @@ def validate(d, upto=None, quiet=False, skip=()):
             if isinstance(c, str) and not is_blank(c) and not re.match(r"^([0-9a-f]{40}|[0-9a-f]{64})$", c):
                 ctx.err("P2-sources.json", "$.sources[%d].commit" % i, "应为 40 位 commit 或 64 位 sha256（小写十六进制）")
             lp = s.get("local_path", "")
-            if isinstance(lp, str) and not is_blank(lp) and not os.path.isdir(lp):
-                ctx.err("P2-sources.json", "$.sources[%d].local_path" % i, "目录不存在：%s" % lp)
+            if isinstance(lp, str) and not is_blank(lp) and not os.path.isdir(src_root(s)):
+                hint = "；先运行 fetch-sources %s 检出源码" % d if (lp == "cache" or lp.startswith("cache:")) else ""
+                ctx.err("P2-sources.json", "$.sources[%d].local_path" % i, "目录不存在：%s%s" % (src_root(s), hint))
         if p1:
             for x in p1.get("deployments", []):
                 if isinstance(x, dict) and x.get("id") not in used:
@@ -301,7 +378,7 @@ def validate(d, upto=None, quiet=False, skip=()):
                 s = srcs.get(rg.get("source_id"))
                 if not s or is_blank(s.get("local_path", "")):
                     continue
-                pth = os.path.join(s["local_path"], str(rg.get("file")))
+                pth = os.path.join(src_root(s), str(rg.get("file")))
                 where = "$.responsibilities[%d].ranges[%d]" % (i, j)
                 if not os.path.isfile(pth):
                     ctx.err("P4-responsibilities.json", where, "文件不存在：%s" % pth)
@@ -310,6 +387,11 @@ def validate(d, upto=None, quiet=False, skip=()):
                 st, en = rg.get("start"), rg.get("end")
                 if isinstance(st, int) and isinstance(en, int) and not (1 <= st <= en <= n):
                     ctx.err("P4-responsibilities.json", where, "行号超出范围（文件共 %d 行，且起始不能大于结束）" % n)
+            for ev in ("q1_locations", "q2_locations"):
+                for j, loc in enumerate(r.get(ev) or []):
+                    msg = loc_problem(loc, srcs)
+                    if msg:
+                        ctx.err("P4-responsibilities.json", "$.responsibilities[%d].%s[%d]" % (i, ev, j), msg)
             for q, ev in (("q1_assets_or_authority", "q1_locations"), ("q2_preconditions_or_availability", "q2_locations")):
                 if r.get(q) == "yes" and not r.get(ev):
                     ctx.err("P4-responsibilities.json", "$.responsibilities[%d].%s" % (i, ev), "答了 yes 就要写源码位置")
@@ -318,6 +400,16 @@ def validate(d, upto=None, quiet=False, skip=()):
             for q, ev in (("q1_assets_or_authority", "q1_evidence"), ("q2_preconditions_or_availability", "q2_evidence")):
                 if r.get(q) == "yes" and str(r.get(ev, "")).strip() in ("无", ""):
                     ctx.err("P4-responsibilities.json", "$.responsibilities[%d].%s" % (i, ev), "答了 yes 就要写依据")
+    p5 = data.get("P5-roles-controls.json")
+    if p5 and srcs:
+        for key, field in (("roles", "check_locations"), ("controls", "effect_locations")):
+            for i, x in enumerate(p5.get(key, [])):
+                if not isinstance(x, dict):
+                    continue
+                for j, loc in enumerate(x.get(field) or []):
+                    msg = loc_problem(loc, srcs)
+                    if msg:
+                        ctx.err("P5-roles-controls.json", "$.%s[%d].%s[%d]" % (key, i, field, j), msg)
     c2 = data.get("C2-reports.json")
     if c2:
         for i, r in enumerate(c2.get("reports", [])):
@@ -339,7 +431,7 @@ def validate(d, upto=None, quiet=False, skip=()):
                     continue
                 s = srcs.get(sc.get("production_source_id"))
                 if s and not is_blank(s.get("local_path", "")):
-                    pth = os.path.join(s["local_path"], str(sc.get("production_path")))
+                    pth = os.path.join(src_root(s), str(sc.get("production_path")))
                     if not os.path.isfile(pth):
                         ctx.err("C2-reports.json", "$.reports[%d].scope[%d].production_path" % (i, j),
                                 "生产版本里没有这个文件：%s（文件已删除就不用登记）" % pth)
@@ -468,7 +560,7 @@ def norm(s):
 
 
 def scope_files(src):
-    root = src["local_path"]
+    root = src_root(src)
     files = set()
     for g in src["in_scope_globs"]:
         for p in glob.glob(os.path.join(root, g), recursive=True):
@@ -497,7 +589,7 @@ def compute_lines(d, data):
     texts = {}
     for sid, s in srcs.items():
         for f in scope_files(s):
-            with open(os.path.join(s["local_path"], f), encoding="utf-8", errors="replace") as h:
+            with open(os.path.join(src_root(s), f), encoding="utf-8", errors="replace") as h:
                 t = h.read()
             texts[(sid, f)] = t
             for ln, code in effective_lines(t, s["language"]):
@@ -621,7 +713,7 @@ def analyse(d, data):
             prod_commit = s["commit"]
             ppath = sc["production_path"]
             report_files.setdefault(rep["id"], set()).add((sid, ppath))
-            with open(os.path.join(s["local_path"], ppath), encoding="utf-8", errors="replace") as h:
+            with open(os.path.join(src_root(s), ppath), encoding="utf-8", errors="replace") as h:
                 ptext = h.read()
             p_eff = effective_lines(ptext, s["language"])
             atext = audited_text(rep, sc["audited_path"]) if rep["audited_source"]["kind"] != "unavailable" else None
@@ -791,7 +883,7 @@ def long_core_functions(data, lines):
     found = []
     for s in data["P2-sources.json"]["sources"]:
         for f in scope_files(s):
-            with open(os.path.join(s["local_path"], f), encoding="utf-8", errors="replace") as h:
+            with open(os.path.join(src_root(s), f), encoding="utf-8", errors="replace") as h:
                 eff = effective_lines(h.read(), s["language"])
             i = 0
             while i < len(eff):
@@ -1077,6 +1169,10 @@ def cmd_onchain_score(d):
         out += ["", "## 业务 %s（%s）" % (br["business_id"], br["specialty"]), "",
                 "- 状态：**%s**；业务分 **%s**；权重 %.2f%%；TVL %s 美元" % (
                     br["status"], fmt(br["score"]), br["weight"] * 100, fmt(br["tvl_usd"])), ""]
+        for n in br.get("notes", []):
+            out.append("- 说明：" + n)
+        if br.get("notes"):
+            out.append("")
         out += ["| 大项 | 分数 |", "| --- | ---: |"]
         for k, v in br["dimensions"].items():
             out.append("| %s | %s |" % (onchain.DIM_NAME[k], fmt(v["score"])))
@@ -1100,6 +1196,10 @@ def cmd_onchain_score(d):
                     "、".join(lv["controlled_paths"]), "、".join(lv["uncontrolled_paths"]) or "—"))
         elif kc and kc.get("note"):
             out += ["", "密钥集中度：" + kc["note"]]
+        tb = perm.get("temporary_block")
+        if tb:
+            out += ["", "**临时阻断（只披露，不计分）：** 最少 %d 把密钥即可发起阻断（路径 %s）；阻断能否持续按 H3 路径的批准者计分。" % (
+                tb["min_keys"], "、".join(tb["paths"]))]
         for dim in ("configuration", "funds_dependencies"):
             v = br["dimensions"][dim]
             out += ["", "**%s**" % onchain.DIM_NAME[dim], "", "| 检查 | 编号 | 市场 | 结果 | 计算 | 理由 |", "| --- | --- | --- | --- | --- | --- |"]
@@ -1187,6 +1287,8 @@ def main():
     cmd, d = sys.argv[1], sys.argv[2]
     if cmd == "init":
         cmd_init(d)
+    elif cmd == "fetch-sources":
+        cmd_fetch_sources(d)
     elif cmd == "validate":
         upto = None
         if "--step" in sys.argv:

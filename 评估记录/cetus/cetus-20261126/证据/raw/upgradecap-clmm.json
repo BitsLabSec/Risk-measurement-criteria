@@ -1,0 +1,35 @@
+{
+ "endpoint": "https://graphql.mainnet.sui.io/graphql",
+ "query": "query($a:SuiAddress!,$c:UInt53){ object(address:$a, atCheckpoint:$c){ address version\n  owner{ __typename ... on AddressOwner{ address{ address } } ... on ObjectOwner{ address{ address } } }\n  asMoveObject{ contents{ type{ repr } json } } } }",
+ "variables": {
+  "a": "0x4462a572640227717cb8c60b6dd337f022743de6bc13f1fe0b7adb182d1fa274",
+  "c": 349316550
+ },
+ "response": {
+  "data": {
+   "object": {
+    "address": "0x4462a572640227717cb8c60b6dd337f022743de6bc13f1fe0b7adb182d1fa274",
+    "version": 994816306,
+    "owner": {
+     "__typename": "AddressOwner",
+     "address": {
+      "address": "0xdbfd0b17fa804c98f51d552b050fb7f850b85db96fa2a0d79e50119525814a47"
+     }
+    },
+    "asMoveObject": {
+     "contents": {
+      "type": {
+       "repr": "0x0000000000000000000000000000000000000000000000000000000000000002::package::UpgradeCap"
+      },
+      "json": {
+       "id": "0x4462a572640227717cb8c60b6dd337f022743de6bc13f1fe0b7adb182d1fa274",
+       "package": "0x260693ec785a6e6c9d81d58c7d2ff72f1288ae0fa6a9725abe05a6478b11f084",
+       "version": "15",
+       "policy": 0
+      }
+     }
+    }
+   }
+  }
+ }
+}

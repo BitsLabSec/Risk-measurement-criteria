@@ -1,0 +1,32 @@
+{
+  "assessment_id": "cetus-20261126",
+  "previous_assessment_id": "无",
+  "reason": "first",
+  "project": "Cetus Protocol",
+  "dimensions": [
+    "onchain"
+  ],
+  "chains": [
+    {
+      "chain_id": "sui:mainnet",
+      "name": "Sui Mainnet"
+    }
+  ],
+  "scope_statement": "工作流试跑（DEX 专项）：Cetus CLMM 原生做市（cetus_clmm 包）的链上安全",
+  "known_entries": [
+    "0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb",
+    "0x260693ec785a6e6c9d81d58c7d2ff72f1288ae0fa6a9725abe05a6478b11f084"
+  ],
+  "known_repos": [
+    "https://github.com/CetusProtocol/cetus-contracts"
+  ],
+  "out_of_scope": [
+    "Cetus DLMM：只公开了接口仓库，没有完整源码",
+    "Aggregator V3、Tide RFQ：不同专项业务，本次只试跑原生 AMM",
+    "Limit、DCA、Vaults、Stable Farming、LP Burn、xCETUS、Launchpad、Margin",
+    "Aptos 上的 Cetus 部署",
+    "CLMM 的奖励领取（Farming 专项范围）"
+  ],
+  "assessor": "claude（试跑）",
+  "date": "2026-11-26"
+}

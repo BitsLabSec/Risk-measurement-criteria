@@ -1,0 +1,453 @@
+{
+  "rule_version": "onchain-v1.1 / skeleton-v1.1 / workflow-v1.0",
+  "status": "已评分",
+  "project_score": 92.0,
+  "dimension_view": {
+    "permissions": 80.0,
+    "configuration": 100.0,
+    "funds_dependencies": 100.0
+  },
+  "weight_note": "max(TVL 占比, 5%) 后归一",
+  "blocking_gaps": [],
+  "businesses": [
+    {
+      "business_id": "BZ01",
+      "specialty": "dex_amm",
+      "dimensions": {
+        "permissions": {
+          "score": 80,
+          "by_consequence": {
+            "H1": 80,
+            "H2": 80,
+            "H3": 80
+          },
+          "paths": [
+            {
+              "path_id": "PA01",
+              "business_ids": [
+                "BZ01"
+              ],
+              "declared": "H1",
+              "consequence": "H1",
+              "description": "UpgradeCap 由多签 B（5/10 加权）持有，无时间锁，兼容升级可替换全部池和头寸的处理逻辑",
+              "keys": 2,
+              "effective_delay_s": 0,
+              "score": 80,
+              "x1_candidate": false
+            },
+            {
+              "path_id": "PA02",
+              "business_ids": [
+                "BZ01"
+              ],
+              "declared": "H1",
+              "consequence": "H1",
+              "description": "AdminCap（多签 B）调用 emergent_withdraw 取走奖励金库中 LP 已累计的奖励；不涉及池中本金",
+              "keys": 2,
+              "effective_delay_s": 0,
+              "score": 80,
+              "x1_candidate": false
+            },
+            {
+              "path_id": "PA03",
+              "business_ids": [
+                "BZ01"
+              ],
+              "declared": "H2",
+              "consequence": "H2",
+              "description": "池管理员（多签 A，2/3）调整已有池的手续费率，上限 20%",
+              "keys": 2,
+              "effective_delay_s": 0,
+              "score": 80,
+              "x1_candidate": false
+            },
+            {
+              "path_id": "PA04",
+              "business_ids": [
+                "BZ01"
+              ],
+              "declared": "H2",
+              "consequence": "H2",
+              "description": "池管理员（多签 A）调整全部池的协议分成，上限 30%",
+              "keys": 2,
+              "effective_delay_s": 0,
+              "score": 80,
+              "x1_candidate": false
+            },
+            {
+              "path_id": "PA05",
+              "business_ids": [
+                "BZ01"
+              ],
+              "declared": "H2",
+              "consequence": "H2",
+              "description": "间接路径：AdminCap（多签 B）先给自己授予池管理员角色，再调整费率或协议分成",
+              "keys": 2,
+              "effective_delay_s": 0,
+              "score": 80,
+              "x1_candidate": false
+            },
+            {
+              "path_id": "PA06",
+              "business_ids": [
+                "BZ01"
+              ],
+              "declared": "H3",
+              "consequence": "H3",
+              "description": "池管理员（多签 A）可关闭撤资和领费开关，没有到期时间；多签 B 能用 AdminCap 撤掉 A 的角色并给自己授权恢复，所以阻断能否持续取决于 B",
+              "keys": 2,
+              "effective_delay_s": 0,
+              "score": 80,
+              "initiator_keys": 2,
+              "initiator_ids": [
+                "PR08"
+              ],
+              "x1_candidate": false
+            },
+            {
+              "path_id": "PA07",
+              "business_ids": [
+                "BZ01"
+              ],
+              "declared": "H3",
+              "consequence": "H3",
+              "description": "4 个单签地址都能紧急暂停全部池；只有多签 B 能解除（角色位 5），并能用 AdminCap 撤掉暂停者的角色，所以阻断能否持续取决于 B",
+              "keys": 2,
+              "effective_delay_s": 0,
+              "score": 80,
+              "initiator_keys": 1,
+              "initiator_ids": [
+                "PR06",
+                "PR02",
+                "PR05",
+                "PR04"
+              ],
+              "x1_candidate": false
+            },
+            {
+              "path_id": "PA08",
+              "business_ids": [
+                "BZ01"
+              ],
+              "declared": "H3",
+              "consequence": "H3",
+              "description": "AdminCap（多签 B）把 package_version 调到代码版本之上，全部入口失效，只能靠升级恢复",
+              "keys": 2,
+              "effective_delay_s": 0,
+              "score": 80,
+              "x1_candidate": false
+            }
+          ],
+          "key_concentration": {
+            "paths_considered": 8,
+            "levels": [
+              {
+                "keys": 2,
+                "addresses": [
+                  "0x94718229b8b79c06e81ea7d32a9c226cd20c905ab493fabab28998ab4cd0ab9c",
+                  "0xda7e6003d390c35eb54aa3f67ec4dfe98a0f958e2cfec05e861cb15e80e6d113"
+                ],
+                "controlled_paths": [
+                  "PA01",
+                  "PA02",
+                  "PA05",
+                  "PA06",
+                  "PA07",
+                  "PA08"
+                ],
+                "uncontrolled_paths": [
+                  "PA03",
+                  "PA04"
+                ],
+                "member_of": {
+                  "0x94718229b8b79c06e81ea7d32a9c226cd20c905ab493fabab28998ab4cd0ab9c": [
+                    "PR07 5/10"
+                  ],
+                  "0xda7e6003d390c35eb54aa3f67ec4dfe98a0f958e2cfec05e861cb15e80e6d113": [
+                    "PR07 5/10"
+                  ]
+                }
+              },
+              {
+                "keys": 3,
+                "addresses": [
+                  "0x69d3948e0324e8c2f05faa0fccaaaca92ce5875025bea4611a7e1399801b18ee",
+                  "0x94718229b8b79c06e81ea7d32a9c226cd20c905ab493fabab28998ab4cd0ab9c",
+                  "0xaabf2fedcb36146db164bec930b74a47969c4df98216e049342a3c49b6d11580"
+                ],
+                "controlled_paths": [
+                  "PA01",
+                  "PA02",
+                  "PA03",
+                  "PA04",
+                  "PA05",
+                  "PA06",
+                  "PA07",
+                  "PA08"
+                ],
+                "uncontrolled_paths": [],
+                "member_of": {
+                  "0x69d3948e0324e8c2f05faa0fccaaaca92ce5875025bea4611a7e1399801b18ee": [
+                    "PR07 5/10",
+                    "PR08 2/3"
+                  ],
+                  "0x94718229b8b79c06e81ea7d32a9c226cd20c905ab493fabab28998ab4cd0ab9c": [
+                    "PR07 5/10"
+                  ],
+                  "0xaabf2fedcb36146db164bec930b74a47969c4df98216e049342a3c49b6d11580": [
+                    "PR07 5/10",
+                    "PR08 2/3"
+                  ]
+                }
+              }
+            ],
+            "all_paths_keys": 3
+          },
+          "temporary_block": {
+            "min_keys": 1,
+            "paths": [
+              "PA07"
+            ]
+          }
+        },
+        "configuration": {
+          "score": 100.0,
+          "markets": [
+            {
+              "market_id": "MK01",
+              "score": 100,
+              "tvl_usd": 2258252.79
+            },
+            {
+              "market_id": "MK02",
+              "score": 100,
+              "tvl_usd": 2019832.58
+            },
+            {
+              "market_id": "MK03",
+              "score": 100,
+              "tvl_usd": 1905208.8
+            }
+          ],
+          "checks": [
+            {
+              "check": "CK01",
+              "check_id": "DX-C1.1",
+              "business_id": "BZ01",
+              "market_id": "MK01",
+              "reason": "池类型的两种币与官方列表一致；tick 间距 2 对应的费率档为 100，池费率 100，一致；协议费记在池内字段，由协议费领取角色提取，没有单独的接收方可错绑",
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK02",
+              "check_id": "DX-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK01",
+              "reason": "池费率 100/1000000 不超过代码上限 MAX_FEE_RATE=200000；协议分成 2000/10000 不超过 MAX_PROTOCOL_FEE_RATE=3000",
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK03",
+              "check_id": "DX-C1.1",
+              "business_id": "BZ01",
+              "market_id": "MK02",
+              "reason": "池类型的两种币与官方列表一致；tick 间距 2 对应的费率档为 100，池费率 100，一致；协议费记在池内字段，由协议费领取角色提取，没有单独的接收方可错绑",
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK04",
+              "check_id": "DX-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK02",
+              "reason": "池费率 100/1000000 不超过代码上限 MAX_FEE_RATE=200000；协议分成 2000/10000 不超过 MAX_PROTOCOL_FEE_RATE=3000",
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK05",
+              "check_id": "DX-C1.1",
+              "business_id": "BZ01",
+              "market_id": "MK03",
+              "reason": "池类型的两种币与官方列表一致；tick 间距 60 对应的费率档为 2500，池费率 2500，一致；协议费记在池内字段，由协议费领取角色提取，没有单独的接收方可错绑",
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK06",
+              "check_id": "DX-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK03",
+              "reason": "池费率 2500/1000000 不超过代码上限 MAX_FEE_RATE=200000；协议分成 2000/10000 不超过 MAX_PROTOCOL_FEE_RATE=3000",
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK07",
+              "check_id": "DX-C3.1",
+              "business_id": "BZ01",
+              "market_id": "MK01",
+              "reason": "全局：package_version=15 等于代码 VERSION，GlobalConfig 下没有紧急暂停标记；池级：is_pause=false，没有 pool_status 动态字段，撤资、领费、兑换的开关都是打开的",
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK08",
+              "check_id": "DX-C3.1",
+              "business_id": "BZ01",
+              "market_id": "MK02",
+              "reason": "全局：package_version=15 等于代码 VERSION，GlobalConfig 下没有紧急暂停标记；池级：is_pause=false，没有 pool_status 动态字段，撤资、领费、兑换的开关都是打开的",
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK09",
+              "check_id": "DX-C3.1",
+              "business_id": "BZ01",
+              "market_id": "MK03",
+              "reason": "全局：package_version=15 等于代码 VERSION，GlobalConfig 下没有紧急暂停标记；池级：is_pause=false，没有 pool_status 动态字段，撤资、领费、兑换的开关都是打开的",
+              "result": 100,
+              "dimension": "configuration"
+            }
+          ],
+          "disclosures": []
+        },
+        "funds_dependencies": {
+          "score": 100.0,
+          "markets": [
+            {
+              "market_id": "MK01",
+              "score": 100,
+              "tvl_usd": 2258252.79
+            },
+            {
+              "market_id": "MK02",
+              "score": 100,
+              "tvl_usd": 2019832.58
+            },
+            {
+              "market_id": "MK03",
+              "score": 100,
+              "tvl_usd": 1905208.8
+            }
+          ],
+          "checks": [
+            {
+              "check": "CK10",
+              "check_id": "DX-F1.1",
+              "business_id": "BZ01",
+              "market_id": "MK01",
+              "reason": "两种币各一组：真实余额扣掉协议费后，和 tick 表重建的全部头寸本金应得比较（重建出的当前流动性与池子记录一致；应得不含未领手续费）",
+              "formula": "amm_cover",
+              "calc": {
+                "available[coin_a]": "1948695157738405",
+                "surplus[coin_a]": "191075501555",
+                "结果[coin_a]": "通过",
+                "available[coin_b]": "1255720573483040",
+                "surplus[coin_b]": "14323344935",
+                "结果[coin_b]": "通过"
+              },
+              "result": 100,
+              "dimension": "funds_dependencies"
+            },
+            {
+              "check": "CK11",
+              "check_id": "DX-F1.1",
+              "business_id": "BZ01",
+              "market_id": "MK02",
+              "reason": "两种币各一组：真实余额扣掉协议费后，和 tick 表重建的全部头寸本金应得比较（重建出的当前流动性与池子记录一致；应得不含未领手续费）",
+              "formula": "amm_cover",
+              "calc": {
+                "available[coin_a]": "1076865859728",
+                "surplus[coin_a]": "13773263",
+                "结果[coin_a]": "通过",
+                "available[coin_b]": "817597959182",
+                "surplus[coin_b]": "17624572",
+                "结果[coin_b]": "通过"
+              },
+              "result": 100,
+              "dimension": "funds_dependencies"
+            },
+            {
+              "check": "CK12",
+              "check_id": "DX-F1.1",
+              "business_id": "BZ01",
+              "market_id": "MK03",
+              "reason": "两种币各一组：真实余额扣掉协议费后，和 tick 表重建的全部头寸本金应得比较（重建出的当前流动性与池子记录一致；应得不含未领手续费）",
+              "formula": "amm_cover",
+              "calc": {
+                "available[coin_a]": "693562386869",
+                "surplus[coin_a]": "40768551798",
+                "结果[coin_a]": "通过",
+                "available[coin_b]": "2562478007377020",
+                "surplus[coin_b]": "27475408315618",
+                "结果[coin_b]": "通过"
+              },
+              "result": 100,
+              "dimension": "funds_dependencies"
+            },
+            {
+              "check": "CK13",
+              "check_id": "DX-F2.1",
+              "business_id": "BZ01",
+              "market_id": "ALL",
+              "reason": "两种币都直接存在池对象的 coin_a、coin_b 余额里，没有外部资金组件",
+              "result": "N/A",
+              "dimension": "funds_dependencies"
+            },
+            {
+              "check": "CK14",
+              "check_id": "DX-D1.1",
+              "business_id": "BZ01",
+              "market_id": "ALL",
+              "reason": "撤资和领费只使用池内状态，不需要外部报价（专项补充说明：记 N/A）",
+              "result": "N/A",
+              "dimension": "funds_dependencies"
+            },
+            {
+              "check": "CK15",
+              "check_id": "DX-D2.2",
+              "business_id": "BZ01",
+              "market_id": "ALL",
+              "reason": "CLMM 池没有 Hook 或资产管理器等外部组件",
+              "result": "N/A",
+              "dimension": "funds_dependencies"
+            }
+          ],
+          "disclosures": []
+        }
+      },
+      "incomplete": [],
+      "zero_markets": [],
+      "notes": [
+        "市场 MK01、MK02、MK03 的清单取自官方列表（链上无法枚举），可能不完整",
+        "选定的 3 个市场 TVL 合计 6183294.17 美元，占业务 TVL 的 34.9%（市场和业务的 TVL 口径不同，比例仅供参考）；配置和资金两个大项只代表这部分资金"
+      ],
+      "fatal": [],
+      "raw_score": 92.0,
+      "score": 92.0,
+      "status": "已评分",
+      "tvl_usd": 17730390.46,
+      "weight": 1.0,
+      "market_coverage": {
+        "selected_tvl_usd": 6183294.17,
+        "business_tvl_usd": 17730390.46,
+        "ratio": 0.348739875974508,
+        "same_source": false
+      }
+    }
+  ],
+  "snapshots": [
+    {
+      "chain_id": "sui:mainnet",
+      "block_or_checkpoint": "349316550",
+      "block_hash_or_digest": "GHyg51XmgbRCYzz2ty4o2TN3Gspa65ad4LCFVfPFktub",
+      "time_utc": "2026-11-26T05:59:34.620Z",
+      "evidence": "file:证据/raw/snapshot.json"
+    }
+  ],
+  "validity": "分数只代表快照时点的状态。权限持有人或门限变更、合约升级、核心参数改动后，结果过期，需要重评。",
+  "budget": 45
+}

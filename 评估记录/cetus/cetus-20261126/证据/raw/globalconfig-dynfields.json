@@ -1,0 +1,17 @@
+{
+ "endpoint": "https://graphql.mainnet.sui.io/graphql",
+ "query": "query($a:SuiAddress!,$c:UInt53,$after:String){ address(address:$a, atCheckpoint:$c){\n  dynamicFields(first:50, after:$after){ pageInfo{ hasNextPage endCursor }\n  nodes{ name{ json type{ repr } } value{ __typename ... on MoveValue{ json type{ repr } } ... on MoveObject{ address contents{ json type{ repr } } } } } } } }",
+ "variables": {
+  "a": "0xdaa46292632c3c4d8f31f23ea0f9b36a28ff3677e9684980e4438403a67a3d8f",
+  "c": 349316550
+ },
+ "response": {
+  "data": {
+   "address": {
+    "dynamicFields": {
+     "nodes": []
+    }
+   }
+  }
+ }
+}

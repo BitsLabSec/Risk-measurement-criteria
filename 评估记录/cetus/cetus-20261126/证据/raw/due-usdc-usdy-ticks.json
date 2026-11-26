@@ -1,0 +1,1545 @@
+{
+ "endpoint": "https://graphql.mainnet.sui.io/graphql",
+ "query": "query($a:SuiAddress!,$c:UInt53,$after:String){ address(address:$a, atCheckpoint:$c){\n  dynamicFields(first:50, after:$after){ pageInfo{ hasNextPage endCursor }\n  nodes{ name{ json type{ repr } } value{ __typename ... on MoveValue{ json type{ repr } } ... on MoveObject{ address contents{ json type{ repr } } } } } } } }",
+ "variables": {
+  "a": "0x84cd5d3e0239992ee7c859cc82f852feb4871960e37db4b1535fc1a08127a853",
+  "c": 349316550
+ },
+ "response": {
+  "data": {
+   "address": {
+    "dynamicFields": {
+     "nodes": [
+      {
+       "name": {
+        "json": "464024",
+        "type": {
+         "repr": "u64"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "score": "464024",
+         "nexts": [
+          {
+           "is_none": false,
+           "v": "887272"
+          },
+          {
+           "is_none": false,
+           "v": "887272"
+          }
+         ],
+         "prev": {
+          "is_none": false,
+          "v": "445124"
+         },
+         "value": {
+          "index": {
+           "bits": 20388
+          },
+          "sqrt_price": "51123123796951224742",
+          "liquidity_net": {
+           "bits": "340282366920938463463374607431768210689"
+          },
+          "liquidity_gross": "767",
+          "fee_growth_outside_a": "0",
+          "fee_growth_outside_b": "0",
+          "points_growth_outside": "0",
+          "rewards_growth_outside": [
+           "0",
+           "0"
+          ]
+         }
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::skip_list::Node<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::tick::Tick>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "442724",
+        "type": {
+         "repr": "u64"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "score": "442724",
+         "nexts": [
+          {
+           "is_none": false,
+           "v": "442766"
+          },
+          {
+           "is_none": false,
+           "v": "442848"
+          }
+         ],
+         "prev": {
+          "is_none": false,
+          "v": "442710"
+         },
+         "value": {
+          "index": {
+           "bits": 4294966384
+          },
+          "sqrt_price": "17624503212771889507",
+          "liquidity_net": {
+           "bits": "769908962"
+          },
+          "liquidity_gross": "769908962",
+          "fee_growth_outside_a": "11494539079535246",
+          "fee_growth_outside_b": "16132958326230037",
+          "points_growth_outside": "1008919377760581360295",
+          "rewards_growth_outside": [
+           "17135804523142283",
+           "5544366131198620737596"
+          ]
+         }
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::skip_list::Node<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::tick::Tick>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "442768",
+        "type": {
+         "repr": "u64"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "score": "442768",
+         "nexts": [
+          {
+           "is_none": false,
+           "v": "442820"
+          }
+         ],
+         "prev": {
+          "is_none": false,
+          "v": "442766"
+         },
+         "value": {
+          "index": {
+           "bits": 4294966428
+          },
+          "sqrt_price": "17663317859597041080",
+          "liquidity_net": {
+           "bits": "340282366920938463463374606963546007977"
+          },
+          "liquidity_gross": "468222203479",
+          "fee_growth_outside_a": "11114091093456260",
+          "fee_growth_outside_b": "15785045739917721",
+          "points_growth_outside": "983659399566002006410",
+          "rewards_growth_outside": [
+           "1128381794746516050",
+           "5231625128107604499427"
+          ]
+         }
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::skip_list::Node<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::tick::Tick>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "442590",
+        "type": {
+         "repr": "u64"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "score": "442590",
+         "nexts": [
+          {
+           "is_none": false,
+           "v": "442708"
+          },
+          {
+           "is_none": false,
+           "v": "442710"
+          }
+         ],
+         "prev": {
+          "is_none": false,
+          "v": "442586"
+         },
+         "value": {
+          "index": {
+           "bits": 4294966250
+          },
+          "sqrt_price": "17506819605624973405",
+          "liquidity_net": {
+           "bits": "133069"
+          },
+          "liquidity_gross": "133069",
+          "fee_growth_outside_a": "12814192899174024",
+          "fee_growth_outside_b": "17310952748050890",
+          "points_growth_outside": "1221751633276163865391",
+          "rewards_growth_outside": [
+           "1921126723679532954",
+           "6201566158214854948322"
+          ]
+         }
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::skip_list::Node<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::tick::Tick>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "442766",
+        "type": {
+         "repr": "u64"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "score": "442766",
+         "nexts": [
+          {
+           "is_none": false,
+           "v": "442768"
+          }
+         ],
+         "prev": {
+          "is_none": false,
+          "v": "442724"
+         },
+         "value": {
+          "index": {
+           "bits": 4294966426
+          },
+          "sqrt_price": "17661551704426598419",
+          "liquidity_net": {
+           "bits": "468222203479"
+          },
+          "liquidity_gross": "468222203479",
+          "fee_growth_outside_a": "11126940937483333",
+          "fee_growth_outside_b": "15796782707959706",
+          "points_growth_outside": "983847093765237566601",
+          "rewards_growth_outside": [
+           "1166634268284498847",
+           "5233071600401324195241"
+          ]
+         }
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::skip_list::Node<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::tick::Tick>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "442562",
+        "type": {
+         "repr": "u64"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "score": "442562",
+         "nexts": [
+          {
+           "is_none": false,
+           "v": "442564"
+          }
+         ],
+         "prev": {
+          "is_none": false,
+          "v": "442560"
+         },
+         "value": {
+          "index": {
+           "bits": 4294966222
+          },
+          "sqrt_price": "17482328430538030493",
+          "liquidity_net": {
+           "bits": "340282366920938463463374606925509848056"
+          },
+          "liquidity_gross": "506258363400",
+          "fee_growth_outside_a": "12613961192811813",
+          "fee_growth_outside_b": "17140739507540447",
+          "points_growth_outside": "1222288162747704294659",
+          "rewards_growth_outside": [
+           "862342989236876319",
+           "6202905313575717646673"
+          ]
+         }
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::skip_list::Node<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::tick::Tick>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "887272",
+        "type": {
+         "repr": "u64"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "score": "887272",
+         "nexts": [
+          {
+           "is_none": true,
+           "v": "0"
+          },
+          {
+           "is_none": true,
+           "v": "0"
+          },
+          {
+           "is_none": true,
+           "v": "0"
+          }
+         ],
+         "prev": {
+          "is_none": false,
+          "v": "464024"
+         },
+         "value": {
+          "index": {
+           "bits": 443636
+          },
+          "sqrt_price": "79226673515401279992447579055",
+          "liquidity_net": {
+           "bits": "340282366920938463463374607431723226854"
+          },
+          "liquidity_gross": "44984602",
+          "fee_growth_outside_a": "0",
+          "fee_growth_outside_b": "0",
+          "points_growth_outside": "0",
+          "rewards_growth_outside": [
+           "0"
+          ]
+         }
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::skip_list::Node<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::tick::Tick>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "442558",
+        "type": {
+         "repr": "u64"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "score": "442558",
+         "nexts": [
+          {
+           "is_none": false,
+           "v": "442560"
+          },
+          {
+           "is_none": false,
+           "v": "442560"
+          },
+          {
+           "is_none": false,
+           "v": "442560"
+          },
+          {
+           "is_none": false,
+           "v": "442710"
+          },
+          {
+           "is_none": false,
+           "v": "442710"
+          }
+         ],
+         "prev": {
+          "is_none": false,
+          "v": "442506"
+         },
+         "value": {
+          "index": {
+           "bits": 4294966218
+          },
+          "sqrt_price": "17478832489251855228",
+          "liquidity_net": {
+           "bits": "491085435788"
+          },
+          "liquidity_gross": "491085435788",
+          "fee_growth_outside_a": "12618812176507571",
+          "fee_growth_outside_b": "17144546586023723",
+          "points_growth_outside": "1222423717682818324495",
+          "rewards_growth_outside": [
+           "869626611350081382",
+           "6203061966208227791308"
+          ]
+         }
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::skip_list::Node<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::tick::Tick>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "439496",
+        "type": {
+         "repr": "u64"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "score": "439496",
+         "nexts": [
+          {
+           "is_none": false,
+           "v": "439590"
+          },
+          {
+           "is_none": false,
+           "v": "441812"
+          }
+         ],
+         "prev": {
+          "is_none": false,
+          "v": "248748"
+         },
+         "value": {
+          "index": {
+           "bits": 4294963156
+          },
+          "sqrt_price": "14997720625475274943",
+          "liquidity_net": {
+           "bits": "4272"
+          },
+          "liquidity_gross": "4272",
+          "fee_growth_outside_a": "21790350491947899472",
+          "fee_growth_outside_b": "1203316599730842",
+          "points_growth_outside": "928276184761243281883921",
+          "rewards_growth_outside": [
+           "11079911835068304593713"
+          ]
+         }
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::skip_list::Node<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::tick::Tick>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "442560",
+        "type": {
+         "repr": "u64"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "score": "442560",
+         "nexts": [
+          {
+           "is_none": false,
+           "v": "442562"
+          },
+          {
+           "is_none": false,
+           "v": "442590"
+          },
+          {
+           "is_none": false,
+           "v": "442710"
+          }
+         ],
+         "prev": {
+          "is_none": false,
+          "v": "442558"
+         },
+         "value": {
+          "index": {
+           "bits": 4294966220
+          },
+          "sqrt_price": "17480580372500780414",
+          "liquidity_net": {
+           "bits": "506258363400"
+          },
+          "liquidity_gross": "506258363400",
+          "fee_growth_outside_a": "12616711754203476",
+          "fee_growth_outside_b": "17142948280134135",
+          "points_growth_outside": "1222385563054274698747",
+          "rewards_growth_outside": [
+           "873991851899882345",
+           "6203016985224586588378"
+          ]
+         }
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::skip_list::Node<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::tick::Tick>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "248748",
+        "type": {
+         "repr": "u64"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "score": "248748",
+         "nexts": [
+          {
+           "is_none": false,
+           "v": "439496"
+          },
+          {
+           "is_none": false,
+           "v": "439496"
+          }
+         ],
+         "prev": {
+          "is_none": false,
+          "v": "0"
+         },
+         "value": {
+          "index": {
+           "bits": 4294772408
+          },
+          "sqrt_price": "1081912543335177",
+          "liquidity_net": {
+           "bits": "94394"
+          },
+          "liquidity_gross": "94394",
+          "fee_growth_outside_a": "21790685812971923564",
+          "fee_growth_outside_b": "1272438221222993",
+          "points_growth_outside": "470864715689835074661369",
+          "rewards_growth_outside": [
+           "3625923993978804145097"
+          ]
+         }
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::skip_list::Node<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::tick::Tick>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "442972",
+        "type": {
+         "repr": "u64"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "score": "442972",
+         "nexts": [
+          {
+           "is_none": false,
+           "v": "442974"
+          },
+          {
+           "is_none": false,
+           "v": "442980"
+          }
+         ],
+         "prev": {
+          "is_none": false,
+          "v": "442848"
+         },
+         "value": {
+          "index": {
+           "bits": 4294966632
+          },
+          "sqrt_price": "17844396579580450526",
+          "liquidity_net": {
+           "bits": "103033600942"
+          },
+          "liquidity_gross": "103033600942",
+          "fee_growth_outside_a": "9456206065840962",
+          "fee_growth_outside_b": "14249785115552211",
+          "points_growth_outside": "581369796364854493821",
+          "rewards_growth_outside": [
+           "6767868602844406",
+           "3888905303787259588292"
+          ]
+         }
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::skip_list::Node<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::tick::Tick>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "442586",
+        "type": {
+         "repr": "u64"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "score": "442586",
+         "nexts": [
+          {
+           "is_none": false,
+           "v": "442590"
+          }
+         ],
+         "prev": {
+          "is_none": false,
+          "v": "442584"
+         },
+         "value": {
+          "index": {
+           "bits": 4294966246
+          },
+          "sqrt_price": "17503318766838418053",
+          "liquidity_net": {
+           "bits": "340282366920938463463374606922604343250"
+          },
+          "liquidity_gross": "509163868206",
+          "fee_growth_outside_a": "12623956026192898",
+          "fee_growth_outside_b": "17151888479165104",
+          "points_growth_outside": "1221718432595916615461",
+          "rewards_growth_outside": [
+           "812413096865964711",
+           "6201675715233131363333"
+          ]
+         }
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::skip_list::Node<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::tick::Tick>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "442848",
+        "type": {
+         "repr": "u64"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "score": "442848",
+         "nexts": [
+          {
+           "is_none": false,
+           "v": "442972"
+          },
+          {
+           "is_none": false,
+           "v": "442972"
+          },
+          {
+           "is_none": false,
+           "v": "442980"
+          }
+         ],
+         "prev": {
+          "is_none": false,
+          "v": "442820"
+         },
+         "value": {
+          "index": {
+           "bits": 4294966508
+          },
+          "sqrt_price": "17734109079589855910",
+          "liquidity_net": {
+           "bits": "340282366920938463463374607430998302494"
+          },
+          "liquidity_gross": "769908962",
+          "fee_growth_outside_a": "10502817870341476",
+          "fee_growth_outside_b": "15222480893851342",
+          "points_growth_outside": "955030316755779449478",
+          "rewards_growth_outside": [
+           "0",
+           "4968056085964695416989"
+          ]
+         }
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::skip_list::Node<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::tick::Tick>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "0",
+        "type": {
+         "repr": "u64"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "score": "0",
+         "nexts": [
+          {
+           "is_none": false,
+           "v": "248748"
+          }
+         ],
+         "prev": {
+          "is_none": true,
+          "v": "0"
+         },
+         "value": {
+          "index": {
+           "bits": 4294523660
+          },
+          "sqrt_price": "4295048016",
+          "liquidity_net": {
+           "bits": "44984602"
+          },
+          "liquidity_gross": "44984602",
+          "fee_growth_outside_a": "901679589245408",
+          "fee_growth_outside_b": "788646133743577",
+          "points_growth_outside": "469860665697808437234971",
+          "rewards_growth_outside": [
+           "21099778031468771491"
+          ]
+         }
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::skip_list::Node<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::tick::Tick>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "444692",
+        "type": {
+         "repr": "u64"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "score": "444692",
+         "nexts": [
+          {
+           "is_none": false,
+           "v": "444972"
+          },
+          {
+           "is_none": false,
+           "v": "445124"
+          }
+         ],
+         "prev": {
+          "is_none": false,
+          "v": "442980"
+         },
+         "value": {
+          "index": {
+           "bits": 1056
+          },
+          "sqrt_price": "19446852701141136410",
+          "liquidity_net": {
+           "bits": "340282366920938463463374607431768042300"
+          },
+          "liquidity_gross": "169156",
+          "fee_growth_outside_a": "4793634111356866",
+          "fee_growth_outside_b": "9602224315375222",
+          "points_growth_outside": "44366307812097083801",
+          "rewards_growth_outside": [
+           "0",
+           "51349893301038291441"
+          ]
+         }
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::skip_list::Node<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::tick::Tick>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "442280",
+        "type": {
+         "repr": "u64"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "score": "442280",
+         "nexts": [
+          {
+           "is_none": false,
+           "v": "442288"
+          },
+          {
+           "is_none": false,
+           "v": "442288"
+          },
+          {
+           "is_none": false,
+           "v": "442288"
+          }
+         ],
+         "prev": {
+          "is_none": false,
+          "v": "442130"
+         },
+         "value": {
+          "index": {
+           "bits": 4294965940
+          },
+          "sqrt_price": "17237569443102631285",
+          "liquidity_net": {
+           "bits": "340282366920938463463374393828070296770"
+          },
+          "liquidity_gross": "213603697914686",
+          "fee_growth_outside_a": "0",
+          "fee_growth_outside_b": "0",
+          "points_growth_outside": "0",
+          "rewards_growth_outside": [
+           "0",
+           "0"
+          ]
+         }
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::skip_list::Node<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::tick::Tick>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "442350",
+        "type": {
+         "repr": "u64"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "score": "442350",
+         "nexts": [
+          {
+           "is_none": false,
+           "v": "442506"
+          }
+         ],
+         "prev": {
+          "is_none": false,
+          "v": "442288"
+         },
+         "value": {
+          "index": {
+           "bits": 4294966010
+          },
+          "sqrt_price": "17298003612601880861",
+          "liquidity_net": {
+           "bits": "340282366920938463463374516669056952551"
+          },
+          "liquidity_gross": "90762711258905",
+          "fee_growth_outside_a": "0",
+          "fee_growth_outside_b": "0",
+          "points_growth_outside": "0",
+          "rewards_growth_outside": [
+           "0",
+           "0"
+          ]
+         }
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::skip_list::Node<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::tick::Tick>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "442130",
+        "type": {
+         "repr": "u64"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "score": "442130",
+         "nexts": [
+          {
+           "is_none": false,
+           "v": "442280"
+          },
+          {
+           "is_none": false,
+           "v": "442280"
+          }
+         ],
+         "prev": {
+          "is_none": false,
+          "v": "441812"
+         },
+         "value": {
+          "index": {
+           "bits": 4294965790
+          },
+          "sqrt_price": "17108777684535215465",
+          "liquidity_net": {
+           "bits": "213603697914686"
+          },
+          "liquidity_gross": "213603697914686",
+          "fee_growth_outside_a": "21803402072830377703",
+          "fee_growth_outside_b": "18478988954913039",
+          "points_growth_outside": "929502153811457905007629",
+          "rewards_growth_outside": [
+           "11081167480802696453400",
+           "6207097098416993283554"
+          ]
+         }
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::skip_list::Node<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::tick::Tick>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "442710",
+        "type": {
+         "repr": "u64"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "score": "442710",
+         "nexts": [
+          {
+           "is_none": false,
+           "v": "442724"
+          },
+          {
+           "is_none": false,
+           "v": "442724"
+          },
+          {
+           "is_none": false,
+           "v": "442848"
+          },
+          {
+           "is_none": true,
+           "v": "0"
+          },
+          {
+           "is_none": true,
+           "v": "0"
+          }
+         ],
+         "prev": {
+          "is_none": false,
+          "v": "442708"
+         },
+         "value": {
+          "index": {
+           "bits": 4294966370
+          },
+          "sqrt_price": "17612170993903760521",
+          "liquidity_net": {
+           "bits": "340282366920938463463374607431768204622"
+          },
+          "liquidity_gross": "6834",
+          "fee_growth_outside_a": "11715034709138298",
+          "fee_growth_outside_b": "16332052747350424",
+          "points_growth_outside": "1032551087282282971040",
+          "rewards_growth_outside": [
+           "518731394815970381",
+           "5696635032644796890073"
+          ]
+         }
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::skip_list::Node<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::tick::Tick>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "442564",
+        "type": {
+         "repr": "u64"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "score": "442564",
+         "nexts": [
+          {
+           "is_none": false,
+           "v": "442584"
+          }
+         ],
+         "prev": {
+          "is_none": false,
+          "v": "442562"
+         },
+         "value": {
+          "index": {
+           "bits": 4294966224
+          },
+          "sqrt_price": "17484076663381084297",
+          "liquidity_net": {
+           "bits": "340282366920938463463374606940682775668"
+          },
+          "liquidity_gross": "491085435788",
+          "fee_growth_outside_a": "12611545629785739",
+          "fee_growth_outside_b": "17138709562550192",
+          "points_growth_outside": "1222261009872674185688",
+          "rewards_growth_outside": [
+           "861140204904471163",
+           "6202877768510746001083"
+          ]
+         }
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::skip_list::Node<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::tick::Tick>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "442506",
+        "type": {
+         "repr": "u64"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "score": "442506",
+         "nexts": [
+          {
+           "is_none": false,
+           "v": "442558"
+          }
+         ],
+         "prev": {
+          "is_none": false,
+          "v": "442350"
+         },
+         "value": {
+          "index": {
+           "bits": 4294966166
+          },
+          "sqrt_price": "17433448818262671524",
+          "liquidity_net": {
+           "bits": "101722185868"
+          },
+          "liquidity_gross": "101722185868",
+          "fee_growth_outside_a": "12646869881549719",
+          "fee_growth_outside_b": "17162466370527299",
+          "points_growth_outside": "1224309952716544522324",
+          "rewards_growth_outside": [
+           "866950584847093881",
+           "6205245611620874411672"
+          ]
+         }
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::skip_list::Node<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::tick::Tick>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "444972",
+        "type": {
+         "repr": "u64"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "score": "444972",
+         "nexts": [
+          {
+           "is_none": false,
+           "v": "445124"
+          }
+         ],
+         "prev": {
+          "is_none": false,
+          "v": "444692"
+         },
+         "value": {
+          "index": {
+           "bits": 1336
+          },
+          "sqrt_price": "19721009551639811283",
+          "liquidity_net": {
+           "bits": "340282366920938463463374607431641704401"
+          },
+          "liquidity_gross": "126507055",
+          "fee_growth_outside_a": "4465286985630922",
+          "fee_growth_outside_b": "9231613875052858",
+          "points_growth_outside": "44107353769779310657",
+          "rewards_growth_outside": [
+           "0",
+           "51050177974281609561"
+          ]
+         }
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::skip_list::Node<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::tick::Tick>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "442820",
+        "type": {
+         "repr": "u64"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "score": "442820",
+         "nexts": [
+          {
+           "is_none": false,
+           "v": "442848"
+          }
+         ],
+         "prev": {
+          "is_none": false,
+          "v": "442768"
+         },
+         "value": {
+          "index": {
+           "bits": 4294966480
+          },
+          "sqrt_price": "17709299937766081796",
+          "liquidity_net": {
+           "bits": "340282366920938463463374607330046025588"
+          },
+          "liquidity_gross": "101722185868",
+          "fee_growth_outside_a": "10702287572803023",
+          "fee_growth_outside_b": "15406597114477782",
+          "points_growth_outside": "963353279052354760660",
+          "rewards_growth_outside": [
+           "0",
+           "5043438439396430768393"
+          ]
+         }
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::skip_list::Node<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::tick::Tick>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "442584",
+        "type": {
+         "repr": "u64"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "score": "442584",
+         "nexts": [
+          {
+           "is_none": false,
+           "v": "442586"
+          }
+         ],
+         "prev": {
+          "is_none": false,
+          "v": "442564"
+         },
+         "value": {
+          "index": {
+           "bits": 4294966244
+          },
+          "sqrt_price": "17501568609977420311",
+          "liquidity_net": {
+           "bits": "509163868206"
+          },
+          "liquidity_gross": "509163868206",
+          "fee_growth_outside_a": "12628043799580970",
+          "fee_growth_outside_b": "17155309695906198",
+          "points_growth_outside": "1221796457025955016660",
+          "rewards_growth_outside": [
+           "815352709254396452",
+           "6201766674094867598757"
+          ]
+         }
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::skip_list::Node<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::tick::Tick>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "441812",
+        "type": {
+         "repr": "u64"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "score": "441812",
+         "nexts": [
+          {
+           "is_none": false,
+           "v": "442130"
+          },
+          {
+           "is_none": false,
+           "v": "442130"
+          }
+         ],
+         "prev": {
+          "is_none": false,
+          "v": "439590"
+         },
+         "value": {
+          "index": {
+           "bits": 4294965472
+          },
+          "sqrt_price": "16838912723883301498",
+          "liquidity_net": {
+           "bits": "169156"
+          },
+          "liquidity_gross": "169156",
+          "fee_growth_outside_a": "21789165447368823144",
+          "fee_growth_outside_b": "0",
+          "points_growth_outside": "458442052479003163401898",
+          "rewards_growth_outside": [
+           "11054918890283621938423"
+          ]
+         }
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::skip_list::Node<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::tick::Tick>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "442974",
+        "type": {
+         "repr": "u64"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "score": "442974",
+         "nexts": [
+          {
+           "is_none": false,
+           "v": "442980"
+          }
+         ],
+         "prev": {
+          "is_none": false,
+          "v": "442972"
+         },
+         "value": {
+          "index": {
+           "bits": 4294966634
+          },
+          "sqrt_price": "17846181019238408570",
+          "liquidity_net": {
+           "bits": "340282366920938463463374607399820653206"
+          },
+          "liquidity_gross": "31947558250",
+          "fee_growth_outside_a": "9441618527151359",
+          "fee_growth_outside_b": "14236168008869480",
+          "points_growth_outside": "581153382392516088328",
+          "rewards_growth_outside": [
+           "35371734634866096",
+           "3888355762551819201023"
+          ]
+         }
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::skip_list::Node<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::tick::Tick>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "445124",
+        "type": {
+         "repr": "u64"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "score": "445124",
+         "nexts": [
+          {
+           "is_none": false,
+           "v": "464024"
+          },
+          {
+           "is_none": false,
+           "v": "464024"
+          }
+         ],
+         "prev": {
+          "is_none": false,
+          "v": "444972"
+         },
+         "value": {
+          "index": {
+           "bits": 1488
+          },
+          "sqrt_price": "19871452661925271028",
+          "liquidity_net": {
+           "bits": "340282366920938463463374607431768112790"
+          },
+          "liquidity_gross": "98666",
+          "fee_growth_outside_a": "4287260545077891",
+          "fee_growth_outside_b": "9023135440831585",
+          "points_growth_outside": "39776592335969239118",
+          "rewards_growth_outside": [
+           "0",
+           "46037722611075508242"
+          ]
+         }
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::skip_list::Node<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::tick::Tick>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "442288",
+        "type": {
+         "repr": "u64"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "score": "442288",
+         "nexts": [
+          {
+           "is_none": false,
+           "v": "442350"
+          },
+          {
+           "is_none": false,
+           "v": "442558"
+          },
+          {
+           "is_none": false,
+           "v": "442558"
+          },
+          {
+           "is_none": false,
+           "v": "442558"
+          }
+         ],
+         "prev": {
+          "is_none": false,
+          "v": "442280"
+         },
+         "value": {
+          "index": {
+           "bits": 4294965948
+          },
+          "sqrt_price": "17244465505202990926",
+          "liquidity_net": {
+           "bits": "90762711258905"
+          },
+          "liquidity_gross": "90762711258905",
+          "fee_growth_outside_a": "0",
+          "fee_growth_outside_b": "0",
+          "points_growth_outside": "0",
+          "rewards_growth_outside": [
+           "0",
+           "0"
+          ]
+         }
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::skip_list::Node<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::tick::Tick>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "439590",
+        "type": {
+         "repr": "u64"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "score": "439590",
+         "nexts": [
+          {
+           "is_none": false,
+           "v": "441812"
+          }
+         ],
+         "prev": {
+          "is_none": false,
+          "v": "439496"
+         },
+         "value": {
+          "index": {
+           "bits": 4294963250
+          },
+          "sqrt_price": "15068372281230747121",
+          "liquidity_net": {
+           "bits": "767"
+          },
+          "liquidity_gross": "767",
+          "fee_growth_outside_a": "21803317022250625393",
+          "fee_growth_outside_b": "18427792723720075",
+          "points_growth_outside": "929498665832642266668458",
+          "rewards_growth_outside": [
+           "11081167480802696453400",
+           "6203060085898893345590"
+          ]
+         }
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::skip_list::Node<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::tick::Tick>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "442980",
+        "type": {
+         "repr": "u64"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "score": "442980",
+         "nexts": [
+          {
+           "is_none": false,
+           "v": "444692"
+          },
+          {
+           "is_none": false,
+           "v": "444692"
+          },
+          {
+           "is_none": false,
+           "v": "887272"
+          }
+         ],
+         "prev": {
+          "is_none": false,
+          "v": "442974"
+         },
+         "value": {
+          "index": {
+           "bits": 4294966640
+          },
+          "sqrt_price": "17851535408947456853",
+          "liquidity_net": {
+           "bits": "340282366920938463463374607360682168764"
+          },
+          "liquidity_gross": "71086042692",
+          "fee_growth_outside_a": "9398182536879618",
+          "fee_growth_outside_b": "14195649084974425",
+          "points_growth_outside": "580458419036407476356",
+          "rewards_growth_outside": [
+           "0",
+           "3880169622877731768483"
+          ]
+         }
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::skip_list::Node<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::tick::Tick>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "442708",
+        "type": {
+         "repr": "u64"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "score": "442708",
+         "nexts": [
+          {
+           "is_none": false,
+           "v": "442710"
+          }
+         ],
+         "prev": {
+          "is_none": false,
+          "v": "442590"
+         },
+         "value": {
+          "index": {
+           "bits": 4294966368
+          },
+          "sqrt_price": "17610409952908469678",
+          "liquidity_net": {
+           "bits": "126380820"
+          },
+          "liquidity_gross": "126633290",
+          "fee_growth_outside_a": "11737358995409653",
+          "fee_growth_outside_b": "16352269952890832",
+          "points_growth_outside": "1038678161427147689251",
+          "rewards_growth_outside": [
+           "557603283716328442",
+           "5710507560908786810901"
+          ]
+         }
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::skip_list::Node<0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::tick::Tick>"
+        }
+       }
+      }
+     ]
+    }
+   }
+  }
+ }
+}

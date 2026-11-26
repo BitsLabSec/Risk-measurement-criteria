@@ -1,0 +1,437 @@
+{
+ "endpoint": "https://graphql.mainnet.sui.io/graphql",
+ "query": "query($o:SuiAddress!,$c:UInt53!){ transactions(filter:{affectedObject:$o, beforeCheckpoint:$c}, last:25){ nodes{ digest\n  sender{ address } effects{ checkpoint{ sequenceNumber } timestamp }\n  kind{ __typename ... on ProgrammableTransaction{ commands(first:50){ nodes{ __typename ... on MoveCallCommand{ function{ module{ package{ address } name } name } } } } } } } } }",
+ "variables": {
+  "o": "0x871d8a227114f375170f149f7e9d45be822dd003eba225e83c05ac80828596bc",
+  "c": 349316551
+ },
+ "response": {
+  "data": {
+   "transactions": {
+    "nodes": [
+     {
+      "digest": "7ZF5T1br6sWfyWtSs9U6qHt5WWyc8LUXKvoNXbxHCU1d",
+      "sender": {
+       "address": "0x475af7c4a6ecdafd68a5bc58b66696e2ef7139fbe4125dc17ba1923f9cd6dc1b"
+      },
+      "effects": {
+       "checkpoint": {
+        "sequenceNumber": 349316443
+       },
+       "timestamp": "2026-11-26T05:59:09.027Z"
+      },
+      "kind": {
+       "__typename": "ProgrammableTransaction",
+       "commands": {
+        "nodes": [
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "package": {
+             "address": "0x260693ec785a6e6c9d81d58c7d2ff72f1288ae0fa6a9725abe05a6478b11f084"
+            },
+            "name": "pool"
+           },
+           "name": "current_sqrt_price"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "package": {
+             "address": "0x0000000000000000000000000000000000000000000000000000000000000001"
+            },
+            "name": "u128"
+           },
+           "name": "checked_sub"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "package": {
+             "address": "0x0000000000000000000000000000000000000000000000000000000000000001"
+            },
+            "name": "option"
+           },
+           "name": "destroy_some"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "package": {
+             "address": "0x260693ec785a6e6c9d81d58c7d2ff72f1288ae0fa6a9725abe05a6478b11f084"
+            },
+            "name": "pool"
+           },
+           "name": "current_sqrt_price"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "package": {
+             "address": "0x0000000000000000000000000000000000000000000000000000000000000001"
+            },
+            "name": "u128"
+           },
+           "name": "checked_sub"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "package": {
+             "address": "0x0000000000000000000000000000000000000000000000000000000000000001"
+            },
+            "name": "option"
+           },
+           "name": "destroy_some"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "package": {
+             "address": "0x260693ec785a6e6c9d81d58c7d2ff72f1288ae0fa6a9725abe05a6478b11f084"
+            },
+            "name": "pool"
+           },
+           "name": "current_sqrt_price"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "package": {
+             "address": "0x0000000000000000000000000000000000000000000000000000000000000001"
+            },
+            "name": "u128"
+           },
+           "name": "checked_sub"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "package": {
+             "address": "0x0000000000000000000000000000000000000000000000000000000000000001"
+            },
+            "name": "option"
+           },
+           "name": "destroy_some"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "package": {
+             "address": "0x0000000000000000000000000000000000000000000000000000000000000002"
+            },
+            "name": "coin"
+           },
+           "name": "redeem_funds"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "package": {
+             "address": "0x0000000000000000000000000000000000000000000000000000000000000002"
+            },
+            "name": "coin"
+           },
+           "name": "value"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "package": {
+             "address": "0x0000000000000000000000000000000000000000000000000000000000000002"
+            },
+            "name": "coin"
+           },
+           "name": "into_balance"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "package": {
+             "address": "0x260693ec785a6e6c9d81d58c7d2ff72f1288ae0fa6a9725abe05a6478b11f084"
+            },
+            "name": "pool"
+           },
+           "name": "flash_swap"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "package": {
+             "address": "0x0000000000000000000000000000000000000000000000000000000000000002"
+            },
+            "name": "balance"
+           },
+           "name": "join"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "package": {
+             "address": "0x0000000000000000000000000000000000000000000000000000000000000002"
+            },
+            "name": "balance"
+           },
+           "name": "zero"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "package": {
+             "address": "0x260693ec785a6e6c9d81d58c7d2ff72f1288ae0fa6a9725abe05a6478b11f084"
+            },
+            "name": "pool"
+           },
+           "name": "repay_flash_swap"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "package": {
+             "address": "0x0000000000000000000000000000000000000000000000000000000000000002"
+            },
+            "name": "coin"
+           },
+           "name": "from_balance"
+          }
+         },
+         {
+          "__typename": "SplitCoinsCommand"
+         },
+         {
+          "__typename": "MergeCoinsCommand"
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "package": {
+             "address": "0x0000000000000000000000000000000000000000000000000000000000000002"
+            },
+            "name": "coin"
+           },
+           "name": "value"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "package": {
+             "address": "0x0000000000000000000000000000000000000000000000000000000000000002"
+            },
+            "name": "coin"
+           },
+           "name": "into_balance"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "package": {
+             "address": "0x260693ec785a6e6c9d81d58c7d2ff72f1288ae0fa6a9725abe05a6478b11f084"
+            },
+            "name": "pool"
+           },
+           "name": "flash_swap"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "package": {
+             "address": "0x0000000000000000000000000000000000000000000000000000000000000002"
+            },
+            "name": "balance"
+           },
+           "name": "join"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "package": {
+             "address": "0x0000000000000000000000000000000000000000000000000000000000000002"
+            },
+            "name": "balance"
+           },
+           "name": "zero"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "package": {
+             "address": "0x260693ec785a6e6c9d81d58c7d2ff72f1288ae0fa6a9725abe05a6478b11f084"
+            },
+            "name": "pool"
+           },
+           "name": "repay_flash_swap"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "package": {
+             "address": "0x0000000000000000000000000000000000000000000000000000000000000002"
+            },
+            "name": "coin"
+           },
+           "name": "from_balance"
+          }
+         },
+         {
+          "__typename": "SplitCoinsCommand"
+         },
+         {
+          "__typename": "MergeCoinsCommand"
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "package": {
+             "address": "0x0000000000000000000000000000000000000000000000000000000000000002"
+            },
+            "name": "coin"
+           },
+           "name": "value"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "package": {
+             "address": "0x0000000000000000000000000000000000000000000000000000000000000002"
+            },
+            "name": "coin"
+           },
+           "name": "into_balance"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "package": {
+             "address": "0x260693ec785a6e6c9d81d58c7d2ff72f1288ae0fa6a9725abe05a6478b11f084"
+            },
+            "name": "pool"
+           },
+           "name": "flash_swap"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "package": {
+             "address": "0x0000000000000000000000000000000000000000000000000000000000000002"
+            },
+            "name": "balance"
+           },
+           "name": "join"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "package": {
+             "address": "0x0000000000000000000000000000000000000000000000000000000000000002"
+            },
+            "name": "balance"
+           },
+           "name": "zero"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "package": {
+             "address": "0x260693ec785a6e6c9d81d58c7d2ff72f1288ae0fa6a9725abe05a6478b11f084"
+            },
+            "name": "pool"
+           },
+           "name": "repay_flash_swap"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "package": {
+             "address": "0x0000000000000000000000000000000000000000000000000000000000000002"
+            },
+            "name": "coin"
+           },
+           "name": "from_balance"
+          }
+         },
+         {
+          "__typename": "SplitCoinsCommand"
+         },
+         {
+          "__typename": "MergeCoinsCommand"
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "package": {
+             "address": "0x0000000000000000000000000000000000000000000000000000000000000002"
+            },
+            "name": "coin"
+           },
+           "name": "send_funds"
+          }
+         }
+        ]
+       }
+      }
+     }
+    ]
+   }
+  }
+ }
+}

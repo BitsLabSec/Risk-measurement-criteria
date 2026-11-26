@@ -1,0 +1,52 @@
+{
+ "endpoint": "https://graphql.mainnet.sui.io/graphql",
+ "query": "query($a:SuiAddress!){ transactions(filter:{sentAddress:$a}, last:1){ nodes{ digest signatures{ signatureBytes }\n  effects{ timestamp checkpoint{ sequenceNumber } } } } }",
+ "variables": {
+  "a": "0x2891c6b8dca29a075d263c1bb21c7b88adf3ff6baddae1b8743cc00b66bd2c47"
+ },
+ "response": {
+  "data": {
+   "transactions": {
+    "nodes": [
+     {
+      "digest": "A9BiNt9SPszFzy9Rj3FYJQDeDSMmBWp8w59KF3YANNhT",
+      "signatures": [
+       {
+        "signatureBytes": "AwIAeXVuAqSHWGdhtio++Vq6n8PeZBdsvbmUY1ywO+Bff7R4sazuYpprCm6HaBQnXepUEVg/7TdRdZRnS6VZfkS8CwDa6pHZxVQygQ4jNdCWGSZnNAloKYWWDD2gJqd0VmlDY366RcHivhEytd7o7z4p16Xdx2bEBws+BgPDWJaSpDMHAwADAOrWwe8pqkq4Ku0232brL3nc3K8f86f3skyvcxl3vHZQAQBazceOQpX8hcFjAKSAjIJQ7yxOPzYH4ry0sUNzkMylWQEA3QhpkJwiVvAEWp1E4s5PUUkCrwTwxUWEriFD+3/HGbIBAgA="
+       }
+      ],
+      "effects": {
+       "timestamp": "2026-11-25T09:16:16.583Z",
+       "checkpoint": {
+        "sequenceNumber": 349009803
+       }
+      }
+     }
+    ]
+   },
+   "decoded": {
+    "threshold": 2,
+    "members": [
+     {
+      "scheme": "ed25519",
+      "address": "0xaabf2fedcb36146db164bec930b74a47969c4df98216e049342a3c49b6d11580",
+      "weight": 1
+     },
+     {
+      "scheme": "ed25519",
+      "address": "0x69d3948e0324e8c2f05faa0fccaaaca92ce5875025bea4611a7e1399801b18ee",
+      "weight": 1
+     },
+     {
+      "scheme": "ed25519",
+      "address": "0xf5c5735651726d57dab28f32d2e62c0821e5448ac4a597db94cc1adc92025f9f",
+      "weight": 1
+     }
+    ],
+    "derived_address": "0x2891c6b8dca29a075d263c1bb21c7b88adf3ff6baddae1b8743cc00b66bd2c47",
+    "matches_address": true,
+    "digest": "A9BiNt9SPszFzy9Rj3FYJQDeDSMmBWp8w59KF3YANNhT"
+   }
+  }
+ }
+}

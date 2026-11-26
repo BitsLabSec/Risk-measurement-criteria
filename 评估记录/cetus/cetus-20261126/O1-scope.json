@@ -1,0 +1,118 @@
+{
+  "snapshots": [
+    {
+      "chain_id": "sui:mainnet",
+      "block_or_checkpoint": "349316550",
+      "block_hash_or_digest": "GHyg51XmgbRCYzz2ty4o2TN3Gspa65ad4LCFVfPFktub",
+      "time_utc": "2026-11-26T05:59:34.620Z",
+      "evidence": "file:证据/raw/snapshot.json"
+    }
+  ],
+  "baseline_check": [
+    {
+      "deployment_id": "I01",
+      "unchanged": "yes",
+      "evidence": "file:证据/raw/upgradecap-clmm.json"
+    }
+  ],
+  "businesses": [
+    {
+      "business_id": "BZ01",
+      "necessary_ops": [
+        {
+          "op": "撤资（取回流动性）",
+          "entry": "pool::remove_liquidity"
+        },
+        {
+          "op": "领取已产生的手续费",
+          "entry": "pool::collect_fee"
+        },
+        {
+          "op": "交易",
+          "entry": "pool::flash_swap"
+        }
+      ],
+      "markets": [
+        {
+          "id": "MK01",
+          "name": "haSUI-SUI（费率 0.01%）",
+          "object": "0x871d8a227114f375170f149f7e9d45be822dd003eba225e83c05ac80828596bc",
+          "key": "无",
+          "discovered_by": "official_list",
+          "discovery_evidence": "https://api-sui.cetus.zone/v2/sui/stats_pools?is_vaults=false&display_all_pools=true&has_mining=true&has_farming=true&no_incentives=true&order_by=-tvl&limit=10&offset=0"
+        },
+        {
+          "id": "MK02",
+          "name": "USDC-USDY（费率 0.01%）",
+          "object": "0xdcd762ad374686fa890fc4f3b9bbfe2a244e713d7bffbfbd1b9221cb290da2ed",
+          "key": "无",
+          "discovered_by": "official_list",
+          "discovery_evidence": "https://api-sui.cetus.zone/v2/sui/stats_pools?is_vaults=false&display_all_pools=true&has_mining=true&has_farming=true&no_incentives=true&order_by=-tvl&limit=10&offset=0"
+        },
+        {
+          "id": "MK03",
+          "name": "USDC-SUI（费率 0.25%）",
+          "object": "0xb8d7d9e66a60c239e7a60110efcf8de6c705580ed924d0dde141f4a0e2c90105",
+          "key": "无",
+          "discovered_by": "official_list",
+          "discovery_evidence": "https://api-sui.cetus.zone/v2/sui/stats_pools?is_vaults=false&display_all_pools=true&has_mining=true&has_farming=true&no_incentives=true&order_by=-tvl&limit=10&offset=0"
+        }
+      ]
+    }
+  ],
+  "module_objects": [
+    {
+      "module_id": "M05",
+      "chain_id": "sui:mainnet",
+      "object": "0x260693ec785a6e6c9d81d58c7d2ff72f1288ae0fa6a9725abe05a6478b11f084",
+      "object_kind": "package",
+      "evidence": "file:证据/raw/pkgversions-clmm.json"
+    },
+    {
+      "module_id": "M02",
+      "chain_id": "sui:mainnet",
+      "object": "0xdaa46292632c3c4d8f31f23ea0f9b36a28ff3677e9684980e4438403a67a3d8f",
+      "object_kind": "global_config",
+      "evidence": "file:证据/raw/globalconfig.json"
+    },
+    {
+      "module_id": "M02",
+      "chain_id": "sui:mainnet",
+      "object": "0x89c1a321291d15ddae5a086c9abc533dff697fde3d89e0ca836c41af73e36a75",
+      "object_kind": "capability",
+      "evidence": "file:证据/raw/caps-AdminCap.json"
+    },
+    {
+      "module_id": "M01",
+      "chain_id": "sui:mainnet",
+      "object": "0xcf1897ae0793665f0e3f676d86450675bbf31842fde1aa02613b7b53f34b764c",
+      "object_kind": "registry",
+      "evidence": "file:证据/raw/acl-members.json"
+    },
+    {
+      "module_id": "M03",
+      "chain_id": "sui:mainnet",
+      "object": "0xf699e7f2276f5c9a75944b37a0c5b5d9ddfd2471bf6242483b03ab2887d198d0",
+      "object_kind": "registry",
+      "evidence": "file:证据/raw/factory-pools.json"
+    },
+    {
+      "module_id": "M09",
+      "chain_id": "sui:mainnet",
+      "object": "0xce7bceef26d3ad1f6d9b6f13a953f053e6ed3ca77907516481ce99ae8e588f2b",
+      "object_kind": "treasury",
+      "evidence": "file:证据/raw/rewarder-vault.json"
+    },
+    {
+      "module_id": "M05",
+      "chain_id": "sui:mainnet",
+      "object": "0x4462a572640227717cb8c60b6dd337f022743de6bc13f1fe0b7adb182d1fa274",
+      "object_kind": "capability",
+      "evidence": "file:证据/raw/upgradecap-clmm.json"
+    }
+  ],
+  "out_of_scope": [
+    "其余 45464 个 CLMM 池：按 DEX 专项第 0 节不全量扫池，只选了官方 dapp 按 TVL 排名前三的池",
+    "奖励领取（collect_reward）：属于 Farming 专项，本次不评"
+  ]
+}

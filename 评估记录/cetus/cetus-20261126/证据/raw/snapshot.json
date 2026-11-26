@@ -1,0 +1,14 @@
+{
+ "endpoint": "https://graphql.mainnet.sui.io/graphql",
+ "query": "{ checkpoint { sequenceNumber digest timestamp } }",
+ "variables": {},
+ "response": {
+  "data": {
+   "checkpoint": {
+    "sequenceNumber": 349316550,
+    "digest": "GHyg51XmgbRCYzz2ty4o2TN3Gspa65ad4LCFVfPFktub",
+    "timestamp": "2026-11-26T05:59:34.620Z"
+   }
+  }
+ }
+}

@@ -1,0 +1,21 @@
+{
+ "command": "cmd:python3 工作流/scripts/sui_read.py <目录> clmm-due 0xdcd762ad374686fa890fc4f3b9bbfe2a244e713d7bffbfbd1b9221cb290da2ed --at 349316550 --name due-usdc-usdy",
+ "inputs": {
+  "pool": "file:证据/raw/due-usdc-usdy-pool.json",
+  "ticks": "file:证据/raw/due-usdc-usdy-ticks.json"
+ },
+ "result": {
+  "ticks": 32,
+  "due_a": "1076852086465",
+  "due_b": "817580334610",
+  "balance_a": "1076876178480",
+  "balance_b": "817606064363",
+  "reserved_a": "10318752",
+  "reserved_b": "8105181",
+  "liquidity_rebuilt": "213603743167877",
+  "liquidity_recorded": "213603743167877",
+  "rebuild_ok": true,
+  "problem": null
+ },
+ "formula": "onchain/dex-onchain-security-rating-standard.md DX-F1.1"
+}

@@ -1,0 +1,351 @@
+{
+  "roles": [
+    {
+      "id": "R01",
+      "credential": "config::AdminCap",
+      "check_locations": [
+        "sources/config.move:339-374",
+        "sources/config.move:575-583"
+      ],
+      "how_obtained": "init 时转给部署者，可转移（key, store）",
+      "granted_by_role_ids": []
+    },
+    {
+      "id": "R02",
+      "credential": "0x2::package::UpgradeCap（cetus_clmm）",
+      "check_locations": [
+        "Published.toml:1-9"
+      ],
+      "how_obtained": "发布时生成，可转移",
+      "granted_by_role_ids": []
+    },
+    {
+      "id": "R03",
+      "credential": "GlobalConfig.acl 角色位 0：ACL_POOL_MANAGER（池管理员）",
+      "check_locations": [
+        "sources/config.move:435-437"
+      ],
+      "how_obtained": "AdminCap 调用 set_roles／add_role 授予，remove_role 撤销；init 时给部署者 0、1、3、4 位",
+      "granted_by_role_ids": [
+        "R01"
+      ]
+    },
+    {
+      "id": "R04",
+      "credential": "GlobalConfig.acl 角色位 1：ACL_FEE_TIER_MANAGER（费率档管理员）",
+      "check_locations": [
+        "sources/config.move:442-444"
+      ],
+      "how_obtained": "AdminCap 调用 set_roles／add_role 授予，remove_role 撤销；init 时给部署者 0、1、3、4 位",
+      "granted_by_role_ids": [
+        "R01"
+      ]
+    },
+    {
+      "id": "R05",
+      "credential": "GlobalConfig.acl 角色位 2：ACL_CLAIM_PROTOCOL_FEE（协议费领取）",
+      "check_locations": [
+        "sources/config.move:449-457"
+      ],
+      "how_obtained": "AdminCap 调用 set_roles／add_role 授予，remove_role 撤销；init 时给部署者 0、1、3、4 位",
+      "granted_by_role_ids": [
+        "R01"
+      ]
+    },
+    {
+      "id": "R06",
+      "credential": "GlobalConfig.acl 角色位 3：ACL_PARTNER_MANAGER（合作方管理员）",
+      "check_locations": [
+        "sources/config.move:459-464"
+      ],
+      "how_obtained": "AdminCap 调用 set_roles／add_role 授予，remove_role 撤销；init 时给部署者 0、1、3、4 位",
+      "granted_by_role_ids": [
+        "R01"
+      ]
+    },
+    {
+      "id": "R07",
+      "credential": "GlobalConfig.acl 角色位 4：ACL_REWARDER_MANAGER（奖励管理员）",
+      "check_locations": [
+        "sources/config.move:466-471"
+      ],
+      "how_obtained": "AdminCap 调用 set_roles／add_role 授予，remove_role 撤销；init 时给部署者 0、1、3、4 位",
+      "granted_by_role_ids": [
+        "R01"
+      ]
+    },
+    {
+      "id": "R08",
+      "credential": "GlobalConfig.acl 角色位 5：ACL_EMERGENCY_UNPAUSE（解除紧急暂停）",
+      "check_locations": [
+        "sources/config.move:480-485"
+      ],
+      "how_obtained": "AdminCap 调用 set_roles／add_role 授予，remove_role 撤销；init 时给部署者 0、1、3、4 位",
+      "granted_by_role_ids": [
+        "R01"
+      ]
+    },
+    {
+      "id": "R09",
+      "credential": "GlobalConfig.acl 角色位 6：ACL_EMERGENCY_PAUSE（紧急暂停）",
+      "check_locations": [
+        "sources/config.move:473-475"
+      ],
+      "how_obtained": "AdminCap 调用 set_roles／add_role 授予，remove_role 撤销；init 时给部署者 0、1、3、4 位",
+      "granted_by_role_ids": [
+        "R01"
+      ]
+    }
+  ],
+  "controls": [
+    {
+      "id": "K01",
+      "role_ids": [
+        "R02"
+      ],
+      "entry": "0x2::package::authorize_upgrade（cetus_clmm）",
+      "conditions": "UpgradeCap policy=0（兼容升级），无时间锁",
+      "what_changes": "替换 cetus_clmm 的全部逻辑，对全部已有池和头寸生效",
+      "effect_locations": [
+        "Published.toml:1-9"
+      ],
+      "affected_responsibility_ids": [
+        "D01",
+        "D02",
+        "D03",
+        "D05",
+        "D06"
+      ],
+      "consequence": "H1",
+      "reachability": "source_closed"
+    },
+    {
+      "id": "K02",
+      "role_ids": [
+        "R01"
+      ],
+      "entry": "rewarder::emergent_withdraw",
+      "conditions": "包版本检查",
+      "what_changes": "从 RewarderGlobalVault 取走任意数量的奖励币（含 LP 已累计、未领取的奖励）",
+      "effect_locations": [
+        "sources/rewarder.move:374-389"
+      ],
+      "affected_responsibility_ids": [
+        "D05"
+      ],
+      "consequence": "H1",
+      "reachability": "source_closed"
+    },
+    {
+      "id": "K03",
+      "role_ids": [
+        "R01"
+      ],
+      "entry": "config::set_roles／add_role／remove_role",
+      "conditions": "无",
+      "what_changes": "给任意地址授予或撤销任意角色位（包括池管理员、紧急暂停）",
+      "effect_locations": [
+        "sources/config.move:339-374"
+      ],
+      "affected_responsibility_ids": [
+        "D03"
+      ],
+      "consequence": "H3",
+      "reachability": "source_closed"
+    },
+    {
+      "id": "K04",
+      "role_ids": [
+        "R01"
+      ],
+      "entry": "config::update_package_version",
+      "conditions": "新版本号必须大于旧值且小于 EMERGENCY_PAUSE_VERSION",
+      "what_changes": "把 GlobalConfig.package_version 改成大于代码 VERSION 的值，所有入口的版本检查失败，直到升级出新包",
+      "effect_locations": [
+        "sources/config.move:575-583",
+        "sources/config.move:524-526"
+      ],
+      "affected_responsibility_ids": [
+        "D01",
+        "D02",
+        "D03"
+      ],
+      "consequence": "H3",
+      "reachability": "source_closed"
+    },
+    {
+      "id": "K05",
+      "role_ids": [
+        "R03"
+      ],
+      "entry": "pool::set_pool_status",
+      "conditions": "包版本检查",
+      "what_changes": "逐池关闭撤资、领费、兑换等开关，没有到期时间",
+      "effect_locations": [
+        "sources/pool.move:2514-2570",
+        "sources/pool.move:2445-2487"
+      ],
+      "affected_responsibility_ids": [
+        "D01"
+      ],
+      "consequence": "H3",
+      "reachability": "source_closed"
+    },
+    {
+      "id": "K06",
+      "role_ids": [
+        "R03"
+      ],
+      "entry": "pool::update_fee_rate",
+      "conditions": "新费率 ≤ MAX_FEE_RATE（200000，即 20%）",
+      "what_changes": "修改已有池的手续费率，对存量 LP 和交易者立即生效",
+      "effect_locations": [
+        "sources/pool.move:1444-1463"
+      ],
+      "affected_responsibility_ids": [
+        "D02"
+      ],
+      "consequence": "H2",
+      "reachability": "source_closed"
+    },
+    {
+      "id": "K07",
+      "role_ids": [
+        "R09"
+      ],
+      "entry": "config::emergency_pause",
+      "conditions": "已在暂停中不能重复暂停",
+      "what_changes": "把包版本改成 EMERGENCY_PAUSE_VERSION，全部池的撤资、领费、兑换都失败；只有 R08 能解除",
+      "effect_locations": [
+        "sources/config.move:540-569"
+      ],
+      "affected_responsibility_ids": [
+        "D01",
+        "D02",
+        "D03"
+      ],
+      "consequence": "H3",
+      "reachability": "source_closed"
+    },
+    {
+      "id": "K08",
+      "role_ids": [
+        "R08"
+      ],
+      "entry": "config::emergency_unpause",
+      "conditions": "必须处于紧急暂停中；恢复的版本号不小于暂停前的版本",
+      "what_changes": "恢复包版本，解除紧急暂停",
+      "effect_locations": [
+        "sources/config.move:554-569"
+      ],
+      "affected_responsibility_ids": [
+        "D03"
+      ],
+      "consequence": "none",
+      "reachability": "source_closed"
+    },
+    {
+      "id": "K09",
+      "role_ids": [
+        "R03"
+      ],
+      "entry": "config::update_protocol_fee_rate",
+      "conditions": "新值 ≤ MAX_PROTOCOL_FEE_RATE（3000，即手续费的 30%）",
+      "what_changes": "修改全部池的协议分成比例，对存量 LP 立即生效",
+      "effect_locations": [
+        "sources/config.move:242-257"
+      ],
+      "affected_responsibility_ids": [
+        "D02"
+      ],
+      "consequence": "H2",
+      "reachability": "source_closed"
+    },
+    {
+      "id": "K10",
+      "role_ids": [
+        "R07"
+      ],
+      "entry": "pool::initialize_rewarder／update_emission",
+      "conditions": "调整前先结算",
+      "what_changes": "调整奖励发放速度，只影响之后的奖励",
+      "effect_locations": [
+        "sources/pool.move:1368-1421"
+      ],
+      "affected_responsibility_ids": [
+        "D05"
+      ],
+      "consequence": "none",
+      "reachability": "source_closed"
+    },
+    {
+      "id": "K11",
+      "role_ids": [
+        "R05"
+      ],
+      "entry": "pool::collect_protocol_fee",
+      "conditions": "只能取 fee_protocol_coin_a/b",
+      "what_changes": "取走协议费余额，不涉及 LP 本金和 LP 手续费",
+      "effect_locations": [
+        "sources/pool.move:1332-1349"
+      ],
+      "affected_responsibility_ids": [
+        "D02"
+      ],
+      "consequence": "none",
+      "reachability": "source_closed"
+    },
+    {
+      "id": "K12",
+      "role_ids": [
+        "R04"
+      ],
+      "entry": "config::add_fee_tier／update_fee_tier／delete_fee_tier",
+      "conditions": "费率 ≤ MAX_FEE_RATE",
+      "what_changes": "费率档只在建池时使用，不改已有池",
+      "effect_locations": [
+        "sources/config.move:264-332"
+      ],
+      "affected_responsibility_ids": [
+        "D04"
+      ],
+      "consequence": "none",
+      "reachability": "source_closed"
+    },
+    {
+      "id": "K13",
+      "role_ids": [
+        "R06"
+      ],
+      "entry": "partner::create_partner／update_ref_fee_rate 等",
+      "conditions": "无",
+      "what_changes": "合作方返佣比例，只影响合作方收入",
+      "effect_locations": [
+        "sources/partner.move:170-310"
+      ],
+      "affected_responsibility_ids": [
+        "D05"
+      ],
+      "consequence": "none",
+      "reachability": "source_closed"
+    },
+    {
+      "id": "K14",
+      "role_ids": [
+        "R03"
+      ],
+      "entry": "pool::init_position_snapshot",
+      "conditions": "包版本必须等于 EMERGENCY_RESTORE_NEED_VERSION，且池已暂停",
+      "what_changes": "为池子建立头寸快照；配套的 apply_liquidity_cut 已改为直接 abort",
+      "effect_locations": [
+        "sources/pool.move:1630-1650",
+        "sources/pool.move:1723-1733"
+      ],
+      "affected_responsibility_ids": [
+        "D06"
+      ],
+      "consequence": "none",
+      "reachability": "source_closed"
+    }
+  ]
+}

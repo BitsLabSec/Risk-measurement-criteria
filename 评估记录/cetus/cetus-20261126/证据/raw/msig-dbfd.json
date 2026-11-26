@@ -1,0 +1,67 @@
+{
+ "endpoint": "https://graphql.mainnet.sui.io/graphql",
+ "query": "query($a:SuiAddress!){ transactions(filter:{sentAddress:$a}, last:1){ nodes{ digest signatures{ signatureBytes }\n  effects{ timestamp checkpoint{ sequenceNumber } } } } }",
+ "variables": {
+  "a": "0xdbfd0b17fa804c98f51d552b050fb7f850b85db96fa2a0d79e50119525814a47"
+ },
+ "response": {
+  "data": {
+   "transactions": {
+    "nodes": [
+     {
+      "digest": "2mpEmSMk7RBkMjkctUEUxkduT34F8zt76NBxpJyN83Jt",
+      "signatures": [
+       {
+        "signatureBytes": "AwMAL7lxazjZ1MLzjueAq6eqwudXjEYJiLmwONdxQWsoa5xvko4QaADkp911luDbnoz9ODQZGpVaTjbyVvFTFwOmBACUdCnc8ISXinClkwagB+UEdQXkpXgiyllGF55FfCLvcEEi/p+Nkif3gZIT6xugUoJeKkGF/uzZ/IGLgHBJcJIGAIN1YrcPvzWHqLSX9tg8+YOGyQoOdElprZunEymqSC6FspefMGNiCTqGUDkqmSTjrM/dccgJ5a78sTtrB2WaNQgyAAYAkLtls8cHomKBOyYEwK1aiz48ncy/TMOa/yooIQdUiDgDAGWiqUrQW7O82SgyuJk2DodQINgG9FRnnYFoSTrc4qY9AwB1KcU5ArEf6Hvb7U3OhgWgtatpVW4VgswznT/8C7886QEA3QhpkJwiVvAEWp1E4s5PUUkCrwTwxUWEriFD+3/HGbIBAOrWwe8pqkq4Ku0232brL3nc3K8f86f3skyvcxl3vHZQAQBazceOQpX8hcFjAKSAjIJQ7yxOPzYH4ry0sUNzkMylWQEFAA=="
+       }
+      ],
+      "effects": {
+       "timestamp": "2026-10-28T05:16:51.583Z",
+       "checkpoint": {
+        "sequenceNumber": 338944029
+       }
+      }
+     }
+    ]
+   },
+   "decoded": {
+    "threshold": 5,
+    "members": [
+     {
+      "scheme": "ed25519",
+      "address": "0xda7e6003d390c35eb54aa3f67ec4dfe98a0f958e2cfec05e861cb15e80e6d113",
+      "weight": 3
+     },
+     {
+      "scheme": "ed25519",
+      "address": "0x94718229b8b79c06e81ea7d32a9c226cd20c905ab493fabab28998ab4cd0ab9c",
+      "weight": 3
+     },
+     {
+      "scheme": "ed25519",
+      "address": "0xd2029d6ded1bc3cf4b16b7bbc5b1f496966a0073e8b5275ecee42868a297f9b8",
+      "weight": 1
+     },
+     {
+      "scheme": "ed25519",
+      "address": "0xf5c5735651726d57dab28f32d2e62c0821e5448ac4a597db94cc1adc92025f9f",
+      "weight": 1
+     },
+     {
+      "scheme": "ed25519",
+      "address": "0xaabf2fedcb36146db164bec930b74a47969c4df98216e049342a3c49b6d11580",
+      "weight": 1
+     },
+     {
+      "scheme": "ed25519",
+      "address": "0x69d3948e0324e8c2f05faa0fccaaaca92ce5875025bea4611a7e1399801b18ee",
+      "weight": 1
+     }
+    ],
+    "derived_address": "0xdbfd0b17fa804c98f51d552b050fb7f850b85db96fa2a0d79e50119525814a47",
+    "matches_address": true,
+    "digest": "2mpEmSMk7RBkMjkctUEUxkduT34F8zt76NBxpJyN83Jt"
+   }
+  }
+ }
+}

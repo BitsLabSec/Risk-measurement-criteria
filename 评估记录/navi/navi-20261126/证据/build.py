@@ -3,7 +3,9 @@
 import json, os, sys, glob, datetime
 HERE = os.path.dirname(os.path.abspath(__file__))
 RAW = os.path.join(HERE, "raw")
-SRC = os.path.join(HERE, "navi-smart-contracts")
+sys.path.insert(0, os.path.join(HERE, "..", "..", "..", "..", "工作流", "scripts"))
+from bitsscore import src_root  # noqa: E402
+SRC = src_root({"repo_url": "https://github.com/naviprotocol/navi-smart-contracts", "commit": "db60087a454c84279c285bbd29c8e0e2543e1c07", "local_path": "cache"})  # 先运行 fetch-sources
 OUT = sys.argv[1]
 os.makedirs(OUT, exist_ok=True)
 C = "sui:mainnet"
@@ -72,7 +74,7 @@ w("P1-baseline.json", {"baseline_id": "B01", "snapshots": [snap_rec], "deploymen
 # ---------------------------------------------------------------- P2
 w("P2-sources.json", {"sources": [
     {"id": "S01", "deployment_ids": ["I01", "I02"], "language": "move", "repo_url": REPO, "commit": COMMIT,
-     "local_path": SRC, "in_scope_globs": ["lending_core/sources/*.move", "oracle/sources/*.move"],
+     "local_path": "cache", "in_scope_globs": ["lending_core/sources/*.move", "oracle/sources/*.move"],
      "excluded_globs": ["**/tests/**"], "verify_method": "not_verified", "verify_result": "not_verified",
      "verify_evidence": [REPO + "/blob/" + COMMIT + "/lending_core/Published.toml"]}]})
 
@@ -322,7 +324,7 @@ rh.append({"role_id": "R07", "chain_id": C, "credential": UPCAP_O, "holder_statu
 
 def path(pid_, cons, ctrls, desc, appr, rids, evs, covers="na", rate="na", auto="na"):
     return {"id": pid_, "business_ids": ["BZ01"], "consequence": cons, "control_ids": ctrls, "description": desc,
-            "approver_ids": appr, "delay_seconds": 0, "delay_public": "na", "delay_bypass": "na", "exit_closable_in_delay": "na",
+            "approver_ids": appr, "initiator_ids": [], "delay_seconds": 0, "delay_public": "na", "delay_bypass": "na", "exit_closable_in_delay": "na",
             "h1_rate_limited": rate if cons == "H1" else "na", "h1_covers_all_assets": covers if cons == "H1" else "na",
             "h3_auto_expire": auto if cons == "H3" else "na", "reading_ids": rids, "evidence": evs}
 

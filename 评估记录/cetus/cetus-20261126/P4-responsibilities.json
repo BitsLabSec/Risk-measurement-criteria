@@ -1,0 +1,235 @@
+{
+  "responsibilities": [
+    {
+      "id": "D01",
+      "result": "加减流动性、头寸记账、领取手续费",
+      "business_ids": [
+        "BZ01"
+      ],
+      "module_ids": [
+        "M05",
+        "M07",
+        "M10",
+        "M12",
+        "M13",
+        "M11"
+      ],
+      "ranges": [
+        {
+          "source_id": "S01",
+          "file": "sources/pool.move",
+          "start": 1,
+          "end": 3526
+        },
+        {
+          "source_id": "S01",
+          "file": "sources/position.move",
+          "start": 1,
+          "end": 1025
+        },
+        {
+          "source_id": "S01",
+          "file": "sources/tick.move",
+          "start": 1,
+          "end": 850
+        },
+        {
+          "source_id": "S01",
+          "file": "sources/math/clmm_math.move",
+          "start": 1,
+          "end": 467
+        },
+        {
+          "source_id": "S01",
+          "file": "sources/math/tick_math.move",
+          "start": 1,
+          "end": 260
+        },
+        {
+          "source_id": "S01",
+          "file": "sources/utils.move",
+          "start": 1,
+          "end": 40
+        }
+      ],
+      "q1_assets_or_authority": "yes",
+      "q1_evidence": "remove_liquidity 从池中划出两种币并减少头寸流动性",
+      "q1_locations": [
+        "sources/pool.move:758-843"
+      ],
+      "q2_preconditions_or_availability": "yes",
+      "q2_evidence": "撤资、领费先检查包版本和池状态开关",
+      "q2_locations": [
+        "sources/pool.move:764-765",
+        "sources/pool.move:2445-2487"
+      ],
+      "impact_object": "池子余额、LP 头寸",
+      "failure_consequence": "LP 资金被错误划转或撤资被阻断"
+    },
+    {
+      "id": "D02",
+      "result": "兑换与闪电贷",
+      "business_ids": [
+        "BZ01"
+      ],
+      "module_ids": [
+        "M05",
+        "M06"
+      ],
+      "ranges": [
+        {
+          "source_id": "S01",
+          "file": "sources/pool.move",
+          "start": 1,
+          "end": 3526
+        },
+        {
+          "source_id": "S01",
+          "file": "sources/pool_creator.move",
+          "start": 1,
+          "end": 213
+        }
+      ],
+      "q1_assets_or_authority": "yes",
+      "q1_evidence": "flash_swap 按价格曲线划出资产，repay 时收回",
+      "q1_locations": [
+        "sources/pool.move:1181-1252"
+      ],
+      "q2_preconditions_or_availability": "yes",
+      "q2_evidence": "兑换受 is_allow_swap 开关控制",
+      "q2_locations": [
+        "sources/pool.move:2415-2428"
+      ],
+      "impact_object": "池子余额和价格",
+      "failure_consequence": "兑换价格或收付金额出错"
+    },
+    {
+      "id": "D03",
+      "result": "全局配置、角色权限、包版本与紧急暂停",
+      "business_ids": [
+        "BZ01"
+      ],
+      "module_ids": [
+        "M02",
+        "M01"
+      ],
+      "ranges": [
+        {
+          "source_id": "S01",
+          "file": "sources/config.move",
+          "start": 1,
+          "end": 650
+        },
+        {
+          "source_id": "S01",
+          "file": "sources/acl.move",
+          "start": 1,
+          "end": 139
+        }
+      ],
+      "q1_assets_or_authority": "yes",
+      "q1_evidence": "AdminCap 授予和撤销全部角色",
+      "q1_locations": [
+        "sources/config.move:339-374"
+      ],
+      "q2_preconditions_or_availability": "yes",
+      "q2_evidence": "emergency_pause 把包版本改成极大值，所有入口的版本检查都会失败",
+      "q2_locations": [
+        "sources/config.move:524-569"
+      ],
+      "impact_object": "全部池子的可用性和权限边界",
+      "failure_consequence": "必要操作被全局阻断，或权限被错误授予"
+    },
+    {
+      "id": "D04",
+      "result": "建池、池列表与币种名单",
+      "business_ids": [
+        "BZ01"
+      ],
+      "module_ids": [
+        "M03"
+      ],
+      "ranges": [
+        {
+          "source_id": "S01",
+          "file": "sources/factory.move",
+          "start": 1,
+          "end": 1159
+        }
+      ],
+      "q1_assets_or_authority": "no",
+      "q1_evidence": "无",
+      "q1_locations": [],
+      "q2_preconditions_or_availability": "no",
+      "q2_evidence": "无",
+      "q2_locations": [],
+      "impact_object": "新池的创建",
+      "failure_consequence": "只影响新池创建，不影响已有头寸"
+    },
+    {
+      "id": "D05",
+      "result": "奖励金库与合作方返佣",
+      "business_ids": [
+        "BZ01"
+      ],
+      "module_ids": [
+        "M09",
+        "M04"
+      ],
+      "ranges": [
+        {
+          "source_id": "S01",
+          "file": "sources/rewarder.move",
+          "start": 1,
+          "end": 452
+        },
+        {
+          "source_id": "S01",
+          "file": "sources/partner.move",
+          "start": 1,
+          "end": 449
+        }
+      ],
+      "q1_assets_or_authority": "yes",
+      "q1_evidence": "emergent_withdraw 可从奖励金库取走任意数量奖励币",
+      "q1_locations": [
+        "sources/rewarder.move:374-389"
+      ],
+      "q2_preconditions_or_availability": "no",
+      "q2_evidence": "无",
+      "q2_locations": [],
+      "impact_object": "奖励金库余额、合作方返佣",
+      "failure_consequence": "LP 已累计奖励无法领取"
+    },
+    {
+      "id": "D06",
+      "result": "2025 年事件后的头寸快照与恢复入口",
+      "business_ids": [
+        "BZ01"
+      ],
+      "module_ids": [
+        "M08"
+      ],
+      "ranges": [
+        {
+          "source_id": "S01",
+          "file": "sources/position_snapshot.move",
+          "start": 1,
+          "end": 207
+        }
+      ],
+      "q1_assets_or_authority": "yes",
+      "q1_evidence": "受影响头寸记录快照，apply_liquidity_cut 已改为直接 abort",
+      "q1_locations": [
+        "sources/pool.move:1630-1650"
+      ],
+      "q2_preconditions_or_availability": "yes",
+      "q2_evidence": "被快照的头寸不能 close_position",
+      "q2_locations": [
+        "sources/pool.move:879-886"
+      ],
+      "impact_object": "受影响头寸",
+      "failure_consequence": "受影响头寸的关闭受限"
+    }
+  ]
+}

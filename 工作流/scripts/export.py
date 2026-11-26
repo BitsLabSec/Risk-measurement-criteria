@@ -155,9 +155,9 @@ def build_code_tree(c6, data, code_lines, cov, ev):
                 refs.append("%s/compare/%s...%s" % (repo.rstrip("/").removesuffix(".git"), a["commit"], src.get("commit")))
             elif a.get("kind") == "git":
                 refs.append("cmd:git diff --no-index <(git -C %s show %s:%s) %s/%s" % (
-                    a["repo_path"], a["commit"], ap, src.get("local_path", ""), f))
+                    a["repo_path"], a["commit"], ap, src.get("local_path", "") if not str(src.get("local_path", "")).startswith("cache") else "<fetch-sources 检出目录>", f))
             else:
-                refs.append("cmd:diff -u %s/%s %s/%s" % (a.get("dir_path", ""), ap, src.get("local_path", ""), f))
+                refs.append("cmd:diff -u %s/%s %s/%s" % (a.get("dir_path", ""), ap, src.get("local_path", "") if not str(src.get("local_path", "")).startswith("cache") else "<fetch-sources 检出目录>", f))
         return out, refs
     resp_info = {r["id"]: r for r in data["P4-responsibilities.json"]["responsibilities"]}
 
@@ -354,7 +354,8 @@ class OnchainTree:
         data = {"description": p["description"], "declaredConsequence": p["declared"], "minKeys": p.get("keys"),
                 "effectiveDelaySeconds": p.get("effective_delay_s"), "delaySeconds": src["delay_seconds"],
                 "delayPublic": src["delay_public"], "delayBypass": src["delay_bypass"],
-                "exitClosableInDelay": src["exit_closable_in_delay"], "note": p.get("note")}
+                "exitClosableInDelay": src["exit_closable_in_delay"], "note": p.get("note"),
+                "initiatorIds": src.get("initiator_ids", []), "initiatorMinKeys": p.get("initiator_keys")}
         if p.get("excluded"):
             return node(nid, "path", p["description"], "excluded", method="none", text=p["note"], data=data,
                         evidence_ids=self.ev.ids(src["evidence"]), children=kids, ref=p["path_id"])
@@ -393,6 +394,9 @@ class OnchainTree:
                 "levels": [{"keys": lv["keys"], "addresses": lv["addresses"], "memberOf": lv["member_of"],
                             "controlledPaths": lv["controlled_paths"], "uncontrolledPaths": lv["uncontrolled_paths"]}
                            for lv in kc["levels"]]}
+        tb = perm.get("temporary_block")
+        if tb:
+            data["temporaryBlock"] = {"minKeys": tb["min_keys"], "pathIds": tb["paths"]}
         return node(nid, "aspect", DIM_CN["permissions"], st(s), score=s if is_num(s) else None, weight=0.4,
                     method="min", text="H1、H2、H3 取最低", data=data, children=cons)
 
@@ -480,6 +484,11 @@ class OnchainTree:
                     method=method, text=text,
                     data={"specialty": br["specialty"], "specialtyVersion": specialty_version(br["specialty"]),
                           "tvlUsd": br.get("tvl_usd"), "notes": br.get("notes", []),
+                          "marketCoverage": None if not br.get("market_coverage") else {
+                              "selectedTvlUsd": br["market_coverage"]["selected_tvl_usd"],
+                              "businessTvlUsd": br["market_coverage"]["business_tvl_usd"],
+                              "ratio": br["market_coverage"]["ratio"],
+                              "sameSource": br["market_coverage"]["same_source"]},
                           "incompleteReasons": br["incomplete"],
                           "zeroMarkets": [{"marketId": z["market_id"], "dimension": DIM_KEY[z["dimension"]]}
                                           for z in br["zero_markets"]]},

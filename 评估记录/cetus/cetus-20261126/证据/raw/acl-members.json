@@ -1,0 +1,151 @@
+{
+ "endpoint": "https://graphql.mainnet.sui.io/graphql",
+ "query": "query($a:SuiAddress!,$c:UInt53,$after:String){ address(address:$a, atCheckpoint:$c){\n  dynamicFields(first:50, after:$after){ pageInfo{ hasNextPage endCursor }\n  nodes{ name{ json type{ repr } } value{ __typename ... on MoveValue{ json type{ repr } } ... on MoveObject{ address contents{ json type{ repr } } } } } } } }",
+ "variables": {
+  "a": "0xcf1897ae0793665f0e3f676d86450675bbf31842fde1aa02613b7b53f34b764c",
+  "c": 349316550
+ },
+ "response": {
+  "data": {
+   "address": {
+    "dynamicFields": {
+     "nodes": [
+      {
+       "name": {
+        "json": "0xdbfd0b17fa804c98f51d552b050fb7f850b85db96fa2a0d79e50119525814a47",
+        "type": {
+         "repr": "address"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "prev": "0x2891c6b8dca29a075d263c1bb21c7b88adf3ff6baddae1b8743cc00b66bd2c47",
+         "next": null,
+         "value": "32"
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::linked_table::Node<address,u128>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "0x94718229b8b79c06e81ea7d32a9c226cd20c905ab493fabab28998ab4cd0ab9c",
+        "type": {
+         "repr": "address"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "prev": "0x69d3948e0324e8c2f05faa0fccaaaca92ce5875025bea4611a7e1399801b18ee",
+         "next": "0x2713eff5875e0c59ce5ee5b561df3d8c8cbe5d086033e0a59be14efeb5e39c81",
+         "value": "64"
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::linked_table::Node<address,u128>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "0xf5c5735651726d57dab28f32d2e62c0821e5448ac4a597db94cc1adc92025f9f",
+        "type": {
+         "repr": "address"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "prev": "0xaabf2fedcb36146db164bec930b74a47969c4df98216e049342a3c49b6d11580",
+         "next": "0x69d3948e0324e8c2f05faa0fccaaaca92ce5875025bea4611a7e1399801b18ee",
+         "value": "80"
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::linked_table::Node<address,u128>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "0xaabf2fedcb36146db164bec930b74a47969c4df98216e049342a3c49b6d11580",
+        "type": {
+         "repr": "address"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "prev": null,
+         "next": "0xf5c5735651726d57dab28f32d2e62c0821e5448ac4a597db94cc1adc92025f9f",
+         "value": "68"
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::linked_table::Node<address,u128>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "0x2891c6b8dca29a075d263c1bb21c7b88adf3ff6baddae1b8743cc00b66bd2c47",
+        "type": {
+         "repr": "address"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "prev": "0x2713eff5875e0c59ce5ee5b561df3d8c8cbe5d086033e0a59be14efeb5e39c81",
+         "next": "0xdbfd0b17fa804c98f51d552b050fb7f850b85db96fa2a0d79e50119525814a47",
+         "value": "27"
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::linked_table::Node<address,u128>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "0x69d3948e0324e8c2f05faa0fccaaaca92ce5875025bea4611a7e1399801b18ee",
+        "type": {
+         "repr": "address"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "prev": "0xf5c5735651726d57dab28f32d2e62c0821e5448ac4a597db94cc1adc92025f9f",
+         "next": "0x94718229b8b79c06e81ea7d32a9c226cd20c905ab493fabab28998ab4cd0ab9c",
+         "value": "64"
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::linked_table::Node<address,u128>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "0x2713eff5875e0c59ce5ee5b561df3d8c8cbe5d086033e0a59be14efeb5e39c81",
+        "type": {
+         "repr": "address"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "prev": "0x94718229b8b79c06e81ea7d32a9c226cd20c905ab493fabab28998ab4cd0ab9c",
+         "next": "0x2891c6b8dca29a075d263c1bb21c7b88adf3ff6baddae1b8743cc00b66bd2c47",
+         "value": "4"
+        },
+        "type": {
+         "repr": "0xbe21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa::linked_table::Node<address,u128>"
+        }
+       }
+      }
+     ]
+    }
+   }
+  }
+ }
+}

@@ -5,7 +5,7 @@
     "previousAssessmentId": null,
     "reason": "first"
   },
-  "generatedAt": "2026-11-26T02:31:07Z",
+  "generatedAt": "2026-11-26T06:18:13Z",
   "project": {
     "name": "NAVI Protocol",
     "chains": [
@@ -120,7 +120,15 @@
               "specialty": "lending",
               "specialtyVersion": "1.2",
               "tvlUsd": 113349153.2,
-              "notes": [],
+              "notes": [
+                "选定的 35 个市场 TVL 合计 113349153.20 美元，占业务 TVL 的 100.0%；配置和资金两个大项只代表这部分资金"
+              ],
+              "marketCoverage": {
+                "selectedTvlUsd": 113349153.19999999,
+                "businessTvlUsd": 113349153.2,
+                "ratio": 0.9999999999999999,
+                "sameSource": true
+              },
               "incompleteReasons": [],
               "zeroMarkets": [
                 {
@@ -402,7 +410,9 @@
                           "delayPublic": "na",
                           "delayBypass": "na",
                           "exitClosableInDelay": "na",
-                          "note": null
+                          "note": null,
+                          "initiatorIds": [],
+                          "initiatorMinKeys": null
                         },
                         "evidenceIds": [
                           "EV-8d35f1eace"
@@ -627,7 +637,9 @@
                           "delayPublic": "na",
                           "delayBypass": "na",
                           "exitClosableInDelay": "na",
-                          "note": null
+                          "note": null,
+                          "initiatorIds": [],
+                          "initiatorMinKeys": null
                         },
                         "evidenceIds": [
                           "EV-b288150754"
@@ -806,7 +818,9 @@
                           "delayPublic": "na",
                           "delayBypass": "na",
                           "exitClosableInDelay": "na",
-                          "note": null
+                          "note": null,
+                          "initiatorIds": [],
+                          "initiatorMinKeys": null
                         },
                         "evidenceIds": [
                           "EV-4871a2e357"
@@ -1125,7 +1139,9 @@
                           "delayPublic": "na",
                           "delayBypass": "na",
                           "exitClosableInDelay": "na",
-                          "note": null
+                          "note": null,
+                          "initiatorIds": [],
+                          "initiatorMinKeys": null
                         },
                         "evidenceIds": [
                           "EV-98b8b3abc8"
@@ -1322,7 +1338,9 @@
                           "delayPublic": "na",
                           "delayBypass": "na",
                           "exitClosableInDelay": "na",
-                          "note": null
+                          "note": null,
+                          "initiatorIds": [],
+                          "initiatorMinKeys": null
                         },
                         "evidenceIds": [
                           "EV-2ff6a837a7"
@@ -1473,7 +1491,9 @@
                           "delayPublic": "na",
                           "delayBypass": "na",
                           "exitClosableInDelay": "na",
-                          "note": null
+                          "note": null,
+                          "initiatorIds": [],
+                          "initiatorMinKeys": null
                         },
                         "evidenceIds": [
                           "EV-2ff6a837a7"
@@ -1624,7 +1644,9 @@
                           "delayPublic": "na",
                           "delayBypass": "na",
                           "exitClosableInDelay": "na",
-                          "note": null
+                          "note": null,
+                          "initiatorIds": [],
+                          "initiatorMinKeys": null
                         },
                         "evidenceIds": [
                           "EV-edae789810"
@@ -1775,7 +1797,9 @@
                           "delayPublic": "na",
                           "delayBypass": "na",
                           "exitClosableInDelay": "na",
-                          "note": null
+                          "note": null,
+                          "initiatorIds": [],
+                          "initiatorMinKeys": null
                         },
                         "evidenceIds": [
                           "EV-4058d3fbea"
@@ -1944,7 +1968,9 @@
                           "delayPublic": "na",
                           "delayBypass": "na",
                           "exitClosableInDelay": "na",
-                          "note": null
+                          "note": null,
+                          "initiatorIds": [],
+                          "initiatorMinKeys": null
                         },
                         "evidenceIds": [
                           "EV-9b2df34efc"
@@ -2123,7 +2149,9 @@
                           "delayPublic": "na",
                           "delayBypass": "na",
                           "exitClosableInDelay": "na",
-                          "note": null
+                          "note": null,
+                          "initiatorIds": [],
+                          "initiatorMinKeys": null
                         },
                         "evidenceIds": [
                           "EV-0a5b123849"
@@ -2274,7 +2302,9 @@
                           "delayPublic": "na",
                           "delayBypass": "na",
                           "exitClosableInDelay": "na",
-                          "note": null
+                          "note": null,
+                          "initiatorIds": [],
+                          "initiatorMinKeys": null
                         },
                         "evidenceIds": [
                           "EV-9b2df34efc"
@@ -2453,7 +2483,9 @@
                           "delayPublic": "na",
                           "delayBypass": "na",
                           "exitClosableInDelay": "na",
-                          "note": null
+                          "note": null,
+                          "initiatorIds": [],
+                          "initiatorMinKeys": null
                         },
                         "evidenceIds": [
                           "EV-0a5b123849"

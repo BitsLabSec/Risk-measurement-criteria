@@ -1,0 +1,205 @@
+{
+  "businesses": [
+    {
+      "id": "BZ01",
+      "name": "CLMM 原生做市与兑换",
+      "specialty": "dex_amm",
+      "user_entries": [
+        "pool::remove_liquidity",
+        "pool::collect_fee",
+        "pool::flash_swap",
+        "pool::add_liquidity",
+        "pool::open_position",
+        "pool::close_position"
+      ],
+      "assets_or_state": [
+        "各池的两种币余额（coin_a、coin_b）",
+        "LP 头寸的流动性和未领手续费",
+        "协议费（fee_protocol_coin_a/b）"
+      ]
+    }
+  ],
+  "modules": [
+    {
+      "id": "M01",
+      "name": "cetus_clmm::acl",
+      "source_id": "S01",
+      "file": "sources/acl.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "按地址记录角色位的权限表",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M02",
+      "name": "cetus_clmm::config",
+      "source_id": "S01",
+      "file": "sources/config.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "全局配置：费率档、协议费率、权限、包版本与紧急暂停",
+      "calls_module_ids": [
+        "M01"
+      ]
+    },
+    {
+      "id": "M03",
+      "name": "cetus_clmm::factory",
+      "source_id": "S01",
+      "file": "sources/factory.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "建池、池列表、币种黑白名单",
+      "calls_module_ids": [
+        "M02",
+        "M05"
+      ]
+    },
+    {
+      "id": "M04",
+      "name": "cetus_clmm::partner",
+      "source_id": "S01",
+      "file": "sources/partner.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "合作方返佣",
+      "calls_module_ids": [
+        "M02"
+      ]
+    },
+    {
+      "id": "M05",
+      "name": "cetus_clmm::pool",
+      "source_id": "S01",
+      "file": "sources/pool.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "池子：加减流动性、兑换、领费、闪电贷、管理入口",
+      "calls_module_ids": [
+        "M02",
+        "M07",
+        "M10",
+        "M09",
+        "M04",
+        "M08",
+        "M12",
+        "M13"
+      ]
+    },
+    {
+      "id": "M06",
+      "name": "cetus_clmm::pool_creator",
+      "source_id": "S01",
+      "file": "sources/pool_creator.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "建池并同时加流动性的入口",
+      "calls_module_ids": [
+        "M03",
+        "M05"
+      ]
+    },
+    {
+      "id": "M07",
+      "name": "cetus_clmm::position",
+      "source_id": "S01",
+      "file": "sources/position.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "LP 头寸 NFT 与头寸记账",
+      "calls_module_ids": [
+        "M12"
+      ]
+    },
+    {
+      "id": "M08",
+      "name": "cetus_clmm::position_snapshot",
+      "source_id": "S01",
+      "file": "sources/position_snapshot.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "2025 年事件后受影响头寸的快照",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M09",
+      "name": "cetus_clmm::rewarder",
+      "source_id": "S01",
+      "file": "sources/rewarder.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "奖励发放与奖励金库",
+      "calls_module_ids": [
+        "M02"
+      ]
+    },
+    {
+      "id": "M10",
+      "name": "cetus_clmm::tick",
+      "source_id": "S01",
+      "file": "sources/tick.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "tick 表与区间记账",
+      "calls_module_ids": [
+        "M13"
+      ]
+    },
+    {
+      "id": "M11",
+      "name": "cetus_clmm::utils",
+      "source_id": "S01",
+      "file": "sources/utils.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "工具函数",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M12",
+      "name": "cetus_clmm::clmm_math",
+      "source_id": "S01",
+      "file": "sources/math/clmm_math.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "流动性与数量换算",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M13",
+      "name": "cetus_clmm::tick_math",
+      "source_id": "S01",
+      "file": "sources/math/tick_math.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "tick 与价格换算",
+      "calls_module_ids": []
+    }
+  ]
+}

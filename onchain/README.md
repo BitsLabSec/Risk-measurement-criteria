@@ -14,7 +14,7 @@
 | 专项 | 状态 | 适用业务 |
 | --- | --- | --- |
 | [Lending v1.2](./lending-onchain-security-rating-standard.md) | **现行** | 超额抵押借贷市场 |
-| [DEX v1.0](./dex-onchain-security-rating-standard.md) | **现行** | 原生 AMM、聚合路由、RFQ |
+| [DEX v1.1](./dex-onchain-security-rating-standard.md) | **现行** | 原生 AMM、聚合路由、RFQ |
 | [收益金库 v1.0](./yield-vault-onchain-security-rating-standard.md) | **现行** | 份额兑付、赎回、策略取回 |
 | [杠杆仓位 v1.0](./margin-onchain-security-rating-standard.md) | **现行** | 开仓、减仓、还款、清算 |
 | [条件订单 v1.0](./order-execution-onchain-security-rating-standard.md) | **现行** | 限价单、DCA、取消退款 |

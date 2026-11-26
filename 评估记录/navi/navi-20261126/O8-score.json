@@ -258,7 +258,8 @@
               }
             ],
             "all_paths_keys": 3
-          }
+          },
+          "temporary_block": null
         },
         "configuration": {
           "score": 0.0,
@@ -2627,13 +2628,21 @@
           "dimension": "configuration"
         }
       ],
-      "notes": [],
+      "notes": [
+        "选定的 35 个市场 TVL 合计 113349153.20 美元，占业务 TVL 的 100.0%；配置和资金两个大项只代表这部分资金"
+      ],
       "fatal": [],
       "raw_score": 62.0,
       "score": 62.0,
       "status": "已评分",
       "tvl_usd": 113349153.2,
-      "weight": 1.0
+      "weight": 1.0,
+      "market_coverage": {
+        "selected_tvl_usd": 113349153.19999999,
+        "business_tvl_usd": 113349153.2,
+        "ratio": 0.9999999999999999,
+        "same_source": true
+      }
     }
   ],
   "snapshots": [

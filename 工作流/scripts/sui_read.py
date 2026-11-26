@@ -12,8 +12,13 @@
   python3 sui_read.py <目录> by-type <完整类型> --at <检查点> [--name 名字] 按类型找对象（用于找权限凭证），类型写定义它的包 ID
   python3 sui_read.py <目录> package <原始包ID> [--name 名字]             包的全部版本
   python3 sui_read.py <目录> msig <地址> [--name 名字]                    定向读该地址发出的最近一笔交易，解出多签成员和门限
+  python3 sui_read.py <目录> usertx <对象ID> --at <检查点> --pkg <包ID> [--name 名字]
+                                          P1 用：在快照前碰过这个对象的最近 25 笔交易里，找一笔直接调用了 <包ID> 的真实交易
+  python3 sui_read.py <目录> clmm-due <池对象ID> --at <检查点> [--name 名字]
+                                          DX-F1.1 用：读池子和整张 tick 表，按专项公式重建全部头寸的本金应得（目前支持 Cetus CLMM 的对象布局）
 
-不扫描历史交易：msig 只读一笔交易；by-type 只按凭证类型查询，不枚举用户。
+不扫描历史交易：msig 只读一笔交易；usertx 只看最近 25 笔的调用目标；by-type 只按凭证类型查询，不枚举用户；
+clmm-due 只读一张 tick 表，不逐个读头寸。
 """
 import base64
 import hashlib
@@ -33,6 +38,9 @@ Q_TABLE = """query($a:SuiAddress!,$c:UInt53,$after:String){ address(address:$a, 
 Q_BYTYPE = """query($t:String!,$c:UInt53!){ checkpoint(sequenceNumber:$c){ query{ objects(filter:{type:$t}, first:50){
   nodes{ address version owner{ __typename ... on AddressOwner{ address{ address } } ... on ObjectOwner{ address{ address } } } } } } } }"""
 Q_PACKAGE = """query($a:SuiAddress!){ packageVersions(address:$a, first:50){ nodes{ address version previousTransaction{ digest } } } }"""
+Q_USERTX = """query($o:SuiAddress!,$c:UInt53!){ transactions(filter:{affectedObject:$o, beforeCheckpoint:$c}, last:25){ nodes{ digest
+  sender{ address } effects{ checkpoint{ sequenceNumber } timestamp }
+  kind{ __typename ... on ProgrammableTransaction{ commands(first:50){ nodes{ __typename ... on MoveCallCommand{ function{ module{ package{ address } name } name } } } } } } } } }"""
 Q_LASTTX = """query($a:SuiAddress!){ transactions(filter:{sentAddress:$a}, last:1){ nodes{ digest signatures{ signatureBytes }
   effects{ timestamp checkpoint{ sequenceNumber } } } } }"""
 
@@ -110,6 +118,54 @@ def decode_multisig(sig_b64):
     return {"threshold": thr, "members": members, "derived_address": derived}
 
 
+Q64 = 1 << 64
+
+
+def _signed(bits, width):
+    b = int(bits)
+    return b - (1 << width) if b >= 1 << (width - 1) else b
+
+
+def read_table(d, table_id, at, name):
+    nodes, after = [], None
+    while True:
+        v = {"a": table_id, "c": at, "after": after}
+        data = gql(Q_TABLE, v)
+        df = data["address"]["dynamicFields"]
+        nodes += df["nodes"]
+        if not df["pageInfo"]["hasNextPage"]:
+            break
+        after = df["pageInfo"]["endCursor"]
+    ref = save(d, name, Q_TABLE, {"a": table_id, "c": at}, {"address": {"dynamicFields": {"nodes": nodes}}})
+    return nodes, ref
+
+
+def clmm_due(pool, tick_nodes):
+    """按 DEX 专项 DX-F1.1：用 tick 表重建各相邻区间的流动性，逐区间算出本金应得后相加（Cetus CLMM 布局）。"""
+    ticks = sorted((_signed(n["value"]["json"]["value"]["index"]["bits"], 32), int(n["value"]["json"]["value"]["sqrt_price"]),
+                    _signed(n["value"]["json"]["value"]["liquidity_net"]["bits"], 128)) for n in tick_nodes)
+    cur = int(pool["current_sqrt_price"])
+    L, due_a, due_b, l_cur = 0, 0, 0, 0
+    for (_, s0, net), (_, s1, _) in zip(ticks, ticks[1:]):
+        L += net
+        if L < 0:
+            return {"rebuild_ok": False, "problem": "重建出负流动性，tick 表不完整"}
+        if s0 <= cur < s1:
+            l_cur = L
+        if L == 0:
+            continue
+        S = min(max(cur, s0), s1)
+        due_a += L * Q64 * (s1 - S) // (S * s1)
+        due_b += L * (S - s0) // Q64
+    L += ticks[-1][2] if ticks else 0
+    ok = l_cur == int(pool["liquidity"]) and L == 0
+    return {"ticks": len(ticks), "due_a": str(due_a), "due_b": str(due_b),
+            "balance_a": str(pool["coin_a"]), "balance_b": str(pool["coin_b"]),
+            "reserved_a": str(pool["fee_protocol_coin_a"]), "reserved_b": str(pool["fee_protocol_coin_b"]),
+            "liquidity_rebuilt": str(l_cur), "liquidity_recorded": str(pool["liquidity"]), "rebuild_ok": ok,
+            "problem": None if ok else "重建出的当前流动性和池子记录的不一致，或最后一个 tick 之后流动性不为 0：tick 表没读全"}
+
+
 def main():
     a = sys.argv[1:]
     if len(a) < 2:
@@ -172,6 +228,47 @@ def main():
             if not res["matches_address"]:
                 print("警告：由公钥推回的地址和目标地址不一致，不要采用，交人处理")
         ref = save(d, name or "msig-" + a[2][:10], Q_LASTTX, v, data)
+    elif cmd == "usertx":
+        pkg = (opt("--pkg") or "").lower()
+        if at is None or not pkg:
+            raise SystemExit("usertx 要写 --at <检查点> 和 --pkg <包ID>")
+        v = {"o": a[2], "c": at + 1}
+        data = gql(Q_USERTX, v)
+        hit = None
+        for n in reversed(data["transactions"]["nodes"]):
+            calls = [c["function"] for c in n["kind"].get("commands", {}).get("nodes", []) if c.get("function")]
+            if any(f["module"]["package"]["address"] == pkg for f in calls):
+                hit = n
+                break
+        if not hit:
+            raise SystemExit("最近 25 笔交易里没有直接调用这个包的：换一个常用对象再试；仍找不到时 P1 填 unconfirmed 并登记缺口")
+        ref = save(d, name or "usertx-" + a[2][:10], Q_USERTX, v, {"transactions": {"nodes": [hit]}})
+        print("交易 %s（检查点 %s）调用了：" % (hit["digest"], hit["effects"]["checkpoint"]["sequenceNumber"]))
+        for c in hit["kind"]["commands"]["nodes"]:
+            if c.get("function") and c["function"]["module"]["package"]["address"] == pkg:
+                print("  %s::%s" % (c["function"]["module"]["name"], c["function"]["name"]))
+        print("交易证据：tx:sui:mainnet:" + hit["digest"])
+    elif cmd == "clmm-due":
+        if at is None:
+            raise SystemExit("clmm-due 要写 --at <检查点>")
+        base = name or "clmm-due-" + a[2][:10]
+        pdata = gql(Q_OBJECT, {"a": a[2], "c": at})
+        pref = save(d, base + "-pool", Q_OBJECT, {"a": a[2], "c": at}, pdata)
+        pool = pdata["object"]["asMoveObject"]["contents"]["json"]
+        tnodes, tref = read_table(d, pool["tick_manager"]["ticks"]["id"], at, base + "-ticks")
+        res = clmm_due(pool, tnodes)
+        cmdline = "cmd:python3 工作流/scripts/sui_read.py <目录> clmm-due %s --at %d --name %s" % (a[2], at, base)
+        out = {"command": cmdline, "inputs": {"pool": pref, "ticks": tref}, "result": res,
+               "formula": "onchain/dex-onchain-security-rating-standard.md DX-F1.1"}
+        raw = os.path.join(d, "证据", "raw")
+        with open(os.path.join(raw, base + ".json"), "w", encoding="utf-8") as f:
+            json.dump(out, f, ensure_ascii=False, indent=1)
+        ref = "file:证据/raw/%s.json" % base
+        print(json.dumps(res, ensure_ascii=False, indent=1))
+        if not res["rebuild_ok"]:
+            print("警告：%s。不要采用这组结果，读数记 unreadable 并登记缺口" % res["problem"])
+        else:
+            print("O3 里 due_a、due_b 两条读数：method 写 derived，method_detail 写上面的命令，evidence 写下面的引用")
     else:
         raise SystemExit(__doc__)
     print("证据引用：" + ref)

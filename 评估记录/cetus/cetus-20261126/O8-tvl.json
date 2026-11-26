@@ -1,0 +1,52 @@
+{
+  "tvl_available": "yes",
+  "tvl_source": "defillama",
+  "market_tvl_source": "official_dapp",
+  "price_source": "无",
+  "tvl_time_utc": "2026-11-26T00:21:11Z",
+  "businesses": [
+    {
+      "business_id": "BZ01",
+      "tvl_usd": 17730390.46,
+      "basis": "DefiLlama「Cetus CLMM」的 currentChainTvls.Sui（不含 Aptos 和 staking）",
+      "reading_ids": [],
+      "evidence": [
+        "https://api.llama.fi/protocol/cetus-amm",
+        "https://defillama.com/protocol/cetus-amm",
+        "file:证据/web/defillama-cetus-amm.json"
+      ]
+    }
+  ],
+  "markets": [
+    {
+      "market_id": "MK01",
+      "tvl_usd": 2258252.79,
+      "basis": "Cetus 官方 stats_pools 接口的 pure_tvl_in_usd",
+      "reading_ids": [],
+      "evidence": [
+        "https://api-sui.cetus.zone/v2/sui/stats_pools?is_vaults=false&display_all_pools=true&has_mining=true&has_farming=true&no_incentives=true&order_by=-tvl&limit=10&offset=0",
+        "file:证据/web/cetus-stats-pools.json"
+      ]
+    },
+    {
+      "market_id": "MK02",
+      "tvl_usd": 2019832.58,
+      "basis": "Cetus 官方 stats_pools 接口的 pure_tvl_in_usd",
+      "reading_ids": [],
+      "evidence": [
+        "https://api-sui.cetus.zone/v2/sui/stats_pools?is_vaults=false&display_all_pools=true&has_mining=true&has_farming=true&no_incentives=true&order_by=-tvl&limit=10&offset=0",
+        "file:证据/web/cetus-stats-pools.json"
+      ]
+    },
+    {
+      "market_id": "MK03",
+      "tvl_usd": 1905208.8,
+      "basis": "Cetus 官方 stats_pools 接口的 pure_tvl_in_usd",
+      "reading_ids": [],
+      "evidence": [
+        "https://api-sui.cetus.zone/v2/sui/stats_pools?is_vaults=false&display_all_pools=true&has_mining=true&has_farming=true&no_incentives=true&order_by=-tvl&limit=10&offset=0",
+        "file:证据/web/cetus-stats-pools.json"
+      ]
+    }
+  ]
+}

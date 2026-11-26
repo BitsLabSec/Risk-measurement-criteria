@@ -9,7 +9,7 @@
       "language": "move",
       "repo_url": "https://github.com/naviprotocol/navi-smart-contracts",
       "commit": "db60087a454c84279c285bbd29c8e0e2543e1c07",
-      "local_path": "/private/tmp/claude-501/-Users-secundanirn-Desktop-bitslab-docs-bitsscore/9c0dea62-2a58-4ea5-9e19-fa03e1e9c554/scratchpad/navi/navi-smart-contracts",
+      "local_path": "cache",
       "in_scope_globs": [
         "lending_core/sources/*.move",
         "oracle/sources/*.move"

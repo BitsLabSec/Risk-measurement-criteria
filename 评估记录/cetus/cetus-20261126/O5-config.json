@@ -1,0 +1,217 @@
+{
+  "checks": [
+    {
+      "id": "CK01",
+      "business_id": "BZ01",
+      "market_id": "MK01",
+      "check_id": "DX-C1.1",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD019",
+        "RD020",
+        "RD021"
+      ],
+      "reason": "池类型的两种币与官方列表一致；tick 间距 2 对应的费率档为 100，池费率 100，一致；协议费记在池内字段，由协议费领取角色提取，没有单独的接收方可错绑",
+      "evidence": [
+        "file:证据/raw/pool-hasui-sui.json",
+        "file:证据/raw/globalconfig.json"
+      ]
+    },
+    {
+      "id": "CK02",
+      "business_id": "BZ01",
+      "market_id": "MK01",
+      "check_id": "DX-C2.1",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD021",
+        "RD007"
+      ],
+      "reason": "池费率 100/1000000 不超过代码上限 MAX_FEE_RATE=200000；协议分成 2000/10000 不超过 MAX_PROTOCOL_FEE_RATE=3000",
+      "evidence": [
+        "file:证据/raw/pool-hasui-sui.json",
+        "sources/config.move:32-36"
+      ]
+    },
+    {
+      "id": "CK03",
+      "business_id": "BZ01",
+      "market_id": "MK02",
+      "check_id": "DX-C1.1",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD033",
+        "RD034",
+        "RD035"
+      ],
+      "reason": "池类型的两种币与官方列表一致；tick 间距 2 对应的费率档为 100，池费率 100，一致；协议费记在池内字段，由协议费领取角色提取，没有单独的接收方可错绑",
+      "evidence": [
+        "file:证据/raw/pool-usdc-usdy.json",
+        "file:证据/raw/globalconfig.json"
+      ]
+    },
+    {
+      "id": "CK04",
+      "business_id": "BZ01",
+      "market_id": "MK02",
+      "check_id": "DX-C2.1",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD035",
+        "RD007"
+      ],
+      "reason": "池费率 100/1000000 不超过代码上限 MAX_FEE_RATE=200000；协议分成 2000/10000 不超过 MAX_PROTOCOL_FEE_RATE=3000",
+      "evidence": [
+        "file:证据/raw/pool-usdc-usdy.json",
+        "sources/config.move:32-36"
+      ]
+    },
+    {
+      "id": "CK05",
+      "business_id": "BZ01",
+      "market_id": "MK03",
+      "check_id": "DX-C1.1",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD047",
+        "RD048",
+        "RD049"
+      ],
+      "reason": "池类型的两种币与官方列表一致；tick 间距 60 对应的费率档为 2500，池费率 2500，一致；协议费记在池内字段，由协议费领取角色提取，没有单独的接收方可错绑",
+      "evidence": [
+        "file:证据/raw/pool-usdc-sui.json",
+        "file:证据/raw/globalconfig.json"
+      ]
+    },
+    {
+      "id": "CK06",
+      "business_id": "BZ01",
+      "market_id": "MK03",
+      "check_id": "DX-C2.1",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD049",
+        "RD007"
+      ],
+      "reason": "池费率 2500/1000000 不超过代码上限 MAX_FEE_RATE=200000；协议分成 2000/10000 不超过 MAX_PROTOCOL_FEE_RATE=3000",
+      "evidence": [
+        "file:证据/raw/pool-usdc-sui.json",
+        "sources/config.move:32-36"
+      ]
+    },
+    {
+      "id": "CK07",
+      "business_id": "BZ01",
+      "market_id": "MK01",
+      "check_id": "DX-C3.1",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD006",
+        "RD009",
+        "RD028",
+        "RD030"
+      ],
+      "reason": "全局：package_version=15 等于代码 VERSION，GlobalConfig 下没有紧急暂停标记；池级：is_pause=false，没有 pool_status 动态字段，撤资、领费、兑换的开关都是打开的",
+      "evidence": [
+        "file:证据/raw/globalconfig.json",
+        "file:证据/raw/globalconfig-dynfields.json",
+        "file:证据/raw/pool-hasui-sui.json",
+        "file:证据/raw/pool-hasui-sui-dynfields.json"
+      ]
+    },
+    {
+      "id": "CK08",
+      "business_id": "BZ01",
+      "market_id": "MK02",
+      "check_id": "DX-C3.1",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD006",
+        "RD009",
+        "RD042",
+        "RD044"
+      ],
+      "reason": "全局：package_version=15 等于代码 VERSION，GlobalConfig 下没有紧急暂停标记；池级：is_pause=false，没有 pool_status 动态字段，撤资、领费、兑换的开关都是打开的",
+      "evidence": [
+        "file:证据/raw/globalconfig.json",
+        "file:证据/raw/globalconfig-dynfields.json",
+        "file:证据/raw/pool-usdc-usdy.json",
+        "file:证据/raw/pool-usdc-usdy-dynfields.json"
+      ]
+    },
+    {
+      "id": "CK09",
+      "business_id": "BZ01",
+      "market_id": "MK03",
+      "check_id": "DX-C3.1",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD006",
+        "RD009",
+        "RD056",
+        "RD058"
+      ],
+      "reason": "全局：package_version=15 等于代码 VERSION，GlobalConfig 下没有紧急暂停标记；池级：is_pause=false，没有 pool_status 动态字段，撤资、领费、兑换的开关都是打开的",
+      "evidence": [
+        "file:证据/raw/globalconfig.json",
+        "file:证据/raw/globalconfig-dynfields.json",
+        "file:证据/raw/pool-usdc-sui.json",
+        "file:证据/raw/pool-usdc-sui-dynfields.json"
+      ]
+    }
+  ]
+}

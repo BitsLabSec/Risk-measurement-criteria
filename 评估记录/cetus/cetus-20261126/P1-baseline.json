@@ -1,0 +1,30 @@
+{
+  "baseline_id": "B01",
+  "snapshots": [
+    {
+      "chain_id": "sui:mainnet",
+      "block_or_checkpoint": "349316550",
+      "block_hash_or_digest": "GHyg51XmgbRCYzz2ty4o2TN3Gspa65ad4LCFVfPFktub",
+      "time_utc": "2026-11-26T05:59:34.620Z",
+      "evidence": "file:证据/raw/snapshot.json"
+    }
+  ],
+  "deployments": [
+    {
+      "id": "I01",
+      "chain_id": "sui:mainnet",
+      "entry": "0x260693ec785a6e6c9d81d58c7d2ff72f1288ae0fa6a9725abe05a6478b11f084",
+      "proxy_kind": "sui_package",
+      "actual_code": "0x260693ec785a6e6c9d81d58c7d2ff72f1288ae0fa6a9725abe05a6478b11f084",
+      "version": "15",
+      "how_found": "packageVersions 的最新版本是 15（0x2606…）；UpgradeCap 的 package 字段也指向 0x2606…、version=15；快照前的真实交易 7ZF5T1br6sWfyWtSs9U6qHt5WWyc8LUXKvoNXbxHCU1d 直接调用了 0x2606…::pool::flash_swap",
+      "evidence": [
+        "file:证据/raw/pkgversions-clmm.json",
+        "file:证据/raw/upgradecap-clmm.json",
+        "file:证据/raw/usertx-clmm.json",
+        "tx:sui:mainnet:7ZF5T1br6sWfyWtSs9U6qHt5WWyc8LUXKvoNXbxHCU1d"
+      ],
+      "status": "confirmed"
+    }
+  ]
+}

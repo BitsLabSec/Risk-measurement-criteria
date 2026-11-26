@@ -40,6 +40,7 @@ FORMULA_FOR = {
     "L-F1.1": "interval_cover", "V-F1.1": "interval_cover", "M-F1.1": "interval_cover",
     "P-F1.1": "interval_cover", "LS-F1.1": "interval_cover", "FA-F1.1": "interval_cover",
     "BR-F1.2": "interval_cover", "LB-F1.2": "interval_cover",
+    "DX-F1.1": "amm_cover",
 }
 # 公式说明：交付物字段表里的公式表由这里生成，步骤卡只链接过去，不另抄一份
 FORMULA_DOC = {
@@ -75,6 +76,10 @@ FORMULA_DOC = {
     "interval_cover": ("区间覆盖", "比较应付区间与可用资金区间",
                        "应付下界 > 可用资金上界 → 0；两区间重叠 → 60；可用资金下界 ≥ 应付上界 → 通过",
                        {"due_low": "应付下界", "due_high": "应付上界", "avail_low": "可用资金下界", "avail_high": "可用资金上界（确定值时上下界填同一个读数）"}),
+    "amm_cover": ("池子本金覆盖", "可用 = 真实余额 − 不属于 LP 的余额；余量 = 可用 − 全部头寸本金应得（每个币种一组）",
+                  "可用 < 应得 → 0",
+                  {"due": "全部头寸的本金应得（读取工具从 tick 表或 bin 表重建的读数，method 为 derived）",
+                   "balance": "池子该币种的真实余额", "reserved": "不属于 LP 的余额，例如协议费；没有填常量 0"}),
 }
 
 # 每个公式可接受的输入写法：列表里任选一种，名字必须完全一致
@@ -90,6 +95,7 @@ FORMULA_INPUTS = {
     "concentration": [["max_stake", "total_stake"]],
     "coverage": [["locked", "circulating"]],
     "interval_cover": [["due_low", "due_high", "avail_low", "avail_high"]],
+    "amm_cover": [["due", "balance", "reserved"]],
 }
 
 
@@ -132,9 +138,37 @@ def specialty_rows(specialty):
     return rows
 
 
-def required_checks(specialty):
+_APPLIES = re.compile(r"^\|\s*([a-z_]+)\s*\|(.*)\|\s*$")
+_CHECK_ID = re.compile(r"[A-Z]{1,2}-[CFD]\d\.\d+[a-z]?")
+
+
+def applicable_ids(specialty):
+    """专项里有「各业务适用的检查项」表时，返回这种业务适用的编号集合；没有这张表返回 None（全部适用）。"""
+    stem = SPECIALTY_FILE.get(specialty)
+    if not stem:
+        return None
+    path = os.path.join(ONCHAIN_DIR, stem + "-onchain-security-rating-standard.md")
+    table = {}
+    with open(path, encoding="utf-8") as f:
+        for line in f:
+            m = _APPLIES.match(line.strip())
+            if m and m.group(1) in SPECIALTY_FILE:
+                table[m.group(1)] = set(_CHECK_ID.findall(m.group(2)))
+    if not table:
+        return None
+    if specialty not in table:
+        raise ValueError("专项文件 %s 有「各业务适用的检查项」表，但没有列出 %s" % (os.path.basename(path), specialty))
+    return table[specialty]
+
+
+def specialty_rows_for(specialty):
     rows = specialty_rows(specialty) or {}
-    out = dict(rows)
+    ids = applicable_ids(specialty)
+    return rows if ids is None else {k: v for k, v in rows.items() if k in ids}
+
+
+def required_checks(specialty):
+    out = dict(specialty_rows_for(specialty))
     if specialty in ORACLE_REQUIRED:
         for k, dim in OR_CHECKS.items():
             out[k] = {"dim": dim, "disclosure": k in OR_DISCLOSURE, "file": "链上安全评估标准.md"}
@@ -144,7 +178,7 @@ def required_checks(specialty):
 def allowed_check(specialty, cid):
     if cid in OR_CHECKS:
         return {"dim": OR_CHECKS[cid], "disclosure": cid in OR_DISCLOSURE}
-    return (specialty_rows(specialty) or {}).get(cid)
+    return specialty_rows_for(specialty).get(cid)
 
 
 # ---------------------------------------------------------------- 最少密钥数
@@ -280,6 +314,13 @@ def evaluate_paths(o4):
             continue
         r["effective_delay_s"] = effective_delay(p)
         r["score"] = perm_score(r["keys"], r["effective_delay_s"])
+        inits = p.get("initiator_ids") or []
+        if inits:
+            try:
+                r["initiator_keys"] = min(min_keys([i], principals) for i in inits)
+                r["initiator_ids"] = list(inits)
+            except ValueError as e:
+                r["initiator_note"] = "无法计算发起阻断的密钥数：%s" % e
         r["x1_candidate"] = (r["consequence"] == "H1" and r["keys"] <= 1 and r["effective_delay_s"] < DAY
                              and p["h1_covers_all_assets"] == "yes")
         out.append(r)
@@ -391,6 +432,9 @@ def run_formula(fname, v):
         if dl > ah:
             return True, False, {"result": "有缺口"}
         return False, True, {"result": "区间重叠，无法确认足额"}
+    if fname == "amm_cover":
+        avail = g("balance") - g("reserved")
+        return avail < g("due"), False, {"available": avail, "surplus": avail - g("due")}
     raise ValueError("未知公式 %s" % fname)
 
 
@@ -586,6 +630,13 @@ def validate_onchain(data, ctx, is_blank):
                 ctx.err("O3-readings.json", w + ".method", "%s 只用于 Sui" % m)
             if m == "targeted_tx" and t and t.get("kind") != "multisig":
                 ctx.err("O3-readings.json", w + ".method", "定向读交易只允许用于多签成员和门限（目标类型要是 multisig）")
+            if m == "derived":
+                if snap != "exact":
+                    ctx.err("O3-readings.json", w + ".at_snapshot", "derived 读数由快照读数算出，写 exact")
+                if not str(r.get("evidence", "")).startswith("file:"):
+                    ctx.err("O3-readings.json", w + ".evidence", "derived 读数的证据写读取工具保存的结果文件 file:证据/raw/…")
+                if "cmd:" not in str(r.get("method_detail", "")) and "sui_read" not in str(r.get("method_detail", "")):
+                    ctx.err("O3-readings.json", w + ".method_detail", "derived 读数要写清是哪条命令算出的")
             if m == "storage_slot" and not chain.startswith("evm:"):
                 ctx.err("O3-readings.json", w + ".method", "storage_slot 只用于 EVM；Sui 用 object_field 或 dynamic_field")
             if m == "object_field" and not chain.startswith("sui:"):
@@ -679,6 +730,10 @@ def validate_onchain(data, ctx, is_blank):
                     ctx.err("O4-permissions.json", w + "." + f, "没有等待时写 na")
                 if isinstance(d, int) and d > 0 and v == "na":
                     ctx.err("O4-permissions.json", w + "." + f, "有等待时要回答 yes 或 no")
+            if c != "H3" and p.get("initiator_ids"):
+                ctx.err("O4-permissions.json", w + ".initiator_ids", "只有 H3 路径登记发起阻断的控制者，其他写 []")
+            if c == "H3" and set(p.get("initiator_ids") or []) == set(p.get("approver_ids") or []) and p.get("initiator_ids"):
+                ctx.err("O4-permissions.json", w + ".initiator_ids", "发起者和 approver_ids 相同时留空 []")
             for a in p.get("approver_ids") or []:
                 if principals.get(a, {}).get("kind") == "other":
                     ctx.err("O4-permissions.json", w + ".approver_ids", "控制者 %s 类型是 other，无法计算密钥数：在 gaps.json 登记并交人处理" % a)
@@ -735,7 +790,7 @@ def validate_onchain(data, ctx, is_blank):
             cid = c.get("check_id")
             meta = allowed_check(spec.get(b), cid)
             if not meta:
-                ctx.err(name, w + ".check_id", "%s 不是业务 %s（专项 %s）检查表里的编号" % (cid, b, spec.get(b)))
+                ctx.err(name, w + ".check_id", "%s 不是业务 %s（专项 %s）适用的检查编号：要么不在检查表里，要么专项的「各业务适用的检查项」表没有为这种业务列出它（不适用的编号不用登记）" % (cid, b, spec.get(b)))
                 continue
             if meta["dim"] != dim:
                 ctx.err(name, w + ".check_id", "%s 属于%s，应该填在 %s" % (cid, DIM_NAME[meta["dim"]],
@@ -898,9 +953,15 @@ def score_onchain(data):
                 cons[c] = "incomplete"
                 br["incomplete"].append("%s 没有完成追踪" % c)
         perm = "incomplete" if "incomplete" in cons.values() else min(cons.values())
-        br["dimensions"]["permissions"] = {"score": perm, "by_consequence": cons,
-                                           "paths": [p for p in paths if bid in p["business_ids"]],
-                                           "key_concentration": key_concentration(o4, bid)}
+        mine_paths = [p for p in paths if bid in p["business_ids"]]
+        tb = [p for p in mine_paths if "initiator_keys" in p and not p.get("excluded")]
+        temp_block = None
+        if tb:
+            k = min(p["initiator_keys"] for p in tb)
+            temp_block = {"min_keys": k, "paths": [p["path_id"] for p in tb if p["initiator_keys"] == k]}
+        br["dimensions"]["permissions"] = {"score": perm, "by_consequence": cons, "paths": mine_paths,
+                                           "key_concentration": key_concentration(o4, bid),
+                                           "temporary_block": temp_block}
         # 配置、资金
         mks = [m["id"] for m in info.get("markets", [])] or ["ALL"]
         for dim in ("configuration", "funds_dependencies"):
@@ -976,6 +1037,15 @@ def score_onchain(data):
     for br in results:
         br["tvl_usd"] = tvl.get(br["business_id"])
         br["weight"] = raw_w[br["business_id"]] / sw
+        mk_ids = [m["id"] for m in biz[br["business_id"]].get("markets", [])]
+        if mk_ids and o8["tvl_available"] == "yes" and br["tvl_usd"]:
+            sel = sum(market_tvl.get(m, 0) for m in mk_ids)
+            br["market_coverage"] = {"selected_tvl_usd": sel, "business_tvl_usd": br["tvl_usd"],
+                                     "ratio": sel / br["tvl_usd"],
+                                     "same_source": o8.get("market_tvl_source") == o8.get("tvl_source")}
+            br["notes"].append("选定的 %d 个市场 TVL 合计 %.2f 美元，占业务 TVL 的 %.1f%%%s；配置和资金两个大项只代表这部分资金" % (
+                len(mk_ids), sel, sel / br["tvl_usd"] * 100,
+                "" if br["market_coverage"]["same_source"] else "（市场和业务的 TVL 口径不同，比例仅供参考）"))
 
     statuses = {br["status"] for br in results}
     if "评估未完成" in statuses or gaps:

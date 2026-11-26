@@ -1,0 +1,36 @@
+{
+ "endpoint": "https://graphql.mainnet.sui.io/graphql",
+ "query": "query($a:SuiAddress!,$c:UInt53){ object(address:$a, atCheckpoint:$c){ address version\n  owner{ __typename ... on AddressOwner{ address{ address } } ... on ObjectOwner{ address{ address } } }\n  asMoveObject{ contents{ type{ repr } json } } } }",
+ "variables": {
+  "a": "0xf699e7f2276f5c9a75944b37a0c5b5d9ddfd2471bf6242483b03ab2887d198d0",
+  "c": 349316550
+ },
+ "response": {
+  "data": {
+   "object": {
+    "address": "0xf699e7f2276f5c9a75944b37a0c5b5d9ddfd2471bf6242483b03ab2887d198d0",
+    "version": 1111896153,
+    "owner": {
+     "__typename": "Shared"
+    },
+    "asMoveObject": {
+     "contents": {
+      "type": {
+       "repr": "0x1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb::factory::Pools"
+      },
+      "json": {
+       "id": "0xf699e7f2276f5c9a75944b37a0c5b5d9ddfd2471bf6242483b03ab2887d198d0",
+       "list": {
+        "id": "0x4c9ab808d50ca1358cc699bb53b6334b9471d4718fb19bb621ff41c2e93bbce4",
+        "head": "0x84aff51ddb1adafc68a817534152ad0fb2bb1c36fc439fca3574a0c311eb9151",
+        "tail": "0x50c97105b1011742c982fa3a1bac0f54951b88c7c2a24f5e01613bda9bcd6f5a",
+        "size": "45467"
+       },
+       "index": "45467"
+      }
+     }
+    }
+   }
+  }
+ }
+}

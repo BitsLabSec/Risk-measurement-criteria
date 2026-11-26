@@ -1,0 +1,283 @@
+{
+  "checks": [
+    {
+      "id": "CK10",
+      "business_id": "BZ01",
+      "market_id": "MK01",
+      "check_id": "DX-F1.1",
+      "inputs": [
+        {
+          "name": "due",
+          "reading_id": "RD031",
+          "constant": "无",
+          "divide_by": 1,
+          "note": "sui_read.py clmm-due 由 tick 表重建",
+          "group": "coin_a"
+        },
+        {
+          "name": "balance",
+          "reading_id": "RD022",
+          "constant": "无",
+          "divide_by": 1,
+          "note": "池对象 coin_a",
+          "group": "coin_a"
+        },
+        {
+          "name": "reserved",
+          "reading_id": "RD024",
+          "constant": "无",
+          "divide_by": 1,
+          "note": "协议费不属于 LP，pool.move:154-155",
+          "group": "coin_a"
+        },
+        {
+          "name": "due",
+          "reading_id": "RD032",
+          "constant": "无",
+          "divide_by": 1,
+          "note": "sui_read.py clmm-due 由 tick 表重建",
+          "group": "coin_b"
+        },
+        {
+          "name": "balance",
+          "reading_id": "RD023",
+          "constant": "无",
+          "divide_by": 1,
+          "note": "池对象 coin_b",
+          "group": "coin_b"
+        },
+        {
+          "name": "reserved",
+          "reading_id": "RD025",
+          "constant": "无",
+          "divide_by": 1,
+          "note": "协议费不属于 LP，pool.move:154-155",
+          "group": "coin_b"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD031",
+        "RD022",
+        "RD024",
+        "RD032",
+        "RD023",
+        "RD025"
+      ],
+      "reason": "两种币各一组：真实余额扣掉协议费后，和 tick 表重建的全部头寸本金应得比较（重建出的当前流动性与池子记录一致；应得不含未领手续费）",
+      "evidence": [
+        "file:证据/raw/due-hasui-sui.json",
+        "file:证据/raw/pool-hasui-sui.json"
+      ]
+    },
+    {
+      "id": "CK11",
+      "business_id": "BZ01",
+      "market_id": "MK02",
+      "check_id": "DX-F1.1",
+      "inputs": [
+        {
+          "name": "due",
+          "reading_id": "RD045",
+          "constant": "无",
+          "divide_by": 1,
+          "note": "sui_read.py clmm-due 由 tick 表重建",
+          "group": "coin_a"
+        },
+        {
+          "name": "balance",
+          "reading_id": "RD036",
+          "constant": "无",
+          "divide_by": 1,
+          "note": "池对象 coin_a",
+          "group": "coin_a"
+        },
+        {
+          "name": "reserved",
+          "reading_id": "RD038",
+          "constant": "无",
+          "divide_by": 1,
+          "note": "协议费不属于 LP，pool.move:154-155",
+          "group": "coin_a"
+        },
+        {
+          "name": "due",
+          "reading_id": "RD046",
+          "constant": "无",
+          "divide_by": 1,
+          "note": "sui_read.py clmm-due 由 tick 表重建",
+          "group": "coin_b"
+        },
+        {
+          "name": "balance",
+          "reading_id": "RD037",
+          "constant": "无",
+          "divide_by": 1,
+          "note": "池对象 coin_b",
+          "group": "coin_b"
+        },
+        {
+          "name": "reserved",
+          "reading_id": "RD039",
+          "constant": "无",
+          "divide_by": 1,
+          "note": "协议费不属于 LP，pool.move:154-155",
+          "group": "coin_b"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD045",
+        "RD036",
+        "RD038",
+        "RD046",
+        "RD037",
+        "RD039"
+      ],
+      "reason": "两种币各一组：真实余额扣掉协议费后，和 tick 表重建的全部头寸本金应得比较（重建出的当前流动性与池子记录一致；应得不含未领手续费）",
+      "evidence": [
+        "file:证据/raw/due-usdc-usdy.json",
+        "file:证据/raw/pool-usdc-usdy.json"
+      ]
+    },
+    {
+      "id": "CK12",
+      "business_id": "BZ01",
+      "market_id": "MK03",
+      "check_id": "DX-F1.1",
+      "inputs": [
+        {
+          "name": "due",
+          "reading_id": "RD059",
+          "constant": "无",
+          "divide_by": 1,
+          "note": "sui_read.py clmm-due 由 tick 表重建",
+          "group": "coin_a"
+        },
+        {
+          "name": "balance",
+          "reading_id": "RD050",
+          "constant": "无",
+          "divide_by": 1,
+          "note": "池对象 coin_a",
+          "group": "coin_a"
+        },
+        {
+          "name": "reserved",
+          "reading_id": "RD052",
+          "constant": "无",
+          "divide_by": 1,
+          "note": "协议费不属于 LP，pool.move:154-155",
+          "group": "coin_a"
+        },
+        {
+          "name": "due",
+          "reading_id": "RD060",
+          "constant": "无",
+          "divide_by": 1,
+          "note": "sui_read.py clmm-due 由 tick 表重建",
+          "group": "coin_b"
+        },
+        {
+          "name": "balance",
+          "reading_id": "RD051",
+          "constant": "无",
+          "divide_by": 1,
+          "note": "池对象 coin_b",
+          "group": "coin_b"
+        },
+        {
+          "name": "reserved",
+          "reading_id": "RD053",
+          "constant": "无",
+          "divide_by": 1,
+          "note": "协议费不属于 LP，pool.move:154-155",
+          "group": "coin_b"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD059",
+        "RD050",
+        "RD052",
+        "RD060",
+        "RD051",
+        "RD053"
+      ],
+      "reason": "两种币各一组：真实余额扣掉协议费后，和 tick 表重建的全部头寸本金应得比较（重建出的当前流动性与池子记录一致；应得不含未领手续费）",
+      "evidence": [
+        "file:证据/raw/due-usdc-sui.json",
+        "file:证据/raw/pool-usdc-sui.json"
+      ]
+    },
+    {
+      "id": "CK13",
+      "business_id": "BZ01",
+      "market_id": "ALL",
+      "check_id": "DX-F2.1",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "两种币都直接存在池对象的 coin_a、coin_b 余额里，没有外部资金组件",
+      "evidence": [
+        "sources/pool.move:758-843"
+      ]
+    },
+    {
+      "id": "CK14",
+      "business_id": "BZ01",
+      "market_id": "ALL",
+      "check_id": "DX-D1.1",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "撤资和领费只使用池内状态，不需要外部报价（专项补充说明：记 N/A）",
+      "evidence": [
+        "sources/pool.move:758-843"
+      ]
+    },
+    {
+      "id": "CK15",
+      "business_id": "BZ01",
+      "market_id": "ALL",
+      "check_id": "DX-D2.2",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "CLMM 池没有 Hook 或资产管理器等外部组件",
+      "evidence": [
+        "sources/pool.move:758-843"
+      ]
+    }
+  ]
+}
