@@ -1,6 +1,7 @@
 # BitsScore 合约评估前期准备
 
 - 文档版本 v0.2
+- **本文是规则说明。执行时请按[工作流](../工作流/README.md)的 T0–P6 步骤卡操作，不要按本文的段落顺序自行组织产物。**
 - 更新日期 2026-11-24
 
 ## 一、要做什么
@@ -52,52 +53,18 @@
 
 ## 三、交付什么
 
-### 一张全量关系图
+前期准备的交付物是 P1–P6 的一组文件，字段和格式只在一处定义：[交付物字段表](../工作流/交付物字段表.md)的「前期准备」一节。它们合起来必须回答：
 
-- 节点包含已核实的组件、模块和特权角色，标出关键外部依赖、控制入口及其作用对象。组件按业务归属组织，共享组件用同一个节点关联各业务。证据缺口用范围节点标示，并关联表中的缺口记录。
-- 边标明调用、依赖、读写、授权和控制生效关系。关键控制连接到它实际生效的业务节点，标出执行条件和结果。
-- 图使用表中的部署基线 ID 和记录 ID。函数和状态字段可在所属模块或控制节点中标注。
-
-### 一张结构化表
-
-固定列为 **ID｜记录类型｜对象及归属｜事实与边界｜关联 ID｜证据定位｜状态｜档位及理由**。证据应能回到链上部署基线、对应源码版本、相对路径和函数、类型或具体行号。表内记录边界和待核实项，可关联到受影响的任何条目。
-
-| 记录类型 | 必填内容 |
+| 要回答的问题 | 在哪个交付物 |
 | --- | --- |
-| 代码基线 | 目标网络、区块或检查点、生产入口、实际执行的合约地址或包 ID 与版本、各部署实例的关键依赖及代码产物证据。记录实例对应的源码来源、完整 commit 或归档哈希、验证方法及证据、对应状态、项目类型与纳入范围。共享源码清单可由多个实例引用。 |
-| 组件或模块 | 所属包、业务归属、主要职责、关联的组件和依赖、对应调用或状态关系的依据。外部依赖注明边界。 |
-| 代码职责 | 所属业务、承担的结果及边界、入口和关键实现、共享职责引用、5／3／1 档位及理由。 |
-| 特权角色 | 权限凭证、取得或变更该权限的路径、可触发的控制 ID、源码位置。 |
-| 关键控制 | 授权角色、控制入口、执行条件、作用对象及变化、直接生效或后续读取的位置、受影响职责及结果。 |
-| 范围边界或待核实项 | 涉及对象和关联 ID、排除依据或缺失证据、需核实的具体问题。 |
+| 生产环境实际执行的是哪份代码，在哪个时点 | `P1-baseline.json` |
+| 源码从哪里来，怎么证明和链上一致 | `P2-sources.json` |
+| 项目有哪些业务，由哪些模块组成，模块之间怎么调用 | `P3-business-modules.json` |
+| 每段代码负责什么结果，属于哪一档，为什么 | `P4-responsibilities.json` |
+| 有哪些特权角色，能触发哪些控制，控制作用在哪里、后果多严重 | `P5-roles-controls.json` |
+| 还缺哪些证据，是否阻断出分 | `gaps.json` |
+| 模块与角色关系图 | `P6-graph.md`（脚本生成）。链上评估会在这张图上继续补齐链上实体，见 [O4](../工作流/步骤卡/O4-权限路径.md) |
 
-<a name="delivery-review"></a>交付前用部署和源码清单复核图表。已核实的模块、角色和关键关系均可在图表中定位。缺少依据的范围保留在图表中，注明缺口、受影响对象及其是否阻断代码覆盖分母的建立。
+<a name="delivery-review"></a>交付前用部署和源码清单复核：已核实的模块、角色和关键关系都能在关系图中定位；缺少依据的范围保留在图中，注明缺口、受影响对象，以及是否阻断代码覆盖分母的建立。
 
-### NAVI 最小样例
-
-以下用固定 commit 的公开源码演示借款 v2 和暂停控制。`B01` 是样例的候选源码记录，生产部署及源码对应关系在本例中均待核验。图、表中的职责、角色和档位只描述该份样例源码。正式图表按上述链上基线与全量范围要求交付。
-
-```mermaid
-flowchart TD
-    I["M01 · incentive_v3::entry_borrow_v2"] -->|进入 D01 借款| L["M02 · lending::base_borrow_v2"]
-    L -->|校验并记债| D["M03 · logic::execute_borrow"]
-    L -->|划出池内资金| P["M04 · pool::withdraw_balance_v2"]
-    D -.->|估值依赖| O["M06 · oracle::PriceOracle"]
-    A["R02 · StorageAdminCap 持有人"] -->|铸造并授予 OwnerCap| R["R01 · OwnerCap 持有人"]
-    R -->|提供权限凭证| C["C01 · M05 storage::set_pause，写入 Storage.paused"]
-    C -->|经 when_not_paused 检查，为 true 时中止| L
-```
-
-| ID | 记录类型 | 对象及归属 | 事实与边界 | 关联 ID | 证据定位 | 状态 | 档位及理由 |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| B01 | 代码基线（样例） | NAVI Lending | 候选源码为 `naviprotocol/navi-smart-contracts` 的 `9ff791fe309358a8bf6f3783a2aeb0c95f72a1dd`。样例范围为 `lending_core` 中的借款 v2 与暂停路径，依赖 `oracle::PriceOracle`。 | M01–M06 | [候选源码版本](https://github.com/naviprotocol/navi-smart-contracts/tree/9ff791fe309358a8bf6f3783a2aeb0c95f72a1dd) | 样例源码已固定，生产部署标识和源码匹配证据待核实 | — |
-| M01 | 模块 | `lending_core::incentive_v3` | `entry_borrow_v2` 调用 `lending::borrow_coin_v2`，将返回的资金交给调用者。 | M02、D01 | [借款入口](https://github.com/naviprotocol/navi-smart-contracts/blob/9ff791fe309358a8bf6f3783a2aeb0c95f72a1dd/lending_core/sources/incentive_v3.move#L1119) | 源码确认 | — |
-| M02 | 模块 | `lending_core::lending` | `borrow_coin_v2` 进入 `base_borrow_v2`，先检查暂停状态，再调用记债和出池逻辑。 | M03、M04、M05、D01、C01 | [调用入口](https://github.com/naviprotocol/navi-smart-contracts/blob/9ff791fe309358a8bf6f3783a2aeb0c95f72a1dd/lending_core/sources/lending.move#L312) · [借款执行](https://github.com/naviprotocol/navi-smart-contracts/blob/9ff791fe309358a8bf6f3783a2aeb0c95f72a1dd/lending_core/sources/lending.move#L352) | 源码确认 | — |
-| M03 | 模块 | `lending_core::logic` | `execute_borrow` 校验借款、更新债务并检查健康因子，偿付能力估值依赖价格数据。 | M06、D01 | [借款逻辑](https://github.com/naviprotocol/navi-smart-contracts/blob/9ff791fe309358a8bf6f3783a2aeb0c95f72a1dd/lending_core/sources/logic.move#L129) · [负债估值](https://github.com/naviprotocol/navi-smart-contracts/blob/9ff791fe309358a8bf6f3783a2aeb0c95f72a1dd/lending_core/sources/logic.move#L518) | 源码确认 | — |
-| M04 | 模块 | `lending_core::pool` | `withdraw_balance_v2` 从池中划出资金并返回余额。 | D01 | [出池实现](https://github.com/naviprotocol/navi-smart-contracts/blob/9ff791fe309358a8bf6f3783a2aeb0c95f72a1dd/lending_core/sources/pool.move#L216) | 源码确认 | — |
-| M05 | 模块 | `lending_core::storage` | 保存 `Storage.paused`，提供暂停入口和检查函数。 | R01、R02、C01 | [暂停检查](https://github.com/naviprotocol/navi-smart-contracts/blob/9ff791fe309358a8bf6f3783a2aeb0c95f72a1dd/lending_core/sources/storage.move#L220) · [暂停入口](https://github.com/naviprotocol/navi-smart-contracts/blob/9ff791fe309358a8bf6f3783a2aeb0c95f72a1dd/lending_core/sources/storage.move#L323) | 源码确认 | — |
-| M06 | 依赖边界 | `oracle::PriceOracle` | 借款的抵押和债务估值使用的价格依赖。 | M03 | [抵押物估值](https://github.com/naviprotocol/navi-smart-contracts/blob/9ff791fe309358a8bf6f3783a2aeb0c95f72a1dd/lending_core/sources/logic.move#L529) | 源码确认依赖 | — |
-| D01 | 代码职责 | 核心借贷／借款发放与债务记账 | 新增借款债务并从对应池划款。 | M01–M04、C01 | [记债与出池调用](https://github.com/naviprotocol/navi-smart-contracts/blob/9ff791fe309358a8bf6f3783a2aeb0c95f72a1dd/lending_core/sources/lending.move#L369) | 样例源码确认 | **5（示例）**，直接改变用户债务和池内资产。 |
-| R01 | 特权角色 | `storage::OwnerCap` 持有人 | 初始化时授予发布者，R02 也可以授予新的 `OwnerCap`。可调用 C01。 | M05、R02、C01 | [初始化授权](https://github.com/naviprotocol/navi-smart-contracts/blob/9ff791fe309358a8bf6f3783a2aeb0c95f72a1dd/lending_core/sources/storage.move#L198) · [后续授予](https://github.com/naviprotocol/navi-smart-contracts/blob/9ff791fe309358a8bf6f3783a2aeb0c95f72a1dd/lending_core/sources/storage.move#L822) | 源码确认能力，当前持有人待核实 | — |
-| R02 | 特权角色 | `storage::StorageAdminCap` 持有人 | 初始化时授予发布者，可调用 `mint_owner_cap` 向指定接收方铸造并授予 R01 的凭证。 | M05、R01、C01（间接） | [初始化授权](https://github.com/naviprotocol/navi-smart-contracts/blob/9ff791fe309358a8bf6f3783a2aeb0c95f72a1dd/lending_core/sources/storage.move#L198) · [授予入口](https://github.com/naviprotocol/navi-smart-contracts/blob/9ff791fe309358a8bf6f3783a2aeb0c95f72a1dd/lending_core/sources/storage.move#L822) | 源码确认能力，当前持有人待核实 | — |
-| C01 | 关键控制 | 暂停门控在借款路径上的作用 | `set_pause` 要求 `OwnerCap` 并校验目标 `Storage` 版本。写入 `Storage.paused` 后，`base_borrow_v2` 经 `when_not_paused` 检查，为 `true` 时在记债和出池前中止。设为 `false` 解除这道暂停检查。 | M05、R01、D01 | [控制写入](https://github.com/naviprotocol/navi-smart-contracts/blob/9ff791fe309358a8bf6f3783a2aeb0c95f72a1dd/lending_core/sources/storage.move#L323) · [借款检查点](https://github.com/naviprotocol/navi-smart-contracts/blob/9ff791fe309358a8bf6f3783a2aeb0c95f72a1dd/lending_core/sources/lending.move#L363) | 源码确认条件，当前状态待核实 | — |
+旧版「一张全量关系图 + 一张结构化表」的样例已归档：[NAVI 最小样例](./archive/NAVI最小样例-v0.2.md)。

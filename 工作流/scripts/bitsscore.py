@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""BitsScore 工作流脚本：前期准备 + 代码安全。
+"""BitsScore 工作流脚本：前期准备、代码安全、链上。
 
 用法（<目录> 是这一轮评估的工作目录）：
   python3 bitsscore.py init <目录>        生成空白模板
@@ -11,8 +11,19 @@
   python3 bitsscore.py coverage <目录>    逐行判定覆盖，输出 C3-coverage.json
                                           （第一次运行会生成 C3-semantic-changes.json 让你填）
   python3 bitsscore.py score <目录>       计算代码安全分，输出 C6-score.json 和 C6-score.md
+  python3 bitsscore.py onchain-score <目录>
+                                          计算链上分，输出 O8-score.json 和 O8-score.md
+  python3 bitsscore.py role-graph <目录>  在前期准备关系图上补齐链上实体，输出 O4-role-graph.md
+  python3 bitsscore.py field-table        由 schema.py 重新生成 工作流/交付物字段表.md
+  python3 bitsscore.py review <目录> <步骤> --reviewer 名字 --verdict pass|needs_fix [--comment 意见]
+                                          人工复核某一步的产出（记录文件指纹，文件改过后复核自动过期）
+  python3 bitsscore.py review-status <目录>
+                                          列出每一步的复核状态
+  python3 bitsscore.py history <项目目录> 扫描项目下的各次评估，生成 index.json 和 index.md
+  python3 bitsscore.py export <目录>      重新计分并生成交付 JSON deliverable.json（前端数据源）
 
-规则依据：评分骨架 v1.0 第 2 节、代码安全评分标准 v1.1。计分只在本脚本中实现。
+规则依据：评分骨架 v1.1 第 2、3 节，代码安全评分标准 v1.1，链上安全评估标准 v1.1。
+计分只在本脚本和 onchain.py 中实现。
 """
 import fnmatch
 import glob
@@ -25,9 +36,10 @@ import sys
 from difflib import SequenceMatcher
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from schema import BLANK, FILES, ID_PATTERNS, STEP_ORDER  # noqa: E402
+from schema import BLANK, FILES, ID_PATTERNS, ONCHAIN_ORDER, STEP_ORDER  # noqa: E402
+import onchain  # noqa: E402
 
-RULE_VERSION = "code-security-v1.1 / skeleton-v1.0 / workflow-v1.0"
+RULE_VERSION = "code-security-v1.1 / skeleton-v1.1 / workflow-v1.0"
 TIER_WEIGHT = {5: 5, 3: 3, 1: 1}
 TIER_NAME = {5: "核心", 3: "重要", 1: "辅助"}
 CAP = {"critical": 0, "high": 49, "medium": 79, "low": 94}
@@ -170,7 +182,7 @@ def check(spec, v, file, path, ctx):
             ctx.err(file, path, "应为非空文本")
             return
         if "pattern" in spec and not re.match(spec["pattern"], v):
-            ctx.err(file, path, "格式不对，应匹配 %s" % spec["pattern"])
+            ctx.err(file, path, "格式不对（现在是 %r）。要求：%s" % (v[:60], spec["desc"]))
         if "id" in spec:
             kind = spec["id"]
             if not re.match(ID_PATTERNS[kind], v):
@@ -200,9 +212,12 @@ def validate(d, upto=None, quiet=False, skip=()):
     data = {}
     required = []
     if upto:
-        if upto not in STEP_ORDER:
-            die("--step 只能是 %s" % STEP_ORDER)
-        required = STEP_ORDER[: STEP_ORDER.index(upto) + 1]
+        if upto in STEP_ORDER:
+            required = STEP_ORDER[: STEP_ORDER.index(upto) + 1]
+        elif upto in ONCHAIN_ORDER:
+            required = STEP_ORDER[: STEP_ORDER.index("P5") + 1] + ONCHAIN_ORDER[: ONCHAIN_ORDER.index(upto) + 1]
+        else:
+            die("--step 只能是 %s" % (STEP_ORDER + ONCHAIN_ORDER))
     for name, f in FILES.items():
         if name in skip:
             continue
@@ -230,6 +245,18 @@ def validate(d, upto=None, quiet=False, skip=()):
     # 跨文件规则
     t0 = data.get("T0-task.json")
     chains = {c.get("chain_id") for c in (t0 or {}).get("chains", []) if isinstance(c, dict)}
+    if t0:
+        prev, why = t0.get("previous_assessment_id"), t0.get("reason")
+        if (prev == "无") != (why == "first"):
+            ctx.err("T0-task.json", "$.reason", "第一次评估：reason 填 first，previous_assessment_id 写 无；重评：两者都要填")
+        aid = str(t0.get("assessment_id", ""))
+        if prev not in (None, "无") and not is_blank(str(prev)) and prev == aid:
+            ctx.err("T0-task.json", "$.previous_assessment_id", "不能指向自己")
+        parent = os.path.dirname(os.path.abspath(d))
+        if prev not in (None, "无") and not is_blank(str(prev)) and not os.path.isdir(os.path.join(parent, str(prev))):
+            ctx.err("T0-task.json", "$.previous_assessment_id", "同一项目目录下找不到上一次评估 %s（应在 %s）" % (prev, parent))
+        if not is_blank(aid) and os.path.basename(os.path.abspath(d)) != aid:
+            ctx.err("T0-task.json", "$.assessment_id", "评估目录名要和评估 ID 一致：目录是 %s" % os.path.basename(os.path.abspath(d)))
     p1 = data.get("P1-baseline.json")
     if p1 and t0:
         for i, s in enumerate(p1.get("snapshots", [])):
@@ -283,6 +310,11 @@ def validate(d, upto=None, quiet=False, skip=()):
                 st, en = rg.get("start"), rg.get("end")
                 if isinstance(st, int) and isinstance(en, int) and not (1 <= st <= en <= n):
                     ctx.err("P4-responsibilities.json", where, "行号超出范围（文件共 %d 行，且起始不能大于结束）" % n)
+            for q, ev in (("q1_assets_or_authority", "q1_locations"), ("q2_preconditions_or_availability", "q2_locations")):
+                if r.get(q) == "yes" and not r.get(ev):
+                    ctx.err("P4-responsibilities.json", "$.responsibilities[%d].%s" % (i, ev), "答了 yes 就要写源码位置")
+                if r.get(q) == "no" and r.get(ev):
+                    ctx.err("P4-responsibilities.json", "$.responsibilities[%d].%s" % (i, ev), "答 no 时留空 []")
             for q, ev in (("q1_assets_or_authority", "q1_evidence"), ("q2_preconditions_or_availability", "q2_evidence")):
                 if r.get(q) == "yes" and str(r.get(ev, "")).strip() in ("无", ""):
                     ctx.err("P4-responsibilities.json", "$.responsibilities[%d].%s" % (i, ev), "答了 yes 就要写依据")
@@ -320,8 +352,22 @@ def validate(d, upto=None, quiet=False, skip=()):
                 ctx.err("C4-findings.json", "$.findings[%d].assessor_severity" % i, "报告未定级，必须由你定级")
             if x.get("severity") != "unrated" and x.get("assessor_severity") not in ("same", None):
                 ctx.err("C4-findings.json", "$.findings[%d].assessor_severity" % i, "报告已定级，这里写 same")
+    if c4:
+        for i, x in enumerate(c4.get("findings", [])):
+            if isinstance(x, dict) and x.get("fix_status") in ("fixed_and_reviewed", "fix_deployed_not_reviewed") and not x.get("fix_refs"):
+                ctx.err("C4-findings.json", "$.findings[%d].fix_refs" % i, "修复状态是已修复，要给出修复提交、部署交易或复核报告的引用")
     c5 = data.get("C5-overall.json")
     if c5:
+        for q, ids in (("a1_multi_firm", "a1_report_ids"), ("a2_incremental_review", "a2_report_ids"),
+                       ("a3_formal_verification", "a3_report_ids")):
+            if c5.get(q) == "yes" and not c5.get(ids):
+                ctx.err("C5-overall.json", "$." + ids, "答了 yes 就要列出依据的报告 ID")
+            if c5.get(q) == "no" and c5.get(ids):
+                ctx.err("C5-overall.json", "$." + ids, "答 no 时留空 []")
+        if c5.get("a1_multi_firm") == "yes" and c2:
+            firms = {r.get("firm") for r in c2.get("reports", []) if r.get("id") in (c5.get("a1_report_ids") or [])}
+            if len(firms) < 2:
+                ctx.err("C5-overall.json", "$.a1_report_ids", "A1 要求至少两家不同机构，这里列出的报告只来自 %d 家" % len(firms))
         for q, ev in (("a1_multi_firm", "a1_evidence"), ("a2_incremental_review", "a2_evidence"),
                       ("a3_formal_verification", "a3_evidence"), ("b3_unaudited_cross_module", "b3_evidence")):
             if c5.get(q) == "yes" and str(c5.get(ev, "")).strip() in ("无", ""):
@@ -334,6 +380,12 @@ def validate(d, upto=None, quiet=False, skip=()):
             ctx.err("C5-overall.json", "$.b1_human_decision", "有 B1 线索时，agent 填 pending，等人确认")
         if dec in ("deduct", "no_deduct") and str(c5.get("b1_human_reviewer", "")).strip() in ("无", ""):
             ctx.err("C5-overall.json", "$.b1_human_reviewer", "人确认后要写确认人")
+
+    onchain.validate_onchain(data, ctx, is_blank)
+    if not quiet and data.get("O2-targets.json") and data.get("O1-scope.json"):
+        n = len({"%s|%s" % (t.get("chain_id"), str(t.get("address", "")).lower())
+                 for t in data["O2-targets.json"].get("targets", []) if isinstance(t, dict)})
+        print("取证预算：已列 %d 个目标，预算 %d" % (n, onchain.budget_of(data)))
 
     if not quiet:
         if ctx.errors:
@@ -956,11 +1008,172 @@ def cmd_graph(d):
     print("已写入 P6-graph.md")
 
 
+# ---------------------------------------------------------------- 链上角色关系图
+
+def cmd_role_graph(d):
+    data = need_valid(d, "O4")
+    g = onchain.role_graph(data)
+    shape = {"business": '(["%s"])', "module": '["%s"]', "role": '(["%s"])', "control": '[["%s"]]',
+             "object": '[/"%s"/]', "eoa": '(("%s"))', "multisig": '{{"%s"}}', "timelock": '[("%s")]',
+             "other": '>"%s"]', "no_holder": '>"%s"]'}
+    out = ["# 链上角色关系图（脚本生成，不要手改）", "",
+           "在前期准备的模块—角色—控制关系上，补充了链上实体：模块对应的顶层对象、角色的持有人、多签和时间锁的成员。"
+           "同一个链上实体只有一个节点。", "", "```mermaid", "flowchart LR"]
+    ids = {}
+    for i, n in enumerate(g["nodes"]):
+        ids[n["id"]] = "N%d" % i
+        label = n["label"]
+        if n["kind"] in ("eoa", "multisig", "timelock", "object"):
+            label = label[:10] + "…" + label[-4:] if len(label) > 18 else label
+        extra = {"multisig": " · 多签 %s" % n.get("threshold"), "timelock": " · 时间锁 %sh" % round(n.get("delaySeconds", 0) / 3600, 1),
+                 "eoa": " · EOA", "control": " · %s" % n.get("consequence", "")}.get(n["kind"], "")
+        out.append("  %s%s" % (ids[n["id"]], shape.get(n["kind"], '["%s"]') % q("%s · %s%s" % (n["id"] if not n["id"].startswith(("OBJ:", "NOHOLDER:")) else n["kind"], label, extra))))
+    name = {"uses": "使用", "calls": "调用", "grants": "授予", "can_call": "可调用", "affects": "作用于",
+            "deployed_as": "链上对象", "held_by": "持有人", "signer": "签名人", "proposer": "提议者"}
+    for e in g["edges"]:
+        if e["from"] in ids and e["to"] in ids:
+            lab = name[e["kind"]] + (" w%d" % e["weight"] if e.get("weight", 1) != 1 else "")
+            out.append("  %s -->|%s| %s" % (ids[e["from"]], lab, ids[e["to"]]))
+    out += ["```", ""]
+    with open(fp(d, "O4-role-graph.md"), "w", encoding="utf-8") as h:
+        h.write("\n".join(out))
+    print("已写入 O4-role-graph.md（%d 个节点，%d 条边）" % (len(g["nodes"]), len(g["edges"])))
+
+
+# ---------------------------------------------------------------- 链上计分
+
+def fmt(x):
+    if isinstance(x, bool) or x is None:
+        return "—"
+    if isinstance(x, (int, float)):
+        return "%.2f" % x
+    return {"incomplete": "评估未完成", "reference": "参见其他大项", "N/A": "N/A",
+            "disclosure": "只披露"}.get(x, str(x))
+
+
+def cmd_onchain_score(d):
+    data = need_valid(d, "O8")
+    res = onchain.score_onchain(data)
+    res["snapshots"] = data["O1-scope.json"]["snapshots"]
+    res["validity"] = "分数只代表快照时点的状态。权限持有人或门限变更、合约升级、核心参数改动后，结果过期，需要重评。"
+    res["budget"] = onchain.budget_of(data)
+    jsave(fp(d, "O8-score.json"), res)
+
+    out = ["# 链上评分结果", ""]
+    out += ["## 快照", "", "| 链 | 区块或检查点 | 哈希或 digest | 时间（UTC） |", "| --- | --- | --- | --- |"]
+    for s in res["snapshots"]:
+        out.append("| %s | %s | %s | %s |" % (s["chain_id"], s["block_or_checkpoint"], s["block_hash_or_digest"], s["time_utc"]))
+    out += ["", "**有效期：** " + res["validity"], ""]
+    out += ["## 结果", "", "- 状态：**%s**" % res["status"],
+            "- 项目链上分：**%s**" % fmt(res["project_score"]),
+            "- 业务权重：%s" % res["weight_note"],
+            "- 规则版本：%s" % res["rule_version"], ""]
+    out += ["| 大项（按业务权重加权，仅展示） | 分数 |", "| --- | ---: |"]
+    for k, v in res["dimension_view"].items():
+        out.append("| %s | %s |" % (onchain.DIM_NAME[k], fmt(v)))
+    for g in res["blocking_gaps"]:
+        out.append("- 阻断缺口 %s：%s" % (g["id"], g["missing"]))
+    for br in res["businesses"]:
+        out += ["", "## 业务 %s（%s）" % (br["business_id"], br["specialty"]), "",
+                "- 状态：**%s**；业务分 **%s**；权重 %.2f%%；TVL %s 美元" % (
+                    br["status"], fmt(br["score"]), br["weight"] * 100, fmt(br["tvl_usd"])), ""]
+        out += ["| 大项 | 分数 |", "| --- | ---: |"]
+        for k, v in br["dimensions"].items():
+            out.append("| %s | %s |" % (onchain.DIM_NAME[k], fmt(v["score"])))
+        perm = br["dimensions"]["permissions"]
+        out += ["", "**权限路径**", "", "| 路径 | 后果 | 最少密钥数 | 有效延时（小时） | 得分 | 说明 |", "| --- | --- | ---: | ---: | ---: | --- |"]
+        for p in perm["paths"]:
+            out.append("| %s | %s | %s | %s | %s | %s |" % (
+                p["path_id"], p["consequence"], p.get("keys", "—"),
+                fmt(p["effective_delay_s"] / 3600) if "effective_delay_s" in p else "—",
+                fmt(p.get("score")) if "score" in p else ("不计" if p.get("excluded") else "评估未完成"),
+                p.get("note", p.get("incomplete", p["description"]))))
+        out.append("")
+        out.append("H1／H2／H3：" + "、".join("%s %s" % (k, fmt(v)) for k, v in perm["by_consequence"].items()))
+        for dim in ("configuration", "funds_dependencies"):
+            v = br["dimensions"][dim]
+            out += ["", "**%s**" % onchain.DIM_NAME[dim], "", "| 检查 | 编号 | 市场 | 结果 | 计算 | 理由 |", "| --- | --- | --- | --- | --- | --- |"]
+            for c in v["checks"]:
+                calc = "；".join("%s=%s" % kv for kv in (c.get("calc") or {}).items())
+                out.append("| %s | %s | %s | %s | %s | %s |" % (c["check"], c["check_id"], c["market_id"],
+                           fmt(c["result"]), calc or "—", c["reason"].replace("|", "/")))
+            if len(v["markets"]) > 1:
+                out.append("")
+                out.append("各市场：" + "、".join("%s %s" % (m["market_id"], fmt(m["score"])) for m in v["markets"]))
+        if br["zero_markets"]:
+            out += ["", "**得 0 分的市场：** " + "、".join("%s（%s）" % (z["market_id"], onchain.DIM_NAME[z["dimension"]]) for z in br["zero_markets"])]
+        if br["fatal"]:
+            out += ["", "**致命项：** " + "；".join("%s %s（%s）：%s" % (x["id"], x["kind"], x["decision"], x["fact"]) for x in br["fatal"])]
+        if br["incomplete"]:
+            out += ["", "**未完成的原因：**"] + ["- " + x for x in br["incomplete"]]
+    out.append("")
+    with open(fp(d, "O8-score.md"), "w", encoding="utf-8") as h:
+        h.write("\n".join(out))
+    print("状态：%s；项目链上分：%s" % (res["status"], fmt(res["project_score"])))
+    print("已写入 O8-score.json、O8-score.md")
+
+
+# ---------------------------------------------------------------- 交付 JSON
+
+def cmd_export(d):
+    import export
+    t0 = jload(fp(d, "T0-task.json"))
+    dims = t0.get("dimensions") or []
+    c6 = o8 = None
+    if "code_security" in dims:
+        cmd_score(d)
+        c6 = jload(fp(d, "C6-score.json"))
+    if "onchain" in dims:
+        cmd_onchain_score(d)
+        o8 = jload(fp(d, "O8-score.json"))
+    if not c6 and not o8:
+        die("T0 的 dimensions 里没有 code_security 或 onchain，没有可交付的结果")
+    data = {}
+    for name in FILES:
+        p = fp(d, name)
+        if os.path.exists(p):
+            data[name] = jload(p)
+    code_lines = cov = None
+    if c6:
+        code_lines = compute_lines(d, data)[0]
+        cov = jload(fp(d, "C3-coverage.json"))
+    doc = export.build(data, c6, o8, code_lines, cov)
+    errs = export.self_check(doc)
+    if errs:
+        print("交付 JSON 不符合格式，没有写出（这是脚本的问题，请交给人处理）：")
+        for e in errs[:40]:
+            print("  - " + e)
+        sys.exit(1)
+    jsave(fp(d, "deliverable.json"), doc)
+    print("已写入 deliverable.json（格式自检通过）")
+
+
 # ---------------------------------------------------------------- 入口
 
 def main():
+    if len(sys.argv) >= 2 and sys.argv[1] == "field-table":
+        import fields_doc
+        out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "交付物字段表.md")
+        with open(out, "w", encoding="utf-8") as h:
+            h.write(fields_doc.render())
+        print("已写入 工作流/交付物字段表.md")
+        return
     if len(sys.argv) < 3:
         die(__doc__)
+    if sys.argv[1] in ("review", "review-status", "history"):
+        import records
+        if sys.argv[1] == "review":
+            if len(sys.argv) < 4:
+                die("用法：review <目录> <步骤> --reviewer 名字 --verdict pass|needs_fix [--comment 意见]…")
+            args = sys.argv[4:]
+            opt = lambda k: args[args.index(k) + 1] if k in args else None  # noqa: E731
+            comments = [args[i + 1] for i, a in enumerate(args) if a == "--comment"]
+            records.add_review(sys.argv[2], sys.argv[3], opt("--reviewer"), opt("--verdict"), comments)
+        elif sys.argv[1] == "review-status":
+            records.print_status(sys.argv[2])
+        else:
+            records.history(sys.argv[2])
+        return
     cmd, d = sys.argv[1], sys.argv[2]
     if cmd == "init":
         cmd_init(d)
@@ -978,6 +1191,12 @@ def main():
         cmd_score(d)
     elif cmd == "graph":
         cmd_graph(d)
+    elif cmd == "onchain-score":
+        cmd_onchain_score(d)
+    elif cmd == "role-graph":
+        cmd_role_graph(d)
+    elif cmd == "export":
+        cmd_export(d)
     else:
         die(__doc__)
 

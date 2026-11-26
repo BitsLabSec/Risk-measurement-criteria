@@ -1,7 +1,7 @@
 # BitsScore 同质化代币链上专项
 
 - 版本 v1.0，2026-11-25
-- 依据：[链上安全评估标准 v1.0](./链上安全评估标准.md)。本文只补充代币的读取对象、公式和阈值；档位、汇总和缺证处理一律按通用标准执行。
+- 依据：[链上安全评估标准 v1.1](./链上安全评估标准.md)。本文只补充代币的读取对象、公式和阈值；档位、汇总和缺证处理一律按通用标准执行。
 - 适用：ERC-20 一类的同质化代币，包括 Solana SPL、Sui Coin 等。同名资产在不同链上发行的，每条链分别评估。稳定币储备、桥接资产的支撑、金库份额的赎回，由承担这些义务的业务专项评估，本专项只引用它们的结论。
 - 历史版本：[v0.6 及更早](./archive/fungible-token-onchain-security-rating-standard-v0.6.md)
 - 参考：[ERC-20](https://eips.ethereum.org/EIPS/eip-20) · [Solana 代币权限](https://solana.com/docs/tokens/basics/set-authority) · [Solana 代币扩展](https://solana.com/docs/tokens/extensions)

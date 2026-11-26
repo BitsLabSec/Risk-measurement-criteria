@@ -1,0 +1,562 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "bitsscore-deliverable-3.0",
+  "title": "BitsScore 评估交付物",
+  "description": "前端展示的唯一数据源。由 bitsscore.py export 生成，不要手改。字段说明见 工作流/交付格式.md。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "assessmentId",
+    "history",
+    "generatedAt",
+    "project",
+    "ruleVersions",
+    "snapshots",
+    "validity",
+    "tree",
+    "roleGraph",
+    "reports",
+    "gaps",
+    "evidence"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "3.0"
+    },
+    "assessmentId": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*-\\d{8}(-\\d+)?$"
+    },
+    "generatedAt": {
+      "$ref": "#/$defs/time"
+    },
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "chains"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "chains": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "chainId",
+              "name"
+            ],
+            "properties": {
+              "chainId": {
+                "$ref": "#/$defs/chainId"
+              },
+              "name": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ruleVersions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "skeleton",
+        "codeSecurity",
+        "onchain",
+        "workflow",
+        "specialties"
+      ],
+      "properties": {
+        "skeleton": {
+          "$ref": "#/$defs/version"
+        },
+        "codeSecurity": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/version"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "onchain": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/version"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "workflow": {
+          "$ref": "#/$defs/version"
+        },
+        "specialties": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/version"
+          }
+        }
+      }
+    },
+    "snapshots": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "dimension",
+          "purpose",
+          "chainId",
+          "blockOrCheckpoint",
+          "hash",
+          "timeUtc"
+        ],
+        "properties": {
+          "chainId": {
+            "$ref": "#/$defs/chainId"
+          },
+          "blockOrCheckpoint": {
+            "type": "string",
+            "pattern": "^\\d+$"
+          },
+          "hash": {
+            "type": "string",
+            "minLength": 1
+          },
+          "timeUtc": {
+            "$ref": "#/$defs/time"
+          },
+          "dimension": {
+            "enum": [
+              "code_security",
+              "onchain"
+            ]
+          },
+          "purpose": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "validity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "invalidatedBy"
+      ],
+      "properties": {
+        "invalidatedBy": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "reports": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "firm",
+          "type",
+          "date",
+          "url"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^AR\\d{2,}$"
+          },
+          "firm": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "audit",
+              "incremental_audit",
+              "formal_verification"
+            ]
+          },
+          "date": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "url": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "step",
+          "missing",
+          "blocking"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^G\\d{2,}$"
+          },
+          "step": {
+            "type": "string"
+          },
+          "missing": {
+            "type": "string"
+          },
+          "blocking": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/evidence"
+      }
+    },
+    "tree": {
+      "$ref": "#/$defs/node"
+    },
+    "roleGraph": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "nodes",
+            "edges"
+          ],
+          "properties": {
+            "nodes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "id",
+                  "kind",
+                  "label"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "kind": {
+                    "enum": [
+                      "business",
+                      "module",
+                      "role",
+                      "control",
+                      "object",
+                      "eoa",
+                      "multisig",
+                      "timelock",
+                      "other",
+                      "no_holder"
+                    ]
+                  },
+                  "label": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "edges": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "from",
+                  "to",
+                  "kind"
+                ],
+                "properties": {
+                  "from": {
+                    "type": "string"
+                  },
+                  "to": {
+                    "type": "string"
+                  },
+                  "kind": {
+                    "enum": [
+                      "uses",
+                      "calls",
+                      "grants",
+                      "can_call",
+                      "affects",
+                      "deployed_as",
+                      "held_by",
+                      "signer",
+                      "proposer"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "history": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "previousAssessmentId",
+        "reason"
+      ],
+      "properties": {
+        "previousAssessmentId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reason": {
+          "enum": [
+            "first",
+            "scheduled",
+            "permission_change",
+            "upgrade",
+            "parameter_change",
+            "rule_change",
+            "correction"
+          ]
+        }
+      }
+    }
+  },
+  "$defs": {
+    "time": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?Z$"
+    },
+    "chainId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+:[a-z0-9-]+$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$"
+    },
+    "score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "scoreOrNull": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/score"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "status": {
+      "enum": [
+        "rated",
+        "incomplete",
+        "pending_review",
+        "not_applicable",
+        "not_assessed",
+        "reference",
+        "disclosure",
+        "excluded",
+        "info"
+      ]
+    },
+    "evidenceIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^EV-[0-9a-f]{10}$"
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "ref",
+        "url"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "url",
+            "tx",
+            "command",
+            "file",
+            "code"
+          ]
+        },
+        "ref": {
+          "type": "string"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "label",
+        "status",
+        "score",
+        "weight",
+        "rule",
+        "summary",
+        "refId",
+        "data",
+        "evidenceIds",
+        "children"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "enum": [
+            "root",
+            "dimension",
+            "business",
+            "aspect",
+            "consequence",
+            "path",
+            "controller",
+            "market",
+            "check",
+            "reading",
+            "constant",
+            "absent",
+            "fatal",
+            "coverage",
+            "tier",
+            "responsibility",
+            "code_range",
+            "overall",
+            "adjustment",
+            "observation",
+            "cap",
+            "finding"
+          ]
+        },
+        "label": {
+          "type": "string"
+        },
+        "status": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/status"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "score": {
+          "$ref": "#/$defs/scoreOrNull"
+        },
+        "weight": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "rule": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "method",
+            "text"
+          ],
+          "properties": {
+            "method": {
+              "enum": [
+                "min",
+                "weighted_mean",
+                "sum",
+                "lookup",
+                "formula",
+                "cap",
+                "override",
+                "answer",
+                "none"
+              ]
+            },
+            "text": {
+              "type": "string"
+            }
+          }
+        },
+        "summary": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "refId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "data": {
+          "type": "object"
+        },
+        "evidenceIds": {
+          "$ref": "#/$defs/evidenceIds"
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/node"
+          }
+        }
+      }
+    }
+  }
+}
