@@ -1,0 +1,27 @@
+{
+ "query": "query($a:SuiAddress!){ transactions(filter:{sentAddress:$a}, last:1){ nodes{ digest signatures{ signatureBytes } effects{ checkpoint{ sequenceNumber } } } } }",
+ "variables": {
+  "a": "0x25549f15b144032b4a61921552f6ecbfea13556615f7b45576b12f10d67955e7"
+ },
+ "response": {
+  "data": {
+   "transactions": {
+    "nodes": [
+     {
+      "digest": "9x1yr6Fxq2SV3eG3X3eA6J6MR9Xxztyr4S9SdQMDrUkQ",
+      "signatures": [
+       {
+        "signatureBytes": "AwMAm3d7QR+2OcxJWvH4kgBaCTKIwAfZyiJg4rJvxoXC9EeFm0CAV4ZgX+WGn5eiDjMgTSPrlsOi/B7ikWEzY524AAC5CK99tk3ttLV0TF9riQ85M2UQrAMF59rWHlK1H8dyaQoUTROIpiwdYiT57GBN7jn6uviSCODryL+rRsvik+4IACeI0yw/K1tr55JEDUPxHlr6ktLENzrsnzPrzw2lr3tYCwLp1C7Fmm+Ha4n1SgDmHm8sdT/K+Qg76y+38hhZLAULAAUAbuFvDQIecE7WOY+5YiX3Kh9fnzkWHYVs2b2WvLr60AkBABOEmJ0cJqLkhzKp5QX+qZaG2a/PgKHHJcv1t9KT9ebMAQCwq70rXHvg06VXwaD9f40h7isMqzuuvFzv6ojke7duaAEAsiAsNMlvUf6aOr2tM/OE3+ebDabUbrYcXiogfAn3HagBAKkpWbIKwOZM9NLbQArfkOO74pDdM+HTrEwcidUcHdJrAQMA"
+       }
+      ],
+      "effects": {
+       "checkpoint": {
+        "sequenceNumber": 304232477
+       }
+      }
+     }
+    ]
+   }
+  }
+ }
+}

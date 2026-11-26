@@ -1,0 +1,51 @@
+{
+  "generatedAt": "2026-11-26T02:31:18Z",
+  "assessments": [
+    {
+      "assessmentId": "navi-20261126",
+      "directory": "navi-20261126",
+      "date": "2026-11-26",
+      "previousAssessmentId": "无",
+      "reason": "first",
+      "dimensions": {
+        "code_security": {
+          "status": "not_assessed",
+          "score": null
+        },
+        "onchain": {
+          "status": "rated",
+          "score": 62.0
+        },
+        "business_security": {
+          "status": "not_assessed",
+          "score": null
+        },
+        "intelligence": {
+          "status": "not_assessed",
+          "score": null
+        }
+      },
+      "snapshots": [
+        {
+          "dimension": "onchain",
+          "purpose": "链上快照：权限、参数、资金都按这个时点读取",
+          "chainId": "sui:mainnet",
+          "blockOrCheckpoint": "349261112",
+          "hash": "5cBnTTqw39GFNPrxEdMALAVKq7aGUC5Tz2tT4Sg9VhV2",
+          "timeUtc": "2026-11-26T02:15:08.135Z"
+        }
+      ],
+      "ruleVersions": {
+        "skeleton": "1.1",
+        "codeSecurity": null,
+        "onchain": "1.1",
+        "workflow": "1.0",
+        "specialties": {
+          "lending": "1.2"
+        }
+      },
+      "deliverable": "navi-20261126/deliverable.json"
+    }
+  ],
+  "problems": []
+}

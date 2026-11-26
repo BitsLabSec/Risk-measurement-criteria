@@ -45,12 +45,15 @@ FORMULA_FOR = {
 FORMULA_DOC = {
     "lending_buffer": ("抵押缓冲", "D_open = 1 − b/λ；M = 1 − λ·β；B_buf = min(D_open, M)（单一 LLTV 机制 B_buf = M）",
                        "违反 0 < b ≤ λ ≤ 1、β < 1，或 M < 0 → 0；B_buf < 5%（同底层 1%）→ 60",
-                       {"b": "开仓上限（小数）；单一 LLTV 机制填常量 none", "lambda": "有效清算线（小数）",
-                        "beta": "清算扣押倍率，例如 1.05", "same_underlying": "yes／no：是否同底层组合（按 Lending 专项第 6 节证明）"}),
+                       {"b": "开仓上限（小数）；单一 LLTV 机制填常量 none；为 0 时这一行应填不适用", "lambda": "有效清算线（小数）",
+                        "beta": "清算扣押倍率，例如 1.05（与 bonus 二选一）", "bonus": "清算奖励比例，例如 0.05；脚本按 β = 1 + bonus 计算（与 beta 二选一）",
+                        "same_underlying": "yes／no：是否同底层组合（按 Lending 专项第 6 节证明；属于人工复核重点）"}),
     "rate_curve": ("利率曲线", "k_low = (r_kink − r0) / u_kink；k_high = (r1 − r_kink) / (1 − u_kink)",
                    "有负利率，或利率随利用率上升而下降 → 0；k_high = 0 → 60",
-                   {"r0": "利用率 0 时的年利率", "u_kink": "拐点利用率；没有拐点填 0.8", "r_kink": "拐点处的年利率；没有拐点填 r(0.8)",
-                    "r1": "利用率 100% 时的年利率"}),
+                   {"r0": "写法一：利用率 0 时的年利率", "r_kink": "写法一：拐点处的年利率；没有拐点填 r(0.8)",
+                    "r1": "写法一：利用率 100% 时的年利率", "u_kink": "拐点利用率；没有拐点填 0.8",
+                    "base_rate": "写法二（标准拐点模型）：基础利率", "slope_low": "写法二：拐点前斜率",
+                    "slope_high": "写法二：拐点后斜率"}),
     "margin_h": ("价格不确定性", "H情景 = (λ / b) × (1 − εc) / (1 + εd)", "H情景 < 1 → 60",
                  {"lambda": "有效清算线", "b": "开仓上限", "eps_c": "抵押侧允许的最大价格不确定性", "eps_d": "债务侧允许的最大价格不确定性"}),
     "im_mm": ("保证金", "比较 IM 与 MM", "IM ≤ MM → 0", {"im": "初始保证金率", "mm": "维持保证金率"}),
@@ -74,19 +77,32 @@ FORMULA_DOC = {
                        {"due_low": "应付下界", "due_high": "应付上界", "avail_low": "可用资金下界", "avail_high": "可用资金上界（确定值时上下界填同一个读数）"}),
 }
 
+# 每个公式可接受的输入写法：列表里任选一种，名字必须完全一致
 FORMULA_INPUTS = {
-    "lending_buffer": ["b", "lambda", "beta", "same_underlying"],
-    "rate_curve": ["r0", "u_kink", "r_kink", "r1"],
-    "margin_h": ["lambda", "b", "eps_c", "eps_d"],
-    "im_mm": ["im", "mm"],
-    "oracle_age": ["oracle_type", "max_age_s", "heartbeat_s"],
-    "cdp_buffer": ["mcr", "p", "same_underlying"],
-    "cdp_tcr": ["collateral_value", "debt", "ccr"],
-    "lst_rate": ["r_stored", "staked", "pending_claim", "idle", "pending_redeem", "supply", "epoch_tolerance"],
-    "concentration": ["max_stake", "total_stake"],
-    "coverage": ["locked", "circulating"],
-    "interval_cover": ["due_low", "due_high", "avail_low", "avail_high"],
+    "lending_buffer": [["b", "lambda", "beta", "same_underlying"], ["b", "lambda", "bonus", "same_underlying"]],
+    "rate_curve": [["r0", "u_kink", "r_kink", "r1"], ["base_rate", "slope_low", "slope_high", "u_kink"]],
+    "margin_h": [["lambda", "b", "eps_c", "eps_d"]],
+    "im_mm": [["im", "mm"]],
+    "oracle_age": [["oracle_type", "max_age_s", "heartbeat_s"]],
+    "cdp_buffer": [["mcr", "p", "same_underlying"]],
+    "cdp_tcr": [["collateral_value", "debt", "ccr"]],
+    "lst_rate": [["r_stored", "staked", "pending_claim", "idle", "pending_redeem", "supply", "epoch_tolerance"]],
+    "concentration": [["max_stake", "total_stake"]],
+    "coverage": [["locked", "circulating"]],
+    "interval_cover": [["due_low", "due_high", "avail_low", "avail_high"]],
 }
+
+
+def input_set_ok(fname, names):
+    """返回 (是否齐全, 缺少的名字)。"""
+    best = None
+    for alt in FORMULA_INPUTS[fname]:
+        miss = [n for n in alt if n not in names]
+        if not miss:
+            return True, []
+        if best is None or len(miss) < len(best):
+            best = miss
+    return False, best
 
 
 # ---------------------------------------------------------------- 专项表解析
@@ -170,6 +186,64 @@ def min_keys(approver_ids, principals):
     raise ValueError("门限无法被满足，请检查门限和权重")
 
 
+def key_concentration(o4, business_id):
+    """密钥集中度（只披露，不计分）：最少几把密钥就能走通这个业务的全部 H1–H3 路径，
+    以及每多一把密钥能多控制哪些路径。同一个签名地址出现在多个多签里时只算一次。"""
+    principals = {p["id"]: p for p in o4["principals"]}
+    paths = [p for p in o4["paths"] if business_id in p["business_ids"]
+             and not (p["consequence"] == "H3" and p["h3_auto_expire"] == "yes")]
+    usable, leaves = [], set()
+    for p in paths:
+        try:
+            ls = set()
+            for a in p["approver_ids"]:
+                ls |= leaves_of(a, principals)
+        except ValueError:
+            continue
+        usable.append(p)
+        leaves |= ls
+    leaves = sorted(leaves)
+    if not usable:
+        return None
+    if len(leaves) > MAX_LEAVES:
+        return {"note": "涉及 %d 个签名地址，超过脚本可穷举的 %d 个，未计算" % (len(leaves), MAX_LEAVES)}
+
+    def controlled(chosen):
+        return [p["id"] for p in usable if all(satisfied(a, chosen, principals) for a in p["approver_ids"])]
+
+    levels = []
+    prev = set()
+    for k in range(1, len(leaves) + 1):
+        best = None
+        for combo in itertools.combinations(leaves, k):
+            got = controlled(set(combo))
+            # 同样多的路径时，优先选包含上一层密钥的组合，读者可以看出「再加哪一把」
+            better = best is None or len(got) > len(best[1]) or (
+                len(got) == len(best[1]) and prev <= set(combo) and not prev <= set(best[0]))
+            if better:
+                best = (combo, got)
+        prev = set(best[0])
+        if best[1] and (not levels or len(best[1]) > len(levels[-1]["controlled_paths"])):
+            levels.append({"keys": len(best[0]), "addresses": [x.split("|", 1)[1] for x in best[0]],
+                           "controlled_paths": best[1],
+                           "uncontrolled_paths": [p["id"] for p in usable if p["id"] not in best[1]]})
+        if len(best[1]) == len(usable):
+            break
+    member_of = {}
+    for pid_, p in principals.items():
+        if p["kind"] in ("multisig", "timelock"):
+            for m in p["members"]:
+                mp = principals[m["principal_id"]]
+                if mp["kind"] == "eoa":
+                    member_of.setdefault(mp["address"].lower(), []).append(pid_)
+    label = {pid_: "%s %d/%d" % (pid_, p["threshold"], sum(m["weight"] for m in p["members"]))
+             for pid_, p in principals.items() if p["kind"] in ("multisig", "timelock")}
+    for lv in levels:
+        lv["member_of"] = {a: [label[x] for x in sorted(member_of.get(a, []))] for a in lv["addresses"]}
+    return {"paths_considered": len(usable), "levels": levels,
+            "all_paths_keys": levels[-1]["keys"] if levels and not levels[-1]["uncontrolled_paths"] else None}
+
+
 def perm_score(keys, delay):
     if keys <= 1:
         return 0 if delay < DAY else (40 if delay < 2 * DAY else 50)
@@ -218,9 +292,16 @@ def D(x):
     return Decimal(str(x))
 
 
-def input_values(chk, readings):
-    vals = {}
+def input_groups(chk):
+    groups = {}
     for i in chk["inputs"]:
+        groups.setdefault(i.get("group", "无"), []).append(i)
+    return groups
+
+
+def input_values(inputs, readings):
+    vals = {}
+    for i in inputs:
         if i["reading_id"] != "无":
             rd = readings.get(i["reading_id"])
             if not rd or rd["status"] != "read":
@@ -246,9 +327,12 @@ def run_formula(fname, v):
     """返回 (hard: bool, warn: bool, 计算过程 dict)。"""
     g = lambda k: num(v[k], k)  # noqa: E731
     if fname == "lending_buffer":
-        lam, beta = g("lambda"), g("beta")
+        lam = g("lambda")
+        beta = g("beta") if "beta" in v else 1 + g("bonus")
         single = v["b"] == "none"
         b = None if single else g("b")
+        if not single and b == 0:
+            raise ValueError("b = 0：该资产不能作抵押，没有可检查的组合，这一行应填 q_not_applicable: yes")
         m = 1 - lam * beta
         d_open = None if single else 1 - b / lam
         buf = m if single else min(d_open, m)
@@ -256,11 +340,17 @@ def run_formula(fname, v):
         d1 = D("0.01") if v["same_underlying"] == "yes" else D("0.05")
         return hard, buf < d1, {"D_open": d_open, "M": m, "B_buf": buf, "d1": d1}
     if fname == "rate_curve":
-        r0, uk, rk, r1 = g("r0"), g("u_kink"), g("r_kink"), g("r1")
+        uk = g("u_kink")
+        if "r0" in v:
+            r0, rk, r1 = g("r0"), g("r_kink"), g("r1")
+        else:   # 标准拐点模型：r(u) = base + slope_low·u（u < 拐点），之后加 slope_high·(u − 拐点)
+            r0 = g("base_rate")
+            rk = r0 + g("slope_low") * uk
+            r1 = rk + g("slope_high") * (1 - uk)
         k_low = (rk - r0) / uk if uk > 0 else None
         k_high = (r1 - rk) / (1 - uk) if uk < 1 else None
         hard = min(r0, rk, r1) < 0 or rk < r0 or r1 < rk
-        return hard, k_high == 0, {"k_low": k_low, "k_high": k_high}
+        return hard, k_high == 0, {"r0": r0, "r_kink": rk, "r1": r1, "k_low": k_low, "k_high": k_high}
     if fname == "margin_h":
         h = (g("lambda") / g("b")) * (1 - g("eps_c")) / (1 + g("eps_d"))
         return False, h < 1, {"H_scenario": h}
@@ -335,13 +425,21 @@ def evaluate_check(chk, meta, readings):
     warn = chk["q_warn"] == "yes"
     fname = FORMULA_FOR.get(chk["check_id"])
     if fname:
-        try:
-            fh, fw, calc = run_formula(fname, input_values(chk, readings))
-        except (LookupError, ValueError, ZeroDivisionError, InvalidOperation) as e:
-            r["result"] = "incomplete"
-            r["missing"] = "公式无法计算：%s" % e
-            return r
-        hard, warn = fh, fw
+        hard = warn = False
+        calc = {}
+        groups = input_groups(chk)
+        for gname, inputs in groups.items():
+            try:
+                fh, fw, c = run_formula(fname, input_values(inputs, readings))
+            except (LookupError, ValueError, ZeroDivisionError, InvalidOperation) as e:
+                r["result"] = "incomplete"
+                r["missing"] = "公式无法计算%s：%s" % ("" if gname == "无" else "（组合 %s）" % gname, e)
+                return r
+            hard, warn = hard or fh, warn or fw
+            for k, x in c.items():
+                calc[k if len(groups) == 1 else "%s[%s]" % (k, gname)] = x
+            if len(groups) > 1:
+                calc["结果[%s]" % gname] = "0" if fh else ("60" if fw else "通过")
         r["formula"] = fname
         r["calc"] = {k: (None if x is None else short(x)) for k, x in calc.items()}
     if hard:
@@ -482,12 +580,16 @@ def validate_onchain(data, ctx, is_blank):
                     ctx.err("O3-readings.json", w + ".source", "代码常量的来源写 source_code")
                 if not CODE_LOC.match(str(r.get("evidence", ""))):
                     ctx.err("O3-readings.json", w + ".evidence", "代码常量的证据要写源码位置 路径:起-止")
+            if m == "type_query" and t and t.get("kind") != "capability":
+                ctx.err("O3-readings.json", w + ".method", "按类型查询只允许用于找权限凭证（目标类型要是 capability）")
+            if m in ("type_query", "dynamic_field") and not chain.startswith("sui:"):
+                ctx.err("O3-readings.json", w + ".method", "%s 只用于 Sui" % m)
             if m == "targeted_tx" and t and t.get("kind") != "multisig":
                 ctx.err("O3-readings.json", w + ".method", "定向读交易只允许用于多签成员和门限（目标类型要是 multisig）")
             if m == "storage_slot" and not chain.startswith("evm:"):
                 ctx.err("O3-readings.json", w + ".method", "storage_slot 只用于 EVM；Sui 用 object_field 或 dynamic_field")
-            if m in ("object_field", "dynamic_field") and not chain.startswith("sui:"):
-                ctx.err("O3-readings.json", w + ".method", "%s 只用于 Sui；EVM 用 getter 或 storage_slot" % m)
+            if m == "object_field" and not chain.startswith("sui:"):
+                ctx.err("O3-readings.json", w + ".method", "object_field 只用于 Sui；EVM 用 getter 或 storage_slot")
             if r.get("status") == "read" and str(r.get("value", "")).strip() in ("无", ""):
                 ctx.err("O3-readings.json", w + ".value", "status 是 read 就要填值")
             if r.get("status") == "unreadable" and str(r.get("value", "")).strip() != "无":
@@ -647,11 +749,19 @@ def validate_onchain(data, ctx, is_blank):
                     ctx.err(name, w + "." + q, "%s 有公式，填 by_formula，由脚本判定" % cid)
                 if not fname and c.get(q) == "by_formula":
                     ctx.err(name, w + "." + q, "%s 没有公式，回答 yes 或 no" % cid)
-            names = [x.get("name") for x in c.get("inputs") or [] if isinstance(x, dict)]
             if fname and c.get("q_not_applicable") == "no" and c.get("q_aggregate_not_stored") == "no" and c.get("refers_to") == "无":
-                miss = [n for n in FORMULA_INPUTS[fname] if n not in names]
-                if miss:
-                    ctx.err(name, w + ".inputs", "%s 的公式缺少输入：%s" % (cid, ", ".join(miss)))
+                groups = {}
+                for x in c.get("inputs") or []:
+                    if isinstance(x, dict):
+                        groups.setdefault(x.get("group", "无"), []).append(x.get("name"))
+                if not groups:
+                    groups = {"无": []}
+                for gname, names in groups.items():
+                    if len(names) != len(set(names)):
+                        ctx.err(name, w + ".inputs", "%s 的组合 %s 里有重复的输入名" % (cid, gname))
+                    ok, miss = input_set_ok(fname, names)
+                    if not ok:
+                        ctx.err(name, w + ".inputs", "%s%s 的公式缺少输入：%s" % (cid, "" if gname == "无" else " 组合 " + gname, ", ".join(miss)))
             for j, x in enumerate(c.get("inputs") or []):
                 if not isinstance(x, dict):
                     continue
@@ -789,7 +899,8 @@ def score_onchain(data):
                 br["incomplete"].append("%s 没有完成追踪" % c)
         perm = "incomplete" if "incomplete" in cons.values() else min(cons.values())
         br["dimensions"]["permissions"] = {"score": perm, "by_consequence": cons,
-                                           "paths": [p for p in paths if bid in p["business_ids"]]}
+                                           "paths": [p for p in paths if bid in p["business_ids"]],
+                                           "key_concentration": key_concentration(o4, bid)}
         # 配置、资金
         mks = [m["id"] for m in info.get("markets", [])] or ["ALL"]
         for dim in ("configuration", "funds_dependencies"):
@@ -951,8 +1062,8 @@ def role_graph(data):
 
 
 def _check_formula_doc():
-    for k, ins in FORMULA_INPUTS.items():
-        assert set(FORMULA_DOC[k][3]) == set(ins), k
+    for k, alts in FORMULA_INPUTS.items():
+        assert set(FORMULA_DOC[k][3]) == {n for alt in alts for n in alt}, k
 
 
 _check_formula_doc()

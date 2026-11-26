@@ -1,0 +1,14 @@
+{
+  "gaps": [
+    {
+      "id": "G01",
+      "step": "P2",
+      "object_ids": [
+        "S01"
+      ],
+      "missing": "未做字节码级源码核验（sui client verify-source），只核对了 Published.toml 与链上版本号一致",
+      "searched": "仓库 Published.toml；UpgradeCap 的 package 和 version",
+      "blocks_denominator": false
+    }
+  ]
+}

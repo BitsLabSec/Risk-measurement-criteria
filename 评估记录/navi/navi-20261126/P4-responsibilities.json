@@ -1,0 +1,316 @@
+{
+  "responsibilities": [
+    {
+      "id": "D01",
+      "result": "存款、提款、借款、还款、清算的记账与资金划转",
+      "business_ids": [
+        "BZ01"
+      ],
+      "module_ids": [
+        "M11",
+        "M12",
+        "M14",
+        "M18",
+        "M02",
+        "M20",
+        "M07",
+        "M15",
+        "M04",
+        "M01",
+        "M16",
+        "M17",
+        "M19",
+        "M21",
+        "M05",
+        "M03",
+        "M06"
+      ],
+      "ranges": [
+        {
+          "source_id": "S01",
+          "file": "lending_core/sources/lending.move",
+          "start": 1,
+          "end": 888
+        },
+        {
+          "source_id": "S01",
+          "file": "lending_core/sources/logic.move",
+          "start": 1,
+          "end": 857
+        },
+        {
+          "source_id": "S01",
+          "file": "lending_core/sources/pool.move",
+          "start": 1,
+          "end": 468
+        },
+        {
+          "source_id": "S01",
+          "file": "lending_core/sources/storage.move",
+          "start": 1,
+          "end": 1450
+        },
+        {
+          "source_id": "S01",
+          "file": "lending_core/sources/calculator.move",
+          "start": 1,
+          "end": 109
+        },
+        {
+          "source_id": "S01",
+          "file": "lending_core/sources/validation.move",
+          "start": 1,
+          "end": 85
+        },
+        {
+          "source_id": "S01",
+          "file": "lending_core/sources/flash_loan.move",
+          "start": 1,
+          "end": 353
+        },
+        {
+          "source_id": "S01",
+          "file": "lending_core/sources/pool_manager.move",
+          "start": 1,
+          "end": 320
+        },
+        {
+          "source_id": "S01",
+          "file": "lending_core/sources/dynamic_calculator.move",
+          "start": 1,
+          "end": 424
+        },
+        {
+          "source_id": "S01",
+          "file": "lending_core/sources/account.move",
+          "start": 1,
+          "end": 100
+        },
+        {
+          "source_id": "S01",
+          "file": "lending_core/sources/ray_math.move",
+          "start": 1,
+          "end": 114
+        },
+        {
+          "source_id": "S01",
+          "file": "lending_core/sources/safe_math.move",
+          "start": 1,
+          "end": 57
+        },
+        {
+          "source_id": "S01",
+          "file": "lending_core/sources/utils.move",
+          "start": 1,
+          "end": 37
+        },
+        {
+          "source_id": "S01",
+          "file": "lending_core/sources/version.move",
+          "start": 1,
+          "end": 16
+        },
+        {
+          "source_id": "S01",
+          "file": "lending_core/sources/error.move",
+          "start": 1,
+          "end": 48
+        },
+        {
+          "source_id": "S01",
+          "file": "lending_core/sources/constants.move",
+          "start": 1,
+          "end": 19
+        },
+        {
+          "source_id": "S01",
+          "file": "lending_core/sources/event.move",
+          "start": 1,
+          "end": 546
+        }
+      ],
+      "q1_assets_or_authority": "yes",
+      "q1_evidence": "base_withdraw/base_borrow 从池中划出资金并改写余额",
+      "q1_locations": [
+        "lending_core/sources/lending.move:241-300"
+      ],
+      "q2_preconditions_or_availability": "yes",
+      "q2_evidence": "全部入口先检查 Storage.paused",
+      "q2_locations": [
+        "lending_core/sources/lending.move:186-186"
+      ],
+      "impact_object": "资产池余额、用户存款和债务",
+      "failure_consequence": "资金被错误划转或必要操作被阻断"
+    },
+    {
+      "id": "D02",
+      "result": "价格的写入、校验与读取",
+      "business_ids": [
+        "BZ01"
+      ],
+      "module_ids": [
+        "M22",
+        "M23",
+        "M24",
+        "M25",
+        "M26",
+        "M27",
+        "M28",
+        "M29",
+        "M30",
+        "M31",
+        "M32",
+        "M33",
+        "M34",
+        "M35"
+      ],
+      "ranges": [
+        {
+          "source_id": "S01",
+          "file": "oracle/sources/adaptor_pyth.move",
+          "start": 1,
+          "end": 103
+        },
+        {
+          "source_id": "S01",
+          "file": "oracle/sources/adaptor_supra.move",
+          "start": 1,
+          "end": 30
+        },
+        {
+          "source_id": "S01",
+          "file": "oracle/sources/adaptor_switchboard.move",
+          "start": 1,
+          "end": 33
+        },
+        {
+          "source_id": "S01",
+          "file": "oracle/sources/config.move",
+          "start": 1,
+          "end": 771
+        },
+        {
+          "source_id": "S01",
+          "file": "oracle/sources/oracle.move",
+          "start": 1,
+          "end": 235
+        },
+        {
+          "source_id": "S01",
+          "file": "oracle/sources/oracle_constants.move",
+          "start": 1,
+          "end": 36
+        },
+        {
+          "source_id": "S01",
+          "file": "oracle/sources/oracle_dynamic_getter.move",
+          "start": 1,
+          "end": 97
+        },
+        {
+          "source_id": "S01",
+          "file": "oracle/sources/oracle_error.move",
+          "start": 1,
+          "end": 24
+        },
+        {
+          "source_id": "S01",
+          "file": "oracle/sources/oracle_manage.move",
+          "start": 1,
+          "end": 158
+        },
+        {
+          "source_id": "S01",
+          "file": "oracle/sources/oracle_pro.move",
+          "start": 1,
+          "end": 402
+        },
+        {
+          "source_id": "S01",
+          "file": "oracle/sources/oracle_provider.move",
+          "start": 1,
+          "end": 82
+        },
+        {
+          "source_id": "S01",
+          "file": "oracle/sources/oracle_utils.move",
+          "start": 1,
+          "end": 66
+        },
+        {
+          "source_id": "S01",
+          "file": "oracle/sources/oracle_version.move",
+          "start": 1,
+          "end": 16
+        },
+        {
+          "source_id": "S01",
+          "file": "oracle/sources/strategy.move",
+          "start": 1,
+          "end": 62
+        }
+      ],
+      "q1_assets_or_authority": "yes",
+      "q1_evidence": "价格决定借款额度和清算",
+      "q1_locations": [
+        "oracle/sources/oracle.move:137-151"
+      ],
+      "q2_preconditions_or_availability": "yes",
+      "q2_evidence": "价格过期时估值断言失败",
+      "q2_locations": [
+        "lending_core/sources/calculator.move:97-101"
+      ],
+      "impact_object": "各资产价格",
+      "failure_consequence": "错误估值导致多借或错误清算"
+    },
+    {
+      "id": "D03",
+      "result": "激励与管理入口",
+      "business_ids": [
+        "BZ01"
+      ],
+      "module_ids": [
+        "M08",
+        "M09",
+        "M10",
+        "M13"
+      ],
+      "ranges": [
+        {
+          "source_id": "S01",
+          "file": "lending_core/sources/incentive.move",
+          "start": 1,
+          "end": 422
+        },
+        {
+          "source_id": "S01",
+          "file": "lending_core/sources/incentive_v2.move",
+          "start": 1,
+          "end": 927
+        },
+        {
+          "source_id": "S01",
+          "file": "lending_core/sources/incentive_v3.move",
+          "start": 1,
+          "end": 1627
+        },
+        {
+          "source_id": "S01",
+          "file": "lending_core/sources/manage.move",
+          "start": 1,
+          "end": 246
+        }
+      ],
+      "q1_assets_or_authority": "yes",
+      "q1_evidence": "manage 中有改写清算对象的管理入口",
+      "q1_locations": [
+        "lending_core/sources/manage.move:201-208"
+      ],
+      "q2_preconditions_or_availability": "no",
+      "q2_evidence": "无",
+      "q2_locations": [],
+      "impact_object": "激励余额、清算保护名单",
+      "failure_consequence": "部分用户被排除在清算之外"
+    }
+  ]
+}

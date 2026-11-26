@@ -1,0 +1,125 @@
+{
+ "query": "query($a:SuiAddress!,$c:UInt53){ address(address:$a, atCheckpoint:$c){ dynamicFields(first:50){ nodes{ name{ json type{ repr } } value{ __typename ... on MoveValue{ json type{ repr } } } } } } }",
+ "variables": {
+  "a": "0xbb4e2f4b6205c2e2a2db47aeb4f830796ec7c005f88537ee775986639bc442fe",
+  "c": 349261112
+ },
+ "response": {
+  "data": {
+   "address": {
+    "dynamicFields": {
+     "nodes": [
+      {
+       "name": {
+        "json": {
+         "dummy_field": false
+        },
+        "type": {
+         "repr": "0x1e4a13a0494d5facdbe8473e74127b838c2d446ecec0ce262e2eddafa77259cb::storage::EMODE_KEY"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "emodes_pair": {
+          "id": "0x6ca4ad7689f6fd3f3860c8144190085ef26d425e912afaeab2dadac6bfb8bd16",
+          "size": "10"
+         },
+         "user_emode_id": {
+          "id": "0x17f17d4ad08dfe5d2a48494d17a2d5531026c17c414012f99744387c5dd045e8",
+          "size": "296"
+         },
+         "next_emode_id": "10"
+        },
+        "type": {
+         "repr": "0x1e4a13a0494d5facdbe8473e74127b838c2d446ecec0ce262e2eddafa77259cb::storage::Emode"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": {
+         "dummy_field": false
+        },
+        "type": {
+         "repr": "0x1e4a13a0494d5facdbe8473e74127b838c2d446ecec0ce262e2eddafa77259cb::storage::MARKET_KEY"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "market_id": "0",
+         "last_market_id": "12",
+         "is_main_market": true
+        },
+        "type": {
+         "repr": "0x1e4a13a0494d5facdbe8473e74127b838c2d446ecec0ce262e2eddafa77259cb::storage::MarketInfo"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": {
+         "dummy_field": false
+        },
+        "type": {
+         "repr": "0x1e4a13a0494d5facdbe8473e74127b838c2d446ecec0ce262e2eddafa77259cb::storage::BORROW_WEIGHT_KEY"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": "0xca62000743ef1a11b28d0603884bf0870f7babbcecb5de3a933d9f23b641961c",
+         "size": "0"
+        },
+        "type": {
+         "repr": "0x0000000000000000000000000000000000000000000000000000000000000002::table::Table<u8,u64>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": {
+         "dummy_field": false
+        },
+        "type": {
+         "repr": "0xee0041239b89564ce870a7dec5ddc5d114367ab94a1137e90aa0633cb76518e0::storage::DESIGNATED_LIQUIDATORS_KEY"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": "0x70c39133bb17f806b6c347de40b06fc26329adb064a9f7a2e4416b10764c6ab7",
+         "size": "2"
+        },
+        "type": {
+         "repr": "0x0000000000000000000000000000000000000000000000000000000000000002::table::Table<address,0x0000000000000000000000000000000000000000000000000000000000000002::table::Table<address,bool>>"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": {
+         "dummy_field": false
+        },
+        "type": {
+         "repr": "0xee0041239b89564ce870a7dec5ddc5d114367ab94a1137e90aa0633cb76518e0::storage::PROTECTED_LIQUIDATION_USERS_KEY"
+        }
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": "0x325e57b361aa2ed7cd0bec56f32b70476d3aabb78d9d697593c02132666a7b04",
+         "size": "54"
+        },
+        "type": {
+         "repr": "0x0000000000000000000000000000000000000000000000000000000000000002::table::Table<address,bool>"
+        }
+       }
+      }
+     ]
+    }
+   }
+  }
+ }
+}

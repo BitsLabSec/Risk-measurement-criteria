@@ -1,0 +1,79 @@
+{
+ "query": "query($t:String!,$c:UInt53){ checkpoint(sequenceNumber:$c){ query { objects(filter:{type:$t}, first:20){ nodes{ address version owner{ __typename ... on AddressOwner{ address{ address } } ... on ObjectOwner{ address{ address } } } } } } } }",
+ "variables": {
+  "t": "0xca441b44943c16be0e6e23c5a955bb971537ea3289ae8016fbf33fffe1fd210f::oracle::OracleFeederCap",
+  "c": 349261112
+ },
+ "response": {
+  "data": {
+   "checkpoint": {
+    "query": {
+     "objects": {
+      "nodes": [
+       {
+        "address": "0x4352b03f3a97bc4a736a614a3e1c7779b455614528c3130cd5915aa60d479e70",
+        "version": 95069711,
+        "owner": {
+         "__typename": "AddressOwner",
+         "address": {
+          "address": "0x39c70d4ce3ce769a46f46ad80184a88bc25be9b49545751f5425796ef0c3d9ba"
+         }
+        }
+       },
+       {
+        "address": "0x4842c54c048d099f635299584156a7ec48113d6eb5349a6ccf6932feb8dd6e6a",
+        "version": 305682935,
+        "owner": {
+         "__typename": "AddressOwner",
+         "address": {
+          "address": "0x39c70d4ce3ce769a46f46ad80184a88bc25be9b49545751f5425796ef0c3d9ba"
+         }
+        }
+       },
+       {
+        "address": "0x5ad48a8a8ae82faea9a656da70e42ea18750e84bedc6107e2af3e3764fd18b2e",
+        "version": 305682934,
+        "owner": {
+         "__typename": "AddressOwner",
+         "address": {
+          "address": "0x39c70d4ce3ce769a46f46ad80184a88bc25be9b49545751f5425796ef0c3d9ba"
+         }
+        }
+       },
+       {
+        "address": "0x910eb5162fde240c459f1dc60fe681adbff0038d816b7680212ed13f77c2aa3f",
+        "version": 41696264,
+        "owner": {
+         "__typename": "AddressOwner",
+         "address": {
+          "address": "0x39c70d4ce3ce769a46f46ad80184a88bc25be9b49545751f5425796ef0c3d9ba"
+         }
+        }
+       },
+       {
+        "address": "0xc213c342e3782e346679d4ce1cbae9a730e57f251e3b5e8833e6b071ba9fec3c",
+        "version": 41696266,
+        "owner": {
+         "__typename": "AddressOwner",
+         "address": {
+          "address": "0x39c70d4ce3ce769a46f46ad80184a88bc25be9b49545751f5425796ef0c3d9ba"
+         }
+        }
+       },
+       {
+        "address": "0xe667999eec3fe533dbb8f27574ee44fd6ff7db3aeea1cb0e115708910e6af054",
+        "version": 305682936,
+        "owner": {
+         "__typename": "AddressOwner",
+         "address": {
+          "address": "0x39c70d4ce3ce769a46f46ad80184a88bc25be9b49545751f5425796ef0c3d9ba"
+         }
+        }
+       }
+      ]
+     }
+    }
+   }
+  }
+ }
+}

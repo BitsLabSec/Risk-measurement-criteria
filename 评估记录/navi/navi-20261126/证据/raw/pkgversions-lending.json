@@ -1,0 +1,21 @@
+{
+ "query": "query($a:SuiAddress!){ packageVersions(address:$a,last:1){ nodes{ address version previousTransaction{ digest } } } }",
+ "variables": {
+  "a": "0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca"
+ },
+ "response": {
+  "data": {
+   "packageVersions": {
+    "nodes": [
+     {
+      "address": "0x512f28261c1a293f49416d8885b8d5d32bde6dd68a99a0be36fe42b248e6833a",
+      "version": 26,
+      "previousTransaction": {
+       "digest": "9x1yr6Fxq2SV3eG3X3eA6J6MR9Xxztyr4S9SdQMDrUkQ"
+      }
+     }
+    ]
+   }
+  }
+ }
+}

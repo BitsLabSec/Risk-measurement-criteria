@@ -1,0 +1,32 @@
+{
+ "query": "query($a:SuiAddress!,$c:UInt53){ object(address:$a, atCheckpoint:$c){ asMoveObject{ contents{ json } } } }",
+ "variables": {
+  "a": "0x7db5c000524bfe55bb2bc343886f29eabc38f706dc1655900055fa5b60ee00a5",
+  "c": 349261112
+ },
+ "response": {
+  "data": {
+   "object": {
+    "asMoveObject": {
+     "contents": {
+      "json": {
+       "id": "0x7db5c000524bfe55bb2bc343886f29eabc38f706dc1655900055fa5b60ee00a5",
+       "version": "16",
+       "paused": true,
+       "reserves": {
+        "id": "0xf9a4803708d0043d47382557d7c54b7420081653a028fde2e72626cf4a39cb58",
+        "size": "2"
+       },
+       "reserves_count": 2,
+       "users": [],
+       "user_info": {
+        "id": "0xa29310e998e89b533de76694fcbf11398658d70ca58025923aafd46646b8e931",
+        "size": "47"
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

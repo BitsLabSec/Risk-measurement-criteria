@@ -1,0 +1,537 @@
+{
+ "query": "query($a:SuiAddress!,$c:UInt53){ address(address:$a, atCheckpoint:$c){ dynamicFields(first:50){ nodes{ name{ json } value{ __typename ... on MoveValue{ json } } } } } }",
+ "variables": {
+  "a": "0xc0601facd3b98d1e82905e660bf9f5998097dedcf86ed802cf485865e3e3667c",
+  "c": 349261112
+ },
+ "response": {
+  "data": {
+   "address": {
+    "dynamicFields": {
+     "nodes": [
+      {
+       "name": {
+        "json": 35
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "1111483250",
+         "decimal": 6,
+         "timestamp": "1795425469881"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 33
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "999842",
+         "decimal": 6,
+         "timestamp": "1795658042186"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 37
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "989723388",
+         "decimal": 6,
+         "timestamp": "1794972707908"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 15
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "11842",
+         "decimal": 6,
+         "timestamp": "1795657524003"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 4
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "15469120",
+         "decimal": 9,
+         "timestamp": "1795655942647"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 21
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "6064414003700",
+         "decimal": 8,
+         "timestamp": "1795656504676"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 8
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "5821301716650",
+         "decimal": 8,
+         "timestamp": "1795616354520"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 22
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "7045338791",
+         "decimal": 8,
+         "timestamp": "1795640844357"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 30
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "6072077306234",
+         "decimal": 8,
+         "timestamp": "1795655911445"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 39
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "6041054805750",
+         "decimal": 8,
+         "timestamp": "1795500442084"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 5
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "674515730",
+         "decimal": 9,
+         "timestamp": "1795657955175"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 13
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "6935",
+         "decimal": 6,
+         "timestamp": "1795650398282"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 25
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "17980000",
+         "decimal": 9,
+         "timestamp": "1795654848435"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 2
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "998626",
+         "decimal": 6,
+         "timestamp": "1795657524003"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 23
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "6084174804735",
+         "decimal": 8,
+         "timestamp": "1795657955175"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 26
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "6078420164437",
+         "decimal": 8,
+         "timestamp": "1795657955175"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 31
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "3584950000000",
+         "decimal": 9,
+         "timestamp": "1795656504676"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 24
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "21792320",
+         "decimal": 9,
+         "timestamp": "1795657955175"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 14
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "5821301716650",
+         "decimal": 8,
+         "timestamp": "1795616354520"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 38
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "1062198",
+         "decimal": 6,
+         "timestamp": "1795640148413"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 34
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "999842",
+         "decimal": 6,
+         "timestamp": "1795658042186"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 12
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "1153274",
+         "decimal": 6,
+         "timestamp": "1795656504676"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 16
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "994689",
+         "decimal": 6,
+         "timestamp": "1795657524003"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 1
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "999849",
+         "decimal": 6,
+         "timestamp": "1795657524003"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 36
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "43575000000",
+         "decimal": 9,
+         "timestamp": "1795656390577"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 0
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "674442700",
+         "decimal": 9,
+         "timestamp": "1795658042186"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 32
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "6072077306234",
+         "decimal": 8,
+         "timestamp": "1795655911445"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 18
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "1000499422",
+         "decimal": 9,
+         "timestamp": "1795658042186"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 3
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "169948163340",
+         "decimal": 8,
+         "timestamp": "1795657524003"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 11
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "169996263288",
+         "decimal": 8,
+         "timestamp": "1795658042186"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 20
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "671717420",
+         "decimal": 9,
+         "timestamp": "1795656504676"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 9
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "999913",
+         "decimal": 6,
+         "timestamp": "1795635984898"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 19
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "998625",
+         "decimal": 6,
+         "timestamp": "1795657955175"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 28
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "5821301716650",
+         "decimal": 8,
+         "timestamp": "1795616354520"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 29
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "5821301716650",
+         "decimal": 8,
+         "timestamp": "1795616354520"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 6
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "674442700",
+         "decimal": 9,
+         "timestamp": "1795658042186"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 10
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "999833",
+         "decimal": 6,
+         "timestamp": "1795658951179"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 17
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "6561340",
+         "decimal": 9,
+         "timestamp": "1795655942647"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 7
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "7390500",
+         "decimal": 9,
+         "timestamp": "1795658042186"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 27
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "value": "530780",
+         "decimal": 9,
+         "timestamp": "1795655942647"
+        }
+       }
+      }
+     ]
+    }
+   }
+  }
+ }
+}

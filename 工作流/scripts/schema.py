@@ -358,6 +358,7 @@ INPUT = O("公式的一个输入", {
     "constant": S("不取读数时填常量值（例如代码里写死的数，或 yes／no、pull／push）；用读数时写 无"),
     "divide_by": F("把原始读数换算成公式单位要除以多少。例如读数 8000、单位是 bps，公式要小数，就填 10000；不用换算填 1", min=0.000000001),
     "note": S("换算或取值依据，例如 代码 sources/config.move:42 定义分母为 10000"),
+    "group": S("同一检查项要算多个组合时（例如每个 E-mode 抵押×借款组合），给同一组的输入写相同的组名，例如 emode-6；只有一组写 无。脚本逐组计算，取最差的结果"),
 })
 
 CHECK = O("一个检查项在一个市场上的结果", {
@@ -402,7 +403,8 @@ FILES.update({
                 "markets": L("业务内的市场或池子；只有一个整体时留空 []", O("市场", {
                     "id": S("市场 ID，格式 MK01", id="market"),
                     "name": S("市场名，例如 USDC 储备"),
-                    "object": S("市场或池子的地址或对象 ID（小写，Sui 写完整 64 位）"),
+                    "object": S("市场或池子的对象 ID（小写，Sui 写完整 64 位）；市场是表中的一个条目、没有独立对象时，写所在表的 ID"),
+                    "key": S("市场是表中的条目时，写条目的键（例如资产编号 10）；有独立对象时写 无"),
                     "discovered_by": E("这个市场是怎么找到的：onchain_registry 从链上的市场列表读到；official_list 链上无法枚举，取自官方文档或前端", ["onchain_registry", "official_list"]),
                     "discovery_evidence": EV,
                 })),
@@ -447,8 +449,8 @@ FILES.update({
                 "value": S("原始值，原样照抄（不要换算单位）；读不到写 无"),
                 "unit": S("原始单位，例如 bps、1e18、秒、地址"),
                 "chain_id": CHAIN,
-                "method": E("读取方式：getter 查询函数；object_field Sui 对象字段；dynamic_field Sui 动态字段；storage_slot EVM 存储槽；code_constant 代码常量；targeted_tx 定向读一笔交易（只用于 Sui 原生多签成员）",
-                            ["getter", "object_field", "dynamic_field", "storage_slot", "code_constant", "targeted_tx"]),
+                "method": E("读取方式：getter 查询函数；object_field Sui 对象字段；dynamic_field Sui 表条目或动态字段；type_query 按类型在快照上查找对象（只用于找权限凭证）；storage_slot EVM 存储槽；code_constant 代码常量；targeted_tx 定向读一笔交易（只用于 Sui 原生多签成员）",
+                            ["getter", "object_field", "dynamic_field", "type_query", "storage_slot", "code_constant", "targeted_tx"]),
                 "method_detail": S("getter 写函数签名；object_field／dynamic_field 写字段路径；storage_slot 写槽位和依据（源码存储布局）；code_constant 写常量名；targeted_tx 写交易 digest 和选它的理由"),
                 "at_snapshot": E("exact：在 O1 的快照上读的；bracketed：节点不支持按快照读，在快照前后各读一次且结果一致；code_constant 和 targeted_tx 写 not_applicable", ["exact", "bracketed", "not_applicable"]),
                 "source": E("读数是用什么工具拿到的：collector 采集工具或脚本；rpc 手工调用节点；explorer 区块浏览器；source_code 源码常量。只作记录，不影响计分", ["collector", "rpc", "explorer", "source_code"]),

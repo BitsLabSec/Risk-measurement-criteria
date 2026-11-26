@@ -1,0 +1,287 @@
+{
+ "query": "query($a:SuiAddress!,$c:UInt53){ address(address:$a, atCheckpoint:$c){ dynamicFields(first:50){ nodes{ name{ json } value{ __typename ... on MoveValue{ json } } } } } }",
+ "variables": {
+  "a": "0x6ca4ad7689f6fd3f3860c8144190085ef26d425e912afaeab2dadac6bfb8bd16",
+  "c": 349261112
+ },
+ "response": {
+  "data": {
+   "address": {
+    "dynamicFields": {
+     "nodes": [
+      {
+       "name": {
+        "json": "6"
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "assetA": {
+          "assetId": 10,
+          "isCollateral": false,
+          "isDebt": true,
+          "ltv": "0",
+          "lt": "0",
+          "liquidation_bonus": "30000000000000000000000000"
+         },
+         "assetB": {
+          "assetId": 12,
+          "isCollateral": true,
+          "isDebt": false,
+          "ltv": "850000000000000000000000000",
+          "lt": "870000000000000000000000000",
+          "liquidation_bonus": "30000000000000000000000000"
+         },
+         "isActive": true
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "4"
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "assetA": {
+          "assetId": 10,
+          "isCollateral": false,
+          "isDebt": true,
+          "ltv": "0",
+          "lt": "0",
+          "liquidation_bonus": "30000000000000000000000000"
+         },
+         "assetB": {
+          "assetId": 33,
+          "isCollateral": true,
+          "isDebt": false,
+          "ltv": "850000000000000000000000000",
+          "lt": "870000000000000000000000000",
+          "liquidation_bonus": "30000000000000000000000000"
+         },
+         "isActive": true
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "0"
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "assetA": {
+          "assetId": 0,
+          "isCollateral": false,
+          "isDebt": true,
+          "ltv": "0",
+          "lt": "0",
+          "liquidation_bonus": "50000000000000000000000000"
+         },
+         "assetB": {
+          "assetId": 5,
+          "isCollateral": true,
+          "isDebt": false,
+          "ltv": "900000000000000000000000000",
+          "lt": "930000000000000000000000000",
+          "liquidation_bonus": "50000000000000000000000000"
+         },
+         "isActive": true
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "2"
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "assetA": {
+          "assetId": 10,
+          "isCollateral": false,
+          "isDebt": true,
+          "ltv": "0",
+          "lt": "0",
+          "liquidation_bonus": "30000000000000000000000000"
+         },
+         "assetB": {
+          "assetId": 34,
+          "isCollateral": true,
+          "isDebt": false,
+          "ltv": "850000000000000000000000000",
+          "lt": "870000000000000000000000000",
+          "liquidation_bonus": "30000000000000000000000000"
+         },
+         "isActive": true
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "9"
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "assetA": {
+          "assetId": 10,
+          "isCollateral": true,
+          "isDebt": false,
+          "ltv": "900000000000000000000000000",
+          "lt": "920000000000000000000000000",
+          "liquidation_bonus": "30000000000000000000000000"
+         },
+         "assetB": {
+          "assetId": 18,
+          "isCollateral": false,
+          "isDebt": true,
+          "ltv": "0",
+          "lt": "0",
+          "liquidation_bonus": "30000000000000000000000000"
+         },
+         "isActive": true
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "7"
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "assetA": {
+          "assetId": 10,
+          "isCollateral": true,
+          "isDebt": false,
+          "ltv": "900000000000000000000000000",
+          "lt": "920000000000000000000000000",
+          "liquidation_bonus": "30000000000000000000000000"
+         },
+         "assetB": {
+          "assetId": 19,
+          "isCollateral": false,
+          "isDebt": true,
+          "ltv": "0",
+          "lt": "0",
+          "liquidation_bonus": "30000000000000000000000000"
+         },
+         "isActive": true
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "5"
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "assetA": {
+          "assetId": 10,
+          "isCollateral": true,
+          "isDebt": false,
+          "ltv": "900000000000000000000000000",
+          "lt": "920000000000000000000000000",
+          "liquidation_bonus": "30000000000000000000000000"
+         },
+         "assetB": {
+          "assetId": 12,
+          "isCollateral": false,
+          "isDebt": true,
+          "ltv": "0",
+          "lt": "0",
+          "liquidation_bonus": "30000000000000000000000000"
+         },
+         "isActive": true
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "8"
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "assetA": {
+          "assetId": 10,
+          "isCollateral": false,
+          "isDebt": true,
+          "ltv": "0",
+          "lt": "0",
+          "liquidation_bonus": "30000000000000000000000000"
+         },
+         "assetB": {
+          "assetId": 19,
+          "isCollateral": true,
+          "isDebt": false,
+          "ltv": "900000000000000000000000000",
+          "lt": "920000000000000000000000000",
+          "liquidation_bonus": "30000000000000000000000000"
+         },
+         "isActive": true
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "3"
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "assetA": {
+          "assetId": 10,
+          "isCollateral": true,
+          "isDebt": false,
+          "ltv": "900000000000000000000000000",
+          "lt": "920000000000000000000000000",
+          "liquidation_bonus": "30000000000000000000000000"
+         },
+         "assetB": {
+          "assetId": 33,
+          "isCollateral": false,
+          "isDebt": true,
+          "ltv": "0",
+          "lt": "0",
+          "liquidation_bonus": "30000000000000000000000000"
+         },
+         "isActive": true
+        }
+       }
+      },
+      {
+       "name": {
+        "json": "1"
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "assetA": {
+          "assetId": 10,
+          "isCollateral": true,
+          "isDebt": false,
+          "ltv": "900000000000000000000000000",
+          "lt": "920000000000000000000000000",
+          "liquidation_bonus": "30000000000000000000000000"
+         },
+         "assetB": {
+          "assetId": 34,
+          "isCollateral": false,
+          "isDebt": true,
+          "ltv": "0",
+          "lt": "0",
+          "liquidation_bonus": "30000000000000000000000000"
+         },
+         "isActive": true
+        }
+       }
+      }
+     ]
+    }
+   }
+  }
+ }
+}

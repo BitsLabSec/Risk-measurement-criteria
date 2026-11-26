@@ -1,0 +1,13 @@
+{
+ "query": "{ checkpoint { sequenceNumber digest timestamp } }",
+ "variables": null,
+ "response": {
+  "data": {
+   "checkpoint": {
+    "sequenceNumber": 349261112,
+    "digest": "5cBnTTqw39GFNPrxEdMALAVKq7aGUC5Tz2tT4Sg9VhV2",
+    "timestamp": "2026-11-26T02:15:08.135Z"
+   }
+  }
+ }
+}

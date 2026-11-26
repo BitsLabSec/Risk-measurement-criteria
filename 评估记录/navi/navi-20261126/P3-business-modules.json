@@ -1,0 +1,447 @@
+{
+  "businesses": [
+    {
+      "id": "BZ01",
+      "name": "借贷（主市场）",
+      "specialty": "lending",
+      "user_entries": [
+        "incentive_v3::entry_deposit",
+        "incentive_v3::entry_withdraw_v2",
+        "incentive_v3::entry_borrow_v2",
+        "incentive_v3::entry_repay",
+        "incentive_v3::entry_liquidation"
+      ],
+      "assets_or_state": [
+        "主市场 35 个资产池的余额",
+        "用户存款和债务"
+      ]
+    }
+  ],
+  "modules": [
+    {
+      "id": "M01",
+      "name": "lending_core::account",
+      "source_id": "S01",
+      "file": "lending_core/sources/account.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "借贷主流程",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M02",
+      "name": "lending_core::calculator",
+      "source_id": "S01",
+      "file": "lending_core/sources/calculator.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "借贷主流程",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M03",
+      "name": "lending_core::constants",
+      "source_id": "S01",
+      "file": "lending_core/sources/constants.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "借贷主流程",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M04",
+      "name": "lending_core::dynamic_calculator",
+      "source_id": "S01",
+      "file": "lending_core/sources/dynamic_calculator.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "借贷主流程",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M05",
+      "name": "lending_core::error",
+      "source_id": "S01",
+      "file": "lending_core/sources/error.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "借贷主流程",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M06",
+      "name": "lending_core::event",
+      "source_id": "S01",
+      "file": "lending_core/sources/event.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "借贷主流程",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M07",
+      "name": "lending_core::flash_loan",
+      "source_id": "S01",
+      "file": "lending_core/sources/flash_loan.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "借贷主流程",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M08",
+      "name": "lending_core::incentive",
+      "source_id": "S01",
+      "file": "lending_core/sources/incentive.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "借贷主流程",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M09",
+      "name": "lending_core::incentive_v2",
+      "source_id": "S01",
+      "file": "lending_core/sources/incentive_v2.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "借贷主流程",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M10",
+      "name": "lending_core::incentive_v3",
+      "source_id": "S01",
+      "file": "lending_core/sources/incentive_v3.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "借贷主流程",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M11",
+      "name": "lending_core::lending",
+      "source_id": "S01",
+      "file": "lending_core/sources/lending.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "借贷主流程",
+      "calls_module_ids": [
+        "M12",
+        "M14",
+        "M18",
+        "M26"
+      ]
+    },
+    {
+      "id": "M12",
+      "name": "lending_core::logic",
+      "source_id": "S01",
+      "file": "lending_core/sources/logic.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "借贷主流程",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M13",
+      "name": "lending_core::manage",
+      "source_id": "S01",
+      "file": "lending_core/sources/manage.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "借贷主流程",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M14",
+      "name": "lending_core::pool",
+      "source_id": "S01",
+      "file": "lending_core/sources/pool.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "借贷主流程",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M15",
+      "name": "lending_core::pool_manager",
+      "source_id": "S01",
+      "file": "lending_core/sources/pool_manager.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "借贷主流程",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M16",
+      "name": "lending_core::ray_math",
+      "source_id": "S01",
+      "file": "lending_core/sources/ray_math.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "借贷主流程",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M17",
+      "name": "lending_core::safe_math",
+      "source_id": "S01",
+      "file": "lending_core/sources/safe_math.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "借贷主流程",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M18",
+      "name": "lending_core::storage",
+      "source_id": "S01",
+      "file": "lending_core/sources/storage.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "借贷主流程",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M19",
+      "name": "lending_core::utils",
+      "source_id": "S01",
+      "file": "lending_core/sources/utils.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "借贷主流程",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M20",
+      "name": "lending_core::validation",
+      "source_id": "S01",
+      "file": "lending_core/sources/validation.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "借贷主流程",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M21",
+      "name": "lending_core::version",
+      "source_id": "S01",
+      "file": "lending_core/sources/version.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "借贷主流程",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M22",
+      "name": "oracle::adaptor_pyth",
+      "source_id": "S01",
+      "file": "oracle/sources/adaptor_pyth.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "价格预言机",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M23",
+      "name": "oracle::adaptor_supra",
+      "source_id": "S01",
+      "file": "oracle/sources/adaptor_supra.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "价格预言机",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M24",
+      "name": "oracle::adaptor_switchboard",
+      "source_id": "S01",
+      "file": "oracle/sources/adaptor_switchboard.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "价格预言机",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M25",
+      "name": "oracle::config",
+      "source_id": "S01",
+      "file": "oracle/sources/config.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "价格预言机",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M26",
+      "name": "oracle::oracle",
+      "source_id": "S01",
+      "file": "oracle/sources/oracle.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "价格预言机",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M27",
+      "name": "oracle::oracle_constants",
+      "source_id": "S01",
+      "file": "oracle/sources/oracle_constants.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "价格预言机",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M28",
+      "name": "oracle::oracle_dynamic_getter",
+      "source_id": "S01",
+      "file": "oracle/sources/oracle_dynamic_getter.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "价格预言机",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M29",
+      "name": "oracle::oracle_error",
+      "source_id": "S01",
+      "file": "oracle/sources/oracle_error.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "价格预言机",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M30",
+      "name": "oracle::oracle_manage",
+      "source_id": "S01",
+      "file": "oracle/sources/oracle_manage.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "价格预言机",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M31",
+      "name": "oracle::oracle_pro",
+      "source_id": "S01",
+      "file": "oracle/sources/oracle_pro.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "价格预言机",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M32",
+      "name": "oracle::oracle_provider",
+      "source_id": "S01",
+      "file": "oracle/sources/oracle_provider.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "价格预言机",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M33",
+      "name": "oracle::oracle_utils",
+      "source_id": "S01",
+      "file": "oracle/sources/oracle_utils.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "价格预言机",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M34",
+      "name": "oracle::oracle_version",
+      "source_id": "S01",
+      "file": "oracle/sources/oracle_version.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "价格预言机",
+      "calls_module_ids": []
+    },
+    {
+      "id": "M35",
+      "name": "oracle::strategy",
+      "source_id": "S01",
+      "file": "oracle/sources/strategy.move",
+      "is_external": false,
+      "business_ids": [
+        "BZ01"
+      ],
+      "purpose": "价格预言机",
+      "calls_module_ids": []
+    }
+  ]
+}

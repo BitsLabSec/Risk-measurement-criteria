@@ -1,0 +1,42 @@
+{
+  "baseline_id": "B01",
+  "snapshots": [
+    {
+      "chain_id": "sui:mainnet",
+      "block_or_checkpoint": "349261112",
+      "block_hash_or_digest": "5cBnTTqw39GFNPrxEdMALAVKq7aGUC5Tz2tT4Sg9VhV2",
+      "time_utc": "2026-11-26T02:15:08.135Z",
+      "evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/snapshot.json）"
+    }
+  ],
+  "deployments": [
+    {
+      "id": "I01",
+      "chain_id": "sui:mainnet",
+      "entry": "0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca",
+      "proxy_kind": "sui_package",
+      "actual_code": "0x512f28261c1a293f49416d8885b8d5d32bde6dd68a99a0be36fe42b248e6833a",
+      "version": "26",
+      "how_found": "读 lending_core 的 UpgradeCap：package 字段指向 0x512f…，version=26；packageVersions 的最新版本也是 26",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/upgradecap-lending.json）",
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/pkgversions-lending.json）"
+      ],
+      "status": "confirmed"
+    },
+    {
+      "id": "I02",
+      "chain_id": "sui:mainnet",
+      "entry": "0xca441b44943c16be0e6e23c5a955bb971537ea3289ae8016fbf33fffe1fd210f",
+      "proxy_kind": "sui_package",
+      "actual_code": "0x4837ae94425107554c8847721cf9954c1ad8e10520433b9e37dc11c507148bea",
+      "version": "5",
+      "how_found": "读 oracle 的 UpgradeCap：package 字段指向 0x4837…，version=5；packageVersions 的最新版本也是 5",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/upgradecap-oracle.json）",
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/pkgversions-oracle.json）"
+      ],
+      "status": "confirmed"
+    }
+  ]
+}

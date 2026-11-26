@@ -1,0 +1,2178 @@
+{
+  "targets": [
+    {
+      "id": "OT01",
+      "chain_id": "sui:mainnet",
+      "address": "0xdba1b40f3537441b51d2848fc0a149610e48e67c1cc48c6ad641767622000623",
+      "kind": "capability",
+      "fields": [
+        {
+          "name": "owner",
+          "meaning": "持有人地址"
+        },
+        {
+          "name": "package",
+          "meaning": "当前包"
+        }
+      ],
+      "serves": [
+        "H1@BZ01"
+      ],
+      "priority": "required",
+      "reason": "lending_core 升级凭证"
+    },
+    {
+      "id": "OT02",
+      "chain_id": "sui:mainnet",
+      "address": "0x436d774dedebb6300c35ef99307a315e4c313fe79cdec326678a5c5ef574f0e0",
+      "kind": "capability",
+      "fields": [
+        {
+          "name": "owner",
+          "meaning": "持有人地址"
+        }
+      ],
+      "serves": [
+        "H1@BZ01"
+      ],
+      "priority": "required",
+      "reason": "oracle 升级凭证"
+    },
+    {
+      "id": "OT03",
+      "chain_id": "sui:mainnet",
+      "address": "0x40ef406d7db9a2257bf0f8357b2a6a0a61fd77f0e46057a70bb8627ac05779b8",
+      "kind": "capability",
+      "fields": [
+        {
+          "name": "owner",
+          "meaning": "持有人地址"
+        }
+      ],
+      "serves": [
+        "H1@BZ01",
+        "H2@BZ01",
+        "H3@BZ01"
+      ],
+      "priority": "required",
+      "reason": "OwnerCap 实例（按类型在快照上查询）"
+    },
+    {
+      "id": "OT04",
+      "chain_id": "sui:mainnet",
+      "address": "0xbefa95a3265c29c1099d63596d386a0c873fb712a7151e70e17686b48fcdf3db",
+      "kind": "capability",
+      "fields": [
+        {
+          "name": "owner",
+          "meaning": "持有人地址"
+        }
+      ],
+      "serves": [
+        "H1@BZ01",
+        "H2@BZ01",
+        "H3@BZ01"
+      ],
+      "priority": "required",
+      "reason": "OwnerCap 实例（按类型在快照上查询）"
+    },
+    {
+      "id": "OT05",
+      "chain_id": "sui:mainnet",
+      "address": "0x538d34538c5e70743831869b9fd5e9f1d3a957a9e546651094496fd3e0113ec6",
+      "kind": "capability",
+      "fields": [
+        {
+          "name": "owner",
+          "meaning": "持有人地址"
+        }
+      ],
+      "serves": [
+        "H1@BZ01",
+        "H2@BZ01",
+        "H3@BZ01"
+      ],
+      "priority": "required",
+      "reason": "StorageAdminCap 实例（按类型在快照上查询）"
+    },
+    {
+      "id": "OT06",
+      "chain_id": "sui:mainnet",
+      "address": "0x4888505e7fa22e7d72f332fcf8e797c728a638eac9e0d4c9dbde153545db5d89",
+      "kind": "capability",
+      "fields": [
+        {
+          "name": "owner",
+          "meaning": "持有人地址"
+        }
+      ],
+      "serves": [
+        "H1@BZ01",
+        "H2@BZ01",
+        "H3@BZ01"
+      ],
+      "priority": "required",
+      "reason": "PoolAdminCap 实例（按类型在快照上查询）"
+    },
+    {
+      "id": "OT07",
+      "chain_id": "sui:mainnet",
+      "address": "0x7204e37882baf10f31b66cd1ac78ac65b3b8ad29c265d1e474fb4b24ccd6d5b7",
+      "kind": "capability",
+      "fields": [
+        {
+          "name": "owner",
+          "meaning": "持有人地址"
+        }
+      ],
+      "serves": [
+        "H1@BZ01",
+        "H2@BZ01",
+        "H3@BZ01"
+      ],
+      "priority": "required",
+      "reason": "OracleAdminCap 实例（按类型在快照上查询）"
+    },
+    {
+      "id": "OT08",
+      "chain_id": "sui:mainnet",
+      "address": "0x4352b03f3a97bc4a736a614a3e1c7779b455614528c3130cd5915aa60d479e70",
+      "kind": "capability",
+      "fields": [
+        {
+          "name": "owner",
+          "meaning": "持有人地址"
+        }
+      ],
+      "serves": [
+        "H1@BZ01",
+        "H2@BZ01",
+        "H3@BZ01"
+      ],
+      "priority": "required",
+      "reason": "OracleFeederCap 实例（按类型在快照上查询）"
+    },
+    {
+      "id": "OT09",
+      "chain_id": "sui:mainnet",
+      "address": "0x4842c54c048d099f635299584156a7ec48113d6eb5349a6ccf6932feb8dd6e6a",
+      "kind": "capability",
+      "fields": [
+        {
+          "name": "owner",
+          "meaning": "持有人地址"
+        }
+      ],
+      "serves": [
+        "H1@BZ01",
+        "H2@BZ01",
+        "H3@BZ01"
+      ],
+      "priority": "required",
+      "reason": "OracleFeederCap 实例（按类型在快照上查询）"
+    },
+    {
+      "id": "OT10",
+      "chain_id": "sui:mainnet",
+      "address": "0x5ad48a8a8ae82faea9a656da70e42ea18750e84bedc6107e2af3e3764fd18b2e",
+      "kind": "capability",
+      "fields": [
+        {
+          "name": "owner",
+          "meaning": "持有人地址"
+        }
+      ],
+      "serves": [
+        "H1@BZ01",
+        "H2@BZ01",
+        "H3@BZ01"
+      ],
+      "priority": "required",
+      "reason": "OracleFeederCap 实例（按类型在快照上查询）"
+    },
+    {
+      "id": "OT11",
+      "chain_id": "sui:mainnet",
+      "address": "0x910eb5162fde240c459f1dc60fe681adbff0038d816b7680212ed13f77c2aa3f",
+      "kind": "capability",
+      "fields": [
+        {
+          "name": "owner",
+          "meaning": "持有人地址"
+        }
+      ],
+      "serves": [
+        "H1@BZ01",
+        "H2@BZ01",
+        "H3@BZ01"
+      ],
+      "priority": "required",
+      "reason": "OracleFeederCap 实例（按类型在快照上查询）"
+    },
+    {
+      "id": "OT12",
+      "chain_id": "sui:mainnet",
+      "address": "0xc213c342e3782e346679d4ce1cbae9a730e57f251e3b5e8833e6b071ba9fec3c",
+      "kind": "capability",
+      "fields": [
+        {
+          "name": "owner",
+          "meaning": "持有人地址"
+        }
+      ],
+      "serves": [
+        "H1@BZ01",
+        "H2@BZ01",
+        "H3@BZ01"
+      ],
+      "priority": "required",
+      "reason": "OracleFeederCap 实例（按类型在快照上查询）"
+    },
+    {
+      "id": "OT13",
+      "chain_id": "sui:mainnet",
+      "address": "0xe667999eec3fe533dbb8f27574ee44fd6ff7db3aeea1cb0e115708910e6af054",
+      "kind": "capability",
+      "fields": [
+        {
+          "name": "owner",
+          "meaning": "持有人地址"
+        }
+      ],
+      "serves": [
+        "H1@BZ01",
+        "H2@BZ01",
+        "H3@BZ01"
+      ],
+      "priority": "required",
+      "reason": "OracleFeederCap 实例（按类型在快照上查询）"
+    },
+    {
+      "id": "OT14",
+      "chain_id": "sui:mainnet",
+      "address": "0x25549f15b144032b4a61921552f6ecbfea13556615f7b45576b12f10d67955e7",
+      "kind": "multisig",
+      "fields": [
+        {
+          "name": "members_threshold",
+          "meaning": "从最近一笔交易签名解出的成员、权重和门限"
+        }
+      ],
+      "serves": [
+        "H1@BZ01"
+      ],
+      "priority": "required",
+      "reason": "Sui 原生多签成员"
+    },
+    {
+      "id": "OT15",
+      "chain_id": "sui:mainnet",
+      "address": "0x39c70d4ce3ce769a46f46ad80184a88bc25be9b49545751f5425796ef0c3d9ba",
+      "kind": "multisig",
+      "fields": [
+        {
+          "name": "members_threshold",
+          "meaning": "从最近一笔交易签名解出的成员、权重和门限"
+        }
+      ],
+      "serves": [
+        "H1@BZ01"
+      ],
+      "priority": "required",
+      "reason": "Sui 原生多签成员"
+    },
+    {
+      "id": "OT16",
+      "chain_id": "sui:mainnet",
+      "address": "0x408aab3117dc95445f7564028d2b6d2b65f6d005936f2f9a44c1f27f57a8cac6",
+      "kind": "multisig",
+      "fields": [
+        {
+          "name": "members_threshold",
+          "meaning": "从最近一笔交易签名解出的成员、权重和门限"
+        }
+      ],
+      "serves": [
+        "H1@BZ01"
+      ],
+      "priority": "required",
+      "reason": "Sui 原生多签成员"
+    },
+    {
+      "id": "OT17",
+      "chain_id": "sui:mainnet",
+      "address": "0xbb4e2f4b6205c2e2a2db47aeb4f830796ec7c005f88537ee775986639bc442fe",
+      "kind": "config",
+      "fields": [
+        {
+          "name": "paused",
+          "meaning": "主市场暂停开关"
+        }
+      ],
+      "serves": [
+        "L-C3.1@BZ01"
+      ],
+      "priority": "required",
+      "reason": "主市场 Storage"
+    },
+    {
+      "id": "OT18",
+      "chain_id": "sui:mainnet",
+      "address": "0x1568865ed9a0b5ec414220e8f79b3d04c77acc82358f6e5ae4635687392ffbef",
+      "kind": "oracle_feed",
+      "fields": [
+        {
+          "name": "update_interval",
+          "meaning": "价格最大年龄（毫秒）"
+        }
+      ],
+      "serves": [
+        "OR-2@BZ01"
+      ],
+      "priority": "required",
+      "reason": "PriceOracle"
+    },
+    {
+      "id": "OT19",
+      "chain_id": "sui:mainnet",
+      "address": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+      "kind": "market_or_pool",
+      "fields": [
+        {
+          "name": "reserve[0].ltv",
+          "meaning": "SUI 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[0].threshold",
+          "meaning": "SUI 清算线，1e27"
+        },
+        {
+          "name": "reserve[0].bonus",
+          "meaning": "SUI 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[0].supply_cap",
+          "meaning": "SUI 供应上限"
+        },
+        {
+          "name": "reserve[0].base_rate",
+          "meaning": "SUI 基础利率"
+        },
+        {
+          "name": "reserve[0].multiplier",
+          "meaning": "SUI 拐点前斜率"
+        },
+        {
+          "name": "reserve[0].jump",
+          "meaning": "SUI 拐点后斜率"
+        },
+        {
+          "name": "reserve[0].optimal",
+          "meaning": "SUI 拐点利用率"
+        },
+        {
+          "name": "reserve[0].total_supply",
+          "meaning": "SUI 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[0].supply_index",
+          "meaning": "SUI 存款指数，1e27"
+        },
+        {
+          "name": "reserve[1].ltv",
+          "meaning": "COIN 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[1].threshold",
+          "meaning": "COIN 清算线，1e27"
+        },
+        {
+          "name": "reserve[1].bonus",
+          "meaning": "COIN 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[1].supply_cap",
+          "meaning": "COIN 供应上限"
+        },
+        {
+          "name": "reserve[1].base_rate",
+          "meaning": "COIN 基础利率"
+        },
+        {
+          "name": "reserve[1].multiplier",
+          "meaning": "COIN 拐点前斜率"
+        },
+        {
+          "name": "reserve[1].jump",
+          "meaning": "COIN 拐点后斜率"
+        },
+        {
+          "name": "reserve[1].optimal",
+          "meaning": "COIN 拐点利用率"
+        },
+        {
+          "name": "reserve[1].total_supply",
+          "meaning": "COIN 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[1].supply_index",
+          "meaning": "COIN 存款指数，1e27"
+        },
+        {
+          "name": "reserve[2].ltv",
+          "meaning": "COIN 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[2].threshold",
+          "meaning": "COIN 清算线，1e27"
+        },
+        {
+          "name": "reserve[2].bonus",
+          "meaning": "COIN 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[2].supply_cap",
+          "meaning": "COIN 供应上限"
+        },
+        {
+          "name": "reserve[2].base_rate",
+          "meaning": "COIN 基础利率"
+        },
+        {
+          "name": "reserve[2].multiplier",
+          "meaning": "COIN 拐点前斜率"
+        },
+        {
+          "name": "reserve[2].jump",
+          "meaning": "COIN 拐点后斜率"
+        },
+        {
+          "name": "reserve[2].optimal",
+          "meaning": "COIN 拐点利用率"
+        },
+        {
+          "name": "reserve[2].total_supply",
+          "meaning": "COIN 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[2].supply_index",
+          "meaning": "COIN 存款指数，1e27"
+        },
+        {
+          "name": "reserve[3].ltv",
+          "meaning": "COIN 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[3].threshold",
+          "meaning": "COIN 清算线，1e27"
+        },
+        {
+          "name": "reserve[3].bonus",
+          "meaning": "COIN 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[3].supply_cap",
+          "meaning": "COIN 供应上限"
+        },
+        {
+          "name": "reserve[3].base_rate",
+          "meaning": "COIN 基础利率"
+        },
+        {
+          "name": "reserve[3].multiplier",
+          "meaning": "COIN 拐点前斜率"
+        },
+        {
+          "name": "reserve[3].jump",
+          "meaning": "COIN 拐点后斜率"
+        },
+        {
+          "name": "reserve[3].optimal",
+          "meaning": "COIN 拐点利用率"
+        },
+        {
+          "name": "reserve[3].total_supply",
+          "meaning": "COIN 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[3].supply_index",
+          "meaning": "COIN 存款指数，1e27"
+        },
+        {
+          "name": "reserve[4].ltv",
+          "meaning": "CETUS 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[4].threshold",
+          "meaning": "CETUS 清算线，1e27"
+        },
+        {
+          "name": "reserve[4].bonus",
+          "meaning": "CETUS 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[4].supply_cap",
+          "meaning": "CETUS 供应上限"
+        },
+        {
+          "name": "reserve[4].base_rate",
+          "meaning": "CETUS 基础利率"
+        },
+        {
+          "name": "reserve[4].multiplier",
+          "meaning": "CETUS 拐点前斜率"
+        },
+        {
+          "name": "reserve[4].jump",
+          "meaning": "CETUS 拐点后斜率"
+        },
+        {
+          "name": "reserve[4].optimal",
+          "meaning": "CETUS 拐点利用率"
+        },
+        {
+          "name": "reserve[4].total_supply",
+          "meaning": "CETUS 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[4].supply_index",
+          "meaning": "CETUS 存款指数，1e27"
+        },
+        {
+          "name": "reserve[5].ltv",
+          "meaning": "CERT 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[5].threshold",
+          "meaning": "CERT 清算线，1e27"
+        },
+        {
+          "name": "reserve[5].bonus",
+          "meaning": "CERT 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[5].supply_cap",
+          "meaning": "CERT 供应上限"
+        },
+        {
+          "name": "reserve[5].base_rate",
+          "meaning": "CERT 基础利率"
+        },
+        {
+          "name": "reserve[5].multiplier",
+          "meaning": "CERT 拐点前斜率"
+        },
+        {
+          "name": "reserve[5].jump",
+          "meaning": "CERT 拐点后斜率"
+        },
+        {
+          "name": "reserve[5].optimal",
+          "meaning": "CERT 拐点利用率"
+        },
+        {
+          "name": "reserve[5].total_supply",
+          "meaning": "CERT 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[5].supply_index",
+          "meaning": "CERT 存款指数，1e27"
+        },
+        {
+          "name": "reserve[6].ltv",
+          "meaning": "HASUI 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[6].threshold",
+          "meaning": "HASUI 清算线，1e27"
+        },
+        {
+          "name": "reserve[6].bonus",
+          "meaning": "HASUI 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[6].supply_cap",
+          "meaning": "HASUI 供应上限"
+        },
+        {
+          "name": "reserve[6].base_rate",
+          "meaning": "HASUI 基础利率"
+        },
+        {
+          "name": "reserve[6].multiplier",
+          "meaning": "HASUI 拐点前斜率"
+        },
+        {
+          "name": "reserve[6].jump",
+          "meaning": "HASUI 拐点后斜率"
+        },
+        {
+          "name": "reserve[6].optimal",
+          "meaning": "HASUI 拐点利用率"
+        },
+        {
+          "name": "reserve[6].total_supply",
+          "meaning": "HASUI 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[6].supply_index",
+          "meaning": "HASUI 存款指数，1e27"
+        },
+        {
+          "name": "reserve[7].ltv",
+          "meaning": "NAVX 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[7].threshold",
+          "meaning": "NAVX 清算线，1e27"
+        },
+        {
+          "name": "reserve[7].bonus",
+          "meaning": "NAVX 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[7].supply_cap",
+          "meaning": "NAVX 供应上限"
+        },
+        {
+          "name": "reserve[7].base_rate",
+          "meaning": "NAVX 基础利率"
+        },
+        {
+          "name": "reserve[7].multiplier",
+          "meaning": "NAVX 拐点前斜率"
+        },
+        {
+          "name": "reserve[7].jump",
+          "meaning": "NAVX 拐点后斜率"
+        },
+        {
+          "name": "reserve[7].optimal",
+          "meaning": "NAVX 拐点利用率"
+        },
+        {
+          "name": "reserve[7].total_supply",
+          "meaning": "NAVX 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[7].supply_index",
+          "meaning": "NAVX 存款指数，1e27"
+        },
+        {
+          "name": "reserve[8].ltv",
+          "meaning": "COIN 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[8].threshold",
+          "meaning": "COIN 清算线，1e27"
+        },
+        {
+          "name": "reserve[8].bonus",
+          "meaning": "COIN 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[8].supply_cap",
+          "meaning": "COIN 供应上限"
+        },
+        {
+          "name": "reserve[8].base_rate",
+          "meaning": "COIN 基础利率"
+        },
+        {
+          "name": "reserve[8].multiplier",
+          "meaning": "COIN 拐点前斜率"
+        },
+        {
+          "name": "reserve[8].jump",
+          "meaning": "COIN 拐点后斜率"
+        },
+        {
+          "name": "reserve[8].optimal",
+          "meaning": "COIN 拐点利用率"
+        },
+        {
+          "name": "reserve[8].total_supply",
+          "meaning": "COIN 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[8].supply_index",
+          "meaning": "COIN 存款指数，1e27"
+        },
+        {
+          "name": "reserve[9].ltv",
+          "meaning": "AUSD 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[9].threshold",
+          "meaning": "AUSD 清算线，1e27"
+        },
+        {
+          "name": "reserve[9].bonus",
+          "meaning": "AUSD 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[9].supply_cap",
+          "meaning": "AUSD 供应上限"
+        },
+        {
+          "name": "reserve[9].base_rate",
+          "meaning": "AUSD 基础利率"
+        },
+        {
+          "name": "reserve[9].multiplier",
+          "meaning": "AUSD 拐点前斜率"
+        },
+        {
+          "name": "reserve[9].jump",
+          "meaning": "AUSD 拐点后斜率"
+        },
+        {
+          "name": "reserve[9].optimal",
+          "meaning": "AUSD 拐点利用率"
+        },
+        {
+          "name": "reserve[9].total_supply",
+          "meaning": "AUSD 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[9].supply_index",
+          "meaning": "AUSD 存款指数，1e27"
+        },
+        {
+          "name": "reserve[10].ltv",
+          "meaning": "USDC 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[10].threshold",
+          "meaning": "USDC 清算线，1e27"
+        },
+        {
+          "name": "reserve[10].bonus",
+          "meaning": "USDC 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[10].supply_cap",
+          "meaning": "USDC 供应上限"
+        },
+        {
+          "name": "reserve[10].base_rate",
+          "meaning": "USDC 基础利率"
+        },
+        {
+          "name": "reserve[10].multiplier",
+          "meaning": "USDC 拐点前斜率"
+        },
+        {
+          "name": "reserve[10].jump",
+          "meaning": "USDC 拐点后斜率"
+        },
+        {
+          "name": "reserve[10].optimal",
+          "meaning": "USDC 拐点利用率"
+        },
+        {
+          "name": "reserve[10].total_supply",
+          "meaning": "USDC 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[10].supply_index",
+          "meaning": "USDC 存款指数，1e27"
+        },
+        {
+          "name": "reserve[11].ltv",
+          "meaning": "ETH 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[11].threshold",
+          "meaning": "ETH 清算线，1e27"
+        },
+        {
+          "name": "reserve[11].bonus",
+          "meaning": "ETH 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[11].supply_cap",
+          "meaning": "ETH 供应上限"
+        },
+        {
+          "name": "reserve[11].base_rate",
+          "meaning": "ETH 基础利率"
+        },
+        {
+          "name": "reserve[11].multiplier",
+          "meaning": "ETH 拐点前斜率"
+        },
+        {
+          "name": "reserve[11].jump",
+          "meaning": "ETH 拐点后斜率"
+        },
+        {
+          "name": "reserve[11].optimal",
+          "meaning": "ETH 拐点利用率"
+        },
+        {
+          "name": "reserve[11].total_supply",
+          "meaning": "ETH 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[11].supply_index",
+          "meaning": "ETH 存款指数，1e27"
+        },
+        {
+          "name": "reserve[12].ltv",
+          "meaning": "USDY 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[12].threshold",
+          "meaning": "USDY 清算线，1e27"
+        },
+        {
+          "name": "reserve[12].bonus",
+          "meaning": "USDY 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[12].supply_cap",
+          "meaning": "USDY 供应上限"
+        },
+        {
+          "name": "reserve[12].base_rate",
+          "meaning": "USDY 基础利率"
+        },
+        {
+          "name": "reserve[12].multiplier",
+          "meaning": "USDY 拐点前斜率"
+        },
+        {
+          "name": "reserve[12].jump",
+          "meaning": "USDY 拐点后斜率"
+        },
+        {
+          "name": "reserve[12].optimal",
+          "meaning": "USDY 拐点利用率"
+        },
+        {
+          "name": "reserve[12].total_supply",
+          "meaning": "USDY 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[12].supply_index",
+          "meaning": "USDY 存款指数，1e27"
+        },
+        {
+          "name": "reserve[13].ltv",
+          "meaning": "NS 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[13].threshold",
+          "meaning": "NS 清算线，1e27"
+        },
+        {
+          "name": "reserve[13].bonus",
+          "meaning": "NS 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[13].supply_cap",
+          "meaning": "NS 供应上限"
+        },
+        {
+          "name": "reserve[13].base_rate",
+          "meaning": "NS 基础利率"
+        },
+        {
+          "name": "reserve[13].multiplier",
+          "meaning": "NS 拐点前斜率"
+        },
+        {
+          "name": "reserve[13].jump",
+          "meaning": "NS 拐点后斜率"
+        },
+        {
+          "name": "reserve[13].optimal",
+          "meaning": "NS 拐点利用率"
+        },
+        {
+          "name": "reserve[13].total_supply",
+          "meaning": "NS 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[13].supply_index",
+          "meaning": "NS 存款指数，1e27"
+        },
+        {
+          "name": "reserve[14].ltv",
+          "meaning": "COIN 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[14].threshold",
+          "meaning": "COIN 清算线，1e27"
+        },
+        {
+          "name": "reserve[14].bonus",
+          "meaning": "COIN 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[14].supply_cap",
+          "meaning": "COIN 供应上限"
+        },
+        {
+          "name": "reserve[14].base_rate",
+          "meaning": "COIN 基础利率"
+        },
+        {
+          "name": "reserve[14].multiplier",
+          "meaning": "COIN 拐点前斜率"
+        },
+        {
+          "name": "reserve[14].jump",
+          "meaning": "COIN 拐点后斜率"
+        },
+        {
+          "name": "reserve[14].optimal",
+          "meaning": "COIN 拐点利用率"
+        },
+        {
+          "name": "reserve[14].total_supply",
+          "meaning": "COIN 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[14].supply_index",
+          "meaning": "COIN 存款指数，1e27"
+        },
+        {
+          "name": "reserve[15].ltv",
+          "meaning": "DEEP 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[15].threshold",
+          "meaning": "DEEP 清算线，1e27"
+        },
+        {
+          "name": "reserve[15].bonus",
+          "meaning": "DEEP 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[15].supply_cap",
+          "meaning": "DEEP 供应上限"
+        },
+        {
+          "name": "reserve[15].base_rate",
+          "meaning": "DEEP 基础利率"
+        },
+        {
+          "name": "reserve[15].multiplier",
+          "meaning": "DEEP 拐点前斜率"
+        },
+        {
+          "name": "reserve[15].jump",
+          "meaning": "DEEP 拐点后斜率"
+        },
+        {
+          "name": "reserve[15].optimal",
+          "meaning": "DEEP 拐点利用率"
+        },
+        {
+          "name": "reserve[15].total_supply",
+          "meaning": "DEEP 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[15].supply_index",
+          "meaning": "DEEP 存款指数，1e27"
+        },
+        {
+          "name": "reserve[16].ltv",
+          "meaning": "FDUSD 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[16].threshold",
+          "meaning": "FDUSD 清算线，1e27"
+        },
+        {
+          "name": "reserve[16].bonus",
+          "meaning": "FDUSD 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[16].supply_cap",
+          "meaning": "FDUSD 供应上限"
+        },
+        {
+          "name": "reserve[16].base_rate",
+          "meaning": "FDUSD 基础利率"
+        },
+        {
+          "name": "reserve[16].multiplier",
+          "meaning": "FDUSD 拐点前斜率"
+        },
+        {
+          "name": "reserve[16].jump",
+          "meaning": "FDUSD 拐点后斜率"
+        },
+        {
+          "name": "reserve[16].optimal",
+          "meaning": "FDUSD 拐点利用率"
+        },
+        {
+          "name": "reserve[16].total_supply",
+          "meaning": "FDUSD 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[16].supply_index",
+          "meaning": "FDUSD 存款指数，1e27"
+        },
+        {
+          "name": "reserve[17].ltv",
+          "meaning": "BLUE 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[17].threshold",
+          "meaning": "BLUE 清算线，1e27"
+        },
+        {
+          "name": "reserve[17].bonus",
+          "meaning": "BLUE 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[17].supply_cap",
+          "meaning": "BLUE 供应上限"
+        },
+        {
+          "name": "reserve[17].base_rate",
+          "meaning": "BLUE 基础利率"
+        },
+        {
+          "name": "reserve[17].multiplier",
+          "meaning": "BLUE 拐点前斜率"
+        },
+        {
+          "name": "reserve[17].jump",
+          "meaning": "BLUE 拐点后斜率"
+        },
+        {
+          "name": "reserve[17].optimal",
+          "meaning": "BLUE 拐点利用率"
+        },
+        {
+          "name": "reserve[17].total_supply",
+          "meaning": "BLUE 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[17].supply_index",
+          "meaning": "BLUE 存款指数，1e27"
+        },
+        {
+          "name": "reserve[18].ltv",
+          "meaning": "BUCK 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[18].threshold",
+          "meaning": "BUCK 清算线，1e27"
+        },
+        {
+          "name": "reserve[18].bonus",
+          "meaning": "BUCK 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[18].supply_cap",
+          "meaning": "BUCK 供应上限"
+        },
+        {
+          "name": "reserve[18].base_rate",
+          "meaning": "BUCK 基础利率"
+        },
+        {
+          "name": "reserve[18].multiplier",
+          "meaning": "BUCK 拐点前斜率"
+        },
+        {
+          "name": "reserve[18].jump",
+          "meaning": "BUCK 拐点后斜率"
+        },
+        {
+          "name": "reserve[18].optimal",
+          "meaning": "BUCK 拐点利用率"
+        },
+        {
+          "name": "reserve[18].total_supply",
+          "meaning": "BUCK 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[18].supply_index",
+          "meaning": "BUCK 存款指数，1e27"
+        },
+        {
+          "name": "reserve[19].ltv",
+          "meaning": "USDT 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[19].threshold",
+          "meaning": "USDT 清算线，1e27"
+        },
+        {
+          "name": "reserve[19].bonus",
+          "meaning": "USDT 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[19].supply_cap",
+          "meaning": "USDT 供应上限"
+        },
+        {
+          "name": "reserve[19].base_rate",
+          "meaning": "USDT 基础利率"
+        },
+        {
+          "name": "reserve[19].multiplier",
+          "meaning": "USDT 拐点前斜率"
+        },
+        {
+          "name": "reserve[19].jump",
+          "meaning": "USDT 拐点后斜率"
+        },
+        {
+          "name": "reserve[19].optimal",
+          "meaning": "USDT 拐点利用率"
+        },
+        {
+          "name": "reserve[19].total_supply",
+          "meaning": "USDT 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[19].supply_index",
+          "meaning": "USDT 存款指数，1e27"
+        },
+        {
+          "name": "reserve[20].ltv",
+          "meaning": "STSUI 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[20].threshold",
+          "meaning": "STSUI 清算线，1e27"
+        },
+        {
+          "name": "reserve[20].bonus",
+          "meaning": "STSUI 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[20].supply_cap",
+          "meaning": "STSUI 供应上限"
+        },
+        {
+          "name": "reserve[20].base_rate",
+          "meaning": "STSUI 基础利率"
+        },
+        {
+          "name": "reserve[20].multiplier",
+          "meaning": "STSUI 拐点前斜率"
+        },
+        {
+          "name": "reserve[20].jump",
+          "meaning": "STSUI 拐点后斜率"
+        },
+        {
+          "name": "reserve[20].optimal",
+          "meaning": "STSUI 拐点利用率"
+        },
+        {
+          "name": "reserve[20].total_supply",
+          "meaning": "STSUI 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[20].supply_index",
+          "meaning": "STSUI 存款指数，1e27"
+        },
+        {
+          "name": "reserve[21].ltv",
+          "meaning": "BTC 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[21].threshold",
+          "meaning": "BTC 清算线，1e27"
+        },
+        {
+          "name": "reserve[21].bonus",
+          "meaning": "BTC 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[21].supply_cap",
+          "meaning": "BTC 供应上限"
+        },
+        {
+          "name": "reserve[21].base_rate",
+          "meaning": "BTC 基础利率"
+        },
+        {
+          "name": "reserve[21].multiplier",
+          "meaning": "BTC 拐点前斜率"
+        },
+        {
+          "name": "reserve[21].jump",
+          "meaning": "BTC 拐点后斜率"
+        },
+        {
+          "name": "reserve[21].optimal",
+          "meaning": "BTC 拐点利用率"
+        },
+        {
+          "name": "reserve[21].total_supply",
+          "meaning": "BTC 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[21].supply_index",
+          "meaning": "BTC 存款指数，1e27"
+        },
+        {
+          "name": "reserve[22].ltv",
+          "meaning": "COIN 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[22].threshold",
+          "meaning": "COIN 清算线，1e27"
+        },
+        {
+          "name": "reserve[22].bonus",
+          "meaning": "COIN 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[22].supply_cap",
+          "meaning": "COIN 供应上限"
+        },
+        {
+          "name": "reserve[22].base_rate",
+          "meaning": "COIN 基础利率"
+        },
+        {
+          "name": "reserve[22].multiplier",
+          "meaning": "COIN 拐点前斜率"
+        },
+        {
+          "name": "reserve[22].jump",
+          "meaning": "COIN 拐点后斜率"
+        },
+        {
+          "name": "reserve[22].optimal",
+          "meaning": "COIN 拐点利用率"
+        },
+        {
+          "name": "reserve[22].total_supply",
+          "meaning": "COIN 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[22].supply_index",
+          "meaning": "COIN 存款指数，1e27"
+        },
+        {
+          "name": "reserve[23].ltv",
+          "meaning": "LBTC 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[23].threshold",
+          "meaning": "LBTC 清算线，1e27"
+        },
+        {
+          "name": "reserve[23].bonus",
+          "meaning": "LBTC 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[23].supply_cap",
+          "meaning": "LBTC 供应上限"
+        },
+        {
+          "name": "reserve[23].base_rate",
+          "meaning": "LBTC 基础利率"
+        },
+        {
+          "name": "reserve[23].multiplier",
+          "meaning": "LBTC 拐点前斜率"
+        },
+        {
+          "name": "reserve[23].jump",
+          "meaning": "LBTC 拐点后斜率"
+        },
+        {
+          "name": "reserve[23].optimal",
+          "meaning": "LBTC 拐点利用率"
+        },
+        {
+          "name": "reserve[23].total_supply",
+          "meaning": "LBTC 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[23].supply_index",
+          "meaning": "LBTC 存款指数，1e27"
+        },
+        {
+          "name": "reserve[24].ltv",
+          "meaning": "WAL 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[24].threshold",
+          "meaning": "WAL 清算线，1e27"
+        },
+        {
+          "name": "reserve[24].bonus",
+          "meaning": "WAL 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[24].supply_cap",
+          "meaning": "WAL 供应上限"
+        },
+        {
+          "name": "reserve[24].base_rate",
+          "meaning": "WAL 基础利率"
+        },
+        {
+          "name": "reserve[24].multiplier",
+          "meaning": "WAL 拐点前斜率"
+        },
+        {
+          "name": "reserve[24].jump",
+          "meaning": "WAL 拐点后斜率"
+        },
+        {
+          "name": "reserve[24].optimal",
+          "meaning": "WAL 拐点利用率"
+        },
+        {
+          "name": "reserve[24].total_supply",
+          "meaning": "WAL 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[24].supply_index",
+          "meaning": "WAL 存款指数，1e27"
+        },
+        {
+          "name": "reserve[25].ltv",
+          "meaning": "HAEDAL 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[25].threshold",
+          "meaning": "HAEDAL 清算线，1e27"
+        },
+        {
+          "name": "reserve[25].bonus",
+          "meaning": "HAEDAL 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[25].supply_cap",
+          "meaning": "HAEDAL 供应上限"
+        },
+        {
+          "name": "reserve[25].base_rate",
+          "meaning": "HAEDAL 基础利率"
+        },
+        {
+          "name": "reserve[25].multiplier",
+          "meaning": "HAEDAL 拐点前斜率"
+        },
+        {
+          "name": "reserve[25].jump",
+          "meaning": "HAEDAL 拐点后斜率"
+        },
+        {
+          "name": "reserve[25].optimal",
+          "meaning": "HAEDAL 拐点利用率"
+        },
+        {
+          "name": "reserve[25].total_supply",
+          "meaning": "HAEDAL 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[25].supply_index",
+          "meaning": "HAEDAL 存款指数，1e27"
+        },
+        {
+          "name": "reserve[26].ltv",
+          "meaning": "XBTC 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[26].threshold",
+          "meaning": "XBTC 清算线，1e27"
+        },
+        {
+          "name": "reserve[26].bonus",
+          "meaning": "XBTC 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[26].supply_cap",
+          "meaning": "XBTC 供应上限"
+        },
+        {
+          "name": "reserve[26].base_rate",
+          "meaning": "XBTC 基础利率"
+        },
+        {
+          "name": "reserve[26].multiplier",
+          "meaning": "XBTC 拐点前斜率"
+        },
+        {
+          "name": "reserve[26].jump",
+          "meaning": "XBTC 拐点后斜率"
+        },
+        {
+          "name": "reserve[26].optimal",
+          "meaning": "XBTC 拐点利用率"
+        },
+        {
+          "name": "reserve[26].total_supply",
+          "meaning": "XBTC 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[26].supply_index",
+          "meaning": "XBTC 存款指数，1e27"
+        },
+        {
+          "name": "reserve[27].ltv",
+          "meaning": "IKA 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[27].threshold",
+          "meaning": "IKA 清算线，1e27"
+        },
+        {
+          "name": "reserve[27].bonus",
+          "meaning": "IKA 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[27].supply_cap",
+          "meaning": "IKA 供应上限"
+        },
+        {
+          "name": "reserve[27].base_rate",
+          "meaning": "IKA 基础利率"
+        },
+        {
+          "name": "reserve[27].multiplier",
+          "meaning": "IKA 拐点前斜率"
+        },
+        {
+          "name": "reserve[27].jump",
+          "meaning": "IKA 拐点后斜率"
+        },
+        {
+          "name": "reserve[27].optimal",
+          "meaning": "IKA 拐点利用率"
+        },
+        {
+          "name": "reserve[27].total_supply",
+          "meaning": "IKA 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[27].supply_index",
+          "meaning": "IKA 存款指数，1e27"
+        },
+        {
+          "name": "reserve[28].ltv",
+          "meaning": "COIN 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[28].threshold",
+          "meaning": "COIN 清算线，1e27"
+        },
+        {
+          "name": "reserve[28].bonus",
+          "meaning": "COIN 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[28].supply_cap",
+          "meaning": "COIN 供应上限"
+        },
+        {
+          "name": "reserve[28].base_rate",
+          "meaning": "COIN 基础利率"
+        },
+        {
+          "name": "reserve[28].multiplier",
+          "meaning": "COIN 拐点前斜率"
+        },
+        {
+          "name": "reserve[28].jump",
+          "meaning": "COIN 拐点后斜率"
+        },
+        {
+          "name": "reserve[28].optimal",
+          "meaning": "COIN 拐点利用率"
+        },
+        {
+          "name": "reserve[28].total_supply",
+          "meaning": "COIN 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[28].supply_index",
+          "meaning": "COIN 存款指数，1e27"
+        },
+        {
+          "name": "reserve[29].ltv",
+          "meaning": "MBTC 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[29].threshold",
+          "meaning": "MBTC 清算线，1e27"
+        },
+        {
+          "name": "reserve[29].bonus",
+          "meaning": "MBTC 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[29].supply_cap",
+          "meaning": "MBTC 供应上限"
+        },
+        {
+          "name": "reserve[29].base_rate",
+          "meaning": "MBTC 基础利率"
+        },
+        {
+          "name": "reserve[29].multiplier",
+          "meaning": "MBTC 拐点前斜率"
+        },
+        {
+          "name": "reserve[29].jump",
+          "meaning": "MBTC 拐点后斜率"
+        },
+        {
+          "name": "reserve[29].optimal",
+          "meaning": "MBTC 拐点利用率"
+        },
+        {
+          "name": "reserve[29].total_supply",
+          "meaning": "MBTC 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[29].supply_index",
+          "meaning": "MBTC 存款指数，1e27"
+        },
+        {
+          "name": "reserve[30].ltv",
+          "meaning": "YBTC 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[30].threshold",
+          "meaning": "YBTC 清算线，1e27"
+        },
+        {
+          "name": "reserve[30].bonus",
+          "meaning": "YBTC 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[30].supply_cap",
+          "meaning": "YBTC 供应上限"
+        },
+        {
+          "name": "reserve[30].base_rate",
+          "meaning": "YBTC 基础利率"
+        },
+        {
+          "name": "reserve[30].multiplier",
+          "meaning": "YBTC 拐点前斜率"
+        },
+        {
+          "name": "reserve[30].jump",
+          "meaning": "YBTC 拐点后斜率"
+        },
+        {
+          "name": "reserve[30].optimal",
+          "meaning": "YBTC 拐点利用率"
+        },
+        {
+          "name": "reserve[30].total_supply",
+          "meaning": "YBTC 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[30].supply_index",
+          "meaning": "YBTC 存款指数，1e27"
+        },
+        {
+          "name": "reserve[31].ltv",
+          "meaning": "XAUM 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[31].threshold",
+          "meaning": "XAUM 清算线，1e27"
+        },
+        {
+          "name": "reserve[31].bonus",
+          "meaning": "XAUM 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[31].supply_cap",
+          "meaning": "XAUM 供应上限"
+        },
+        {
+          "name": "reserve[31].base_rate",
+          "meaning": "XAUM 基础利率"
+        },
+        {
+          "name": "reserve[31].multiplier",
+          "meaning": "XAUM 拐点前斜率"
+        },
+        {
+          "name": "reserve[31].jump",
+          "meaning": "XAUM 拐点后斜率"
+        },
+        {
+          "name": "reserve[31].optimal",
+          "meaning": "XAUM 拐点利用率"
+        },
+        {
+          "name": "reserve[31].total_supply",
+          "meaning": "XAUM 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[31].supply_index",
+          "meaning": "XAUM 存款指数，1e27"
+        },
+        {
+          "name": "reserve[32].ltv",
+          "meaning": "WBTC 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[32].threshold",
+          "meaning": "WBTC 清算线，1e27"
+        },
+        {
+          "name": "reserve[32].bonus",
+          "meaning": "WBTC 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[32].supply_cap",
+          "meaning": "WBTC 供应上限"
+        },
+        {
+          "name": "reserve[32].base_rate",
+          "meaning": "WBTC 基础利率"
+        },
+        {
+          "name": "reserve[32].multiplier",
+          "meaning": "WBTC 拐点前斜率"
+        },
+        {
+          "name": "reserve[32].jump",
+          "meaning": "WBTC 拐点后斜率"
+        },
+        {
+          "name": "reserve[32].optimal",
+          "meaning": "WBTC 拐点利用率"
+        },
+        {
+          "name": "reserve[32].total_supply",
+          "meaning": "WBTC 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[32].supply_index",
+          "meaning": "WBTC 存款指数，1e27"
+        },
+        {
+          "name": "reserve[33].ltv",
+          "meaning": "SUI_USDE 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[33].threshold",
+          "meaning": "SUI_USDE 清算线，1e27"
+        },
+        {
+          "name": "reserve[33].bonus",
+          "meaning": "SUI_USDE 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[33].supply_cap",
+          "meaning": "SUI_USDE 供应上限"
+        },
+        {
+          "name": "reserve[33].base_rate",
+          "meaning": "SUI_USDE 基础利率"
+        },
+        {
+          "name": "reserve[33].multiplier",
+          "meaning": "SUI_USDE 拐点前斜率"
+        },
+        {
+          "name": "reserve[33].jump",
+          "meaning": "SUI_USDE 拐点后斜率"
+        },
+        {
+          "name": "reserve[33].optimal",
+          "meaning": "SUI_USDE 拐点利用率"
+        },
+        {
+          "name": "reserve[33].total_supply",
+          "meaning": "SUI_USDE 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[33].supply_index",
+          "meaning": "SUI_USDE 存款指数，1e27"
+        },
+        {
+          "name": "reserve[34].ltv",
+          "meaning": "USDSUI 开仓上限，1e27"
+        },
+        {
+          "name": "reserve[34].threshold",
+          "meaning": "USDSUI 清算线，1e27"
+        },
+        {
+          "name": "reserve[34].bonus",
+          "meaning": "USDSUI 清算奖励，1e27"
+        },
+        {
+          "name": "reserve[34].supply_cap",
+          "meaning": "USDSUI 供应上限"
+        },
+        {
+          "name": "reserve[34].base_rate",
+          "meaning": "USDSUI 基础利率"
+        },
+        {
+          "name": "reserve[34].multiplier",
+          "meaning": "USDSUI 拐点前斜率"
+        },
+        {
+          "name": "reserve[34].jump",
+          "meaning": "USDSUI 拐点后斜率"
+        },
+        {
+          "name": "reserve[34].optimal",
+          "meaning": "USDSUI 拐点利用率"
+        },
+        {
+          "name": "reserve[34].total_supply",
+          "meaning": "USDSUI 存款份额总量，9 位精度"
+        },
+        {
+          "name": "reserve[34].supply_index",
+          "meaning": "USDSUI 存款指数，1e27"
+        }
+      ],
+      "serves": [
+        "L-C2.1@MK",
+        "L-C2.2@MK",
+        "L-C2.4@MK",
+        "TVL"
+      ],
+      "priority": "required",
+      "reason": "主市场储备表，一次查询读出 35 个条目"
+    },
+    {
+      "id": "OT20",
+      "chain_id": "sui:mainnet",
+      "address": "0xc0601facd3b98d1e82905e660bf9f5998097dedcf86ed802cf485865e3e3667c",
+      "kind": "oracle_feed",
+      "fields": [
+        {
+          "name": "price[0]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[1]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[2]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[3]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[4]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[5]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[6]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[7]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[8]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[9]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[10]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[11]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[12]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[13]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[14]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[15]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[16]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[17]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[18]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[19]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[20]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[21]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[22]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[23]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[24]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[25]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[26]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[27]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[28]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[29]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[30]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[31]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[32]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[33]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[34]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[35]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[36]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[37]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[38]",
+          "meaning": "价格值和精度"
+        },
+        {
+          "name": "price[39]",
+          "meaning": "价格值和精度"
+        }
+      ],
+      "serves": [
+        "TVL"
+      ],
+      "priority": "optional",
+      "reason": "价格表，一次查询读出全部价格"
+    },
+    {
+      "id": "OT21",
+      "chain_id": "sui:mainnet",
+      "address": "0x6ca4ad7689f6fd3f3860c8144190085ef26d425e912afaeab2dadac6bfb8bd16",
+      "kind": "config",
+      "fields": [
+        {
+          "name": "emode[0].assetA.ltv",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[0].assetA.lt",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[0].assetA.liquidation_bonus",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[0].assetB.ltv",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[0].assetB.lt",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[0].assetB.liquidation_bonus",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[1].assetA.ltv",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[1].assetA.lt",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[1].assetA.liquidation_bonus",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[1].assetB.ltv",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[1].assetB.lt",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[1].assetB.liquidation_bonus",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[2].assetA.ltv",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[2].assetA.lt",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[2].assetA.liquidation_bonus",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[2].assetB.ltv",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[2].assetB.lt",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[2].assetB.liquidation_bonus",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[3].assetA.ltv",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[3].assetA.lt",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[3].assetA.liquidation_bonus",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[3].assetB.ltv",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[3].assetB.lt",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[3].assetB.liquidation_bonus",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[4].assetA.ltv",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[4].assetA.lt",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[4].assetA.liquidation_bonus",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[4].assetB.ltv",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[4].assetB.lt",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[4].assetB.liquidation_bonus",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[5].assetA.ltv",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[5].assetA.lt",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[5].assetA.liquidation_bonus",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[5].assetB.ltv",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[5].assetB.lt",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[5].assetB.liquidation_bonus",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[6].assetA.ltv",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[6].assetA.lt",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[6].assetA.liquidation_bonus",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[6].assetB.ltv",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[6].assetB.lt",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[6].assetB.liquidation_bonus",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[7].assetA.ltv",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[7].assetA.lt",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[7].assetA.liquidation_bonus",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[7].assetB.ltv",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[7].assetB.lt",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[7].assetB.liquidation_bonus",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[8].assetA.ltv",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[8].assetA.lt",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[8].assetA.liquidation_bonus",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[8].assetB.ltv",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[8].assetB.lt",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[8].assetB.liquidation_bonus",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[9].assetA.ltv",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[9].assetA.lt",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[9].assetA.liquidation_bonus",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[9].assetB.ltv",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[9].assetB.lt",
+          "meaning": "E-mode 组合参数"
+        },
+        {
+          "name": "emode[9].assetB.liquidation_bonus",
+          "meaning": "E-mode 组合参数"
+        }
+      ],
+      "serves": [
+        "L-C2.3@BZ01"
+      ],
+      "priority": "required",
+      "reason": "E-mode 组合表"
+    }
+  ]
+}

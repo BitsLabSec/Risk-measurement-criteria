@@ -1,0 +1,245 @@
+{
+  "roles": [
+    {
+      "id": "R01",
+      "credential": "storage::OwnerCap",
+      "check_locations": [
+        "lending_core/sources/storage.move:323-330"
+      ],
+      "how_obtained": "初始化给发布者；StorageAdminCap 可再铸造",
+      "granted_by_role_ids": [
+        "R02"
+      ]
+    },
+    {
+      "id": "R02",
+      "credential": "storage::StorageAdminCap",
+      "check_locations": [
+        "lending_core/sources/storage.move:822-826"
+      ],
+      "how_obtained": "初始化给发布者，可转移",
+      "granted_by_role_ids": []
+    },
+    {
+      "id": "R03",
+      "credential": "pool::PoolAdminCap",
+      "check_locations": [
+        "lending_core/sources/pool.move:258-265"
+      ],
+      "how_obtained": "初始化给发布者，可转移",
+      "granted_by_role_ids": []
+    },
+    {
+      "id": "R04",
+      "credential": "oracle::OracleAdminCap",
+      "check_locations": [
+        "oracle/sources/oracle.move:61-63"
+      ],
+      "how_obtained": "初始化给发布者，可转移",
+      "granted_by_role_ids": []
+    },
+    {
+      "id": "R05",
+      "credential": "oracle::OracleFeederCap",
+      "check_locations": [
+        "oracle/sources/oracle.move:137-151"
+      ],
+      "how_obtained": "由 OracleAdminCap 调用 create_feeder 铸造",
+      "granted_by_role_ids": [
+        "R04"
+      ]
+    },
+    {
+      "id": "R06",
+      "credential": "0x2::package::UpgradeCap（lending_core）",
+      "check_locations": [
+        "lending_core/Published.toml:1-6"
+      ],
+      "how_obtained": "发布时生成",
+      "granted_by_role_ids": []
+    },
+    {
+      "id": "R07",
+      "credential": "0x2::package::UpgradeCap（oracle）",
+      "check_locations": [
+        "oracle/Published.toml:1-6"
+      ],
+      "how_obtained": "发布时生成",
+      "granted_by_role_ids": []
+    }
+  ],
+  "controls": [
+    {
+      "id": "K01",
+      "role_ids": [
+        "R01"
+      ],
+      "entry": "storage::set_pause",
+      "conditions": "无",
+      "what_changes": "Storage.paused",
+      "effect_locations": [
+        "lending_core/sources/storage.move:323-330",
+        "lending_core/sources/lending.move:406-406"
+      ],
+      "affected_responsibility_ids": [
+        "D01"
+      ],
+      "consequence": "H3",
+      "reachability": "source_closed"
+    },
+    {
+      "id": "K02",
+      "role_ids": [
+        "R01"
+      ],
+      "entry": "storage::set_liquidation_threshold 等风险参数",
+      "conditions": "无",
+      "what_changes": "各资产的清算线、清算奖励、LTV，对存量仓位生效",
+      "effect_locations": [
+        "lending_core/sources/storage.move:417-445"
+      ],
+      "affected_responsibility_ids": [
+        "D01"
+      ],
+      "consequence": "H2",
+      "reachability": "source_closed"
+    },
+    {
+      "id": "K03",
+      "role_ids": [
+        "R02"
+      ],
+      "entry": "storage::mint_owner_cap",
+      "conditions": "无",
+      "what_changes": "铸造新的 OwnerCap",
+      "effect_locations": [
+        "lending_core/sources/storage.move:822-826"
+      ],
+      "affected_responsibility_ids": [
+        "D01"
+      ],
+      "consequence": "H2",
+      "reachability": "source_closed"
+    },
+    {
+      "id": "K04",
+      "role_ids": [
+        "R03"
+      ],
+      "entry": "pool::withdraw_treasury",
+      "conditions": "金额不超过国库余额",
+      "what_changes": "转出国库余额（不含用户存款）",
+      "effect_locations": [
+        "lending_core/sources/pool.move:258-265"
+      ],
+      "affected_responsibility_ids": [
+        "D01"
+      ],
+      "consequence": "none",
+      "reachability": "source_closed"
+    },
+    {
+      "id": "K05",
+      "role_ids": [
+        "R05"
+      ],
+      "entry": "oracle::update_token_price",
+      "conditions": "无价格范围限制",
+      "what_changes": "直接写入任意价格，借贷估值读取这份价格",
+      "effect_locations": [
+        "oracle/sources/oracle.move:137-151",
+        "lending_core/sources/calculator.move:97-101"
+      ],
+      "affected_responsibility_ids": [
+        "D02"
+      ],
+      "consequence": "H1",
+      "reachability": "source_closed"
+    },
+    {
+      "id": "K06",
+      "role_ids": [
+        "R04"
+      ],
+      "entry": "oracle::create_feeder",
+      "conditions": "无",
+      "what_changes": "铸造新的喂价凭证",
+      "effect_locations": [
+        "oracle/sources/oracle.move:61-63"
+      ],
+      "affected_responsibility_ids": [
+        "D02"
+      ],
+      "consequence": "H1",
+      "reachability": "source_closed"
+    },
+    {
+      "id": "K07",
+      "role_ids": [
+        "R04"
+      ],
+      "entry": "oracle_manage 价格源配置",
+      "conditions": "无",
+      "what_changes": "价格源、最大时差、价格区间等配置",
+      "effect_locations": [
+        "oracle/sources/oracle_manage.move:42-110"
+      ],
+      "affected_responsibility_ids": [
+        "D02"
+      ],
+      "consequence": "H2",
+      "reachability": "source_closed"
+    },
+    {
+      "id": "K08",
+      "role_ids": [
+        "R06"
+      ],
+      "entry": "0x2::package::authorize_upgrade（lending_core）",
+      "conditions": "UpgradeCap policy=0（兼容升级）",
+      "what_changes": "替换 lending_core 的全部逻辑",
+      "effect_locations": [
+        "lending_core/Published.toml:1-6"
+      ],
+      "affected_responsibility_ids": [
+        "D01"
+      ],
+      "consequence": "H1",
+      "reachability": "source_closed"
+    },
+    {
+      "id": "K09",
+      "role_ids": [
+        "R07"
+      ],
+      "entry": "0x2::package::authorize_upgrade（oracle）",
+      "conditions": "UpgradeCap policy=0（兼容升级）",
+      "what_changes": "替换价格读取逻辑",
+      "effect_locations": [
+        "oracle/Published.toml:1-6"
+      ],
+      "affected_responsibility_ids": [
+        "D02"
+      ],
+      "consequence": "H1",
+      "reachability": "source_closed"
+    },
+    {
+      "id": "K10",
+      "role_ids": [
+        "R01"
+      ],
+      "entry": "manage::set_protected_liquidation_users",
+      "conditions": "无",
+      "what_changes": "把指定用户排除在清算之外",
+      "effect_locations": [
+        "lending_core/sources/manage.move:205-208"
+      ],
+      "affected_responsibility_ids": [
+        "D03"
+      ],
+      "consequence": "H3",
+      "reachability": "source_closed"
+    }
+  ]
+}

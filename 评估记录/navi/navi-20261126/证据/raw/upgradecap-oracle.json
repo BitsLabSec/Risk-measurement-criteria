@@ -1,0 +1,29 @@
+{
+ "query": "query($a:SuiAddress!,$c:UInt53){ object(address:$a, atCheckpoint:$c){ owner{ __typename ... on AddressOwner{ address{ address } } } asMoveObject{ contents{ json } } } }",
+ "variables": {
+  "a": "0x436d774dedebb6300c35ef99307a315e4c313fe79cdec326678a5c5ef574f0e0",
+  "c": 349261112
+ },
+ "response": {
+  "data": {
+   "object": {
+    "owner": {
+     "__typename": "AddressOwner",
+     "address": {
+      "address": "0x39c70d4ce3ce769a46f46ad80184a88bc25be9b49545751f5425796ef0c3d9ba"
+     }
+    },
+    "asMoveObject": {
+     "contents": {
+      "json": {
+       "id": "0x436d774dedebb6300c35ef99307a315e4c313fe79cdec326678a5c5ef574f0e0",
+       "package": "0x4837ae94425107554c8847721cf9954c1ad8e10520433b9e37dc11c507148bea",
+       "version": "5",
+       "policy": 0
+      }
+     }
+    }
+   }
+  }
+ }
+}

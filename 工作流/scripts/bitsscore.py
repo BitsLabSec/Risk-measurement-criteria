@@ -1090,6 +1090,16 @@ def cmd_onchain_score(d):
                 p.get("note", p.get("incomplete", p["description"]))))
         out.append("")
         out.append("H1／H2／H3：" + "、".join("%s %s" % (k, fmt(v)) for k, v in perm["by_consequence"].items()))
+        kc = perm.get("key_concentration")
+        if kc and kc.get("levels"):
+            out += ["", "**密钥集中度（只披露，不计分）**", "",
+                    "| 密钥数 | 签名地址（所在多签） | 能走通的路径 | 走不通的路径 |", "| ---: | --- | --- | --- |"]
+            for lv in kc["levels"]:
+                out.append("| %d | %s | %s | %s |" % (lv["keys"], "；".join(
+                    "%s（%s）" % (a, "、".join(lv["member_of"][a]) or "单独持有") for a in lv["addresses"]),
+                    "、".join(lv["controlled_paths"]), "、".join(lv["uncontrolled_paths"]) or "—"))
+        elif kc and kc.get("note"):
+            out += ["", "密钥集中度：" + kc["note"]]
         for dim in ("configuration", "funds_dependencies"):
             v = br["dimensions"][dim]
             out += ["", "**%s**" % onchain.DIM_NAME[dim], "", "| 检查 | 编号 | 市场 | 结果 | 计算 | 理由 |", "| --- | --- | --- | --- | --- | --- |"]

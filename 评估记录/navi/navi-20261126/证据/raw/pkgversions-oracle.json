@@ -1,0 +1,28 @@
+{
+ "query": "query($a:SuiAddress!){ packageVersions(address:$a,last:2){ nodes{ address version previousTransaction{ digest } } } }",
+ "variables": {
+  "a": "0xca441b44943c16be0e6e23c5a955bb971537ea3289ae8016fbf33fffe1fd210f"
+ },
+ "response": {
+  "data": {
+   "packageVersions": {
+    "nodes": [
+     {
+      "address": "0x203728f46eb10d19f8f8081db849c86aa8f2a19341b7fd84d7a0e74f053f6242",
+      "version": 4,
+      "previousTransaction": {
+       "digest": "DyJUA8mJSPSqwi12AnJfaoguH5t4j92dHb26BjFChhpe"
+      }
+     },
+     {
+      "address": "0x4837ae94425107554c8847721cf9954c1ad8e10520433b9e37dc11c507148bea",
+      "version": 5,
+      "previousTransaction": {
+       "digest": "7nCLBXSRgH2uviK7HrD4sKGQyMYq1KbZWYrPUvEsZwdA"
+      }
+     }
+    ]
+   }
+  }
+ }
+}

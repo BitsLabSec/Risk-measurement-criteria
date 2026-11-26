@@ -1,0 +1,27 @@
+{
+ "query": "query($a:SuiAddress!){ transactions(filter:{sentAddress:$a}, last:1){ nodes{ digest signatures{ signatureBytes } effects{ checkpoint{ sequenceNumber } } } } }",
+ "variables": {
+  "a": "0x408aab3117dc95445f7564028d2b6d2b65f6d005936f2f9a44c1f27f57a8cac6"
+ },
+ "response": {
+  "data": {
+   "transactions": {
+    "nodes": [
+     {
+      "digest": "7T3UjdEDghLntARj8VVBhQAW2iafLLRLVPdsKAZxAz34",
+      "signatures": [
+       {
+        "signatureBytes": "AwIAhVg27iRsFjsmFwNjL+AsEj/CIZxZohJ1vGozHwbm5c65iFaEauuKURBnB9KZNfX+EiUS4R8g6jsKrqcSZ+OFBwBXg5BJj1ZUX1UmLs1m3QMdZs1iZD7qi4FH5Bc5tIEknao5gdEaP1ih9NRT1e3N6pOHBTnRuXOJJv4wsVLHs/cMBQADAG7hbw0CHnBO1jmPuWIl9yofX585Fh2FbNm9lry6+tAJAQAThJidHCai5IcyqeUF/qmWhtmvz4ChxyXL9bfSk/XmzAEAsiAsNMlvUf6aOr2tM/OE3+ebDabUbrYcXiogfAn3HagBAgA="
+       }
+      ],
+      "effects": {
+       "checkpoint": {
+        "sequenceNumber": 349255905
+       }
+      }
+     }
+    ]
+   }
+  }
+ }
+}

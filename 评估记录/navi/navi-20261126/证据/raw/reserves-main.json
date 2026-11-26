@@ -1,0 +1,1875 @@
+{
+ "query": "query($a:SuiAddress!,$c:UInt53){ address(address:$a, atCheckpoint:$c){ dynamicFields(first:50){ pageInfo{ hasNextPage } nodes{ name{ json } value{ __typename ... on MoveValue{ json } } } } } }",
+ "variables": {
+  "a": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+  "c": 349261112
+ },
+ "response": {
+  "data": {
+   "address": {
+    "dynamicFields": {
+     "pageInfo": {
+      "hasNextPage": false
+     },
+     "nodes": [
+      {
+       "name": {
+        "json": 13
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 13,
+         "oracle_id": 13,
+         "coin_type": "5145494a5f5100e645e4b0aa950fa6b68f614e8c59e17bc5ded3495123a79178::ns::NS",
+         "is_isolated": false,
+         "supply_cap_ceiling": "10000000000000000000000000000000000000",
+         "borrow_cap_ceiling": "0",
+         "current_supply_rate": "1521852212729119554135616",
+         "current_borrow_rate": "109283793247559767091864146",
+         "current_supply_index": "1032973456982336815478552034",
+         "current_borrow_index": "1339674864015882142552760106",
+         "supply_balance": {
+          "user_state": {
+           "id": "0x071dc718b1e579d476d088456979e30d142ecdde6a6eec875477b5b4786530f0",
+           "size": "11798"
+          },
+          "total_supply": "6526621630854644"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0x2c7b7e6d323ca8f63908bb03191225a2ecf177bf0c4602ccd21d7ac121d52fa4",
+           "size": "945"
+          },
+          "total_supply": "116830567126480"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "0",
+         "treasury_factor": "550000000000000000000000000",
+         "treasury_balance": "142956345714",
+         "borrow_rate_factors": {
+          "base_rate": "100000000000000000000000000",
+          "multiplier": "400000000000000000000000000",
+          "jump_rate_multiplier": "3000000000000000000000000000",
+          "reserve_factor": "400000000000000000000000000",
+          "optimal_utilization": "500000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "350000000000000000000000000",
+          "bonus": "100000000000000000000000000",
+          "threshold": "350000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 30
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 30,
+         "oracle_id": 30,
+         "coin_type": "a03ab7eee2c8e97111977b77374eaf6324ba617e7027382228350db08469189e::ybtc::YBTC",
+         "is_isolated": false,
+         "supply_cap_ceiling": "500000000000000000000000000000000000",
+         "borrow_cap_ceiling": "0",
+         "current_supply_rate": "0",
+         "current_borrow_rate": "0",
+         "current_supply_index": "1000000000000000000000000000",
+         "current_borrow_index": "1000000000000000000000000000",
+         "supply_balance": {
+          "user_state": {
+           "id": "0xf12fa3cd399500713ace89e6154647cda48687fec3774c44b2552b9de0b4be1c",
+           "size": "27"
+          },
+          "total_supply": "59488140"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0x73fd2ced34429783b9cba6457fde8f8608a2f7310515cd14295f54febbcd44c2",
+           "size": "0"
+          },
+          "total_supply": "0"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "0",
+         "treasury_factor": "550000000000000000000000000",
+         "treasury_balance": "0",
+         "borrow_rate_factors": {
+          "base_rate": "0",
+          "multiplier": "80000000000000000000000000",
+          "jump_rate_multiplier": "6000000000000000000000000000",
+          "reserve_factor": "300000000000000000000000000",
+          "optimal_utilization": "500000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "350000000000000000000000000",
+          "bonus": "100000000000000000000000000",
+          "threshold": "450000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 32
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 32,
+         "oracle_id": 32,
+         "coin_type": "0041f9f9344cac094454cd574e333c4fdb132d7bcc9379bcd4aab485b2a63942::wbtc::WBTC",
+         "is_isolated": false,
+         "supply_cap_ceiling": "100000000000000000000000000000000000000",
+         "borrow_cap_ceiling": "500000000000000000000000000",
+         "current_supply_rate": "112700528803466093307488",
+         "current_borrow_rate": "1061605052754865580888861",
+         "current_supply_index": "1002234035480874014762319677",
+         "current_borrow_index": "1005779321007437577154780816",
+         "supply_balance": {
+          "user_state": {
+           "id": "0xf8af4a3a91d303b64b04b8351ce0c789a18e1c6c71de25be6c7f83cf861ad03f",
+           "size": "319"
+          },
+          "total_supply": "9678106840"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0x135b58ac16c2826c0bedbedfca6b4e3fe07e571cdf3be6ebac912bcf3e26c6ab",
+           "size": "107"
+          },
+          "total_supply": "2047622702"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "650000000000000000000000000",
+         "treasury_factor": "800000000000000000000000000",
+         "treasury_balance": "29964",
+         "borrow_rate_factors": {
+          "base_rate": "0",
+          "multiplier": "5000000000000000000000000",
+          "jump_rate_multiplier": "6000000000000000000000000000",
+          "reserve_factor": "500000000000000000000000000",
+          "optimal_utilization": "900000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "350000000000000000000000000",
+          "bonus": "150000000000000000000000000",
+          "threshold": "700000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 25
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 25,
+         "oracle_id": 25,
+         "coin_type": "3a304c7feba2d819ea57c3542d68439ca2c386ba02159c740f7b406e592c62ea::haedal::HAEDAL",
+         "is_isolated": false,
+         "supply_cap_ceiling": "10000000000000000000000000000000000000",
+         "borrow_cap_ceiling": "0",
+         "current_supply_rate": "642581879359142829537083",
+         "current_borrow_rate": "302428275889666098505185142",
+         "current_supply_index": "1009761989828506360152614271",
+         "current_borrow_index": "1618129877233398913186319921",
+         "supply_balance": {
+          "user_state": {
+           "id": "0xf761d46deb8df8114b2e39f364716644dc84c8f2e8a82a011b899be45427bac0",
+           "size": "2652"
+          },
+          "total_supply": "687679058725376"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0x1b16a14873c5dfdf3b3a81be095420c67225a922ace939feaf66b18c20f39569",
+           "size": "246"
+          },
+          "total_supply": "1303525896060"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "0",
+         "treasury_factor": "550000000000000000000000000",
+         "treasury_balance": "4084974545",
+         "borrow_rate_factors": {
+          "base_rate": "300000000000000000000000000",
+          "multiplier": "800000000000000000000000000",
+          "jump_rate_multiplier": "3500000000000000000000000000",
+          "reserve_factor": "300000000000000000000000000",
+          "optimal_utilization": "200000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "350000000000000000000000000",
+          "bonus": "100000000000000000000000000",
+          "threshold": "400000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 15
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 15,
+         "oracle_id": 15,
+         "coin_type": "deeb7a4662eec9f2f3def03fb937a663dddaa2e215b8078a284d026b7946c270::deep::DEEP",
+         "is_isolated": false,
+         "supply_cap_ceiling": "450000000000000000000000000000000000000000000",
+         "borrow_cap_ceiling": "860000000000000000000000000",
+         "current_supply_rate": "5554427719770320258048292",
+         "current_borrow_rate": "104480812290284482389864064",
+         "current_supply_index": "1120432121483163526065274543",
+         "current_borrow_index": "1445387078735679835545229579",
+         "supply_balance": {
+          "user_state": {
+           "id": "0x3fdd91f32dcea2af6e16ae66a7220f6439530ef6238deafe5a72026b3e7aa5f5",
+           "size": "14308"
+          },
+          "total_supply": "210924532555963856"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0xba03bb3e0167e1ec355926dfe0c130866857b062b93fb5d9cfba20824ad9f1d5",
+           "size": "1850"
+          },
+          "total_supply": "12417517095908765"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "470000000000000000000000000",
+         "treasury_factor": "550000000000000000000000000",
+         "treasury_balance": "10808751756002",
+         "borrow_rate_factors": {
+          "base_rate": "100000000000000000000000000",
+          "multiplier": "59000000000000000000000000",
+          "jump_rate_multiplier": "10000000000000000000000000000",
+          "reserve_factor": "300000000000000000000000000",
+          "optimal_utilization": "850000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "350000000000000000000000000",
+          "bonus": "100000000000000000000000000",
+          "threshold": "520000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 6
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 6,
+         "oracle_id": 6,
+         "coin_type": "bde4ba4c2e274a60ce15c1cfff9e5c42e41654ac8b6d906a57efa4bd3c29f47d::hasui::HASUI",
+         "is_isolated": false,
+         "supply_cap_ceiling": "27500000000000000000000000000000000000000000",
+         "borrow_cap_ceiling": "150000000000000000000000000",
+         "current_supply_rate": "16539258057535603174860",
+         "current_borrow_rate": "920499273651938877486337",
+         "current_supply_index": "1024697369739437606033137215",
+         "current_borrow_index": "1093501277273547539188531710",
+         "supply_balance": {
+          "user_state": {
+           "id": "0x278b8e3d09c3548c60c51ed2f8eed281876ea58c392f71b7ff650cc9286d095b",
+           "size": "58545"
+          },
+          "total_supply": "19180006826158699"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0x01f36898e020be6c3423e5c95d9f348868813cd4d0be39b0c8df9d8de4722b00",
+           "size": "7372"
+          },
+          "total_supply": "496826004976426"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "700000000000000000000000000",
+         "treasury_factor": "650000000000000000000000000",
+         "treasury_balance": "3687244582",
+         "borrow_rate_factors": {
+          "base_rate": "0",
+          "multiplier": "33300000000000000000000000",
+          "jump_rate_multiplier": "3200000000000000000000000000",
+          "reserve_factor": "350000000000000000000000000",
+          "optimal_utilization": "750000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "350000000000000000000000000",
+          "bonus": "100000000000000000000000000",
+          "threshold": "750000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 29
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 29,
+         "oracle_id": 29,
+         "coin_type": "d1a91b46bd6d966b62686263609074ad16cfdffc63c31a4775870a2d54d20c6b::mbtc::MBTC",
+         "is_isolated": false,
+         "supply_cap_ceiling": "100000000000000000000000000000000000",
+         "borrow_cap_ceiling": "0",
+         "current_supply_rate": "0",
+         "current_borrow_rate": "0",
+         "current_supply_index": "1000000000000000000000000000",
+         "current_borrow_index": "1000000000000000000000000000",
+         "supply_balance": {
+          "user_state": {
+           "id": "0xc2f93d7280de7ed2fc88e59dfe271ffe696a44e6600b82be728e015a75727943",
+           "size": "9"
+          },
+          "total_supply": "256730"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0xaa3bc8cf77c8b5343d31df359bdb335f08b2737ec21d85b6524a37d91a01c3bf",
+           "size": "0"
+          },
+          "total_supply": "0"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "0",
+         "treasury_factor": "550000000000000000000000000",
+         "treasury_balance": "0",
+         "borrow_rate_factors": {
+          "base_rate": "0",
+          "multiplier": "80000000000000000000000000",
+          "jump_rate_multiplier": "6000000000000000000000000000",
+          "reserve_factor": "300000000000000000000000000",
+          "optimal_utilization": "500000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "350000000000000000000000000",
+          "bonus": "100000000000000000000000000",
+          "threshold": "700000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 23
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 23,
+         "oracle_id": 23,
+         "coin_type": "3e8e9423d80e1774a7ca128fccd8bf5f1f7753be658c5e645929037f7c819040::lbtc::LBTC",
+         "is_isolated": false,
+         "supply_cap_ceiling": "70000000000000000000000000000000000000",
+         "borrow_cap_ceiling": "800000000000000000000000000",
+         "current_supply_rate": "53257649375876146801686",
+         "current_borrow_rate": "2919113546976236326799715",
+         "current_supply_index": "1000246796128374574636096746",
+         "current_borrow_index": "1005422978827214236078252962",
+         "supply_balance": {
+          "user_state": {
+           "id": "0x71b90679af894cd5f0fdefee87a228e4bdacc8a1ad444e39011476208a1eb9d4",
+           "size": "1243"
+          },
+          "total_supply": "20218560900"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0x81b4063de499c8fba76523fde33b3dc4579047e7b815ffbf2f1eb82510314daa",
+           "size": "490"
+          },
+          "total_supply": "733955375"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "650000000000000000000000000",
+         "treasury_factor": "850000000000000000000000000",
+         "treasury_balance": "31405",
+         "borrow_rate_factors": {
+          "base_rate": "0",
+          "multiplier": "80000000000000000000000000",
+          "jump_rate_multiplier": "6000000000000000000000000000",
+          "reserve_factor": "500000000000000000000000000",
+          "optimal_utilization": "500000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "350000000000000000000000000",
+          "bonus": "150000000000000000000000000",
+          "threshold": "700000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 19
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 19,
+         "oracle_id": 19,
+         "coin_type": "375f70cf2ae4c00bf37117d0c85a2c71545e6ee05c4a5c7d282cd66a4504b068::usdt::USDT",
+         "is_isolated": false,
+         "supply_cap_ceiling": "10000000000000000000000000000000000000000000",
+         "borrow_cap_ceiling": "960000000000000000000000000",
+         "current_supply_rate": "12331927369291840293390550",
+         "current_borrow_rate": "59753759353041218456966701",
+         "current_supply_index": "1118638005165686966228078573",
+         "current_borrow_index": "1219509106653906177036112704",
+         "supply_balance": {
+          "user_state": {
+           "id": "0xe0399b39ca6127a879071371aff22ca98d8e7f24872afa8435a12e2a77c00e15",
+           "size": "2731"
+          },
+          "total_supply": "1818192263094787"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0x2ad9fe604fb74c1acfe646fe79fc27acf7b62cf4e7d0c6cbb23f6d440ce79306",
+           "size": "2185"
+          },
+          "total_supply": "430250156342709"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "800000000000000000000000000",
+         "treasury_factor": "550000000000000000000000000",
+         "treasury_balance": "121301649454",
+         "borrow_rate_factors": {
+          "base_rate": "47500000000000000000000000",
+          "multiplier": "47500000000000000000000000",
+          "jump_rate_multiplier": "4000000000000000000000000000",
+          "reserve_factor": "200000000000000000000000000",
+          "optimal_utilization": "900000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "350000000000000000000000000",
+          "bonus": "80000000000000000000000000",
+          "threshold": "850000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 7
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 7,
+         "oracle_id": 7,
+         "coin_type": "a99b8952d4f7d947ea77fe0ecdcc9e5fc0bcab2841d6e2a5aa00c3044e5544b5::navx::NAVX",
+         "is_isolated": false,
+         "supply_cap_ceiling": "300000000000000000000000000000000000000000000",
+         "borrow_cap_ceiling": "50000000000000000000000000",
+         "current_supply_rate": "28095118181704523335278",
+         "current_borrow_rate": "5300482825338133602967025",
+         "current_supply_index": "1003603858646475237362700215",
+         "current_borrow_index": "1073887815952382503586402064",
+         "supply_balance": {
+          "user_state": {
+           "id": "0x59dedca8dc44e8df50b190f8b5fe673098c1273ac6168c0a4addf3613afcdee5",
+           "size": "30443"
+          },
+          "total_supply": "243199006018324957"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0xa5bf13075aa400cbdd4690a617c5f008e1fae0511dcd4f7121f09817df6c8d8b",
+           "size": "1686"
+          },
+          "total_supply": "1505887844088489"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "450000000000000000000000000",
+         "treasury_factor": "550000000000000000000000000",
+         "treasury_balance": "36946308238",
+         "borrow_rate_factors": {
+          "base_rate": "0",
+          "multiplier": "800000000000000000000000000",
+          "jump_rate_multiplier": "10000000000000000000000000000",
+          "reserve_factor": "200000000000000000000000000",
+          "optimal_utilization": "100000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "350000000000000000000000000",
+          "bonus": "50000000000000000000000000",
+          "threshold": "650000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 22
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 22,
+         "oracle_id": 22,
+         "coin_type": "b7844e289a8410e50fb3ca48d69eb9cf29e27d223ef90353fe1bd8e27ff8f3f8::coin::COIN",
+         "is_isolated": false,
+         "supply_cap_ceiling": "1000000000000000000000000000000000000000",
+         "borrow_cap_ceiling": "400000000000000000000000000",
+         "current_supply_rate": "49983749911832161087801",
+         "current_borrow_rate": "60281327122362297204704508",
+         "current_supply_index": "1001784840186755362493103394",
+         "current_borrow_index": "1116448062637489001785019426",
+         "supply_balance": {
+          "user_state": {
+           "id": "0xca1ec4793c0d1ec3ab58fbb5ccb2366c962dc5b903ff9ce809c6384c6e07aeb6",
+           "size": "328"
+          },
+          "total_supply": "704422633892"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0x9bb2749aa677392295d0951fe72440884f286e3db069506916004b30a08f3a04",
+           "size": "56"
+          },
+          "total_supply": "748999821"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "600000000000000000000000000",
+         "treasury_factor": "550000000000000000000000000",
+         "treasury_balance": "327330",
+         "borrow_rate_factors": {
+          "base_rate": "60000000000000000000000000",
+          "multiplier": "237500000000000000000000000",
+          "jump_rate_multiplier": "14750000000000000000000000000",
+          "reserve_factor": "300000000000000000000000000",
+          "optimal_utilization": "800000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "350000000000000000000000000",
+          "bonus": "100000000000000000000000000",
+          "threshold": "650000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 34
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 34,
+         "oracle_id": 34,
+         "coin_type": "44f838219cf67b058f3b37907b655f226153c18e33dfcd0da559a844fea9b1c1::usdsui::USDSUI",
+         "is_isolated": false,
+         "supply_cap_ceiling": "15000000000000000000000000000000000000000000",
+         "borrow_cap_ceiling": "920000000000000000000000000",
+         "current_supply_rate": "45991486457578035033044893",
+         "current_borrow_rate": "69576517893532117940687278",
+         "current_supply_index": "1015879708799126966120556010",
+         "current_borrow_index": "1033802505134355465727498167",
+         "supply_balance": {
+          "user_state": {
+           "id": "0x5c14c5f44f3a0d2919869cec9c691e8ee07900ed8c95baef60d03f5a2b998349",
+           "size": "792"
+          },
+          "total_supply": "6849617843154864"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0xdc9b3a385ea7c6dc443235db7ff9d82188a3e6f5b9af6e765ad9577d39c0af67",
+           "size": "491"
+          },
+          "total_supply": "5561550883672942"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "750000000000000000000000000",
+         "treasury_factor": "550000000000000000000000000",
+         "treasury_balance": "1706097084121",
+         "borrow_rate_factors": {
+          "base_rate": "20000000000000000000000000",
+          "multiplier": "60000000000000000000000000",
+          "jump_rate_multiplier": "5000000000000000000000000000",
+          "reserve_factor": "200000000000000000000000000",
+          "optimal_utilization": "900000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "350000000000000000000000000",
+          "bonus": "80000000000000000000000000",
+          "threshold": "780000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 11
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 11,
+         "oracle_id": 11,
+         "coin_type": "d0e89b2af5e4910726fbcd8b8dd37bb79b29e5f83f7491bca830e94f7f226d29::eth::ETH",
+         "is_isolated": false,
+         "supply_cap_ceiling": "1500000000000000000000000000000000000000",
+         "borrow_cap_ceiling": "800000000000000000000000000",
+         "current_supply_rate": "66204007677707808213753",
+         "current_borrow_rate": "2971060589031192145354696",
+         "current_supply_index": "1010647592911806397975379277",
+         "current_borrow_index": "1034512635009904731946302489",
+         "supply_balance": {
+          "user_state": {
+           "id": "0xc0a0cb43620eb8a84d5a4a50a85650e7fa7ba81e660f9cc2863404fd84591d4b",
+           "size": "2347"
+          },
+          "total_supply": "560561160853"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0xf0c6ce5cfaee96073876a5fab7426043f3a798b79502c4caeb6d9772cd35af1f",
+           "size": "1535"
+          },
+          "total_supply": "20338082499"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "700000000000000000000000000",
+         "treasury_factor": "850000000000000000000000000",
+         "treasury_balance": "599463",
+         "borrow_rate_factors": {
+          "base_rate": "0",
+          "multiplier": "80000000000000000000000000",
+          "jump_rate_multiplier": "3200000000000000000000000000",
+          "reserve_factor": "400000000000000000000000000",
+          "optimal_utilization": "750000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "350000000000000000000000000",
+          "bonus": "150000000000000000000000000",
+          "threshold": "750000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 10
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 10,
+         "oracle_id": 10,
+         "coin_type": "dba34672e30cb065b1f93e3ab55318768fd6fef66c15942c9f7cb846e2f900e7::usdc::USDC",
+         "is_isolated": false,
+         "supply_cap_ceiling": "50000000000000000000000000000000000000000000",
+         "borrow_cap_ceiling": "960000000000000000000000000",
+         "current_supply_rate": "90547595632637176472476414",
+         "current_borrow_rate": "124572856097153306272132964",
+         "current_supply_index": "1144370752033433494940193380",
+         "current_borrow_index": "1255504887916012627160937261",
+         "supply_balance": {
+          "user_state": {
+           "id": "0x08b5ce8574ac3bc9327e66ad5decd34d07ee798f724ad01058e8855ac9acb605",
+           "size": "23284"
+          },
+          "total_supply": "15488608881643625"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0xb0b0c7470e96cabbb4f1e8d06bef2fbea65f4dbac52afae8635d9286b1ea9a09",
+           "size": "14581"
+          },
+          "total_supply": "12826975606114086"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "800000000000000000000000000",
+         "treasury_factor": "550000000000000000000000000",
+         "treasury_balance": "6039983013698",
+         "borrow_rate_factors": {
+          "base_rate": "47500000000000000000000000",
+          "multiplier": "47500000000000000000000000",
+          "jump_rate_multiplier": "4000000000000000000000000000",
+          "reserve_factor": "200000000000000000000000000",
+          "optimal_utilization": "900000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "350000000000000000000000000",
+          "bonus": "80000000000000000000000000",
+          "threshold": "850000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 31
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 31,
+         "oracle_id": 31,
+         "coin_type": "9d297676e7a4b771ab023291377b2adfaa4938fb9080b8d12430e4b108b836a9::xaum::XAUM",
+         "is_isolated": false,
+         "supply_cap_ceiling": "10000000000000000000000000000000000000",
+         "borrow_cap_ceiling": "0",
+         "current_supply_rate": "13600507054876940207030",
+         "current_borrow_rate": "80048543783245555963883368",
+         "current_supply_index": "1000341898813538507014013406",
+         "current_borrow_index": "1102849564318671157171939758",
+         "supply_balance": {
+          "user_state": {
+           "id": "0x79b6e696058bd666e536d43f810c012172c8968fea5e4332dd416a495574adf5",
+           "size": "658"
+          },
+          "total_supply": "35529480696"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0xbc41da647d04a24e7faa5a46be036caca1c746708a75718e44f0fbf241d42a9c",
+           "size": "45"
+          },
+          "total_supply": "7831543"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "0",
+         "treasury_factor": "550000000000000000000000000",
+         "treasury_balance": "48847",
+         "borrow_rate_factors": {
+          "base_rate": "80000000000000000000000000",
+          "multiplier": "200000000000000000000000000",
+          "jump_rate_multiplier": "6000000000000000000000000000",
+          "reserve_factor": "300000000000000000000000000",
+          "optimal_utilization": "600000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "350000000000000000000000000",
+          "bonus": "100000000000000000000000000",
+          "threshold": "450000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 4
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 4,
+         "oracle_id": 4,
+         "coin_type": "06864a6f921804860930db6ddbe2e16acdf8504495ea7481637a1c8b9a8fe54b::cetus::CETUS",
+         "is_isolated": false,
+         "supply_cap_ceiling": "10000000000000000000000000000000000000",
+         "borrow_cap_ceiling": "0",
+         "current_supply_rate": "5615727578716898094486385",
+         "current_borrow_rate": "56647923067295481230926747",
+         "current_supply_index": "1053155381282697493356603484",
+         "current_borrow_index": "1269051630394199157380689912",
+         "supply_balance": {
+          "user_state": {
+           "id": "0x6adc72faf2a9a15a583c9fb04f457c6a5f0b456bc9b4832413a131dfd4faddae",
+           "size": "8969"
+          },
+          "total_supply": "4761579852023120"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0x4c3da45ffff6432b4592a39cdb3ce12f4a28034cbcb804bb071facc81fdd923d",
+           "size": "1662"
+          },
+          "total_supply": "559806142506300"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "0",
+         "treasury_factor": "550000000000000000000000000",
+         "treasury_balance": "234889559972",
+         "borrow_rate_factors": {
+          "base_rate": "0",
+          "multiplier": "400000000000000000000000000",
+          "jump_rate_multiplier": "3200000000000000000000000000",
+          "reserve_factor": "300000000000000000000000000",
+          "optimal_utilization": "500000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "350000000000000000000000000",
+          "bonus": "100000000000000000000000000",
+          "threshold": "400000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 33
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 33,
+         "oracle_id": 33,
+         "coin_type": "41d587e5336f1c86cad50d38a7136db99333bb9bda91cea4ba69115defeb1402::sui_usde::SUI_USDE",
+         "is_isolated": false,
+         "supply_cap_ceiling": "5000000000000000000000000000000000000000000",
+         "borrow_cap_ceiling": "920000000000000000000000000",
+         "current_supply_rate": "37287406096782138447197766",
+         "current_borrow_rate": "52882468335533094549949663",
+         "current_supply_index": "1028356245596988689474847337",
+         "current_borrow_index": "1053323324291028326317769685",
+         "supply_balance": {
+          "user_state": {
+           "id": "0xd65ee9f97626d8de70836eb8cf94c6f3644bd30d3acb4cd1c597b1f00acf786b",
+           "size": "263"
+          },
+          "total_supply": "22704507527936"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0x230e2dc6bde4123154aa868ef4094dcf319747c71d178de8138b7d50180eb8c1",
+           "size": "256"
+          },
+          "total_supply": "19536845536109"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "750000000000000000000000000",
+         "treasury_factor": "550000000000000000000000000",
+         "treasury_balance": "264962565161",
+         "borrow_rate_factors": {
+          "base_rate": "0",
+          "multiplier": "60000000000000000000000000",
+          "jump_rate_multiplier": "5000000000000000000000000000",
+          "reserve_factor": "200000000000000000000000000",
+          "optimal_utilization": "900000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "350000000000000000000000000",
+          "bonus": "100000000000000000000000000",
+          "threshold": "800000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 8
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 8,
+         "oracle_id": 8,
+         "coin_type": "027792d9fed7f9844eb4839566001bb6f6cb4804f66aa2da6fe1ee242d896881::coin::COIN",
+         "is_isolated": false,
+         "supply_cap_ceiling": "50000000000000000000000000000000000",
+         "borrow_cap_ceiling": "0",
+         "current_supply_rate": "1395395425263492905157",
+         "current_borrow_rate": "2362537132206385369223616",
+         "current_supply_index": "1000887902110915582764851715",
+         "current_borrow_index": "1013223438484905500246966806",
+         "supply_balance": {
+          "user_state": {
+           "id": "0x821e505a0091b089edba94deaa14c2f2230d026bbaa7b85680554441aad447e0",
+           "size": "594"
+          },
+          "total_supply": "465588181"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0x55e1f3c9e6e5cf9fff563bdd61db07a3826458c56ef72c455e049ab3b1b0e99c",
+           "size": "26278"
+          },
+          "total_supply": "13582647"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "0",
+         "treasury_factor": "550000000000000000000000000",
+         "treasury_balance": "162",
+         "borrow_rate_factors": {
+          "base_rate": "0",
+          "multiplier": "80000000000000000000000000",
+          "jump_rate_multiplier": "6000000000000000000000000000",
+          "reserve_factor": "980000000000000000000000000",
+          "optimal_utilization": "500000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "350000000000000000000000000",
+          "bonus": "100000000000000000000000000",
+          "threshold": "450000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 9
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 9,
+         "oracle_id": 9,
+         "coin_type": "2053d08c1e2bd02791056171aab0fd12bd7cd7efad2ab8f6b9c8902f14df2ff2::ausd::AUSD",
+         "is_isolated": false,
+         "supply_cap_ceiling": "10000000000000000000000000000000000000",
+         "borrow_cap_ceiling": "0",
+         "current_supply_rate": "15383934132676730155564341",
+         "current_borrow_rate": "54991171401230964761796533",
+         "current_supply_index": "1085636768031860499201568954",
+         "current_borrow_index": "1219042080402525456518259008",
+         "supply_balance": {
+          "user_state": {
+           "id": "0xe151af690355de8be1c0281fbd0d483c099ea51920a57c4bf8c9666fd36808fd",
+           "size": "560"
+          },
+          "total_supply": "2078210245951"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0x551300b9441c9a3a16ca1d7972c1dbb4715e15004ccd5f001b2c2eee22fd92c1",
+           "size": "397"
+          },
+          "total_supply": "739730606682"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "0",
+         "treasury_factor": "550000000000000000000000000",
+         "treasury_balance": "301908320",
+         "borrow_rate_factors": {
+          "base_rate": "45000000000000000000000000",
+          "multiplier": "25000000000000000000000000",
+          "jump_rate_multiplier": "5500000000000000000000000000",
+          "reserve_factor": "300000000000000000000000000",
+          "optimal_utilization": "800000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "350000000000000000000000000",
+          "bonus": "100000000000000000000000000",
+          "threshold": "850000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 14
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 14,
+         "oracle_id": 14,
+         "coin_type": "5f496ed5d9d045c5b788dc1bb85f54100f2ede11e46f6a232c29daada4c5bdb6::coin::COIN",
+         "is_isolated": false,
+         "supply_cap_ceiling": "50000000000000000000000000000000000",
+         "borrow_cap_ceiling": "0",
+         "current_supply_rate": "1377150563932754444901",
+         "current_borrow_rate": "2347041170438008694882378",
+         "current_supply_index": "1002437624636534264792260298",
+         "current_borrow_index": "1132847016736356124121071814",
+         "supply_balance": {
+          "user_state": {
+           "id": "0xad0d8be450e020f54e3212b5b1f4f1256bb8ea882bc85bc9f86708f73d653720",
+           "size": "32577"
+          },
+          "total_supply": "503389901"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0xb5cac1b39f67da86f4496f75339001a12f4b8ba78b047682f5158ac4ae8e1649",
+           "size": "229"
+          },
+          "total_supply": "13068775"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "0",
+         "treasury_factor": "550000000000000000000000000",
+         "treasury_balance": "223",
+         "borrow_rate_factors": {
+          "base_rate": "0",
+          "multiplier": "80000000000000000000000000",
+          "jump_rate_multiplier": "6000000000000000000000000000",
+          "reserve_factor": "980000000000000000000000000",
+          "optimal_utilization": "500000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "350000000000000000000000000",
+          "bonus": "100000000000000000000000000",
+          "threshold": "600000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 27
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 27,
+         "oracle_id": 27,
+         "coin_type": "7262fb2f7a3a14c888c438a3cd9b912469a58cf60f367352c46584262e8299aa::ika::IKA",
+         "is_isolated": false,
+         "supply_cap_ceiling": "10000000000000000000000000000000000000",
+         "borrow_cap_ceiling": "0",
+         "current_supply_rate": "42624170984945201297133176",
+         "current_borrow_rate": "498790371921840890911365158",
+         "current_supply_index": "1036909537133716766411164144",
+         "current_borrow_index": "1601744841539291645410801129",
+         "supply_balance": {
+          "user_state": {
+           "id": "0x424143c7ddf4080f4f9e8eb3bcc9a6ebed10c8a3f3b99d2d32fd495067f593be",
+           "size": "4168"
+          },
+          "total_supply": "45974511853053437"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0xd7dcdf9305157638569b030e127392834d73a79ce0f64c51866a864cb7f11247",
+           "size": "418"
+          },
+          "total_supply": "8478414315034623"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "0",
+         "treasury_factor": "550000000000000000000000000",
+         "treasury_balance": "97516644065837",
+         "borrow_rate_factors": {
+          "base_rate": "100000000000000000000000000",
+          "multiplier": "1400000000000000000000000000",
+          "jump_rate_multiplier": "12000000000000000000000000000",
+          "reserve_factor": "700000000000000000000000000",
+          "optimal_utilization": "300000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "350000000000000000000000000",
+          "bonus": "100000000000000000000000000",
+          "threshold": "200000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 26
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 26,
+         "oracle_id": 26,
+         "coin_type": "876a4b7bce8aeaef60464c11f4026903e9afacab79b9b142686158aa86560b50::xbtc::XBTC",
+         "is_isolated": false,
+         "supply_cap_ceiling": "205000000000000000000000000000000000000",
+         "borrow_cap_ceiling": "800000000000000000000000000",
+         "current_supply_rate": "172638899087897645654970",
+         "current_borrow_rate": "1241538860389085436645472",
+         "current_supply_index": "1007082912154357230496202535",
+         "current_borrow_index": "1013748677731926942520617466",
+         "supply_balance": {
+          "user_state": {
+           "id": "0xdeec1fb37d7ea634bd329f9e02d2d564956f778a490f1d47a899865266d086cd",
+           "size": "2034"
+          },
+          "total_supply": "38324313136"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0x14f4702a6ea138b83531a640c3fa953d3e723075beb687c4db3309d067fa9792",
+           "size": "774"
+          },
+          "total_supply": "7562923715"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "670000000000000000000000000",
+         "treasury_factor": "800000000000000000000000000",
+         "treasury_balance": "59291",
+         "borrow_rate_factors": {
+          "base_rate": "0",
+          "multiplier": "6250000000000000000000000",
+          "jump_rate_multiplier": "3000000000000000000000000000",
+          "reserve_factor": "300000000000000000000000000",
+          "optimal_utilization": "800000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "350000000000000000000000000",
+          "bonus": "150000000000000000000000000",
+          "threshold": "700000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 20
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 20,
+         "oracle_id": 20,
+         "coin_type": "d1b72982e40348d069bb1ff701e634c117bb5f741f44dff91e472d3b01461e55::stsui::STSUI",
+         "is_isolated": false,
+         "supply_cap_ceiling": "40000000000000000000000000000000000000000",
+         "borrow_cap_ceiling": "150000000000000000000000000",
+         "current_supply_rate": "1238545555107544113226408",
+         "current_borrow_rate": "14365676215194136758960517",
+         "current_supply_index": "1004838120024108386100322207",
+         "current_borrow_index": "1027654384848361042317534166",
+         "supply_balance": {
+          "user_state": {
+           "id": "0xfa30b3db35ee961f702f259ea42fb9c5524dce630187e3a7e0b0e24eb0187fef",
+           "size": "1037"
+          },
+          "total_supply": "5475275232348"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0x67bbcb4d8ef039883c568fe74016ba85839d14f158d9926d68cf930a4d16b169",
+           "size": "235"
+          },
+          "total_supply": "576973301807"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "700000000000000000000000000",
+         "treasury_factor": "550000000000000000000000000",
+         "treasury_balance": "30519902",
+         "borrow_rate_factors": {
+          "base_rate": "0",
+          "multiplier": "133300000000000000000000000",
+          "jump_rate_multiplier": "3200000000000000000000000000",
+          "reserve_factor": "200000000000000000000000000",
+          "optimal_utilization": "750000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "350000000000000000000000000",
+          "bonus": "100000000000000000000000000",
+          "threshold": "750000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 0
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 0,
+         "oracle_id": 0,
+         "coin_type": "0000000000000000000000000000000000000000000000000000000000000002::sui::SUI",
+         "is_isolated": false,
+         "supply_cap_ceiling": "55000000000000000000000000000000000000000000",
+         "borrow_cap_ceiling": "960000000000000000000000000",
+         "current_supply_rate": "13963029857725225947803854",
+         "current_borrow_rate": "24341037884331095242039254",
+         "current_supply_index": "1101148716736059211965725058",
+         "current_borrow_index": "1250512613946602763193964573",
+         "supply_balance": {
+          "user_state": {
+           "id": "0x589c83af4b035a3bc64c40d9011397b539b97ea47edf7be8f33d643606bf96f8",
+           "size": "865685"
+          },
+          "total_supply": "21705991753054169"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0xe7ff0daa9d090727210abe6a8b6c0c5cd483f3692a10610386e4dc9c57871ba7",
+           "size": "88340"
+          },
+          "total_supply": "13705286843853883"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "750000000000000000000000000",
+         "treasury_factor": "650000000000000000000000000",
+         "treasury_balance": "1765186581456",
+         "borrow_rate_factors": {
+          "base_rate": "10000000000000000000000000",
+          "multiplier": "20000000000000000000000000",
+          "jump_rate_multiplier": "1000000000000000000000000000",
+          "reserve_factor": "200000000000000000000000000",
+          "optimal_utilization": "900000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "350000000000000000000000000",
+          "bonus": "100000000000000000000000000",
+          "threshold": "800000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 3
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 3,
+         "oracle_id": 3,
+         "coin_type": "af8cd5edc19c4512f4259f0bee101a40d41ebed738ade5874359610ef8eeced5::coin::COIN",
+         "is_isolated": false,
+         "supply_cap_ceiling": "1000000000000000000000000000000000000",
+         "borrow_cap_ceiling": "0",
+         "current_supply_rate": "18974370788029940218373",
+         "current_borrow_rate": "7111026518731299927732150",
+         "current_supply_index": "1008390776231000901432212187",
+         "current_borrow_index": "1037512866636668055800951211",
+         "supply_balance": {
+          "user_state": {
+           "id": "0xa668905b1ad445a3159b4d29b1181c4a62d864861b463dd9106cc0d97ffe8f7f",
+           "size": "1908"
+          },
+          "total_supply": "64085244187"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0x7568d06a1b6ffc416a36c82791e3daf0e621cf19d4a2724fc6f74842661b6323",
+           "size": "1644"
+          },
+          "total_supply": "8310636028"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "0",
+         "treasury_factor": "550000000000000000000000000",
+         "treasury_balance": "1289180",
+         "borrow_rate_factors": {
+          "base_rate": "0",
+          "multiplier": "53300000000000000000000000",
+          "jump_rate_multiplier": "3200000000000000000000000000",
+          "reserve_factor": "980000000000000000000000000",
+          "optimal_utilization": "750000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "350000000000000000000000000",
+          "bonus": "100000000000000000000000000",
+          "threshold": "800000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 21
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 21,
+         "oracle_id": 21,
+         "coin_type": "aafb102dd0902f5055cadecd687fb5b71ca82ef0e0285d90afde828ec58ca96b::btc::BTC",
+         "is_isolated": false,
+         "supply_cap_ceiling": "50000000000000000000000000000000000000",
+         "borrow_cap_ceiling": "800000000000000000000000000",
+         "current_supply_rate": "39830678293958194178602",
+         "current_borrow_rate": "1093124123244357747239255",
+         "current_supply_index": "1007206053190527741727056527",
+         "current_borrow_index": "1019680109786264471319784524",
+         "supply_balance": {
+          "user_state": {
+           "id": "0xf99e9bbd4c2b5dee460abeddc0f96042f2fb51420cb634d5a378d5d7643dd189",
+           "size": "1889"
+          },
+          "total_supply": "11436530923"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0x33d8a4cb800c863f19ae27fc173e1eb5895cdbcea7ae302b756fb275c678dc72",
+           "size": "485"
+          },
+          "total_supply": "823241715"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "650000000000000000000000000",
+         "treasury_factor": "850000000000000000000000000",
+         "treasury_balance": "11709",
+         "borrow_rate_factors": {
+          "base_rate": "0",
+          "multiplier": "15000000000000000000000000",
+          "jump_rate_multiplier": "2000000000000000000000000000",
+          "reserve_factor": "500000000000000000000000000",
+          "optimal_utilization": "900000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "350000000000000000000000000",
+          "bonus": "150000000000000000000000000",
+          "threshold": "700000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 2
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 2,
+         "oracle_id": 2,
+         "coin_type": "c060006111016b8a020ad5b33834984a437aaa7d3c74c18e09a95d48aceab08c::coin::COIN",
+         "is_isolated": false,
+         "supply_cap_ceiling": "1000000000000000000000000000000000000000",
+         "borrow_cap_ceiling": "0",
+         "current_supply_rate": "1914901159369959911166363",
+         "current_borrow_rate": "39972658289798626134758586",
+         "current_supply_index": "1179894640417461265102812973",
+         "current_borrow_index": "2006970419497408311675238085",
+         "supply_balance": {
+          "user_state": {
+           "id": "0x7e2a49ff9d2edd875f82b76a9b21e2a5a098e7130abfd510a203b6ea08ab9257",
+           "size": "17985"
+          },
+          "total_supply": "908430144548858"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0xc14d8292a7d69ae31164bafab7ca8a5bfda11f998540fe976a674ed0673e448f",
+           "size": "32279"
+          },
+          "total_supply": "511690409487494"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "0",
+         "treasury_factor": "550000000000000000000000000",
+         "treasury_balance": "229245325381434",
+         "borrow_rate_factors": {
+          "base_rate": "10000000000000000000000000",
+          "multiplier": "20000000000000000000000000",
+          "jump_rate_multiplier": "120000000000000000000000000",
+          "reserve_factor": "950000000000000000000000000",
+          "optimal_utilization": "850000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "350000000000000000000000000",
+          "bonus": "80000000000000000000000000",
+          "threshold": "850000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 17
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 17,
+         "oracle_id": 17,
+         "coin_type": "e1b45a0e641b9955a20aa0ad1c1f4ad86aad8afb07296d4085e349a50e90bdca::blue::BLUE",
+         "is_isolated": false,
+         "supply_cap_ceiling": "10000000000000000000000000000000000000",
+         "borrow_cap_ceiling": "0",
+         "current_supply_rate": "15645298906704880318496",
+         "current_borrow_rate": "3662001666540724046287727",
+         "current_supply_index": "1018761030433484892181977680",
+         "current_borrow_index": "1137110528361837330289318482",
+         "supply_balance": {
+          "user_state": {
+           "id": "0xc12b3d04d566fb418a199a113c09c65c121fd878172084ec0c60e08def51726f",
+           "size": "3708"
+          },
+          "total_supply": "1173203735853701"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0x897b75f0e55b9cfaae65e818d02ebefa5c91d4cf581f9c7c86d6e39749c87020",
+           "size": "275"
+          },
+          "total_supply": "6415222613491"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "0",
+         "treasury_factor": "550000000000000000000000000",
+         "treasury_balance": "170068607",
+         "borrow_rate_factors": {
+          "base_rate": "0",
+          "multiplier": "600000000000000000000000000",
+          "jump_rate_multiplier": "8000000000000000000000000000",
+          "reserve_factor": "300000000000000000000000000",
+          "optimal_utilization": "300000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "350000000000000000000000000",
+          "bonus": "100000000000000000000000000",
+          "threshold": "300000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 5
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 5,
+         "oracle_id": 5,
+         "coin_type": "549e8b69270defbfafd4f94e17ec44cdbdd99820b33bda2278dea3b9a32d3f55::cert::CERT",
+         "is_isolated": false,
+         "supply_cap_ceiling": "25000000000000000000000000000000000000000000",
+         "borrow_cap_ceiling": "150000000000000000000000000",
+         "current_supply_rate": "57095961365521249324793",
+         "current_borrow_rate": "3421850972348149052389549",
+         "current_supply_index": "1022331569666343607931654652",
+         "current_borrow_index": "1100277590645962102706076263",
+         "supply_balance": {
+          "user_state": {
+           "id": "0xe6457d247b6661b1cac123351998f88f3e724ff6e9ea542127b5dcb3176b3841",
+           "size": "68910"
+          },
+          "total_supply": "15038807092157294"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0x8fa5eccbca2c4ba9aae3b87fd44aa75aa5f5b41ea2d9be4d5321379384974984",
+           "size": "16586"
+          },
+          "total_supply": "358702050095847"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "750000000000000000000000000",
+         "treasury_factor": "650000000000000000000000000",
+         "treasury_balance": "16250198736",
+         "borrow_rate_factors": {
+          "base_rate": "0",
+          "multiplier": "133300000000000000000000000",
+          "jump_rate_multiplier": "3200000000000000000000000000",
+          "reserve_factor": "350000000000000000000000000",
+          "optimal_utilization": "750000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "350000000000000000000000000",
+          "bonus": "100000000000000000000000000",
+          "threshold": "800000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 12
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 12,
+         "oracle_id": 12,
+         "coin_type": "960b531667636f39e85867775f52f6b1f220a058c4de786905bdf761e06a56bb::usdy::USDY",
+         "is_isolated": false,
+         "supply_cap_ceiling": "5000000000000000000000000000000000000000000",
+         "borrow_cap_ceiling": "920000000000000000000000000",
+         "current_supply_rate": "13906820870239815095323612",
+         "current_borrow_rate": "33354844769825945145986938",
+         "current_supply_index": "1018952871066133319862525333",
+         "current_borrow_index": "1096606592382869821771980529",
+         "supply_balance": {
+          "user_state": {
+           "id": "0x8aac332c01340926066a53f7a5f8ac924e61ea2ae6bc6ce61f112e9094fd5639",
+           "size": "10533"
+          },
+          "total_supply": "1780715785346407"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0xc0f59c5665d6289408ba31efc48718daa4d14a291a303a0d50d306e51eb68872",
+           "size": "1111"
+          },
+          "total_supply": "919827130502504"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "700000000000000000000000000",
+         "treasury_factor": "550000000000000000000000000",
+         "treasury_balance": "161129184576",
+         "borrow_rate_factors": {
+          "base_rate": "0",
+          "multiplier": "60000000000000000000000000",
+          "jump_rate_multiplier": "5000000000000000000000000000",
+          "reserve_factor": "250000000000000000000000000",
+          "optimal_utilization": "850000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "350000000000000000000000000",
+          "bonus": "80000000000000000000000000",
+          "threshold": "750000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 28
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 28,
+         "oracle_id": 28,
+         "coin_type": "8f2b5eb696ed88b71fea398d330bccfa52f6e2a5a8e1ac6180fcb25c6de42ebc::coin::COIN",
+         "is_isolated": false,
+         "supply_cap_ceiling": "100000000000000000000000000000000000000",
+         "borrow_cap_ceiling": "0",
+         "current_supply_rate": "0",
+         "current_borrow_rate": "0",
+         "current_supply_index": "1000000000000000000000000000",
+         "current_borrow_index": "1000000000000000000000000000",
+         "supply_balance": {
+          "user_state": {
+           "id": "0x1e0f6b432e96428c97cca7bea1af8c0c67e143456525d0224b257f724372793c",
+           "size": "9"
+          },
+          "total_supply": "194999942250"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0xc2b07a060e3549331d236e53c0fe0c94088e7967e58a4380f279feb9d880653e",
+           "size": "0"
+          },
+          "total_supply": "0"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "620000000000000000000000000",
+         "treasury_factor": "550000000000000000000000000",
+         "treasury_balance": "0",
+         "borrow_rate_factors": {
+          "base_rate": "0",
+          "multiplier": "80000000000000000000000000",
+          "jump_rate_multiplier": "6000000000000000000000000000",
+          "reserve_factor": "300000000000000000000000000",
+          "optimal_utilization": "500000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "350000000000000000000000000",
+          "bonus": "100000000000000000000000000",
+          "threshold": "770000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 18
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 18,
+         "oracle_id": 18,
+         "coin_type": "ce7ff77a83ea0cb6fd39bd8748e2ec89a3f41e8efdc3f4eb123e0ca37b184db2::buck::BUCK",
+         "is_isolated": false,
+         "supply_cap_ceiling": "0",
+         "borrow_cap_ceiling": "0",
+         "current_supply_rate": "3550116076081848058477707",
+         "current_borrow_rate": "46762386710895589493650357",
+         "current_supply_index": "1014547702318821971202385200",
+         "current_borrow_index": "1099552530555781285173663838",
+         "supply_balance": {
+          "user_state": {
+           "id": "0xdcd4fd6c686eebb54b1816e9851183647a306817303d306bbf70f82757f3eff9",
+           "size": "706"
+          },
+          "total_supply": "16268071745966967"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0x6ae3645ff5936c10ab98c2529d3a316b0d4b22eff46d0d262e27db41371af597",
+           "size": "1480"
+          },
+          "total_supply": "1628023576384955"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "0",
+         "treasury_factor": "550000000000000000000000000",
+         "treasury_balance": "540063724220",
+         "borrow_rate_factors": {
+          "base_rate": "45000000000000000000000000",
+          "multiplier": "16250000000000000000000000",
+          "jump_rate_multiplier": "5000000000000000000000000000",
+          "reserve_factor": "300000000000000000000000000",
+          "optimal_utilization": "800000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "350000000000000000000000000",
+          "bonus": "100000000000000000000000000",
+          "threshold": "700000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 24
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 24,
+         "oracle_id": 24,
+         "coin_type": "356a26eb9e012a68958082340d4c4116e7f55615cf27affcff209cf0ae544f59::wal::WAL",
+         "is_isolated": false,
+         "supply_cap_ceiling": "160000000000000000000000000000000000000000000",
+         "borrow_cap_ceiling": "860000000000000000000000000",
+         "current_supply_rate": "5830081637743642411207387",
+         "current_borrow_rate": "104693624812963803600425601",
+         "current_supply_index": "1106074589183432560565383335",
+         "current_borrow_index": "1458309631764919543464870646",
+         "supply_balance": {
+          "user_state": {
+           "id": "0xa476b12f8b45c7cb595cf1648822d48e4e82d63a47ba94304f3ad3bb19247ff9",
+           "size": "16489"
+          },
+          "total_supply": "105043356762055505"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0xf8741f2550b0d7f7a3179ba2a0363c73e206ca6691d2d1ebbb95b6018359e17b",
+           "size": "1608"
+          },
+          "total_supply": "6338117973632297"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "600000000000000000000000000",
+         "treasury_factor": "550000000000000000000000000",
+         "treasury_balance": "5740963659805",
+         "borrow_rate_factors": {
+          "base_rate": "100000000000000000000000000",
+          "multiplier": "59000000000000000000000000",
+          "jump_rate_multiplier": "6000000000000000000000000000",
+          "reserve_factor": "300000000000000000000000000",
+          "optimal_utilization": "850000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "350000000000000000000000000",
+          "bonus": "100000000000000000000000000",
+          "threshold": "650000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 1
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 1,
+         "oracle_id": 1,
+         "coin_type": "5d4b302506645c37ff133b98c4b50a5ae14841659738d6d733d59d0d217a93bf::coin::COIN",
+         "is_isolated": false,
+         "supply_cap_ceiling": "2500000000000000000000000000000000000000000",
+         "borrow_cap_ceiling": "0",
+         "current_supply_rate": "3835068156381418533479834",
+         "current_borrow_rate": "204680959043294756109031542",
+         "current_supply_index": "1167721565784307322168426649",
+         "current_borrow_index": "1765216710221113786022904213",
+         "supply_balance": {
+          "user_state": {
+           "id": "0x8d0a4467806458052d577c8cd2be6031e972f2b8f5f77fce98aa12cd85330da9",
+           "size": "29002"
+          },
+          "total_supply": "1996661319870386"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0x8a3aaa817a811131c624658f6e77cba04ab5829293d2c49c1a9cce8ac9c8dec4",
+           "size": "61349"
+          },
+          "total_supply": "1237406893911932"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "0",
+         "treasury_factor": "550000000000000000000000000",
+         "treasury_balance": "472186846371489",
+         "borrow_rate_factors": {
+          "base_rate": "50000000000000000000000000",
+          "multiplier": "90000000000000000000000000",
+          "jump_rate_multiplier": "2000000000000000000000000000",
+          "reserve_factor": "980000000000000000000000000",
+          "optimal_utilization": "900000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "0",
+          "bonus": "0",
+          "threshold": "850000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      },
+      {
+       "name": {
+        "json": 16
+       },
+       "value": {
+        "__typename": "MoveValue",
+        "json": {
+         "id": 16,
+         "oracle_id": 16,
+         "coin_type": "f16e6b723f242ec745dfd7634ad072c42d5c1d9ac9d62a39c381303eaa57693a::fdusd::FDUSD",
+         "is_isolated": false,
+         "supply_cap_ceiling": "52000000000000000000000000000000000000000",
+         "borrow_cap_ceiling": "900000000000000000000000000",
+         "current_supply_rate": "5328686589797282139166214",
+         "current_borrow_rate": "48650963391939809591117660",
+         "current_supply_index": "1054177133655306103316818238",
+         "current_borrow_index": "1213959907159629276238587787",
+         "supply_balance": {
+          "user_state": {
+           "id": "0x6dffc3d05e79b055749eae1c27e93a47b5a9999214ce8a2f6173574151d120bf",
+           "size": "1108"
+          },
+          "total_supply": "25392581282409"
+         },
+         "borrow_balance": {
+          "user_state": {
+           "id": "0x4a4bb401f011c104083f56e3ee154266f1a88cad10b8acc9c993d4da304ebf00",
+           "size": "556"
+          },
+          "total_supply": "3220207551148"
+         },
+         "last_update_timestamp": "1795658042186",
+         "ltv": "700000000000000000000000000",
+         "treasury_factor": "550000000000000000000000000",
+         "treasury_balance": "943825829",
+         "borrow_rate_factors": {
+          "base_rate": "45000000000000000000000000",
+          "multiplier": "25000000000000000000000000",
+          "jump_rate_multiplier": "5000000000000000000000000000",
+          "reserve_factor": "250000000000000000000000000",
+          "optimal_utilization": "850000000000000000000000000"
+         },
+         "liquidation_factors": {
+          "ratio": "350000000000000000000000000",
+          "bonus": "100000000000000000000000000",
+          "threshold": "750000000000000000000000000"
+         },
+         "reserve_field_a": "0",
+         "reserve_field_b": "0",
+         "reserve_field_c": "0"
+        }
+       }
+      }
+     ]
+    }
+   }
+  }
+ }
+}

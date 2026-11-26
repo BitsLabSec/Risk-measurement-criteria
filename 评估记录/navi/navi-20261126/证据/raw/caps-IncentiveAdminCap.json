@@ -1,0 +1,18 @@
+{
+ "query": "query($t:String!,$c:UInt53){ checkpoint(sequenceNumber:$c){ query { objects(filter:{type:$t}, first:20){ nodes{ address version owner{ __typename ... on AddressOwner{ address{ address } } ... on ObjectOwner{ address{ address } } } } } } } }",
+ "variables": {
+  "t": "0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::incentive::IncentiveAdminCap",
+  "c": 349261112
+ },
+ "response": {
+  "data": {
+   "checkpoint": {
+    "query": {
+     "objects": {
+      "nodes": []
+     }
+    }
+   }
+  }
+ }
+}

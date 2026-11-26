@@ -1,0 +1,89 @@
+{
+ "query": "query($t:String!,$c:UInt53){ checkpoint(sequenceNumber:$c){ query { objects(filter:{type:$t}, first:10){ nodes{ address version owner{ __typename } } } } } }",
+ "variables": {
+  "t": "0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::storage::Storage",
+  "c": 349261112
+ },
+ "response": {
+  "data": {
+   "checkpoint": {
+    "query": {
+     "objects": {
+      "nodes": [
+       {
+        "address": "0x199c1d5c2d58a4b05bbfa2338d02ad2676572a8a59ac148a5475b5c0fc53ed9f",
+        "version": 1111686882,
+        "owner": {
+         "__typename": "Shared"
+        }
+       },
+       {
+        "address": "0x2056ca72f7c81c3fb6b3a6eea117368cad7fb0c9caa4e2a7b51ee913e9e5deb9",
+        "version": 1110775556,
+        "owner": {
+         "__typename": "Shared"
+        }
+       },
+       {
+        "address": "0x35fecf669e7794ad25d289c2a23f065e518351acae09c5032d7237e185257924",
+        "version": 1111686882,
+        "owner": {
+         "__typename": "Shared"
+        }
+       },
+       {
+        "address": "0x51c5ad179214eb5e170dd93ba6f9b15948002caf85f7e2b091ef46d2dc2ce5b6",
+        "version": 1111686882,
+        "owner": {
+         "__typename": "Shared"
+        }
+       },
+       {
+        "address": "0x6b945adccadf11cd7ec39f8c2c225a4267004a74587871cac86f9fa3dbf3be63",
+        "version": 1111686882,
+        "owner": {
+         "__typename": "Shared"
+        }
+       },
+       {
+        "address": "0x79db6cdbfb59a067be7d78c1003079f56d817ac33b5d372b3165daf09f31ed69",
+        "version": 1111686882,
+        "owner": {
+         "__typename": "Shared"
+        }
+       },
+       {
+        "address": "0x7db5c000524bfe55bb2bc343886f29eabc38f706dc1655900055fa5b60ee00a5",
+        "version": 1111686882,
+        "owner": {
+         "__typename": "Shared"
+        }
+       },
+       {
+        "address": "0xafb982de1a436b1cc8a14ecd2d787762599b65d3a6b75b84b10939b1e17d9381",
+        "version": 1111686882,
+        "owner": {
+         "__typename": "Shared"
+        }
+       },
+       {
+        "address": "0xbb4e2f4b6205c2e2a2db47aeb4f830796ec7c005f88537ee775986639bc442fe",
+        "version": 1111706568,
+        "owner": {
+         "__typename": "Shared"
+        }
+       },
+       {
+        "address": "0xc2b6a52f0da7f91389eaffe4f68f4cacee43aa616bb8a4371118eafaf07cdd90",
+        "version": 1111686882,
+        "owner": {
+         "__typename": "Shared"
+        }
+       }
+      ]
+     }
+    }
+   }
+  }
+ }
+}

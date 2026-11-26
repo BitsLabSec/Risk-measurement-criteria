@@ -1,0 +1,35 @@
+{
+ "query": "query($a:SuiAddress!,$c:UInt53){ object(address:$a, atCheckpoint:$c){ version asMoveObject{ contents{ json } } } }",
+ "variables": {
+  "a": "0xbb4e2f4b6205c2e2a2db47aeb4f830796ec7c005f88537ee775986639bc442fe",
+  "c": 345771824
+ },
+ "response": {
+  "data": {
+   "object": {
+    "version": 1091834956,
+    "asMoveObject": {
+     "contents": {
+      "json": {
+       "id": "0xbb4e2f4b6205c2e2a2db47aeb4f830796ec7c005f88537ee775986639bc442fe",
+       "version": "16",
+       "paused": false,
+       "reserves": {
+        "id": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+        "size": "35"
+       },
+       "reserves_count": 35,
+       "users": [
+        "0x440b63f667b85a3f3555868ffafe0d4682ab063dc25209035356ab89047ff431"
+       ],
+       "user_info": {
+        "id": "0xabc6c3fbc89b96e3351fdbeb5730bcc5398648367260c6a4e201779e34694e04",
+        "size": "999993"
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

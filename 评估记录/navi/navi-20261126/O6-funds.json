@@ -1,0 +1,197 @@
+{
+  "checks": [
+    {
+      "id": "CK143",
+      "business_id": "BZ01",
+      "market_id": "ALL",
+      "check_id": "L-F1.1",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "借贷协议没有明确到期的应付；存款人提款依赖池内现金和利率机制",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK144",
+      "business_id": "BZ01",
+      "market_id": "ALL",
+      "check_id": "L-F1.2",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "协议没有公开承诺最低储备",
+      "evidence": [
+        "https://github.com/naviprotocol/navi-smart-contracts/blob/db60087a454c84279c285bbd29c8e0e2543e1c07/SECURITY.md"
+      ]
+    },
+    {
+      "id": "CK145",
+      "business_id": "BZ01",
+      "market_id": "ALL",
+      "check_id": "L-F2.1",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "CK002",
+      "reading_ids": [],
+      "reason": "SUI 池的部分资金由 pool_manager 质押为 vSUI；本次未读取管理器状态，引用 L-C3.1：主市场已暂停，所有提款都受阻",
+      "evidence": [
+        "lending_core/sources/pool.move:353-400"
+      ]
+    },
+    {
+      "id": "CK146",
+      "business_id": "BZ01",
+      "market_id": "ALL",
+      "check_id": "L-D1.1",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD370"
+      ],
+      "reason": "价格表中各价格的存储时间早于快照 6 分钟到 12 小时不等，但 oracle_pro 可在交易内按需更新，存储价格过期本身不导致必要操作受阻",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/prices-main.json）"
+      ]
+    },
+    {
+      "id": "CK147",
+      "business_id": "BZ01",
+      "market_id": "ALL",
+      "check_id": "L-D2.1",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "价格适配器（Pyth、Supra、Switchboard）出错时 oracle_pro 拒绝更新、估值断言失败；没有发现会继续执行的分支",
+      "evidence": [
+        "lending_core/sources/calculator.move:97-101"
+      ]
+    },
+    {
+      "id": "CK148",
+      "business_id": "BZ01",
+      "market_id": "ALL",
+      "check_id": "OR-1",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD019"
+      ],
+      "reason": "估值读价 calculate_value 断言 is_valid，价格年龄超过 update_interval 即无效",
+      "evidence": [
+        "oracle/sources/oracle.move:179-197"
+      ]
+    },
+    {
+      "id": "CK149",
+      "business_id": "BZ01",
+      "market_id": "ALL",
+      "check_id": "OR-2",
+      "inputs": [
+        {
+          "name": "oracle_type",
+          "reading_id": "无",
+          "constant": "pull",
+          "divide_by": 1,
+          "note": "oracle_pro 由使用方在交易内按需更新",
+          "group": "无"
+        },
+        {
+          "name": "max_age_s",
+          "reading_id": "RD019",
+          "constant": "无",
+          "divide_by": 1000,
+          "note": "毫秒换算成秒",
+          "group": "无"
+        },
+        {
+          "name": "heartbeat_s",
+          "reading_id": "无",
+          "constant": "none",
+          "divide_by": 1,
+          "note": "拉取型没有心跳",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD019"
+      ],
+      "reason": "PriceOracle.update_interval = 15000 毫秒",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/priceoracle.json）"
+      ]
+    },
+    {
+      "id": "CK150",
+      "business_id": "BZ01",
+      "market_id": "ALL",
+      "check_id": "OR-3",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "oracle_pro 配置了价格区间和双源偏差阈值；置信区间只披露",
+      "evidence": [
+        "oracle/sources/oracle_manage.move:52-80"
+      ]
+    },
+    {
+      "id": "CK151",
+      "business_id": "BZ01",
+      "market_id": "ALL",
+      "check_id": "OR-4",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "Sui 不是 EVM L2",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/snapshot.json）"
+      ]
+    }
+  ]
+}

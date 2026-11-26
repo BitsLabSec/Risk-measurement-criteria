@@ -1,0 +1,407 @@
+{
+  "tvl_available": "yes",
+  "tvl_source": "onchain_balances",
+  "market_tvl_source": "onchain_balances",
+  "price_source": "NAVI PriceOracle 存储价格",
+  "tvl_time_utc": "2026-11-26T02:15:08.135Z",
+  "businesses": [
+    {
+      "business_id": "BZ01",
+      "tvl_usd": 113349153.2,
+      "basis": "35 个市场的存款价值之和",
+      "reading_ids": [
+        "RD028",
+        "RD029",
+        "RD370"
+      ],
+      "evidence": []
+    }
+  ],
+  "markets": [
+    {
+      "market_id": "MK01",
+      "tvl_usd": 16120209.03,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD028",
+        "RD029",
+        "RD370"
+      ],
+      "evidence": []
+    },
+    {
+      "market_id": "MK02",
+      "tvl_usd": 2331192.42,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD038",
+        "RD039",
+        "RD371"
+      ],
+      "evidence": []
+    },
+    {
+      "market_id": "MK03",
+      "tvl_usd": 1070379.13,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD048",
+        "RD049",
+        "RD372"
+      ],
+      "evidence": []
+    },
+    {
+      "market_id": "MK04",
+      "tvl_usd": 109825.55,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD058",
+        "RD059",
+        "RD373"
+      ],
+      "evidence": []
+    },
+    {
+      "market_id": "MK05",
+      "tvl_usd": 77572.74,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD068",
+        "RD069",
+        "RD374"
+      ],
+      "evidence": []
+    },
+    {
+      "market_id": "MK06",
+      "tvl_usd": 10370441.42,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD078",
+        "RD079",
+        "RD375"
+      ],
+      "evidence": []
+    },
+    {
+      "market_id": "MK07",
+      "tvl_usd": 13255296.21,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD088",
+        "RD089",
+        "RD376"
+      ],
+      "evidence": []
+    },
+    {
+      "market_id": "MK08",
+      "tvl_usd": 1803839.69,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD098",
+        "RD099",
+        "RD377"
+      ],
+      "evidence": []
+    },
+    {
+      "market_id": "MK09",
+      "tvl_usd": 27127.36,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD108",
+        "RD109",
+        "RD378"
+      ],
+      "evidence": []
+    },
+    {
+      "market_id": "MK10",
+      "tvl_usd": 2255.99,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD118",
+        "RD119",
+        "RD379"
+      ],
+      "evidence": []
+    },
+    {
+      "market_id": "MK11",
+      "tvl_usd": 17721750.97,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD128",
+        "RD129",
+        "RD380"
+      ],
+      "evidence": []
+    },
+    {
+      "market_id": "MK12",
+      "tvl_usd": 963079.47,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD138",
+        "RD139",
+        "RD381"
+      ],
+      "evidence": []
+    },
+    {
+      "market_id": "MK13",
+      "tvl_usd": 2092575.84,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD148",
+        "RD149",
+        "RD382"
+      ],
+      "evidence": []
+    },
+    {
+      "market_id": "MK14",
+      "tvl_usd": 46754.57,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD158",
+        "RD159",
+        "RD383"
+      ],
+      "evidence": []
+    },
+    {
+      "market_id": "MK15",
+      "tvl_usd": 29375.28,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD168",
+        "RD169",
+        "RD384"
+      ],
+      "evidence": []
+    },
+    {
+      "market_id": "MK16",
+      "tvl_usd": 2798579.85,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD178",
+        "RD179",
+        "RD385"
+      ],
+      "evidence": []
+    },
+    {
+      "market_id": "MK17",
+      "tvl_usd": 26626.11,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD188",
+        "RD189",
+        "RD386"
+      ],
+      "evidence": []
+    },
+    {
+      "market_id": "MK18",
+      "tvl_usd": 7842.21,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD198",
+        "RD199",
+        "RD387"
+      ],
+      "evidence": []
+    },
+    {
+      "market_id": "MK19",
+      "tvl_usd": 16512977.64,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD208",
+        "RD209",
+        "RD388"
+      ],
+      "evidence": []
+    },
+    {
+      "market_id": "MK20",
+      "tvl_usd": 2031102.36,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD218",
+        "RD219",
+        "RD389"
+      ],
+      "evidence": []
+    },
+    {
+      "market_id": "MK21",
+      "tvl_usd": 3695.63,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD228",
+        "RD229",
+        "RD390"
+      ],
+      "evidence": []
+    },
+    {
+      "market_id": "MK22",
+      "tvl_usd": 698556.4,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD238",
+        "RD239",
+        "RD391"
+      ],
+      "evidence": []
+    },
+    {
+      "market_id": "MK23",
+      "tvl_usd": 49717.54,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD248",
+        "RD249",
+        "RD392"
+      ],
+      "evidence": []
+    },
+    {
+      "market_id": "MK24",
+      "tvl_usd": 1230436.18,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD258",
+        "RD259",
+        "RD393"
+      ],
+      "evidence": []
+    },
+    {
+      "market_id": "MK25",
+      "tvl_usd": 2531957.86,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD268",
+        "RD269",
+        "RD394"
+      ],
+      "evidence": []
+    },
+    {
+      "market_id": "MK26",
+      "tvl_usd": 12485.17,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD278",
+        "RD279",
+        "RD395"
+      ],
+      "evidence": []
+    },
+    {
+      "market_id": "MK27",
+      "tvl_usd": 2346012.51,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD288",
+        "RD289",
+        "RD396"
+      ],
+      "evidence": []
+    },
+    {
+      "market_id": "MK28",
+      "tvl_usd": 25303.03,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD298",
+        "RD299",
+        "RD397"
+      ],
+      "evidence": []
+    },
+    {
+      "market_id": "MK29",
+      "tvl_usd": 11351534.99,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD308",
+        "RD309",
+        "RD398"
+      ],
+      "evidence": []
+    },
+    {
+      "market_id": "MK30",
+      "tvl_usd": 14.95,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD318",
+        "RD319",
+        "RD399"
+      ],
+      "evidence": []
+    },
+    {
+      "market_id": "MK31",
+      "tvl_usd": 3612.17,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD328",
+        "RD329",
+        "RD400"
+      ],
+      "evidence": []
+    },
+    {
+      "market_id": "MK32",
+      "tvl_usd": 127414.96,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD338",
+        "RD339",
+        "RD401"
+      ],
+      "evidence": []
+    },
+    {
+      "market_id": "MK33",
+      "tvl_usd": 588974.99,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD348",
+        "RD349",
+        "RD402"
+      ],
+      "evidence": []
+    },
+    {
+      "market_id": "MK34",
+      "tvl_usd": 23344.63,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD358",
+        "RD359",
+        "RD403"
+      ],
+      "evidence": []
+    },
+    {
+      "market_id": "MK35",
+      "tvl_usd": 6957288.35,
+      "basis": "存款份额 × 存款指数 ÷ 1e27 ÷ 1e9 × 价格表中的存储价格（存储价格可能比快照早，见 L-D1.1）",
+      "reading_ids": [
+        "RD368",
+        "RD369",
+        "RD404"
+      ],
+      "evidence": []
+    }
+  ]
+}

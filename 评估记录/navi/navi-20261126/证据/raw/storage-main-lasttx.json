@@ -1,0 +1,197 @@
+{
+ "query": "query($a:SuiAddress!){ transactions(filter:{affectedObject:$a}, last:3){ nodes{ digest sender{ address } effects{ timestamp } kind{ __typename ... on ProgrammableTransaction{ commands(first:5){ nodes{ __typename ... on MoveCallCommand{ function{ module{ name } name } } } } } } } } }",
+ "variables": {
+  "a": "0xbb4e2f4b6205c2e2a2db47aeb4f830796ec7c005f88537ee775986639bc442fe"
+ },
+ "response": {
+  "data": {
+   "transactions": {
+    "nodes": [
+     {
+      "digest": "GiDLiwW9Ghdo35FYbcu1KjVdr4fSzGKDhgiFjCtMFtxv",
+      "sender": {
+       "address": "0x32e2bdc71a22228f623b01693e43599405a61b438187897045f8748c1599d91b"
+      },
+      "effects": {
+       "timestamp": "2026-11-26T01:54:49.645Z"
+      },
+      "kind": {
+       "__typename": "ProgrammableTransaction",
+       "commands": {
+        "nodes": [
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "name": "vault"
+           },
+           "name": "begin"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "name": "vault"
+           },
+           "name": "take_position"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "name": "pool"
+           },
+           "name": "remove_liquidity"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "name": "vault"
+           },
+           "name": "take_balance"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "name": "balance"
+           },
+           "name": "join"
+          }
+         }
+        ]
+       }
+      }
+     },
+     {
+      "digest": "29YWjWVEQyN5TTqrFnpztzH1NjFPpGgd8wo5qZBgKW4Y",
+      "sender": {
+       "address": "0x6d5ee345995a09af2bc75922aaa911cf1464d8ce6c3b4e0bf8f2a4ca352d8991"
+      },
+      "effects": {
+       "timestamp": "2026-11-26T01:55:14.138Z"
+      },
+      "kind": {
+       "__typename": "ProgrammableTransaction",
+       "commands": {
+        "nodes": [
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "name": "vault"
+           },
+           "name": "begin"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "name": "vault"
+           },
+           "name": "take_position"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "name": "pool"
+           },
+           "name": "remove_liquidity"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "name": "vault"
+           },
+           "name": "take_balance"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "name": "balance"
+           },
+           "name": "join"
+          }
+         }
+        ]
+       }
+      }
+     },
+     {
+      "digest": "6fFvCA2YbtsKU6Y2jd4BEzpvEbZ2mgFtfYMkrKRPwyRL",
+      "sender": {
+       "address": "0x60674cafdadd2337a90b7bde4245126300e138c1240eeb0040c5449526acbd05"
+      },
+      "effects": {
+       "timestamp": "2026-11-26T02:09:41.406Z"
+      },
+      "kind": {
+       "__typename": "ProgrammableTransaction",
+       "commands": {
+        "nodes": [
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "name": "lending"
+           },
+           "name": "flash_loan_with_ctx_v2"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "name": "coin"
+           },
+           "name": "from_balance"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "name": "router"
+           },
+           "name": "new_swap_context_v2"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "name": "coin"
+           },
+           "name": "zero"
+          }
+         },
+         {
+          "__typename": "MoveCallCommand",
+          "function": {
+           "module": {
+            "name": "deepbookv3"
+           },
+           "name": "swap"
+          }
+         }
+        ]
+       }
+      }
+     }
+    ]
+   }
+  }
+ }
+}

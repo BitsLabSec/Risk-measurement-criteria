@@ -1,0 +1,5097 @@
+{
+  "checks": [
+    {
+      "id": "CK001",
+      "business_id": "BZ01",
+      "market_id": "ALL",
+      "check_id": "L-C1.1",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD020"
+      ],
+      "reason": "储备表的 coin_type 与 oracle_id 一一对应，35 个资产未见重复或错配",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK002",
+      "business_id": "BZ01",
+      "market_id": "ALL",
+      "check_id": "L-C3.1",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "yes",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD018"
+      ],
+      "reason": "快照时主市场 Storage.paused = true；还款、提款、借款、清算入口都先检查该开关，全部受阻，没有替代入口",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/storage-0xbb4e2f4b.json）",
+        "lending_core/sources/lending.move:406-406"
+      ]
+    },
+    {
+      "id": "CK003",
+      "business_id": "BZ01",
+      "market_id": "MK01",
+      "check_id": "L-C2.1",
+      "inputs": [
+        {
+          "name": "b",
+          "reading_id": "RD020",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "lambda",
+          "reading_id": "RD021",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "bonus",
+          "reading_id": "RD022",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "清算奖励；奖励在清算人与国库之间分配，用户被扣押的总额为债务 × (1 + bonus)，见 logic.move:225-233",
+          "group": "无"
+        },
+        {
+          "name": "same_underlying",
+          "reading_id": "无",
+          "constant": "no",
+          "divide_by": 1,
+          "note": "默认模式按一般组合",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD020",
+        "RD021",
+        "RD022"
+      ],
+      "reason": "默认模式：SUI 作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK004",
+      "business_id": "BZ01",
+      "market_id": "MK01",
+      "check_id": "L-C2.3",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK005",
+      "business_id": "BZ01",
+      "market_id": "MK01",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD024",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD025",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD026",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD027",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD024",
+        "RD025",
+        "RD026",
+        "RD027"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK006",
+      "business_id": "BZ01",
+      "market_id": "MK01",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD023"
+      ],
+      "reason": "设有供应上限（supply_cap_ceiling = 55000000000000000000000000000000000000000000），无论是否主流资产都不触发",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK007",
+      "business_id": "BZ01",
+      "market_id": "MK02",
+      "check_id": "L-C2.1",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD030"
+      ],
+      "reason": "LTV = 0，该资产不能作抵押，没有抵押×借款组合",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK008",
+      "business_id": "BZ01",
+      "market_id": "MK02",
+      "check_id": "L-C2.3",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK009",
+      "business_id": "BZ01",
+      "market_id": "MK02",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD034",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD035",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD036",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD037",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD034",
+        "RD035",
+        "RD036",
+        "RD037"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK010",
+      "business_id": "BZ01",
+      "market_id": "MK02",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD030"
+      ],
+      "reason": "LTV = 0，不能作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK011",
+      "business_id": "BZ01",
+      "market_id": "MK03",
+      "check_id": "L-C2.1",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD040"
+      ],
+      "reason": "LTV = 0，该资产不能作抵押，没有抵押×借款组合",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK012",
+      "business_id": "BZ01",
+      "market_id": "MK03",
+      "check_id": "L-C2.3",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK013",
+      "business_id": "BZ01",
+      "market_id": "MK03",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD044",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD045",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD046",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD047",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD044",
+        "RD045",
+        "RD046",
+        "RD047"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK014",
+      "business_id": "BZ01",
+      "market_id": "MK03",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD040"
+      ],
+      "reason": "LTV = 0，不能作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK015",
+      "business_id": "BZ01",
+      "market_id": "MK04",
+      "check_id": "L-C2.1",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD050"
+      ],
+      "reason": "LTV = 0，该资产不能作抵押，没有抵押×借款组合",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK016",
+      "business_id": "BZ01",
+      "market_id": "MK04",
+      "check_id": "L-C2.3",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK017",
+      "business_id": "BZ01",
+      "market_id": "MK04",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD054",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD055",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD056",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD057",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD054",
+        "RD055",
+        "RD056",
+        "RD057"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK018",
+      "business_id": "BZ01",
+      "market_id": "MK04",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD050"
+      ],
+      "reason": "LTV = 0，不能作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK019",
+      "business_id": "BZ01",
+      "market_id": "MK05",
+      "check_id": "L-C2.1",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD060"
+      ],
+      "reason": "LTV = 0，该资产不能作抵押，没有抵押×借款组合",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK020",
+      "business_id": "BZ01",
+      "market_id": "MK05",
+      "check_id": "L-C2.3",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK021",
+      "business_id": "BZ01",
+      "market_id": "MK05",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD064",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD065",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD066",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD067",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD064",
+        "RD065",
+        "RD066",
+        "RD067"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK022",
+      "business_id": "BZ01",
+      "market_id": "MK05",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD060"
+      ],
+      "reason": "LTV = 0，不能作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK023",
+      "business_id": "BZ01",
+      "market_id": "MK06",
+      "check_id": "L-C2.1",
+      "inputs": [
+        {
+          "name": "b",
+          "reading_id": "RD070",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "lambda",
+          "reading_id": "RD071",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "bonus",
+          "reading_id": "RD072",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "清算奖励；奖励在清算人与国库之间分配，用户被扣押的总额为债务 × (1 + bonus)，见 logic.move:225-233",
+          "group": "无"
+        },
+        {
+          "name": "same_underlying",
+          "reading_id": "无",
+          "constant": "no",
+          "divide_by": 1,
+          "note": "默认模式按一般组合",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD070",
+        "RD071",
+        "RD072"
+      ],
+      "reason": "默认模式：CERT 作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK024",
+      "business_id": "BZ01",
+      "market_id": "MK06",
+      "check_id": "L-C2.3",
+      "inputs": [
+        {
+          "name": "b",
+          "reading_id": "RD425",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "E-mode ltv",
+          "group": "emode-2"
+        },
+        {
+          "name": "lambda",
+          "reading_id": "RD426",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "E-mode lt",
+          "group": "emode-2"
+        },
+        {
+          "name": "bonus",
+          "reading_id": "RD427",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "E-mode 清算奖励",
+          "group": "emode-2"
+        },
+        {
+          "name": "same_underlying",
+          "reading_id": "无",
+          "constant": "yes",
+          "divide_by": 1,
+          "note": "借款资产 0；两边同为美元计价资产，或同为 SUI 及其 LST 时按同底层（分类需人工复核）",
+          "group": "emode-2"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD425",
+        "RD426",
+        "RD427"
+      ],
+      "reason": "E-mode：CERT 作抵押的全部 1 个有效组合，脚本逐组计算取最差",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK025",
+      "business_id": "BZ01",
+      "market_id": "MK06",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD074",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD075",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD076",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD077",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD074",
+        "RD075",
+        "RD076",
+        "RD077"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK026",
+      "business_id": "BZ01",
+      "market_id": "MK06",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD073"
+      ],
+      "reason": "设有供应上限（supply_cap_ceiling = 25000000000000000000000000000000000000000000），无论是否主流资产都不触发",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK027",
+      "business_id": "BZ01",
+      "market_id": "MK07",
+      "check_id": "L-C2.1",
+      "inputs": [
+        {
+          "name": "b",
+          "reading_id": "RD080",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "lambda",
+          "reading_id": "RD081",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "bonus",
+          "reading_id": "RD082",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "清算奖励；奖励在清算人与国库之间分配，用户被扣押的总额为债务 × (1 + bonus)，见 logic.move:225-233",
+          "group": "无"
+        },
+        {
+          "name": "same_underlying",
+          "reading_id": "无",
+          "constant": "no",
+          "divide_by": 1,
+          "note": "默认模式按一般组合",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD080",
+        "RD081",
+        "RD082"
+      ],
+      "reason": "默认模式：HASUI 作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK028",
+      "business_id": "BZ01",
+      "market_id": "MK07",
+      "check_id": "L-C2.3",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK029",
+      "business_id": "BZ01",
+      "market_id": "MK07",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD084",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD085",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD086",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD087",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD084",
+        "RD085",
+        "RD086",
+        "RD087"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK030",
+      "business_id": "BZ01",
+      "market_id": "MK07",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD083"
+      ],
+      "reason": "设有供应上限（supply_cap_ceiling = 27500000000000000000000000000000000000000000），无论是否主流资产都不触发",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK031",
+      "business_id": "BZ01",
+      "market_id": "MK08",
+      "check_id": "L-C2.1",
+      "inputs": [
+        {
+          "name": "b",
+          "reading_id": "RD090",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "lambda",
+          "reading_id": "RD091",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "bonus",
+          "reading_id": "RD092",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "清算奖励；奖励在清算人与国库之间分配，用户被扣押的总额为债务 × (1 + bonus)，见 logic.move:225-233",
+          "group": "无"
+        },
+        {
+          "name": "same_underlying",
+          "reading_id": "无",
+          "constant": "no",
+          "divide_by": 1,
+          "note": "默认模式按一般组合",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD090",
+        "RD091",
+        "RD092"
+      ],
+      "reason": "默认模式：NAVX 作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK032",
+      "business_id": "BZ01",
+      "market_id": "MK08",
+      "check_id": "L-C2.3",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK033",
+      "business_id": "BZ01",
+      "market_id": "MK08",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD094",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD095",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD096",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD097",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD094",
+        "RD095",
+        "RD096",
+        "RD097"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK034",
+      "business_id": "BZ01",
+      "market_id": "MK08",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD093"
+      ],
+      "reason": "设有供应上限（supply_cap_ceiling = 300000000000000000000000000000000000000000000），无论是否主流资产都不触发",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK035",
+      "business_id": "BZ01",
+      "market_id": "MK09",
+      "check_id": "L-C2.1",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD100"
+      ],
+      "reason": "LTV = 0，该资产不能作抵押，没有抵押×借款组合",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK036",
+      "business_id": "BZ01",
+      "market_id": "MK09",
+      "check_id": "L-C2.3",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK037",
+      "business_id": "BZ01",
+      "market_id": "MK09",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD104",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD105",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD106",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD107",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD104",
+        "RD105",
+        "RD106",
+        "RD107"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK038",
+      "business_id": "BZ01",
+      "market_id": "MK09",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD100"
+      ],
+      "reason": "LTV = 0，不能作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK039",
+      "business_id": "BZ01",
+      "market_id": "MK10",
+      "check_id": "L-C2.1",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD110"
+      ],
+      "reason": "LTV = 0，该资产不能作抵押，没有抵押×借款组合",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK040",
+      "business_id": "BZ01",
+      "market_id": "MK10",
+      "check_id": "L-C2.3",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK041",
+      "business_id": "BZ01",
+      "market_id": "MK10",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD114",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD115",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD116",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD117",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD114",
+        "RD115",
+        "RD116",
+        "RD117"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK042",
+      "business_id": "BZ01",
+      "market_id": "MK10",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD110"
+      ],
+      "reason": "LTV = 0，不能作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK043",
+      "business_id": "BZ01",
+      "market_id": "MK11",
+      "check_id": "L-C2.1",
+      "inputs": [
+        {
+          "name": "b",
+          "reading_id": "RD120",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "lambda",
+          "reading_id": "RD121",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "bonus",
+          "reading_id": "RD122",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "清算奖励；奖励在清算人与国库之间分配，用户被扣押的总额为债务 × (1 + bonus)，见 logic.move:225-233",
+          "group": "无"
+        },
+        {
+          "name": "same_underlying",
+          "reading_id": "无",
+          "constant": "no",
+          "divide_by": 1,
+          "note": "默认模式按一般组合",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD120",
+        "RD121",
+        "RD122"
+      ],
+      "reason": "默认模式：USDC 作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK044",
+      "business_id": "BZ01",
+      "market_id": "MK11",
+      "check_id": "L-C2.3",
+      "inputs": [
+        {
+          "name": "b",
+          "reading_id": "RD434",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "E-mode ltv",
+          "group": "emode-4"
+        },
+        {
+          "name": "lambda",
+          "reading_id": "RD435",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "E-mode lt",
+          "group": "emode-4"
+        },
+        {
+          "name": "bonus",
+          "reading_id": "RD436",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "E-mode 清算奖励",
+          "group": "emode-4"
+        },
+        {
+          "name": "same_underlying",
+          "reading_id": "无",
+          "constant": "yes",
+          "divide_by": 1,
+          "note": "借款资产 18；两边同为美元计价资产，或同为 SUI 及其 LST 时按同底层（分类需人工复核）",
+          "group": "emode-4"
+        },
+        {
+          "name": "b",
+          "reading_id": "RD440",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "E-mode ltv",
+          "group": "emode-5"
+        },
+        {
+          "name": "lambda",
+          "reading_id": "RD441",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "E-mode lt",
+          "group": "emode-5"
+        },
+        {
+          "name": "bonus",
+          "reading_id": "RD442",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "E-mode 清算奖励",
+          "group": "emode-5"
+        },
+        {
+          "name": "same_underlying",
+          "reading_id": "无",
+          "constant": "yes",
+          "divide_by": 1,
+          "note": "借款资产 19；两边同为美元计价资产，或同为 SUI 及其 LST 时按同底层（分类需人工复核）",
+          "group": "emode-5"
+        },
+        {
+          "name": "b",
+          "reading_id": "RD446",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "E-mode ltv",
+          "group": "emode-6"
+        },
+        {
+          "name": "lambda",
+          "reading_id": "RD447",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "E-mode lt",
+          "group": "emode-6"
+        },
+        {
+          "name": "bonus",
+          "reading_id": "RD448",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "E-mode 清算奖励",
+          "group": "emode-6"
+        },
+        {
+          "name": "same_underlying",
+          "reading_id": "无",
+          "constant": "yes",
+          "divide_by": 1,
+          "note": "借款资产 12；两边同为美元计价资产，或同为 SUI 及其 LST 时按同底层（分类需人工复核）",
+          "group": "emode-6"
+        },
+        {
+          "name": "b",
+          "reading_id": "RD458",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "E-mode ltv",
+          "group": "emode-8"
+        },
+        {
+          "name": "lambda",
+          "reading_id": "RD459",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "E-mode lt",
+          "group": "emode-8"
+        },
+        {
+          "name": "bonus",
+          "reading_id": "RD460",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "E-mode 清算奖励",
+          "group": "emode-8"
+        },
+        {
+          "name": "same_underlying",
+          "reading_id": "无",
+          "constant": "yes",
+          "divide_by": 1,
+          "note": "借款资产 33；两边同为美元计价资产，或同为 SUI 及其 LST 时按同底层（分类需人工复核）",
+          "group": "emode-8"
+        },
+        {
+          "name": "b",
+          "reading_id": "RD464",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "E-mode ltv",
+          "group": "emode-9"
+        },
+        {
+          "name": "lambda",
+          "reading_id": "RD465",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "E-mode lt",
+          "group": "emode-9"
+        },
+        {
+          "name": "bonus",
+          "reading_id": "RD466",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "E-mode 清算奖励",
+          "group": "emode-9"
+        },
+        {
+          "name": "same_underlying",
+          "reading_id": "无",
+          "constant": "yes",
+          "divide_by": 1,
+          "note": "借款资产 34；两边同为美元计价资产，或同为 SUI 及其 LST 时按同底层（分类需人工复核）",
+          "group": "emode-9"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD434",
+        "RD435",
+        "RD436",
+        "RD440",
+        "RD441",
+        "RD442",
+        "RD446",
+        "RD447",
+        "RD448",
+        "RD458",
+        "RD459",
+        "RD460",
+        "RD464",
+        "RD465",
+        "RD466"
+      ],
+      "reason": "E-mode：USDC 作抵押的全部 5 个有效组合，脚本逐组计算取最差",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK045",
+      "business_id": "BZ01",
+      "market_id": "MK11",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD124",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD125",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD126",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD127",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD124",
+        "RD125",
+        "RD126",
+        "RD127"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK046",
+      "business_id": "BZ01",
+      "market_id": "MK11",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD123"
+      ],
+      "reason": "设有供应上限（supply_cap_ceiling = 50000000000000000000000000000000000000000000），无论是否主流资产都不触发",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK047",
+      "business_id": "BZ01",
+      "market_id": "MK12",
+      "check_id": "L-C2.1",
+      "inputs": [
+        {
+          "name": "b",
+          "reading_id": "RD130",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "lambda",
+          "reading_id": "RD131",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "bonus",
+          "reading_id": "RD132",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "清算奖励；奖励在清算人与国库之间分配，用户被扣押的总额为债务 × (1 + bonus)，见 logic.move:225-233",
+          "group": "无"
+        },
+        {
+          "name": "same_underlying",
+          "reading_id": "无",
+          "constant": "no",
+          "divide_by": 1,
+          "note": "默认模式按一般组合",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD130",
+        "RD131",
+        "RD132"
+      ],
+      "reason": "默认模式：ETH 作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK048",
+      "business_id": "BZ01",
+      "market_id": "MK12",
+      "check_id": "L-C2.3",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK049",
+      "business_id": "BZ01",
+      "market_id": "MK12",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD134",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD135",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD136",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD137",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD134",
+        "RD135",
+        "RD136",
+        "RD137"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK050",
+      "business_id": "BZ01",
+      "market_id": "MK12",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD133"
+      ],
+      "reason": "设有供应上限（supply_cap_ceiling = 1500000000000000000000000000000000000000），无论是否主流资产都不触发",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK051",
+      "business_id": "BZ01",
+      "market_id": "MK13",
+      "check_id": "L-C2.1",
+      "inputs": [
+        {
+          "name": "b",
+          "reading_id": "RD140",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "lambda",
+          "reading_id": "RD141",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "bonus",
+          "reading_id": "RD142",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "清算奖励；奖励在清算人与国库之间分配，用户被扣押的总额为债务 × (1 + bonus)，见 logic.move:225-233",
+          "group": "无"
+        },
+        {
+          "name": "same_underlying",
+          "reading_id": "无",
+          "constant": "no",
+          "divide_by": 1,
+          "note": "默认模式按一般组合",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD140",
+        "RD141",
+        "RD142"
+      ],
+      "reason": "默认模式：USDY 作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK052",
+      "business_id": "BZ01",
+      "market_id": "MK13",
+      "check_id": "L-C2.3",
+      "inputs": [
+        {
+          "name": "b",
+          "reading_id": "RD413",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "E-mode ltv",
+          "group": "emode-0"
+        },
+        {
+          "name": "lambda",
+          "reading_id": "RD414",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "E-mode lt",
+          "group": "emode-0"
+        },
+        {
+          "name": "bonus",
+          "reading_id": "RD415",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "E-mode 清算奖励",
+          "group": "emode-0"
+        },
+        {
+          "name": "same_underlying",
+          "reading_id": "无",
+          "constant": "yes",
+          "divide_by": 1,
+          "note": "借款资产 10；两边同为美元计价资产，或同为 SUI 及其 LST 时按同底层（分类需人工复核）",
+          "group": "emode-0"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD413",
+        "RD414",
+        "RD415"
+      ],
+      "reason": "E-mode：USDY 作抵押的全部 1 个有效组合，脚本逐组计算取最差",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK053",
+      "business_id": "BZ01",
+      "market_id": "MK13",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD144",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD145",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD146",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD147",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD144",
+        "RD145",
+        "RD146",
+        "RD147"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK054",
+      "business_id": "BZ01",
+      "market_id": "MK13",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD143"
+      ],
+      "reason": "设有供应上限（supply_cap_ceiling = 5000000000000000000000000000000000000000000），无论是否主流资产都不触发",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK055",
+      "business_id": "BZ01",
+      "market_id": "MK14",
+      "check_id": "L-C2.1",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD150"
+      ],
+      "reason": "LTV = 0，该资产不能作抵押，没有抵押×借款组合",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK056",
+      "business_id": "BZ01",
+      "market_id": "MK14",
+      "check_id": "L-C2.3",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK057",
+      "business_id": "BZ01",
+      "market_id": "MK14",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD154",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD155",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD156",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD157",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD154",
+        "RD155",
+        "RD156",
+        "RD157"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK058",
+      "business_id": "BZ01",
+      "market_id": "MK14",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD150"
+      ],
+      "reason": "LTV = 0，不能作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK059",
+      "business_id": "BZ01",
+      "market_id": "MK15",
+      "check_id": "L-C2.1",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD160"
+      ],
+      "reason": "LTV = 0，该资产不能作抵押，没有抵押×借款组合",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK060",
+      "business_id": "BZ01",
+      "market_id": "MK15",
+      "check_id": "L-C2.3",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK061",
+      "business_id": "BZ01",
+      "market_id": "MK15",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD164",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD165",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD166",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD167",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD164",
+        "RD165",
+        "RD166",
+        "RD167"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK062",
+      "business_id": "BZ01",
+      "market_id": "MK15",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD160"
+      ],
+      "reason": "LTV = 0，不能作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK063",
+      "business_id": "BZ01",
+      "market_id": "MK16",
+      "check_id": "L-C2.1",
+      "inputs": [
+        {
+          "name": "b",
+          "reading_id": "RD170",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "lambda",
+          "reading_id": "RD171",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "bonus",
+          "reading_id": "RD172",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "清算奖励；奖励在清算人与国库之间分配，用户被扣押的总额为债务 × (1 + bonus)，见 logic.move:225-233",
+          "group": "无"
+        },
+        {
+          "name": "same_underlying",
+          "reading_id": "无",
+          "constant": "no",
+          "divide_by": 1,
+          "note": "默认模式按一般组合",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD170",
+        "RD171",
+        "RD172"
+      ],
+      "reason": "默认模式：DEEP 作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK064",
+      "business_id": "BZ01",
+      "market_id": "MK16",
+      "check_id": "L-C2.3",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK065",
+      "business_id": "BZ01",
+      "market_id": "MK16",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD174",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD175",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD176",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD177",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD174",
+        "RD175",
+        "RD176",
+        "RD177"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK066",
+      "business_id": "BZ01",
+      "market_id": "MK16",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD173"
+      ],
+      "reason": "设有供应上限（supply_cap_ceiling = 450000000000000000000000000000000000000000000），无论是否主流资产都不触发",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK067",
+      "business_id": "BZ01",
+      "market_id": "MK17",
+      "check_id": "L-C2.1",
+      "inputs": [
+        {
+          "name": "b",
+          "reading_id": "RD180",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "lambda",
+          "reading_id": "RD181",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "bonus",
+          "reading_id": "RD182",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "清算奖励；奖励在清算人与国库之间分配，用户被扣押的总额为债务 × (1 + bonus)，见 logic.move:225-233",
+          "group": "无"
+        },
+        {
+          "name": "same_underlying",
+          "reading_id": "无",
+          "constant": "no",
+          "divide_by": 1,
+          "note": "默认模式按一般组合",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD180",
+        "RD181",
+        "RD182"
+      ],
+      "reason": "默认模式：FDUSD 作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK068",
+      "business_id": "BZ01",
+      "market_id": "MK17",
+      "check_id": "L-C2.3",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK069",
+      "business_id": "BZ01",
+      "market_id": "MK17",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD184",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD185",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD186",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD187",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD184",
+        "RD185",
+        "RD186",
+        "RD187"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK070",
+      "business_id": "BZ01",
+      "market_id": "MK17",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD183"
+      ],
+      "reason": "设有供应上限（supply_cap_ceiling = 52000000000000000000000000000000000000000），无论是否主流资产都不触发",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK071",
+      "business_id": "BZ01",
+      "market_id": "MK18",
+      "check_id": "L-C2.1",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD190"
+      ],
+      "reason": "LTV = 0，该资产不能作抵押，没有抵押×借款组合",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK072",
+      "business_id": "BZ01",
+      "market_id": "MK18",
+      "check_id": "L-C2.3",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK073",
+      "business_id": "BZ01",
+      "market_id": "MK18",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD194",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD195",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD196",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD197",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD194",
+        "RD195",
+        "RD196",
+        "RD197"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK074",
+      "business_id": "BZ01",
+      "market_id": "MK18",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD190"
+      ],
+      "reason": "LTV = 0，不能作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK075",
+      "business_id": "BZ01",
+      "market_id": "MK19",
+      "check_id": "L-C2.1",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD200"
+      ],
+      "reason": "LTV = 0，该资产不能作抵押，没有抵押×借款组合",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK076",
+      "business_id": "BZ01",
+      "market_id": "MK19",
+      "check_id": "L-C2.3",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK077",
+      "business_id": "BZ01",
+      "market_id": "MK19",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD204",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD205",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD206",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD207",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD204",
+        "RD205",
+        "RD206",
+        "RD207"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK078",
+      "business_id": "BZ01",
+      "market_id": "MK19",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD200"
+      ],
+      "reason": "LTV = 0，不能作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK079",
+      "business_id": "BZ01",
+      "market_id": "MK20",
+      "check_id": "L-C2.1",
+      "inputs": [
+        {
+          "name": "b",
+          "reading_id": "RD210",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "lambda",
+          "reading_id": "RD211",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "bonus",
+          "reading_id": "RD212",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "清算奖励；奖励在清算人与国库之间分配，用户被扣押的总额为债务 × (1 + bonus)，见 logic.move:225-233",
+          "group": "无"
+        },
+        {
+          "name": "same_underlying",
+          "reading_id": "无",
+          "constant": "no",
+          "divide_by": 1,
+          "note": "默认模式按一般组合",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD210",
+        "RD211",
+        "RD212"
+      ],
+      "reason": "默认模式：USDT 作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK080",
+      "business_id": "BZ01",
+      "market_id": "MK20",
+      "check_id": "L-C2.3",
+      "inputs": [
+        {
+          "name": "b",
+          "reading_id": "RD455",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "E-mode ltv",
+          "group": "emode-7"
+        },
+        {
+          "name": "lambda",
+          "reading_id": "RD456",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "E-mode lt",
+          "group": "emode-7"
+        },
+        {
+          "name": "bonus",
+          "reading_id": "RD457",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "E-mode 清算奖励",
+          "group": "emode-7"
+        },
+        {
+          "name": "same_underlying",
+          "reading_id": "无",
+          "constant": "yes",
+          "divide_by": 1,
+          "note": "借款资产 10；两边同为美元计价资产，或同为 SUI 及其 LST 时按同底层（分类需人工复核）",
+          "group": "emode-7"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD455",
+        "RD456",
+        "RD457"
+      ],
+      "reason": "E-mode：USDT 作抵押的全部 1 个有效组合，脚本逐组计算取最差",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK081",
+      "business_id": "BZ01",
+      "market_id": "MK20",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD214",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD215",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD216",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD217",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD214",
+        "RD215",
+        "RD216",
+        "RD217"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK082",
+      "business_id": "BZ01",
+      "market_id": "MK20",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD213"
+      ],
+      "reason": "设有供应上限（supply_cap_ceiling = 10000000000000000000000000000000000000000000），无论是否主流资产都不触发",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK083",
+      "business_id": "BZ01",
+      "market_id": "MK21",
+      "check_id": "L-C2.1",
+      "inputs": [
+        {
+          "name": "b",
+          "reading_id": "RD220",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "lambda",
+          "reading_id": "RD221",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "bonus",
+          "reading_id": "RD222",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "清算奖励；奖励在清算人与国库之间分配，用户被扣押的总额为债务 × (1 + bonus)，见 logic.move:225-233",
+          "group": "无"
+        },
+        {
+          "name": "same_underlying",
+          "reading_id": "无",
+          "constant": "no",
+          "divide_by": 1,
+          "note": "默认模式按一般组合",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD220",
+        "RD221",
+        "RD222"
+      ],
+      "reason": "默认模式：STSUI 作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK084",
+      "business_id": "BZ01",
+      "market_id": "MK21",
+      "check_id": "L-C2.3",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK085",
+      "business_id": "BZ01",
+      "market_id": "MK21",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD224",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD225",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD226",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD227",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD224",
+        "RD225",
+        "RD226",
+        "RD227"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK086",
+      "business_id": "BZ01",
+      "market_id": "MK21",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD223"
+      ],
+      "reason": "设有供应上限（supply_cap_ceiling = 40000000000000000000000000000000000000000），无论是否主流资产都不触发",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK087",
+      "business_id": "BZ01",
+      "market_id": "MK22",
+      "check_id": "L-C2.1",
+      "inputs": [
+        {
+          "name": "b",
+          "reading_id": "RD230",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "lambda",
+          "reading_id": "RD231",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "bonus",
+          "reading_id": "RD232",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "清算奖励；奖励在清算人与国库之间分配，用户被扣押的总额为债务 × (1 + bonus)，见 logic.move:225-233",
+          "group": "无"
+        },
+        {
+          "name": "same_underlying",
+          "reading_id": "无",
+          "constant": "no",
+          "divide_by": 1,
+          "note": "默认模式按一般组合",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD230",
+        "RD231",
+        "RD232"
+      ],
+      "reason": "默认模式：BTC 作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK088",
+      "business_id": "BZ01",
+      "market_id": "MK22",
+      "check_id": "L-C2.3",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK089",
+      "business_id": "BZ01",
+      "market_id": "MK22",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD234",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD235",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD236",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD237",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD234",
+        "RD235",
+        "RD236",
+        "RD237"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK090",
+      "business_id": "BZ01",
+      "market_id": "MK22",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD233"
+      ],
+      "reason": "设有供应上限（supply_cap_ceiling = 50000000000000000000000000000000000000），无论是否主流资产都不触发",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK091",
+      "business_id": "BZ01",
+      "market_id": "MK23",
+      "check_id": "L-C2.1",
+      "inputs": [
+        {
+          "name": "b",
+          "reading_id": "RD240",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "lambda",
+          "reading_id": "RD241",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "bonus",
+          "reading_id": "RD242",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "清算奖励；奖励在清算人与国库之间分配，用户被扣押的总额为债务 × (1 + bonus)，见 logic.move:225-233",
+          "group": "无"
+        },
+        {
+          "name": "same_underlying",
+          "reading_id": "无",
+          "constant": "no",
+          "divide_by": 1,
+          "note": "默认模式按一般组合",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD240",
+        "RD241",
+        "RD242"
+      ],
+      "reason": "默认模式：COIN 作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK092",
+      "business_id": "BZ01",
+      "market_id": "MK23",
+      "check_id": "L-C2.3",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK093",
+      "business_id": "BZ01",
+      "market_id": "MK23",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD244",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD245",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD246",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD247",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD244",
+        "RD245",
+        "RD246",
+        "RD247"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK094",
+      "business_id": "BZ01",
+      "market_id": "MK23",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD243"
+      ],
+      "reason": "设有供应上限（supply_cap_ceiling = 1000000000000000000000000000000000000000），无论是否主流资产都不触发",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK095",
+      "business_id": "BZ01",
+      "market_id": "MK24",
+      "check_id": "L-C2.1",
+      "inputs": [
+        {
+          "name": "b",
+          "reading_id": "RD250",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "lambda",
+          "reading_id": "RD251",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "bonus",
+          "reading_id": "RD252",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "清算奖励；奖励在清算人与国库之间分配，用户被扣押的总额为债务 × (1 + bonus)，见 logic.move:225-233",
+          "group": "无"
+        },
+        {
+          "name": "same_underlying",
+          "reading_id": "无",
+          "constant": "no",
+          "divide_by": 1,
+          "note": "默认模式按一般组合",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD250",
+        "RD251",
+        "RD252"
+      ],
+      "reason": "默认模式：LBTC 作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK096",
+      "business_id": "BZ01",
+      "market_id": "MK24",
+      "check_id": "L-C2.3",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK097",
+      "business_id": "BZ01",
+      "market_id": "MK24",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD254",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD255",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD256",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD257",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD254",
+        "RD255",
+        "RD256",
+        "RD257"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK098",
+      "business_id": "BZ01",
+      "market_id": "MK24",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD253"
+      ],
+      "reason": "设有供应上限（supply_cap_ceiling = 70000000000000000000000000000000000000），无论是否主流资产都不触发",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK099",
+      "business_id": "BZ01",
+      "market_id": "MK25",
+      "check_id": "L-C2.1",
+      "inputs": [
+        {
+          "name": "b",
+          "reading_id": "RD260",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "lambda",
+          "reading_id": "RD261",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "bonus",
+          "reading_id": "RD262",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "清算奖励；奖励在清算人与国库之间分配，用户被扣押的总额为债务 × (1 + bonus)，见 logic.move:225-233",
+          "group": "无"
+        },
+        {
+          "name": "same_underlying",
+          "reading_id": "无",
+          "constant": "no",
+          "divide_by": 1,
+          "note": "默认模式按一般组合",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD260",
+        "RD261",
+        "RD262"
+      ],
+      "reason": "默认模式：WAL 作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK100",
+      "business_id": "BZ01",
+      "market_id": "MK25",
+      "check_id": "L-C2.3",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK101",
+      "business_id": "BZ01",
+      "market_id": "MK25",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD264",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD265",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD266",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD267",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD264",
+        "RD265",
+        "RD266",
+        "RD267"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK102",
+      "business_id": "BZ01",
+      "market_id": "MK25",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD263"
+      ],
+      "reason": "设有供应上限（supply_cap_ceiling = 160000000000000000000000000000000000000000000），无论是否主流资产都不触发",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK103",
+      "business_id": "BZ01",
+      "market_id": "MK26",
+      "check_id": "L-C2.1",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD270"
+      ],
+      "reason": "LTV = 0，该资产不能作抵押，没有抵押×借款组合",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK104",
+      "business_id": "BZ01",
+      "market_id": "MK26",
+      "check_id": "L-C2.3",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK105",
+      "business_id": "BZ01",
+      "market_id": "MK26",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD274",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD275",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD276",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD277",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD274",
+        "RD275",
+        "RD276",
+        "RD277"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK106",
+      "business_id": "BZ01",
+      "market_id": "MK26",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD270"
+      ],
+      "reason": "LTV = 0，不能作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK107",
+      "business_id": "BZ01",
+      "market_id": "MK27",
+      "check_id": "L-C2.1",
+      "inputs": [
+        {
+          "name": "b",
+          "reading_id": "RD280",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "lambda",
+          "reading_id": "RD281",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "bonus",
+          "reading_id": "RD282",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "清算奖励；奖励在清算人与国库之间分配，用户被扣押的总额为债务 × (1 + bonus)，见 logic.move:225-233",
+          "group": "无"
+        },
+        {
+          "name": "same_underlying",
+          "reading_id": "无",
+          "constant": "no",
+          "divide_by": 1,
+          "note": "默认模式按一般组合",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD280",
+        "RD281",
+        "RD282"
+      ],
+      "reason": "默认模式：XBTC 作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK108",
+      "business_id": "BZ01",
+      "market_id": "MK27",
+      "check_id": "L-C2.3",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK109",
+      "business_id": "BZ01",
+      "market_id": "MK27",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD284",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD285",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD286",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD287",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD284",
+        "RD285",
+        "RD286",
+        "RD287"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK110",
+      "business_id": "BZ01",
+      "market_id": "MK27",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD283"
+      ],
+      "reason": "设有供应上限（supply_cap_ceiling = 205000000000000000000000000000000000000），无论是否主流资产都不触发",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK111",
+      "business_id": "BZ01",
+      "market_id": "MK28",
+      "check_id": "L-C2.1",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD290"
+      ],
+      "reason": "LTV = 0，该资产不能作抵押，没有抵押×借款组合",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK112",
+      "business_id": "BZ01",
+      "market_id": "MK28",
+      "check_id": "L-C2.3",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK113",
+      "business_id": "BZ01",
+      "market_id": "MK28",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD294",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD295",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD296",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD297",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD294",
+        "RD295",
+        "RD296",
+        "RD297"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK114",
+      "business_id": "BZ01",
+      "market_id": "MK28",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD290"
+      ],
+      "reason": "LTV = 0，不能作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK115",
+      "business_id": "BZ01",
+      "market_id": "MK29",
+      "check_id": "L-C2.1",
+      "inputs": [
+        {
+          "name": "b",
+          "reading_id": "RD300",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "lambda",
+          "reading_id": "RD301",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "bonus",
+          "reading_id": "RD302",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "清算奖励；奖励在清算人与国库之间分配，用户被扣押的总额为债务 × (1 + bonus)，见 logic.move:225-233",
+          "group": "无"
+        },
+        {
+          "name": "same_underlying",
+          "reading_id": "无",
+          "constant": "no",
+          "divide_by": 1,
+          "note": "默认模式按一般组合",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD300",
+        "RD301",
+        "RD302"
+      ],
+      "reason": "默认模式：COIN 作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK116",
+      "business_id": "BZ01",
+      "market_id": "MK29",
+      "check_id": "L-C2.3",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK117",
+      "business_id": "BZ01",
+      "market_id": "MK29",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD304",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD305",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD306",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD307",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD304",
+        "RD305",
+        "RD306",
+        "RD307"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK118",
+      "business_id": "BZ01",
+      "market_id": "MK29",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD303"
+      ],
+      "reason": "设有供应上限（supply_cap_ceiling = 100000000000000000000000000000000000000），无论是否主流资产都不触发",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK119",
+      "business_id": "BZ01",
+      "market_id": "MK30",
+      "check_id": "L-C2.1",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD310"
+      ],
+      "reason": "LTV = 0，该资产不能作抵押，没有抵押×借款组合",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK120",
+      "business_id": "BZ01",
+      "market_id": "MK30",
+      "check_id": "L-C2.3",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK121",
+      "business_id": "BZ01",
+      "market_id": "MK30",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD314",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD315",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD316",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD317",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD314",
+        "RD315",
+        "RD316",
+        "RD317"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK122",
+      "business_id": "BZ01",
+      "market_id": "MK30",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD310"
+      ],
+      "reason": "LTV = 0，不能作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK123",
+      "business_id": "BZ01",
+      "market_id": "MK31",
+      "check_id": "L-C2.1",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD320"
+      ],
+      "reason": "LTV = 0，该资产不能作抵押，没有抵押×借款组合",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK124",
+      "business_id": "BZ01",
+      "market_id": "MK31",
+      "check_id": "L-C2.3",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK125",
+      "business_id": "BZ01",
+      "market_id": "MK31",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD324",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD325",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD326",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD327",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD324",
+        "RD325",
+        "RD326",
+        "RD327"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK126",
+      "business_id": "BZ01",
+      "market_id": "MK31",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD320"
+      ],
+      "reason": "LTV = 0，不能作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK127",
+      "business_id": "BZ01",
+      "market_id": "MK32",
+      "check_id": "L-C2.1",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD330"
+      ],
+      "reason": "LTV = 0，该资产不能作抵押，没有抵押×借款组合",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK128",
+      "business_id": "BZ01",
+      "market_id": "MK32",
+      "check_id": "L-C2.3",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK129",
+      "business_id": "BZ01",
+      "market_id": "MK32",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD334",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD335",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD336",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD337",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD334",
+        "RD335",
+        "RD336",
+        "RD337"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK130",
+      "business_id": "BZ01",
+      "market_id": "MK32",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD330"
+      ],
+      "reason": "LTV = 0，不能作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK131",
+      "business_id": "BZ01",
+      "market_id": "MK33",
+      "check_id": "L-C2.1",
+      "inputs": [
+        {
+          "name": "b",
+          "reading_id": "RD340",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "lambda",
+          "reading_id": "RD341",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "bonus",
+          "reading_id": "RD342",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "清算奖励；奖励在清算人与国库之间分配，用户被扣押的总额为债务 × (1 + bonus)，见 logic.move:225-233",
+          "group": "无"
+        },
+        {
+          "name": "same_underlying",
+          "reading_id": "无",
+          "constant": "no",
+          "divide_by": 1,
+          "note": "默认模式按一般组合",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD340",
+        "RD341",
+        "RD342"
+      ],
+      "reason": "默认模式：WBTC 作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK132",
+      "business_id": "BZ01",
+      "market_id": "MK33",
+      "check_id": "L-C2.3",
+      "inputs": [],
+      "q_not_applicable": "yes",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [],
+      "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK133",
+      "business_id": "BZ01",
+      "market_id": "MK33",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD344",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD345",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD346",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD347",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD344",
+        "RD345",
+        "RD346",
+        "RD347"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK134",
+      "business_id": "BZ01",
+      "market_id": "MK33",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD343"
+      ],
+      "reason": "设有供应上限（supply_cap_ceiling = 100000000000000000000000000000000000000），无论是否主流资产都不触发",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK135",
+      "business_id": "BZ01",
+      "market_id": "MK34",
+      "check_id": "L-C2.1",
+      "inputs": [
+        {
+          "name": "b",
+          "reading_id": "RD350",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "lambda",
+          "reading_id": "RD351",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "bonus",
+          "reading_id": "RD352",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "清算奖励；奖励在清算人与国库之间分配，用户被扣押的总额为债务 × (1 + bonus)，见 logic.move:225-233",
+          "group": "无"
+        },
+        {
+          "name": "same_underlying",
+          "reading_id": "无",
+          "constant": "no",
+          "divide_by": 1,
+          "note": "默认模式按一般组合",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD350",
+        "RD351",
+        "RD352"
+      ],
+      "reason": "默认模式：SUI_USDE 作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK136",
+      "business_id": "BZ01",
+      "market_id": "MK34",
+      "check_id": "L-C2.3",
+      "inputs": [
+        {
+          "name": "b",
+          "reading_id": "RD419",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "E-mode ltv",
+          "group": "emode-1"
+        },
+        {
+          "name": "lambda",
+          "reading_id": "RD420",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "E-mode lt",
+          "group": "emode-1"
+        },
+        {
+          "name": "bonus",
+          "reading_id": "RD421",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "E-mode 清算奖励",
+          "group": "emode-1"
+        },
+        {
+          "name": "same_underlying",
+          "reading_id": "无",
+          "constant": "yes",
+          "divide_by": 1,
+          "note": "借款资产 10；两边同为美元计价资产，或同为 SUI 及其 LST 时按同底层（分类需人工复核）",
+          "group": "emode-1"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD419",
+        "RD420",
+        "RD421"
+      ],
+      "reason": "E-mode：SUI_USDE 作抵押的全部 1 个有效组合，脚本逐组计算取最差",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK137",
+      "business_id": "BZ01",
+      "market_id": "MK34",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD354",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD355",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD356",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD357",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD354",
+        "RD355",
+        "RD356",
+        "RD357"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK138",
+      "business_id": "BZ01",
+      "market_id": "MK34",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD353"
+      ],
+      "reason": "设有供应上限（supply_cap_ceiling = 5000000000000000000000000000000000000000000），无论是否主流资产都不触发",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK139",
+      "business_id": "BZ01",
+      "market_id": "MK35",
+      "check_id": "L-C2.1",
+      "inputs": [
+        {
+          "name": "b",
+          "reading_id": "RD360",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "lambda",
+          "reading_id": "RD361",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "ray 精度",
+          "group": "无"
+        },
+        {
+          "name": "bonus",
+          "reading_id": "RD362",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "清算奖励；奖励在清算人与国库之间分配，用户被扣押的总额为债务 × (1 + bonus)，见 logic.move:225-233",
+          "group": "无"
+        },
+        {
+          "name": "same_underlying",
+          "reading_id": "无",
+          "constant": "no",
+          "divide_by": 1,
+          "note": "默认模式按一般组合",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD360",
+        "RD361",
+        "RD362"
+      ],
+      "reason": "默认模式：USDSUI 作抵押",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    },
+    {
+      "id": "CK140",
+      "business_id": "BZ01",
+      "market_id": "MK35",
+      "check_id": "L-C2.3",
+      "inputs": [
+        {
+          "name": "b",
+          "reading_id": "RD431",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "E-mode ltv",
+          "group": "emode-3"
+        },
+        {
+          "name": "lambda",
+          "reading_id": "RD432",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "E-mode lt",
+          "group": "emode-3"
+        },
+        {
+          "name": "bonus",
+          "reading_id": "RD433",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "E-mode 清算奖励",
+          "group": "emode-3"
+        },
+        {
+          "name": "same_underlying",
+          "reading_id": "无",
+          "constant": "yes",
+          "divide_by": 1,
+          "note": "借款资产 10；两边同为美元计价资产，或同为 SUI 及其 LST 时按同底层（分类需人工复核）",
+          "group": "emode-3"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD431",
+        "RD432",
+        "RD433"
+      ],
+      "reason": "E-mode：USDSUI 作抵押的全部 1 个有效组合，脚本逐组计算取最差",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/emodes-main.json）"
+      ]
+    },
+    {
+      "id": "CK141",
+      "business_id": "BZ01",
+      "market_id": "MK35",
+      "check_id": "L-C2.2",
+      "inputs": [
+        {
+          "name": "base_rate",
+          "reading_id": "RD364",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "基础利率",
+          "group": "无"
+        },
+        {
+          "name": "slope_low",
+          "reading_id": "RD365",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "multiplier",
+          "group": "无"
+        },
+        {
+          "name": "slope_high",
+          "reading_id": "RD366",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "jump_rate_multiplier",
+          "group": "无"
+        },
+        {
+          "name": "u_kink",
+          "reading_id": "RD367",
+          "constant": "无",
+          "divide_by": 1e+27,
+          "note": "optimal_utilization",
+          "group": "无"
+        }
+      ],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "by_formula",
+      "q_warn": "by_formula",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD364",
+        "RD365",
+        "RD366",
+        "RD367"
+      ],
+      "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+      "evidence": [
+        "lending_core/sources/calculator.move:24-36"
+      ]
+    },
+    {
+      "id": "CK142",
+      "business_id": "BZ01",
+      "market_id": "MK35",
+      "check_id": "L-C2.4",
+      "inputs": [],
+      "q_not_applicable": "no",
+      "q_aggregate_not_stored": "no",
+      "q_hard": "no",
+      "q_warn": "no",
+      "q_weakened": "no",
+      "refers_to": "无",
+      "reading_ids": [
+        "RD363"
+      ],
+      "reason": "设有供应上限（supply_cap_ceiling = 15000000000000000000000000000000000000000000），无论是否主流资产都不触发",
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+      ]
+    }
+  ]
+}

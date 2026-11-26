@@ -110,12 +110,14 @@ def render():
             out.append("")
     import onchain
     out += ["## 六、由脚本计算的公式", "",
-            "下表列出的检查项，`q_hard` 和 `q_warn` 填 `by_formula`，在 `inputs` 里按「输入」列的名字逐个填写，定档由脚本完成。"
-            "其余检查项回答是非题。", ""]
+            "下表列出的检查项，`q_hard` 和 `q_warn` 填 `by_formula`，在 `inputs` 里按「输入」的名字逐个填写，定档由脚本完成。其余检查项回答是非题。", "",
+            "- **直接填协议的原始参数，不要自己推算。** 有多种写法的公式，选和协议存储方式一致的那种，例如清算奖励直接填 `bonus`，不要自己算 1 + 奖励。",
+            "- **同一检查项有多个组合时**（例如 L-C2.1／L-C2.3 的多个「抵押 × 借款 × 模式」组合），每个组合一组输入，用 `group` 区分，脚本逐组计算、取最差的结果。不要自己挑最差的那组。", ""]
     for fname, (title, formula, rule, ins) in onchain.FORMULA_DOC.items():
         checks = "、".join(sorted(k for k, v in onchain.FORMULA_FOR.items() if v == fname))
+        alts = "；".join("写法%s：%s" % ("一二三"[i], "、".join("`%s`" % n for n in alt)) for i, alt in enumerate(onchain.FORMULA_INPUTS[fname]))
         out += ["### %s（`%s`）" % (title, fname), "",
-                "- 适用检查项：%s" % checks, "- 公式：%s" % formula, "- 定档：%s" % rule, "",
+                "- 适用检查项：%s" % checks, "- 公式：%s" % formula, "- 定档：%s" % rule, "- 输入：%s" % alts, "",
                 "| 输入 | 含义 |", "| --- | --- |"]
         out += ["| `%s` | %s |" % (k, esc(v)) for k, v in ins.items()]
         out.append("")

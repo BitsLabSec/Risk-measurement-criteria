@@ -1,0 +1,2650 @@
+{
+  "rule_version": "onchain-v1.1 / skeleton-v1.1 / workflow-v1.0",
+  "status": "已评分",
+  "project_score": 62.0,
+  "dimension_view": {
+    "permissions": 80.0,
+    "configuration": 0.0,
+    "funds_dependencies": 100.00000000000001
+  },
+  "weight_note": "max(TVL 占比, 5%) 后归一",
+  "blocking_gaps": [],
+  "businesses": [
+    {
+      "business_id": "BZ01",
+      "specialty": "lending",
+      "dimensions": {
+        "permissions": {
+          "score": 80,
+          "by_consequence": {
+            "H1": 80,
+            "H2": 80,
+            "H3": 80
+          },
+          "paths": [
+            {
+              "path_id": "PA01",
+              "business_ids": [
+                "BZ01"
+              ],
+              "declared": "H1",
+              "consequence": "H1",
+              "description": "lending_core UpgradeCap → 升级替换全部逻辑",
+              "keys": 3,
+              "effective_delay_s": 0,
+              "score": 80,
+              "x1_candidate": false
+            },
+            {
+              "path_id": "PA02",
+              "business_ids": [
+                "BZ01"
+              ],
+              "declared": "H1",
+              "consequence": "H1",
+              "description": "oracle UpgradeCap → 升级价格逻辑",
+              "keys": 2,
+              "effective_delay_s": 0,
+              "score": 80,
+              "x1_candidate": false
+            },
+            {
+              "path_id": "PA03",
+              "business_ids": [
+                "BZ01"
+              ],
+              "declared": "H1",
+              "consequence": "H1",
+              "description": "OracleFeederCap → 直接写入任意价格",
+              "keys": 2,
+              "effective_delay_s": 0,
+              "score": 80,
+              "x1_candidate": false
+            },
+            {
+              "path_id": "PA04",
+              "business_ids": [
+                "BZ01"
+              ],
+              "declared": "H1",
+              "consequence": "H1",
+              "description": "OracleAdminCap → 铸造喂价凭证 → 写入任意价格",
+              "keys": 2,
+              "effective_delay_s": 0,
+              "score": 80,
+              "x1_candidate": false
+            },
+            {
+              "path_id": "PA05",
+              "business_ids": [
+                "BZ01"
+              ],
+              "declared": "H2",
+              "consequence": "H2",
+              "description": "OwnerCap 持有人 1 → 调整对存量仓位生效的风险参数",
+              "keys": 2,
+              "effective_delay_s": 0,
+              "score": 80,
+              "x1_candidate": false
+            },
+            {
+              "path_id": "PA06",
+              "business_ids": [
+                "BZ01"
+              ],
+              "declared": "H2",
+              "consequence": "H2",
+              "description": "OwnerCap 持有人 2 → 调整对存量仓位生效的风险参数",
+              "keys": 2,
+              "effective_delay_s": 0,
+              "score": 80,
+              "x1_candidate": false
+            },
+            {
+              "path_id": "PA07",
+              "business_ids": [
+                "BZ01"
+              ],
+              "declared": "H2",
+              "consequence": "H2",
+              "description": "StorageAdminCap → 铸造 OwnerCap → 调整风险参数",
+              "keys": 2,
+              "effective_delay_s": 0,
+              "score": 80,
+              "x1_candidate": false
+            },
+            {
+              "path_id": "PA08",
+              "business_ids": [
+                "BZ01"
+              ],
+              "declared": "H2",
+              "consequence": "H2",
+              "description": "OracleAdminCap → 修改价格源配置",
+              "keys": 2,
+              "effective_delay_s": 0,
+              "score": 80,
+              "x1_candidate": false
+            },
+            {
+              "path_id": "PA09",
+              "business_ids": [
+                "BZ01"
+              ],
+              "declared": "H3",
+              "consequence": "H3",
+              "description": "OwnerCap 持有人 1 → 暂停（另一持有人能解除但不能撤销对方凭证，任一持有人都能持续暂停）",
+              "keys": 2,
+              "effective_delay_s": 0,
+              "score": 80,
+              "x1_candidate": false
+            },
+            {
+              "path_id": "PA11",
+              "business_ids": [
+                "BZ01"
+              ],
+              "declared": "H3",
+              "consequence": "H3",
+              "description": "OwnerCap 持有人 1 → 把指定用户排除在清算之外",
+              "keys": 2,
+              "effective_delay_s": 0,
+              "score": 80,
+              "x1_candidate": false
+            },
+            {
+              "path_id": "PA10",
+              "business_ids": [
+                "BZ01"
+              ],
+              "declared": "H3",
+              "consequence": "H3",
+              "description": "OwnerCap 持有人 2 → 暂停（另一持有人能解除但不能撤销对方凭证，任一持有人都能持续暂停）",
+              "keys": 2,
+              "effective_delay_s": 0,
+              "score": 80,
+              "x1_candidate": false
+            },
+            {
+              "path_id": "PA12",
+              "business_ids": [
+                "BZ01"
+              ],
+              "declared": "H3",
+              "consequence": "H3",
+              "description": "OwnerCap 持有人 2 → 把指定用户排除在清算之外",
+              "keys": 2,
+              "effective_delay_s": 0,
+              "score": 80,
+              "x1_candidate": false
+            }
+          ],
+          "key_concentration": {
+            "paths_considered": 12,
+            "levels": [
+              {
+                "keys": 2,
+                "addresses": [
+                  "0x4517c281f621096fbf67ae95149bd03f8a66df4ad38c057e46d83b845c65eefe",
+                  "0x588732d6d828ba46628702f3bd6ce832f7a2b31a98346de5fac64a2f19dd0b0b"
+                ],
+                "controlled_paths": [
+                  "PA02",
+                  "PA03",
+                  "PA04",
+                  "PA05",
+                  "PA06",
+                  "PA07",
+                  "PA08",
+                  "PA09",
+                  "PA11",
+                  "PA10",
+                  "PA12"
+                ],
+                "uncontrolled_paths": [
+                  "PA01"
+                ],
+                "member_of": {
+                  "0x4517c281f621096fbf67ae95149bd03f8a66df4ad38c057e46d83b845c65eefe": [
+                    "PR06 3/5",
+                    "PR07 2/3",
+                    "PR08 2/3"
+                  ],
+                  "0x588732d6d828ba46628702f3bd6ce832f7a2b31a98346de5fac64a2f19dd0b0b": [
+                    "PR06 3/5",
+                    "PR07 2/3",
+                    "PR08 2/3"
+                  ]
+                }
+              },
+              {
+                "keys": 3,
+                "addresses": [
+                  "0x1d0385c861470b066e2becabe0d1411b2e568b1ecef70ce9ad3d282e82227fe2",
+                  "0x4517c281f621096fbf67ae95149bd03f8a66df4ad38c057e46d83b845c65eefe",
+                  "0x588732d6d828ba46628702f3bd6ce832f7a2b31a98346de5fac64a2f19dd0b0b"
+                ],
+                "controlled_paths": [
+                  "PA01",
+                  "PA02",
+                  "PA03",
+                  "PA04",
+                  "PA05",
+                  "PA06",
+                  "PA07",
+                  "PA08",
+                  "PA09",
+                  "PA11",
+                  "PA10",
+                  "PA12"
+                ],
+                "uncontrolled_paths": [],
+                "member_of": {
+                  "0x1d0385c861470b066e2becabe0d1411b2e568b1ecef70ce9ad3d282e82227fe2": [
+                    "PR06 3/5",
+                    "PR07 2/3"
+                  ],
+                  "0x4517c281f621096fbf67ae95149bd03f8a66df4ad38c057e46d83b845c65eefe": [
+                    "PR06 3/5",
+                    "PR07 2/3",
+                    "PR08 2/3"
+                  ],
+                  "0x588732d6d828ba46628702f3bd6ce832f7a2b31a98346de5fac64a2f19dd0b0b": [
+                    "PR06 3/5",
+                    "PR07 2/3",
+                    "PR08 2/3"
+                  ]
+                }
+              }
+            ],
+            "all_paths_keys": 3
+          }
+        },
+        "configuration": {
+          "score": 0.0,
+          "markets": [
+            {
+              "market_id": "MK01",
+              "score": 0,
+              "tvl_usd": 16120209.03
+            },
+            {
+              "market_id": "MK02",
+              "score": 0,
+              "tvl_usd": 2331192.42
+            },
+            {
+              "market_id": "MK03",
+              "score": 0,
+              "tvl_usd": 1070379.13
+            },
+            {
+              "market_id": "MK04",
+              "score": 0,
+              "tvl_usd": 109825.55
+            },
+            {
+              "market_id": "MK05",
+              "score": 0,
+              "tvl_usd": 77572.74
+            },
+            {
+              "market_id": "MK06",
+              "score": 0,
+              "tvl_usd": 10370441.42
+            },
+            {
+              "market_id": "MK07",
+              "score": 0,
+              "tvl_usd": 13255296.21
+            },
+            {
+              "market_id": "MK08",
+              "score": 0,
+              "tvl_usd": 1803839.69
+            },
+            {
+              "market_id": "MK09",
+              "score": 0,
+              "tvl_usd": 27127.36
+            },
+            {
+              "market_id": "MK10",
+              "score": 0,
+              "tvl_usd": 2255.99
+            },
+            {
+              "market_id": "MK11",
+              "score": 0,
+              "tvl_usd": 17721750.97
+            },
+            {
+              "market_id": "MK12",
+              "score": 0,
+              "tvl_usd": 963079.47
+            },
+            {
+              "market_id": "MK13",
+              "score": 0,
+              "tvl_usd": 2092575.84
+            },
+            {
+              "market_id": "MK14",
+              "score": 0,
+              "tvl_usd": 46754.57
+            },
+            {
+              "market_id": "MK15",
+              "score": 0,
+              "tvl_usd": 29375.28
+            },
+            {
+              "market_id": "MK16",
+              "score": 0,
+              "tvl_usd": 2798579.85
+            },
+            {
+              "market_id": "MK17",
+              "score": 0,
+              "tvl_usd": 26626.11
+            },
+            {
+              "market_id": "MK18",
+              "score": 0,
+              "tvl_usd": 7842.21
+            },
+            {
+              "market_id": "MK19",
+              "score": 0,
+              "tvl_usd": 16512977.64
+            },
+            {
+              "market_id": "MK20",
+              "score": 0,
+              "tvl_usd": 2031102.36
+            },
+            {
+              "market_id": "MK21",
+              "score": 0,
+              "tvl_usd": 3695.63
+            },
+            {
+              "market_id": "MK22",
+              "score": 0,
+              "tvl_usd": 698556.4
+            },
+            {
+              "market_id": "MK23",
+              "score": 0,
+              "tvl_usd": 49717.54
+            },
+            {
+              "market_id": "MK24",
+              "score": 0,
+              "tvl_usd": 1230436.18
+            },
+            {
+              "market_id": "MK25",
+              "score": 0,
+              "tvl_usd": 2531957.86
+            },
+            {
+              "market_id": "MK26",
+              "score": 0,
+              "tvl_usd": 12485.17
+            },
+            {
+              "market_id": "MK27",
+              "score": 0,
+              "tvl_usd": 2346012.51
+            },
+            {
+              "market_id": "MK28",
+              "score": 0,
+              "tvl_usd": 25303.03
+            },
+            {
+              "market_id": "MK29",
+              "score": 0,
+              "tvl_usd": 11351534.99
+            },
+            {
+              "market_id": "MK30",
+              "score": 0,
+              "tvl_usd": 14.95
+            },
+            {
+              "market_id": "MK31",
+              "score": 0,
+              "tvl_usd": 3612.17
+            },
+            {
+              "market_id": "MK32",
+              "score": 0,
+              "tvl_usd": 127414.96
+            },
+            {
+              "market_id": "MK33",
+              "score": 0,
+              "tvl_usd": 588974.99
+            },
+            {
+              "market_id": "MK34",
+              "score": 0,
+              "tvl_usd": 23344.63
+            },
+            {
+              "market_id": "MK35",
+              "score": 0,
+              "tvl_usd": 6957288.35
+            }
+          ],
+          "checks": [
+            {
+              "check": "CK001",
+              "check_id": "L-C1.1",
+              "business_id": "BZ01",
+              "market_id": "ALL",
+              "reason": "储备表的 coin_type 与 oracle_id 一一对应，35 个资产未见重复或错配",
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK002",
+              "check_id": "L-C3.1",
+              "business_id": "BZ01",
+              "market_id": "ALL",
+              "reason": "快照时主市场 Storage.paused = true；还款、提款、借款、清算入口都先检查该开关，全部受阻，没有替代入口",
+              "result": 0,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK003",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK01",
+              "reason": "默认模式：SUI 作抵押",
+              "formula": "lending_buffer",
+              "calc": {
+                "D_open": "0.0625",
+                "M": "0.12",
+                "B_buf": "0.0625",
+                "d1": "0.05"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK004",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK01",
+              "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK005",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK01",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0.01",
+                "r_kink": "0.028",
+                "r1": "0.128",
+                "k_low": "0.02",
+                "k_high": "1"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK006",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK01",
+              "reason": "设有供应上限（supply_cap_ceiling = 55000000000000000000000000000000000000000000），无论是否主流资产都不触发",
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK007",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK02",
+              "reason": "LTV = 0，该资产不能作抵押，没有抵押×借款组合",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK008",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK02",
+              "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK009",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK02",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0.05",
+                "r_kink": "0.131",
+                "r1": "0.331",
+                "k_low": "0.09",
+                "k_high": "2"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK010",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK02",
+              "reason": "LTV = 0，不能作抵押",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK011",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK03",
+              "reason": "LTV = 0，该资产不能作抵押，没有抵押×借款组合",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK012",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK03",
+              "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK013",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK03",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0.01",
+                "r_kink": "0.027",
+                "r1": "0.045",
+                "k_low": "0.02",
+                "k_high": "0.12"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK014",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK03",
+              "reason": "LTV = 0，不能作抵押",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK015",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK04",
+              "reason": "LTV = 0，该资产不能作抵押，没有抵押×借款组合",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK016",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK04",
+              "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK017",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK04",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0",
+                "r_kink": "0.039975",
+                "r1": "0.839975",
+                "k_low": "0.0533",
+                "k_high": "3.2"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK018",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK04",
+              "reason": "LTV = 0，不能作抵押",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK019",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK05",
+              "reason": "LTV = 0，该资产不能作抵押，没有抵押×借款组合",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK020",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK05",
+              "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK021",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK05",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0",
+                "r_kink": "0.2",
+                "r1": "1.8",
+                "k_low": "0.4",
+                "k_high": "3.2"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK022",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK05",
+              "reason": "LTV = 0，不能作抵押",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK023",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK06",
+              "reason": "默认模式：CERT 作抵押",
+              "formula": "lending_buffer",
+              "calc": {
+                "D_open": "0.0625",
+                "M": "0.12",
+                "B_buf": "0.0625",
+                "d1": "0.05"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK024",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK06",
+              "reason": "E-mode：CERT 作抵押的全部 1 个有效组合，脚本逐组计算取最差",
+              "formula": "lending_buffer",
+              "calc": {
+                "D_open": "0.032258",
+                "M": "0.0235",
+                "B_buf": "0.0235",
+                "d1": "0.01"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK025",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK06",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0",
+                "r_kink": "0.099975",
+                "r1": "0.899975",
+                "k_low": "0.1333",
+                "k_high": "3.2"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK026",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK06",
+              "reason": "设有供应上限（supply_cap_ceiling = 25000000000000000000000000000000000000000000），无论是否主流资产都不触发",
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK027",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK07",
+              "reason": "默认模式：HASUI 作抵押",
+              "formula": "lending_buffer",
+              "calc": {
+                "D_open": "0.066667",
+                "M": "0.175",
+                "B_buf": "0.066667",
+                "d1": "0.05"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK028",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK07",
+              "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK029",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK07",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0",
+                "r_kink": "0.024975",
+                "r1": "0.824975",
+                "k_low": "0.0333",
+                "k_high": "3.2"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK030",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK07",
+              "reason": "设有供应上限（supply_cap_ceiling = 27500000000000000000000000000000000000000000），无论是否主流资产都不触发",
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK031",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK08",
+              "reason": "默认模式：NAVX 作抵押",
+              "formula": "lending_buffer",
+              "calc": {
+                "D_open": "0.307692",
+                "M": "0.3175",
+                "B_buf": "0.307692",
+                "d1": "0.05"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK032",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK08",
+              "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK033",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK08",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0",
+                "r_kink": "0.08",
+                "r1": "9.08",
+                "k_low": "0.8",
+                "k_high": "10"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK034",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK08",
+              "reason": "设有供应上限（supply_cap_ceiling = 300000000000000000000000000000000000000000000），无论是否主流资产都不触发",
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK035",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK09",
+              "reason": "LTV = 0，该资产不能作抵押，没有抵押×借款组合",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK036",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK09",
+              "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK037",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK09",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0",
+                "r_kink": "0.04",
+                "r1": "3.04",
+                "k_low": "0.08",
+                "k_high": "6"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK038",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK09",
+              "reason": "LTV = 0，不能作抵押",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK039",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK10",
+              "reason": "LTV = 0，该资产不能作抵押，没有抵押×借款组合",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK040",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK10",
+              "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK041",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK10",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0.045",
+                "r_kink": "0.065",
+                "r1": "1.165",
+                "k_low": "0.025",
+                "k_high": "5.5"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK042",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK10",
+              "reason": "LTV = 0，不能作抵押",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK043",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK11",
+              "reason": "默认模式：USDC 作抵押",
+              "formula": "lending_buffer",
+              "calc": {
+                "D_open": "0.058824",
+                "M": "0.082",
+                "B_buf": "0.058824",
+                "d1": "0.05"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK044",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK11",
+              "reason": "E-mode：USDC 作抵押的全部 5 个有效组合，脚本逐组计算取最差",
+              "formula": "lending_buffer",
+              "calc": {
+                "D_open[emode-4]": "0.021739",
+                "M[emode-4]": "0.0524",
+                "B_buf[emode-4]": "0.021739",
+                "d1[emode-4]": "0.01",
+                "结果[emode-4]": "通过",
+                "D_open[emode-5]": "0.021739",
+                "M[emode-5]": "0.0524",
+                "B_buf[emode-5]": "0.021739",
+                "d1[emode-5]": "0.01",
+                "结果[emode-5]": "通过",
+                "D_open[emode-6]": "0.021739",
+                "M[emode-6]": "0.0524",
+                "B_buf[emode-6]": "0.021739",
+                "d1[emode-6]": "0.01",
+                "结果[emode-6]": "通过",
+                "D_open[emode-8]": "0.021739",
+                "M[emode-8]": "0.0524",
+                "B_buf[emode-8]": "0.021739",
+                "d1[emode-8]": "0.01",
+                "结果[emode-8]": "通过",
+                "D_open[emode-9]": "0.021739",
+                "M[emode-9]": "0.0524",
+                "B_buf[emode-9]": "0.021739",
+                "d1[emode-9]": "0.01",
+                "结果[emode-9]": "通过"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK045",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK11",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0.0475",
+                "r_kink": "0.09025",
+                "r1": "0.49025",
+                "k_low": "0.0475",
+                "k_high": "4"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK046",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK11",
+              "reason": "设有供应上限（supply_cap_ceiling = 50000000000000000000000000000000000000000000），无论是否主流资产都不触发",
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK047",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK12",
+              "reason": "默认模式：ETH 作抵押",
+              "formula": "lending_buffer",
+              "calc": {
+                "D_open": "0.066667",
+                "M": "0.1375",
+                "B_buf": "0.066667",
+                "d1": "0.05"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK048",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK12",
+              "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK049",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK12",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0",
+                "r_kink": "0.06",
+                "r1": "0.86",
+                "k_low": "0.08",
+                "k_high": "3.2"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK050",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK12",
+              "reason": "设有供应上限（supply_cap_ceiling = 1500000000000000000000000000000000000000），无论是否主流资产都不触发",
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK051",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK13",
+              "reason": "默认模式：USDY 作抵押",
+              "formula": "lending_buffer",
+              "calc": {
+                "D_open": "0.066667",
+                "M": "0.19",
+                "B_buf": "0.066667",
+                "d1": "0.05"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK052",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK13",
+              "reason": "E-mode：USDY 作抵押的全部 1 个有效组合，脚本逐组计算取最差",
+              "formula": "lending_buffer",
+              "calc": {
+                "D_open": "0.022989",
+                "M": "0.1039",
+                "B_buf": "0.022989",
+                "d1": "0.01"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK053",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK13",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0",
+                "r_kink": "0.051",
+                "r1": "0.801",
+                "k_low": "0.06",
+                "k_high": "5"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK054",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK13",
+              "reason": "设有供应上限（supply_cap_ceiling = 5000000000000000000000000000000000000000000），无论是否主流资产都不触发",
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK055",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK14",
+              "reason": "LTV = 0，该资产不能作抵押，没有抵押×借款组合",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK056",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK14",
+              "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK057",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK14",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0.1",
+                "r_kink": "0.3",
+                "r1": "1.8",
+                "k_low": "0.4",
+                "k_high": "3"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK058",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK14",
+              "reason": "LTV = 0，不能作抵押",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK059",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK15",
+              "reason": "LTV = 0，该资产不能作抵押，没有抵押×借款组合",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK060",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK15",
+              "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK061",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK15",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0",
+                "r_kink": "0.04",
+                "r1": "3.04",
+                "k_low": "0.08",
+                "k_high": "6"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK062",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK15",
+              "reason": "LTV = 0，不能作抵押",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK063",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK16",
+              "reason": "默认模式：DEEP 作抵押",
+              "formula": "lending_buffer",
+              "calc": {
+                "D_open": "0.096154",
+                "M": "0.428",
+                "B_buf": "0.096154",
+                "d1": "0.05"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK064",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK16",
+              "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK065",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK16",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0.1",
+                "r_kink": "0.15015",
+                "r1": "1.65015",
+                "k_low": "0.059",
+                "k_high": "10"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK066",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK16",
+              "reason": "设有供应上限（supply_cap_ceiling = 450000000000000000000000000000000000000000000），无论是否主流资产都不触发",
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK067",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK17",
+              "reason": "默认模式：FDUSD 作抵押",
+              "formula": "lending_buffer",
+              "calc": {
+                "D_open": "0.066667",
+                "M": "0.175",
+                "B_buf": "0.066667",
+                "d1": "0.05"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK068",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK17",
+              "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK069",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK17",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0.045",
+                "r_kink": "0.06625",
+                "r1": "0.81625",
+                "k_low": "0.025",
+                "k_high": "5"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK070",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK17",
+              "reason": "设有供应上限（supply_cap_ceiling = 52000000000000000000000000000000000000000），无论是否主流资产都不触发",
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK071",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK18",
+              "reason": "LTV = 0，该资产不能作抵押，没有抵押×借款组合",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK072",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK18",
+              "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK073",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK18",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0",
+                "r_kink": "0.18",
+                "r1": "5.78",
+                "k_low": "0.6",
+                "k_high": "8"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK074",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK18",
+              "reason": "LTV = 0，不能作抵押",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK075",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK19",
+              "reason": "LTV = 0，该资产不能作抵押，没有抵押×借款组合",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK076",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK19",
+              "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK077",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK19",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0.045",
+                "r_kink": "0.058",
+                "r1": "1.058",
+                "k_low": "0.01625",
+                "k_high": "5"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK078",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK19",
+              "reason": "LTV = 0，不能作抵押",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK079",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK20",
+              "reason": "默认模式：USDT 作抵押",
+              "formula": "lending_buffer",
+              "calc": {
+                "D_open": "0.058824",
+                "M": "0.082",
+                "B_buf": "0.058824",
+                "d1": "0.05"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK080",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK20",
+              "reason": "E-mode：USDT 作抵押的全部 1 个有效组合，脚本逐组计算取最差",
+              "formula": "lending_buffer",
+              "calc": {
+                "D_open": "0.021739",
+                "M": "0.0524",
+                "B_buf": "0.021739",
+                "d1": "0.01"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK081",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK20",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0.0475",
+                "r_kink": "0.09025",
+                "r1": "0.49025",
+                "k_low": "0.0475",
+                "k_high": "4"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK082",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK20",
+              "reason": "设有供应上限（supply_cap_ceiling = 10000000000000000000000000000000000000000000），无论是否主流资产都不触发",
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK083",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK21",
+              "reason": "默认模式：STSUI 作抵押",
+              "formula": "lending_buffer",
+              "calc": {
+                "D_open": "0.066667",
+                "M": "0.175",
+                "B_buf": "0.066667",
+                "d1": "0.05"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK084",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK21",
+              "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK085",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK21",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0",
+                "r_kink": "0.099975",
+                "r1": "0.899975",
+                "k_low": "0.1333",
+                "k_high": "3.2"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK086",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK21",
+              "reason": "设有供应上限（supply_cap_ceiling = 40000000000000000000000000000000000000000），无论是否主流资产都不触发",
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK087",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK22",
+              "reason": "默认模式：BTC 作抵押",
+              "formula": "lending_buffer",
+              "calc": {
+                "D_open": "0.071429",
+                "M": "0.195",
+                "B_buf": "0.071429",
+                "d1": "0.05"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK088",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK22",
+              "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK089",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK22",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0",
+                "r_kink": "0.0135",
+                "r1": "0.2135",
+                "k_low": "0.015",
+                "k_high": "2"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK090",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK22",
+              "reason": "设有供应上限（supply_cap_ceiling = 50000000000000000000000000000000000000），无论是否主流资产都不触发",
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK091",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK23",
+              "reason": "默认模式：COIN 作抵押",
+              "formula": "lending_buffer",
+              "calc": {
+                "D_open": "0.076923",
+                "M": "0.285",
+                "B_buf": "0.076923",
+                "d1": "0.05"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK092",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK23",
+              "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK093",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK23",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0.06",
+                "r_kink": "0.25",
+                "r1": "3.2",
+                "k_low": "0.2375",
+                "k_high": "14.75"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK094",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK23",
+              "reason": "设有供应上限（supply_cap_ceiling = 1000000000000000000000000000000000000000），无论是否主流资产都不触发",
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK095",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK24",
+              "reason": "默认模式：LBTC 作抵押",
+              "formula": "lending_buffer",
+              "calc": {
+                "D_open": "0.071429",
+                "M": "0.195",
+                "B_buf": "0.071429",
+                "d1": "0.05"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK096",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK24",
+              "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK097",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK24",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0",
+                "r_kink": "0.04",
+                "r1": "3.04",
+                "k_low": "0.08",
+                "k_high": "6"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK098",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK24",
+              "reason": "设有供应上限（supply_cap_ceiling = 70000000000000000000000000000000000000），无论是否主流资产都不触发",
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK099",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK25",
+              "reason": "默认模式：WAL 作抵押",
+              "formula": "lending_buffer",
+              "calc": {
+                "D_open": "0.076923",
+                "M": "0.285",
+                "B_buf": "0.076923",
+                "d1": "0.05"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK100",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK25",
+              "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK101",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK25",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0.1",
+                "r_kink": "0.15015",
+                "r1": "1.05015",
+                "k_low": "0.059",
+                "k_high": "6"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK102",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK25",
+              "reason": "设有供应上限（supply_cap_ceiling = 160000000000000000000000000000000000000000000），无论是否主流资产都不触发",
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK103",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK26",
+              "reason": "LTV = 0，该资产不能作抵押，没有抵押×借款组合",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK104",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK26",
+              "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK105",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK26",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0.3",
+                "r_kink": "0.46",
+                "r1": "3.26",
+                "k_low": "0.8",
+                "k_high": "3.5"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK106",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK26",
+              "reason": "LTV = 0，不能作抵押",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK107",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK27",
+              "reason": "默认模式：XBTC 作抵押",
+              "formula": "lending_buffer",
+              "calc": {
+                "D_open": "0.042857",
+                "M": "0.195",
+                "B_buf": "0.042857",
+                "d1": "0.05"
+              },
+              "result": 60,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK108",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK27",
+              "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK109",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK27",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0",
+                "r_kink": "0.005",
+                "r1": "0.605",
+                "k_low": "0.00625",
+                "k_high": "3"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK110",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK27",
+              "reason": "设有供应上限（supply_cap_ceiling = 205000000000000000000000000000000000000），无论是否主流资产都不触发",
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK111",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK28",
+              "reason": "LTV = 0，该资产不能作抵押，没有抵押×借款组合",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK112",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK28",
+              "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK113",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK28",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0.1",
+                "r_kink": "0.52",
+                "r1": "8.92",
+                "k_low": "1.4",
+                "k_high": "12"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK114",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK28",
+              "reason": "LTV = 0，不能作抵押",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK115",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK29",
+              "reason": "默认模式：COIN 作抵押",
+              "formula": "lending_buffer",
+              "calc": {
+                "D_open": "0.194805",
+                "M": "0.153",
+                "B_buf": "0.153",
+                "d1": "0.05"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK116",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK29",
+              "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK117",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK29",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0",
+                "r_kink": "0.04",
+                "r1": "3.04",
+                "k_low": "0.08",
+                "k_high": "6"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK118",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK29",
+              "reason": "设有供应上限（supply_cap_ceiling = 100000000000000000000000000000000000000），无论是否主流资产都不触发",
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK119",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK30",
+              "reason": "LTV = 0，该资产不能作抵押，没有抵押×借款组合",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK120",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK30",
+              "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK121",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK30",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0",
+                "r_kink": "0.04",
+                "r1": "3.04",
+                "k_low": "0.08",
+                "k_high": "6"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK122",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK30",
+              "reason": "LTV = 0，不能作抵押",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK123",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK31",
+              "reason": "LTV = 0，该资产不能作抵押，没有抵押×借款组合",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK124",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK31",
+              "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK125",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK31",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0",
+                "r_kink": "0.04",
+                "r1": "3.04",
+                "k_low": "0.08",
+                "k_high": "6"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK126",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK31",
+              "reason": "LTV = 0，不能作抵押",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK127",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK32",
+              "reason": "LTV = 0，该资产不能作抵押，没有抵押×借款组合",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK128",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK32",
+              "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK129",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK32",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0.08",
+                "r_kink": "0.2",
+                "r1": "2.6",
+                "k_low": "0.2",
+                "k_high": "6"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK130",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK32",
+              "reason": "LTV = 0，不能作抵押",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK131",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK33",
+              "reason": "默认模式：WBTC 作抵押",
+              "formula": "lending_buffer",
+              "calc": {
+                "D_open": "0.071429",
+                "M": "0.195",
+                "B_buf": "0.071429",
+                "d1": "0.05"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK132",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK33",
+              "reason": "该资产不在任何有效的 E-mode 抵押组合中",
+              "result": "N/A",
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK133",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK33",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0",
+                "r_kink": "0.0045",
+                "r1": "0.6045",
+                "k_low": "0.005",
+                "k_high": "6"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK134",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK33",
+              "reason": "设有供应上限（supply_cap_ceiling = 100000000000000000000000000000000000000），无论是否主流资产都不触发",
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK135",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK34",
+              "reason": "默认模式：SUI_USDE 作抵押",
+              "formula": "lending_buffer",
+              "calc": {
+                "D_open": "0.0625",
+                "M": "0.12",
+                "B_buf": "0.0625",
+                "d1": "0.05"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK136",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK34",
+              "reason": "E-mode：SUI_USDE 作抵押的全部 1 个有效组合，脚本逐组计算取最差",
+              "formula": "lending_buffer",
+              "calc": {
+                "D_open": "0.022989",
+                "M": "0.1039",
+                "B_buf": "0.022989",
+                "d1": "0.01"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK137",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK34",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0",
+                "r_kink": "0.054",
+                "r1": "0.554",
+                "k_low": "0.06",
+                "k_high": "5"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK138",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK34",
+              "reason": "设有供应上限（supply_cap_ceiling = 5000000000000000000000000000000000000000000），无论是否主流资产都不触发",
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK139",
+              "check_id": "L-C2.1",
+              "business_id": "BZ01",
+              "market_id": "MK35",
+              "reason": "默认模式：USDSUI 作抵押",
+              "formula": "lending_buffer",
+              "calc": {
+                "D_open": "0.038462",
+                "M": "0.1576",
+                "B_buf": "0.038462",
+                "d1": "0.05"
+              },
+              "result": 60,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK140",
+              "check_id": "L-C2.3",
+              "business_id": "BZ01",
+              "market_id": "MK35",
+              "reason": "E-mode：USDSUI 作抵押的全部 1 个有效组合，脚本逐组计算取最差",
+              "formula": "lending_buffer",
+              "calc": {
+                "D_open": "0.022989",
+                "M": "0.1039",
+                "B_buf": "0.022989",
+                "d1": "0.01"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK141",
+              "check_id": "L-C2.2",
+              "business_id": "BZ01",
+              "market_id": "MK35",
+              "reason": "分段线性利率：r(u)=base+mul·u（u<opt），之后加 jump·(u−opt)，见 calculator.move:24-36",
+              "formula": "rate_curve",
+              "calc": {
+                "r0": "0.02",
+                "r_kink": "0.074",
+                "r1": "0.574",
+                "k_low": "0.06",
+                "k_high": "5"
+              },
+              "result": 100,
+              "dimension": "configuration"
+            },
+            {
+              "check": "CK142",
+              "check_id": "L-C2.4",
+              "business_id": "BZ01",
+              "market_id": "MK35",
+              "reason": "设有供应上限（supply_cap_ceiling = 15000000000000000000000000000000000000000000），无论是否主流资产都不触发",
+              "result": 100,
+              "dimension": "configuration"
+            }
+          ],
+          "disclosures": []
+        },
+        "funds_dependencies": {
+          "score": 100.00000000000001,
+          "markets": [
+            {
+              "market_id": "MK01",
+              "score": 100,
+              "tvl_usd": 16120209.03
+            },
+            {
+              "market_id": "MK02",
+              "score": 100,
+              "tvl_usd": 2331192.42
+            },
+            {
+              "market_id": "MK03",
+              "score": 100,
+              "tvl_usd": 1070379.13
+            },
+            {
+              "market_id": "MK04",
+              "score": 100,
+              "tvl_usd": 109825.55
+            },
+            {
+              "market_id": "MK05",
+              "score": 100,
+              "tvl_usd": 77572.74
+            },
+            {
+              "market_id": "MK06",
+              "score": 100,
+              "tvl_usd": 10370441.42
+            },
+            {
+              "market_id": "MK07",
+              "score": 100,
+              "tvl_usd": 13255296.21
+            },
+            {
+              "market_id": "MK08",
+              "score": 100,
+              "tvl_usd": 1803839.69
+            },
+            {
+              "market_id": "MK09",
+              "score": 100,
+              "tvl_usd": 27127.36
+            },
+            {
+              "market_id": "MK10",
+              "score": 100,
+              "tvl_usd": 2255.99
+            },
+            {
+              "market_id": "MK11",
+              "score": 100,
+              "tvl_usd": 17721750.97
+            },
+            {
+              "market_id": "MK12",
+              "score": 100,
+              "tvl_usd": 963079.47
+            },
+            {
+              "market_id": "MK13",
+              "score": 100,
+              "tvl_usd": 2092575.84
+            },
+            {
+              "market_id": "MK14",
+              "score": 100,
+              "tvl_usd": 46754.57
+            },
+            {
+              "market_id": "MK15",
+              "score": 100,
+              "tvl_usd": 29375.28
+            },
+            {
+              "market_id": "MK16",
+              "score": 100,
+              "tvl_usd": 2798579.85
+            },
+            {
+              "market_id": "MK17",
+              "score": 100,
+              "tvl_usd": 26626.11
+            },
+            {
+              "market_id": "MK18",
+              "score": 100,
+              "tvl_usd": 7842.21
+            },
+            {
+              "market_id": "MK19",
+              "score": 100,
+              "tvl_usd": 16512977.64
+            },
+            {
+              "market_id": "MK20",
+              "score": 100,
+              "tvl_usd": 2031102.36
+            },
+            {
+              "market_id": "MK21",
+              "score": 100,
+              "tvl_usd": 3695.63
+            },
+            {
+              "market_id": "MK22",
+              "score": 100,
+              "tvl_usd": 698556.4
+            },
+            {
+              "market_id": "MK23",
+              "score": 100,
+              "tvl_usd": 49717.54
+            },
+            {
+              "market_id": "MK24",
+              "score": 100,
+              "tvl_usd": 1230436.18
+            },
+            {
+              "market_id": "MK25",
+              "score": 100,
+              "tvl_usd": 2531957.86
+            },
+            {
+              "market_id": "MK26",
+              "score": 100,
+              "tvl_usd": 12485.17
+            },
+            {
+              "market_id": "MK27",
+              "score": 100,
+              "tvl_usd": 2346012.51
+            },
+            {
+              "market_id": "MK28",
+              "score": 100,
+              "tvl_usd": 25303.03
+            },
+            {
+              "market_id": "MK29",
+              "score": 100,
+              "tvl_usd": 11351534.99
+            },
+            {
+              "market_id": "MK30",
+              "score": 100,
+              "tvl_usd": 14.95
+            },
+            {
+              "market_id": "MK31",
+              "score": 100,
+              "tvl_usd": 3612.17
+            },
+            {
+              "market_id": "MK32",
+              "score": 100,
+              "tvl_usd": 127414.96
+            },
+            {
+              "market_id": "MK33",
+              "score": 100,
+              "tvl_usd": 588974.99
+            },
+            {
+              "market_id": "MK34",
+              "score": 100,
+              "tvl_usd": 23344.63
+            },
+            {
+              "market_id": "MK35",
+              "score": 100,
+              "tvl_usd": 6957288.35
+            }
+          ],
+          "checks": [
+            {
+              "check": "CK143",
+              "check_id": "L-F1.1",
+              "business_id": "BZ01",
+              "market_id": "ALL",
+              "reason": "借贷协议没有明确到期的应付；存款人提款依赖池内现金和利率机制",
+              "result": "N/A",
+              "dimension": "funds_dependencies"
+            },
+            {
+              "check": "CK144",
+              "check_id": "L-F1.2",
+              "business_id": "BZ01",
+              "market_id": "ALL",
+              "reason": "协议没有公开承诺最低储备",
+              "result": "N/A",
+              "dimension": "funds_dependencies"
+            },
+            {
+              "check": "CK145",
+              "check_id": "L-F2.1",
+              "business_id": "BZ01",
+              "market_id": "ALL",
+              "reason": "SUI 池的部分资金由 pool_manager 质押为 vSUI；本次未读取管理器状态，引用 L-C3.1：主市场已暂停，所有提款都受阻",
+              "result": "reference",
+              "refers_to": "CK002",
+              "dimension": "funds_dependencies"
+            },
+            {
+              "check": "CK146",
+              "check_id": "L-D1.1",
+              "business_id": "BZ01",
+              "market_id": "ALL",
+              "reason": "价格表中各价格的存储时间早于快照 6 分钟到 12 小时不等，但 oracle_pro 可在交易内按需更新，存储价格过期本身不导致必要操作受阻",
+              "result": 100,
+              "dimension": "funds_dependencies"
+            },
+            {
+              "check": "CK147",
+              "check_id": "L-D2.1",
+              "business_id": "BZ01",
+              "market_id": "ALL",
+              "reason": "价格适配器（Pyth、Supra、Switchboard）出错时 oracle_pro 拒绝更新、估值断言失败；没有发现会继续执行的分支",
+              "result": 100,
+              "dimension": "funds_dependencies"
+            },
+            {
+              "check": "CK148",
+              "check_id": "OR-1",
+              "business_id": "BZ01",
+              "market_id": "ALL",
+              "reason": "估值读价 calculate_value 断言 is_valid，价格年龄超过 update_interval 即无效",
+              "result": 100,
+              "dimension": "funds_dependencies"
+            },
+            {
+              "check": "CK149",
+              "check_id": "OR-2",
+              "business_id": "BZ01",
+              "market_id": "ALL",
+              "reason": "PriceOracle.update_interval = 15000 毫秒",
+              "formula": "oracle_age",
+              "calc": {
+                "limit_s": "300"
+              },
+              "result": 100,
+              "dimension": "funds_dependencies"
+            },
+            {
+              "check": "CK150",
+              "check_id": "OR-3",
+              "business_id": "BZ01",
+              "market_id": "ALL",
+              "reason": "oracle_pro 配置了价格区间和双源偏差阈值；置信区间只披露",
+              "result": "disclosure",
+              "dimension": "funds_dependencies"
+            },
+            {
+              "check": "CK151",
+              "check_id": "OR-4",
+              "business_id": "BZ01",
+              "market_id": "ALL",
+              "reason": "Sui 不是 EVM L2",
+              "result": "N/A",
+              "dimension": "funds_dependencies"
+            }
+          ],
+          "disclosures": [
+            {
+              "check": "CK150",
+              "check_id": "OR-3",
+              "business_id": "BZ01",
+              "market_id": "ALL",
+              "reason": "oracle_pro 配置了价格区间和双源偏差阈值；置信区间只披露",
+              "result": "disclosure",
+              "dimension": "funds_dependencies"
+            }
+          ]
+        }
+      },
+      "incomplete": [],
+      "zero_markets": [
+        {
+          "market_id": "MK01",
+          "dimension": "configuration"
+        },
+        {
+          "market_id": "MK02",
+          "dimension": "configuration"
+        },
+        {
+          "market_id": "MK03",
+          "dimension": "configuration"
+        },
+        {
+          "market_id": "MK04",
+          "dimension": "configuration"
+        },
+        {
+          "market_id": "MK05",
+          "dimension": "configuration"
+        },
+        {
+          "market_id": "MK06",
+          "dimension": "configuration"
+        },
+        {
+          "market_id": "MK07",
+          "dimension": "configuration"
+        },
+        {
+          "market_id": "MK08",
+          "dimension": "configuration"
+        },
+        {
+          "market_id": "MK09",
+          "dimension": "configuration"
+        },
+        {
+          "market_id": "MK10",
+          "dimension": "configuration"
+        },
+        {
+          "market_id": "MK11",
+          "dimension": "configuration"
+        },
+        {
+          "market_id": "MK12",
+          "dimension": "configuration"
+        },
+        {
+          "market_id": "MK13",
+          "dimension": "configuration"
+        },
+        {
+          "market_id": "MK14",
+          "dimension": "configuration"
+        },
+        {
+          "market_id": "MK15",
+          "dimension": "configuration"
+        },
+        {
+          "market_id": "MK16",
+          "dimension": "configuration"
+        },
+        {
+          "market_id": "MK17",
+          "dimension": "configuration"
+        },
+        {
+          "market_id": "MK18",
+          "dimension": "configuration"
+        },
+        {
+          "market_id": "MK19",
+          "dimension": "configuration"
+        },
+        {
+          "market_id": "MK20",
+          "dimension": "configuration"
+        },
+        {
+          "market_id": "MK21",
+          "dimension": "configuration"
+        },
+        {
+          "market_id": "MK22",
+          "dimension": "configuration"
+        },
+        {
+          "market_id": "MK23",
+          "dimension": "configuration"
+        },
+        {
+          "market_id": "MK24",
+          "dimension": "configuration"
+        },
+        {
+          "market_id": "MK25",
+          "dimension": "configuration"
+        },
+        {
+          "market_id": "MK26",
+          "dimension": "configuration"
+        },
+        {
+          "market_id": "MK27",
+          "dimension": "configuration"
+        },
+        {
+          "market_id": "MK28",
+          "dimension": "configuration"
+        },
+        {
+          "market_id": "MK29",
+          "dimension": "configuration"
+        },
+        {
+          "market_id": "MK30",
+          "dimension": "configuration"
+        },
+        {
+          "market_id": "MK31",
+          "dimension": "configuration"
+        },
+        {
+          "market_id": "MK32",
+          "dimension": "configuration"
+        },
+        {
+          "market_id": "MK33",
+          "dimension": "configuration"
+        },
+        {
+          "market_id": "MK34",
+          "dimension": "configuration"
+        },
+        {
+          "market_id": "MK35",
+          "dimension": "configuration"
+        }
+      ],
+      "notes": [],
+      "fatal": [],
+      "raw_score": 62.0,
+      "score": 62.0,
+      "status": "已评分",
+      "tvl_usd": 113349153.2,
+      "weight": 1.0
+    }
+  ],
+  "snapshots": [
+    {
+      "chain_id": "sui:mainnet",
+      "block_or_checkpoint": "349261112",
+      "block_hash_or_digest": "5cBnTTqw39GFNPrxEdMALAVKq7aGUC5Tz2tT4Sg9VhV2",
+      "time_utc": "2026-11-26T02:15:08.135Z",
+      "evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/snapshot.json）"
+    }
+  ],
+  "validity": "分数只代表快照时点的状态。权限持有人或门限变更、合约升级、核心参数改动后，结果过期，需要重评。",
+  "budget": 45
+}

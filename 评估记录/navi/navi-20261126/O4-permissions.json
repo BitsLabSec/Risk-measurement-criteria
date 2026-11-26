@@ -1,0 +1,573 @@
+{
+  "role_holders": [
+    {
+      "role_id": "R01",
+      "chain_id": "sui:mainnet",
+      "credential": "0x40ef406d7db9a2257bf0f8357b2a6a0a61fd77f0e46057a70bb8627ac05779b8、0xbefa95a3265c29c1099d63596d386a0c873fb712a7151e70e17686b48fcdf3db",
+      "holder_status": "held",
+      "holder_principal_ids": [
+        "PR07",
+        "PR08"
+      ],
+      "reading_ids": [
+        "RD004",
+        "RD005"
+      ],
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/caps-OwnerCap.json）"
+      ]
+    },
+    {
+      "role_id": "R02",
+      "chain_id": "sui:mainnet",
+      "credential": "0x538d34538c5e70743831869b9fd5e9f1d3a957a9e546651094496fd3e0113ec6",
+      "holder_status": "held",
+      "holder_principal_ids": [
+        "PR07"
+      ],
+      "reading_ids": [
+        "RD006"
+      ],
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/caps-StorageAdminCap.json）"
+      ]
+    },
+    {
+      "role_id": "R03",
+      "chain_id": "sui:mainnet",
+      "credential": "0x4888505e7fa22e7d72f332fcf8e797c728a638eac9e0d4c9dbde153545db5d89",
+      "holder_status": "held",
+      "holder_principal_ids": [
+        "PR07"
+      ],
+      "reading_ids": [
+        "RD007"
+      ],
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/caps-PoolAdminCap.json）"
+      ]
+    },
+    {
+      "role_id": "R04",
+      "chain_id": "sui:mainnet",
+      "credential": "0x7204e37882baf10f31b66cd1ac78ac65b3b8ad29c265d1e474fb4b24ccd6d5b7",
+      "holder_status": "held",
+      "holder_principal_ids": [
+        "PR07"
+      ],
+      "reading_ids": [
+        "RD008"
+      ],
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/caps-OracleAdminCap.json）"
+      ]
+    },
+    {
+      "role_id": "R05",
+      "chain_id": "sui:mainnet",
+      "credential": "0x4352b03f3a97bc4a736a614a3e1c7779b455614528c3130cd5915aa60d479e70、0x4842c54c048d099f635299584156a7ec48113d6eb5349a6ccf6932feb8dd6e6a、0x5ad48a8a8ae82faea9a656da70e42ea18750e84bedc6107e2af3e3764fd18b2e、0x910eb5162fde240c459f1dc60fe681adbff0038d816b7680212ed13f77c2aa3f、0xc213c342e3782e346679d4ce1cbae9a730e57f251e3b5e8833e6b071ba9fec3c、0xe667999eec3fe533dbb8f27574ee44fd6ff7db3aeea1cb0e115708910e6af054",
+      "holder_status": "held",
+      "holder_principal_ids": [
+        "PR07"
+      ],
+      "reading_ids": [
+        "RD009",
+        "RD010",
+        "RD011",
+        "RD012",
+        "RD013",
+        "RD014"
+      ],
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/caps-OracleFeederCap.json）"
+      ]
+    },
+    {
+      "role_id": "R06",
+      "chain_id": "sui:mainnet",
+      "credential": "0xdba1b40f3537441b51d2848fc0a149610e48e67c1cc48c6ad641767622000623",
+      "holder_status": "held",
+      "holder_principal_ids": [
+        "PR06"
+      ],
+      "reading_ids": [
+        "RD001"
+      ],
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/upgradecap-lending.json）"
+      ]
+    },
+    {
+      "role_id": "R07",
+      "chain_id": "sui:mainnet",
+      "credential": "0x436d774dedebb6300c35ef99307a315e4c313fe79cdec326678a5c5ef574f0e0",
+      "holder_status": "held",
+      "holder_principal_ids": [
+        "PR07"
+      ],
+      "reading_ids": [
+        "RD003"
+      ],
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/upgradecap-oracle.json）"
+      ]
+    }
+  ],
+  "principals": [
+    {
+      "id": "PR01",
+      "chain_id": "sui:mainnet",
+      "address": "0x4517c281f621096fbf67ae95149bd03f8a66df4ad38c057e46d83b845c65eefe",
+      "kind": "eoa",
+      "threshold": 0,
+      "members": [],
+      "reading_ids": [],
+      "delay_seconds": 0
+    },
+    {
+      "id": "PR02",
+      "chain_id": "sui:mainnet",
+      "address": "0x588732d6d828ba46628702f3bd6ce832f7a2b31a98346de5fac64a2f19dd0b0b",
+      "kind": "eoa",
+      "threshold": 0,
+      "members": [],
+      "reading_ids": [],
+      "delay_seconds": 0
+    },
+    {
+      "id": "PR03",
+      "chain_id": "sui:mainnet",
+      "address": "0x1d0385c861470b066e2becabe0d1411b2e568b1ecef70ce9ad3d282e82227fe2",
+      "kind": "eoa",
+      "threshold": 0,
+      "members": [],
+      "reading_ids": [],
+      "delay_seconds": 0
+    },
+    {
+      "id": "PR04",
+      "chain_id": "sui:mainnet",
+      "address": "0x25dad60d8a17658bbf4b13e6b94c771113313688caa93363cc0e74fc19d6be90",
+      "kind": "eoa",
+      "threshold": 0,
+      "members": [],
+      "reading_ids": [],
+      "delay_seconds": 0
+    },
+    {
+      "id": "PR05",
+      "chain_id": "sui:mainnet",
+      "address": "0x8331e9f8ecf33313fd9c8a187eff98bb38f8943bc183a7b9a80822add5956b3f",
+      "kind": "eoa",
+      "threshold": 0,
+      "members": [],
+      "reading_ids": [],
+      "delay_seconds": 0
+    },
+    {
+      "id": "PR06",
+      "chain_id": "sui:mainnet",
+      "address": "0x25549f15b144032b4a61921552f6ecbfea13556615f7b45576b12f10d67955e7",
+      "kind": "multisig",
+      "threshold": 3,
+      "members": [
+        {
+          "principal_id": "PR01",
+          "weight": 1
+        },
+        {
+          "principal_id": "PR02",
+          "weight": 1
+        },
+        {
+          "principal_id": "PR03",
+          "weight": 1
+        },
+        {
+          "principal_id": "PR04",
+          "weight": 1
+        },
+        {
+          "principal_id": "PR05",
+          "weight": 1
+        }
+      ],
+      "reading_ids": [
+        "RD015"
+      ],
+      "delay_seconds": 0
+    },
+    {
+      "id": "PR07",
+      "chain_id": "sui:mainnet",
+      "address": "0x39c70d4ce3ce769a46f46ad80184a88bc25be9b49545751f5425796ef0c3d9ba",
+      "kind": "multisig",
+      "threshold": 2,
+      "members": [
+        {
+          "principal_id": "PR03",
+          "weight": 1
+        },
+        {
+          "principal_id": "PR02",
+          "weight": 1
+        },
+        {
+          "principal_id": "PR01",
+          "weight": 1
+        }
+      ],
+      "reading_ids": [
+        "RD016"
+      ],
+      "delay_seconds": 0
+    },
+    {
+      "id": "PR08",
+      "chain_id": "sui:mainnet",
+      "address": "0x408aab3117dc95445f7564028d2b6d2b65f6d005936f2f9a44c1f27f57a8cac6",
+      "kind": "multisig",
+      "threshold": 2,
+      "members": [
+        {
+          "principal_id": "PR01",
+          "weight": 1
+        },
+        {
+          "principal_id": "PR02",
+          "weight": 1
+        },
+        {
+          "principal_id": "PR04",
+          "weight": 1
+        }
+      ],
+      "reading_ids": [
+        "RD017"
+      ],
+      "delay_seconds": 0
+    }
+  ],
+  "paths": [
+    {
+      "id": "PA01",
+      "business_ids": [
+        "BZ01"
+      ],
+      "consequence": "H1",
+      "control_ids": [
+        "K08"
+      ],
+      "description": "lending_core UpgradeCap → 升级替换全部逻辑",
+      "approver_ids": [
+        "PR06"
+      ],
+      "delay_seconds": 0,
+      "delay_public": "na",
+      "delay_bypass": "na",
+      "exit_closable_in_delay": "na",
+      "h1_rate_limited": "no",
+      "h1_covers_all_assets": "yes",
+      "h3_auto_expire": "na",
+      "reading_ids": [
+        "RD001"
+      ],
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/upgradecap-lending.json）"
+      ]
+    },
+    {
+      "id": "PA02",
+      "business_ids": [
+        "BZ01"
+      ],
+      "consequence": "H1",
+      "control_ids": [
+        "K09"
+      ],
+      "description": "oracle UpgradeCap → 升级价格逻辑",
+      "approver_ids": [
+        "PR07"
+      ],
+      "delay_seconds": 0,
+      "delay_public": "na",
+      "delay_bypass": "na",
+      "exit_closable_in_delay": "na",
+      "h1_rate_limited": "no",
+      "h1_covers_all_assets": "yes",
+      "h3_auto_expire": "na",
+      "reading_ids": [
+        "RD003"
+      ],
+      "evidence": [
+        "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/upgradecap-oracle.json）"
+      ]
+    },
+    {
+      "id": "PA03",
+      "business_ids": [
+        "BZ01"
+      ],
+      "consequence": "H1",
+      "control_ids": [
+        "K05"
+      ],
+      "description": "OracleFeederCap → 直接写入任意价格",
+      "approver_ids": [
+        "PR07"
+      ],
+      "delay_seconds": 0,
+      "delay_public": "na",
+      "delay_bypass": "na",
+      "exit_closable_in_delay": "na",
+      "h1_rate_limited": "no",
+      "h1_covers_all_assets": "yes",
+      "h3_auto_expire": "na",
+      "reading_ids": [
+        "RD009",
+        "RD010",
+        "RD011",
+        "RD012",
+        "RD013",
+        "RD014"
+      ],
+      "evidence": [
+        "oracle/sources/oracle.move:137-151"
+      ]
+    },
+    {
+      "id": "PA04",
+      "business_ids": [
+        "BZ01"
+      ],
+      "consequence": "H1",
+      "control_ids": [
+        "K06",
+        "K05"
+      ],
+      "description": "OracleAdminCap → 铸造喂价凭证 → 写入任意价格",
+      "approver_ids": [
+        "PR07"
+      ],
+      "delay_seconds": 0,
+      "delay_public": "na",
+      "delay_bypass": "na",
+      "exit_closable_in_delay": "na",
+      "h1_rate_limited": "no",
+      "h1_covers_all_assets": "yes",
+      "h3_auto_expire": "na",
+      "reading_ids": [
+        "RD008"
+      ],
+      "evidence": [
+        "oracle/sources/oracle.move:61-63"
+      ]
+    },
+    {
+      "id": "PA05",
+      "business_ids": [
+        "BZ01"
+      ],
+      "consequence": "H2",
+      "control_ids": [
+        "K02"
+      ],
+      "description": "OwnerCap 持有人 1 → 调整对存量仓位生效的风险参数",
+      "approver_ids": [
+        "PR07"
+      ],
+      "delay_seconds": 0,
+      "delay_public": "na",
+      "delay_bypass": "na",
+      "exit_closable_in_delay": "na",
+      "h1_rate_limited": "na",
+      "h1_covers_all_assets": "na",
+      "h3_auto_expire": "na",
+      "reading_ids": [],
+      "evidence": [
+        "lending_core/sources/storage.move:417-445"
+      ]
+    },
+    {
+      "id": "PA06",
+      "business_ids": [
+        "BZ01"
+      ],
+      "consequence": "H2",
+      "control_ids": [
+        "K02"
+      ],
+      "description": "OwnerCap 持有人 2 → 调整对存量仓位生效的风险参数",
+      "approver_ids": [
+        "PR08"
+      ],
+      "delay_seconds": 0,
+      "delay_public": "na",
+      "delay_bypass": "na",
+      "exit_closable_in_delay": "na",
+      "h1_rate_limited": "na",
+      "h1_covers_all_assets": "na",
+      "h3_auto_expire": "na",
+      "reading_ids": [],
+      "evidence": [
+        "lending_core/sources/storage.move:417-445"
+      ]
+    },
+    {
+      "id": "PA07",
+      "business_ids": [
+        "BZ01"
+      ],
+      "consequence": "H2",
+      "control_ids": [
+        "K03",
+        "K02"
+      ],
+      "description": "StorageAdminCap → 铸造 OwnerCap → 调整风险参数",
+      "approver_ids": [
+        "PR07"
+      ],
+      "delay_seconds": 0,
+      "delay_public": "na",
+      "delay_bypass": "na",
+      "exit_closable_in_delay": "na",
+      "h1_rate_limited": "na",
+      "h1_covers_all_assets": "na",
+      "h3_auto_expire": "na",
+      "reading_ids": [],
+      "evidence": [
+        "lending_core/sources/storage.move:822-826"
+      ]
+    },
+    {
+      "id": "PA08",
+      "business_ids": [
+        "BZ01"
+      ],
+      "consequence": "H2",
+      "control_ids": [
+        "K07"
+      ],
+      "description": "OracleAdminCap → 修改价格源配置",
+      "approver_ids": [
+        "PR07"
+      ],
+      "delay_seconds": 0,
+      "delay_public": "na",
+      "delay_bypass": "na",
+      "exit_closable_in_delay": "na",
+      "h1_rate_limited": "na",
+      "h1_covers_all_assets": "na",
+      "h3_auto_expire": "na",
+      "reading_ids": [],
+      "evidence": [
+        "oracle/sources/oracle_manage.move:42-110"
+      ]
+    },
+    {
+      "id": "PA09",
+      "business_ids": [
+        "BZ01"
+      ],
+      "consequence": "H3",
+      "control_ids": [
+        "K01"
+      ],
+      "description": "OwnerCap 持有人 1 → 暂停（另一持有人能解除但不能撤销对方凭证，任一持有人都能持续暂停）",
+      "approver_ids": [
+        "PR07"
+      ],
+      "delay_seconds": 0,
+      "delay_public": "na",
+      "delay_bypass": "na",
+      "exit_closable_in_delay": "na",
+      "h1_rate_limited": "na",
+      "h1_covers_all_assets": "na",
+      "h3_auto_expire": "no",
+      "reading_ids": [
+        "RD018"
+      ],
+      "evidence": [
+        "lending_core/sources/storage.move:323-330"
+      ]
+    },
+    {
+      "id": "PA11",
+      "business_ids": [
+        "BZ01"
+      ],
+      "consequence": "H3",
+      "control_ids": [
+        "K10"
+      ],
+      "description": "OwnerCap 持有人 1 → 把指定用户排除在清算之外",
+      "approver_ids": [
+        "PR07"
+      ],
+      "delay_seconds": 0,
+      "delay_public": "na",
+      "delay_bypass": "na",
+      "exit_closable_in_delay": "na",
+      "h1_rate_limited": "na",
+      "h1_covers_all_assets": "na",
+      "h3_auto_expire": "no",
+      "reading_ids": [],
+      "evidence": [
+        "lending_core/sources/manage.move:205-208"
+      ]
+    },
+    {
+      "id": "PA10",
+      "business_ids": [
+        "BZ01"
+      ],
+      "consequence": "H3",
+      "control_ids": [
+        "K01"
+      ],
+      "description": "OwnerCap 持有人 2 → 暂停（另一持有人能解除但不能撤销对方凭证，任一持有人都能持续暂停）",
+      "approver_ids": [
+        "PR08"
+      ],
+      "delay_seconds": 0,
+      "delay_public": "na",
+      "delay_bypass": "na",
+      "exit_closable_in_delay": "na",
+      "h1_rate_limited": "na",
+      "h1_covers_all_assets": "na",
+      "h3_auto_expire": "no",
+      "reading_ids": [
+        "RD018"
+      ],
+      "evidence": [
+        "lending_core/sources/storage.move:323-330"
+      ]
+    },
+    {
+      "id": "PA12",
+      "business_ids": [
+        "BZ01"
+      ],
+      "consequence": "H3",
+      "control_ids": [
+        "K10"
+      ],
+      "description": "OwnerCap 持有人 2 → 把指定用户排除在清算之外",
+      "approver_ids": [
+        "PR08"
+      ],
+      "delay_seconds": 0,
+      "delay_public": "na",
+      "delay_bypass": "na",
+      "exit_closable_in_delay": "na",
+      "h1_rate_limited": "na",
+      "h1_covers_all_assets": "na",
+      "h3_auto_expire": "no",
+      "reading_ids": [],
+      "evidence": [
+        "lending_core/sources/manage.move:205-208"
+      ]
+    }
+  ],
+  "absent": []
+}

@@ -1,0 +1,39 @@
+{
+ "query": "query($t:String!,$c:UInt53){ checkpoint(sequenceNumber:$c){ query { objects(filter:{type:$t}, first:20){ nodes{ address version owner{ __typename ... on AddressOwner{ address{ address } } ... on ObjectOwner{ address{ address } } } } } } } }",
+ "variables": {
+  "t": "0xd899cf7d2b5db716bd2cf55599fb0d5ee38a3061e7b6bb6eebf73fa5bc4c81ca::storage::OwnerCap",
+  "c": 349261112
+ },
+ "response": {
+  "data": {
+   "checkpoint": {
+    "query": {
+     "objects": {
+      "nodes": [
+       {
+        "address": "0x40ef406d7db9a2257bf0f8357b2a6a0a61fd77f0e46057a70bb8627ac05779b8",
+        "version": 1107886085,
+        "owner": {
+         "__typename": "AddressOwner",
+         "address": {
+          "address": "0x39c70d4ce3ce769a46f46ad80184a88bc25be9b49545751f5425796ef0c3d9ba"
+         }
+        }
+       },
+       {
+        "address": "0xbefa95a3265c29c1099d63596d386a0c873fb712a7151e70e17686b48fcdf3db",
+        "version": 1111686882,
+        "owner": {
+         "__typename": "AddressOwner",
+         "address": {
+          "address": "0x408aab3117dc95445f7564028d2b6d2b65f6d005936f2f9a44c1f27f57a8cac6"
+         }
+        }
+       }
+      ]
+     }
+    }
+   }
+  }
+ }
+}

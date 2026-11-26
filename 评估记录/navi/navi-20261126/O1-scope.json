@@ -1,0 +1,365 @@
+{
+  "snapshots": [
+    {
+      "chain_id": "sui:mainnet",
+      "block_or_checkpoint": "349261112",
+      "block_hash_or_digest": "5cBnTTqw39GFNPrxEdMALAVKq7aGUC5Tz2tT4Sg9VhV2",
+      "time_utc": "2026-11-26T02:15:08.135Z",
+      "evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/snapshot.json）"
+    }
+  ],
+  "baseline_check": [
+    {
+      "deployment_id": "I01",
+      "unchanged": "yes",
+      "evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/upgradecap-lending.json）"
+    },
+    {
+      "deployment_id": "I02",
+      "unchanged": "yes",
+      "evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/upgradecap-oracle.json）"
+    }
+  ],
+  "businesses": [
+    {
+      "business_id": "BZ01",
+      "necessary_ops": [
+        {
+          "op": "还款",
+          "entry": "incentive_v3::entry_repay"
+        },
+        {
+          "op": "提款",
+          "entry": "incentive_v3::entry_withdraw_v2"
+        },
+        {
+          "op": "清算",
+          "entry": "incentive_v3::entry_liquidation"
+        }
+      ],
+      "markets": [
+        {
+          "id": "MK01",
+          "name": "SUI（资产 0）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "0",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        },
+        {
+          "id": "MK02",
+          "name": "COIN（资产 1）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "1",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        },
+        {
+          "id": "MK03",
+          "name": "COIN（资产 2）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "2",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        },
+        {
+          "id": "MK04",
+          "name": "COIN（资产 3）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "3",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        },
+        {
+          "id": "MK05",
+          "name": "CETUS（资产 4）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "4",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        },
+        {
+          "id": "MK06",
+          "name": "CERT（资产 5）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "5",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        },
+        {
+          "id": "MK07",
+          "name": "HASUI（资产 6）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "6",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        },
+        {
+          "id": "MK08",
+          "name": "NAVX（资产 7）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "7",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        },
+        {
+          "id": "MK09",
+          "name": "COIN（资产 8）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "8",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        },
+        {
+          "id": "MK10",
+          "name": "AUSD（资产 9）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "9",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        },
+        {
+          "id": "MK11",
+          "name": "USDC（资产 10）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "10",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        },
+        {
+          "id": "MK12",
+          "name": "ETH（资产 11）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "11",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        },
+        {
+          "id": "MK13",
+          "name": "USDY（资产 12）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "12",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        },
+        {
+          "id": "MK14",
+          "name": "NS（资产 13）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "13",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        },
+        {
+          "id": "MK15",
+          "name": "COIN（资产 14）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "14",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        },
+        {
+          "id": "MK16",
+          "name": "DEEP（资产 15）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "15",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        },
+        {
+          "id": "MK17",
+          "name": "FDUSD（资产 16）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "16",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        },
+        {
+          "id": "MK18",
+          "name": "BLUE（资产 17）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "17",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        },
+        {
+          "id": "MK19",
+          "name": "BUCK（资产 18）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "18",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        },
+        {
+          "id": "MK20",
+          "name": "USDT（资产 19）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "19",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        },
+        {
+          "id": "MK21",
+          "name": "STSUI（资产 20）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "20",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        },
+        {
+          "id": "MK22",
+          "name": "BTC（资产 21）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "21",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        },
+        {
+          "id": "MK23",
+          "name": "COIN（资产 22）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "22",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        },
+        {
+          "id": "MK24",
+          "name": "LBTC（资产 23）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "23",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        },
+        {
+          "id": "MK25",
+          "name": "WAL（资产 24）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "24",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        },
+        {
+          "id": "MK26",
+          "name": "HAEDAL（资产 25）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "25",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        },
+        {
+          "id": "MK27",
+          "name": "XBTC（资产 26）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "26",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        },
+        {
+          "id": "MK28",
+          "name": "IKA（资产 27）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "27",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        },
+        {
+          "id": "MK29",
+          "name": "COIN（资产 28）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "28",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        },
+        {
+          "id": "MK30",
+          "name": "MBTC（资产 29）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "29",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        },
+        {
+          "id": "MK31",
+          "name": "YBTC（资产 30）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "30",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        },
+        {
+          "id": "MK32",
+          "name": "XAUM（资产 31）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "31",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        },
+        {
+          "id": "MK33",
+          "name": "WBTC（资产 32）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "32",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        },
+        {
+          "id": "MK34",
+          "name": "SUI_USDE（资产 33）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "33",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        },
+        {
+          "id": "MK35",
+          "name": "USDSUI（资产 34）",
+          "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+          "key": "34",
+          "discovered_by": "onchain_registry",
+          "discovery_evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+        }
+      ]
+    }
+  ],
+  "module_objects": [
+    {
+      "module_id": "M18",
+      "chain_id": "sui:mainnet",
+      "object": "0xbb4e2f4b6205c2e2a2db47aeb4f830796ec7c005f88537ee775986639bc442fe",
+      "object_kind": "global_config",
+      "evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/find-Storage.json）"
+    },
+    {
+      "module_id": "M18",
+      "chain_id": "sui:mainnet",
+      "object": "0xe6d4c6610b86ce7735ea754596d71d72d10c7980b5052fc3c8cdf8d09fea9b4b",
+      "object_kind": "registry",
+      "evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/reserves-main.json）"
+    },
+    {
+      "module_id": "M26",
+      "chain_id": "sui:mainnet",
+      "object": "0x1568865ed9a0b5ec414220e8f79b3d04c77acc82358f6e5ae4635687392ffbef",
+      "object_kind": "global_config",
+      "evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/find-PriceOracle.json）"
+    },
+    {
+      "module_id": "M11",
+      "chain_id": "sui:mainnet",
+      "object": "0x512f28261c1a293f49416d8885b8d5d32bde6dd68a99a0be36fe42b248e6833a",
+      "object_kind": "package",
+      "evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/upgradecap-lending.json）"
+    },
+    {
+      "module_id": "M26",
+      "chain_id": "sui:mainnet",
+      "object": "0x4837ae94425107554c8847721cf9954c1ad8e10520433b9e37dc11c507148bea",
+      "object_kind": "package",
+      "evidence": "cmd:curl https://graphql.mainnet.sui.io/graphql（查询与响应见 证据/raw/upgradecap-oracle.json）"
+    }
+  ],
+  "out_of_scope": [
+    "9 个非主市场 Storage（market_id 1–12）：本次只评主市场",
+    "激励业务"
+  ]
+}

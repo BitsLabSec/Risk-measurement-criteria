@@ -385,21 +385,33 @@ class OnchainTree:
             cons.append(node(cid, "consequence", c, st(v), score=v if is_num(v) else None, method="min",
                              text=text, children=ps))
         s = perm["score"]
+        kc = perm.get("key_concentration")
+        data = {}
+        if kc and kc.get("levels"):
+            data["keyConcentration"] = {
+                "pathsConsidered": kc["paths_considered"], "allPathsKeys": kc["all_paths_keys"],
+                "levels": [{"keys": lv["keys"], "addresses": lv["addresses"], "memberOf": lv["member_of"],
+                            "controlledPaths": lv["controlled_paths"], "uncontrolledPaths": lv["uncontrolled_paths"]}
+                           for lv in kc["levels"]]}
         return node(nid, "aspect", DIM_CN["permissions"], st(s), score=s if is_num(s) else None, weight=0.4,
-                    method="min", text="H1、H2、H3 取最低", children=cons)
+                    method="min", text="H1、H2、H3 取最低", data=data, children=cons)
 
     def check(self, pid, c):
         src = self.checks_src[c["check"]]
         nid = "%s/%s" % (pid, c["check_id"])
         kids, used = [], set()
         for i in src["inputs"]:
+            g = i.get("group", "无")
+            tag = i["name"] if g == "无" else "%s@%s" % (i["name"], g)
             if i["reading_id"] != "无":
                 used.add(i["reading_id"])
-                kids.append(self.reading("%s/in-%s" % (nid, i["name"]), i["reading_id"], label="%s ← %s" % (i["name"], i["reading_id"]),
-                                         extra={"input": i["name"], "divideBy": i["divide_by"], "note": i["note"]}))
+                kids.append(self.reading("%s/in-%s" % (nid, tag), i["reading_id"], label="%s ← %s" % (tag, i["reading_id"]),
+                                         extra={"input": i["name"], "group": None if g == "无" else g,
+                                                "divideBy": i["divide_by"], "note": i["note"]}))
             else:
-                kids.append(node("%s/const-%s" % (nid, i["name"]), "constant", "%s = %s" % (i["name"], i["constant"]),
-                                 "info", text=i["note"], data={"input": i["name"], "value": i["constant"]}))
+                kids.append(node("%s/const-%s" % (nid, tag), "constant", "%s = %s" % (tag, i["constant"]),
+                                 "info", text=i["note"], data={"input": i["name"], "group": None if g == "无" else g,
+                                                               "value": i["constant"]}))
         for rid in src["reading_ids"]:
             if rid not in used:
                 kids.append(self.reading(nid, rid))
@@ -437,7 +449,7 @@ class OnchainTree:
             cks = [self.check(mid, c) for c in d["checks"] if c["market_id"] in ("ALL", m["id"])]
             kids.append(node(mid, "market", m["name"], st(mm["score"]), score=mm["score"] if is_num(mm["score"]) else None,
                              weight=w.get(m["id"]), method="min", text="各检查取最低（N/A、只披露、引用不参与）",
-                             data={"object": m["object"], "tvlUsd": self.mtvl.get(m["id"]), "discoveredBy": m["discovered_by"]},
+                             data={"object": m["object"], "tvlUsd": self.mtvl.get(m["id"]), "discoveredBy": m["discovered_by"], "key": None if m.get("key", "无") == "无" else m["key"]},
                              evidence_ids=self.ev.ids(m["discovery_evidence"]), children=cks, ref=m["id"]))
         return node(nid, "aspect", DIM_CN[key], st(s), score=s if is_num(s) else None, weight=weight,
                     method="weighted_mean", text="各市场按 TVL 加权", children=kids)

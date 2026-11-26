@@ -1,0 +1,26 @@
+{
+ "query": "query($t:String!,$c:UInt53){ checkpoint(sequenceNumber:$c){ query { objects(filter:{type:$t}, first:10){ nodes{ address version owner{ __typename } } } } } }",
+ "variables": {
+  "t": "0xca441b44943c16be0e6e23c5a955bb971537ea3289ae8016fbf33fffe1fd210f::oracle::PriceOracle",
+  "c": 349261112
+ },
+ "response": {
+  "data": {
+   "checkpoint": {
+    "query": {
+     "objects": {
+      "nodes": [
+       {
+        "address": "0x1568865ed9a0b5ec414220e8f79b3d04c77acc82358f6e5ae4635687392ffbef",
+        "version": 1111703898,
+        "owner": {
+         "__typename": "Shared"
+        }
+       }
+      ]
+     }
+    }
+   }
+  }
+ }
+}
